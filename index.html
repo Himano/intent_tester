@@ -437,8 +437,10 @@ thead th {
         <!-- (5) Copy-knapp i TrainingPhrase-header -->
         <th>
           <div class="th-flex">
-            <span>TrainingPhrase</span>
+                        <span>TrainingPhrase</span>
             <button id="copy-all-btn" type="button" class="ghost copy-btn">Copy questions</button>
+
+            <button id="copy-non-target-btn" type="button" class="ghost copy-btn">Copy not target</button>
           </div>
         </th>
 
@@ -511,6 +513,7 @@ thead th {
     const scoreEmptyEl = document.getElementById("score-empty");
     const scoreTargetPill = document.getElementById("score-target-pill");
     const copyAllBtn = document.getElementById("copy-all-btn");
+    const copyNonTargetBtn = document.getElementById("copy-non-target-btn");
   const removeAllToggle = document.getElementById("remove-all-toggle");
   const scoreRunBtn = document.getElementById("score-run-btn");
   const top3ContentEl = document.getElementById("top3-content");
@@ -921,6 +924,41 @@ function formatAccuracy(acc) {
     }
 
     copyAllBtn.addEventListener("click", copyAllTrainingPhrases);
+
+    // ---------- Copy all questions NOT target intent ----------
+    async function copyNonTargetTrainingPhrases() {
+      const targetKey = normalizeIntentKey(targetIntentInput.value);
+      if (!targetKey) {
+        alert("Fyll inn target intent fÃ¸rst.");
+        return;
+      }
+
+      const lines = state.rows
+        .filter(r => normalizeIntentKey(getPrimaryIntent(r)) !== targetKey)
+        .map(r => r.phrase)
+        .filter(Boolean);
+
+      const text = lines.join("\n");
+      if (!text) {
+        alert("Ingen spÃ¸rsmÃ¥l Ã¥ kopiere for 'not target'.");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (e) {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+    }
+
+    copyNonTargetBtn.addEventListener("click", copyNonTargetTrainingPhrases);
 
     // ---------- Intent descriptions (fra original fil) ----------
    let intentDescriptions = []; // behold navnet, resten av koden din kan være lik
