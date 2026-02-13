@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Treningsfrase-dashboard</title>
+
+  <!-- SheetJS (XLSX parser) - loaded dynamically with CDN fallbacks -->
+
+  <style>
+    :root {
+      --border: #d0d0d0;
+      --text: #222;
+      --muted: #666;
+      --bg: #fff;
+      --soft: #f7f7f7;
+      --accent: #D22B2B;
+    }
+
+    html, body { height: 100%; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: var(--text);
+      background: var(--bg);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    h2 { margin: 0 0 6px 0; }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .topbar-left, .topbar-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    button {
+      padding: 7px 12px;
+      background-color: var(--accent);
+      border: 0;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    button:hover { filter: brightness(0.95); }
+    button:active { transform: translateY(1px); }
+
+    button.secondary { background: #444; }
+    button.ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .input, select {
+      height: 30px;
+      padding: 0 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: #fff;
+      color: var(--text);
+    }
+    .input { width: 220px; }
+
+    .pill {
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .hint { font-size: 12px; color: var(--muted); }
+
+    /* Layout */
+    .workspace{
+      display:flex;
+      gap:16px;
+      align-items:stretch;
+    }
+
+    #drop-zone{
+      width: 190px;
+      min-height: 140px;
+      border:2px dashed var(--border);
+      border-radius:10px;
+      background:var(--soft);
+      display:grid;
+      place-items:center;
+      text-align:center;
+      color:var(--muted);
+      user-select:none;
+      padding:10px;
+      font-size:12px;
+    }
+    #drop-zone.dragover{
+      border-color:#666;
+      background:#f0f0f0;
+      color:#333;
+    }
+
+    .summary{
+      flex:1;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px 12px;
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height:140px;
+    }
+
+    .summary-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap:12px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      cursor:pointer;
+    }
+    .card:hover{ background:#fcfcfc; }
+
+    .card-title{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .intent-name{
+      font-weight:800;
+      font-size:14px;
+      word-break:break-word;
+    }
+    .card-meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .ngrams{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .ngram-badge{
+      border:1px solid var(--border);
+      background:var(--soft);
+      border-radius:999px;
+      padding:2px 8px;
+      font-size:12px;
+      color:var(--text);
+      max-width:100%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .empty{
+      color:var(--muted);
+      font-size:13px;
+      padding:8px 0 0;
+    }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:1000;
+    }
+    .modal{
+      width:min(1100px, 96vw);
+      max-height:92vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:12px;
+      border:1px solid var(--border);
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      padding:12px;
+    }
+    .modal-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .modal-title{
+      font-weight:800;
+      font-size:16px;
+      word-break:break-word;
+    }
+    .modal-cols{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .modal-cols{ grid-template-columns: 1fr; }
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    th, td{
+      border:1px solid var(--border);
+      padding:8px;
+      text-align:left;
+      vertical-align:top;
+      font-size:13px;
+    }
+    thead th{
+      position:sticky;
+      top:0;
+      background:var(--soft);
+      z-index:2;
+    }
+    tr:nth-child(even){ background:#f9f9f9; }
+
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  </style>
+</head>
+
+<body>
+  <h2>Treningsfrase-dashboard</h2>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <button id="upload-btn" type="button">Last opp XLSX</button>
+      <input id="file-input" type="file" accept=".xlsx" hidden />
+
+      <input id="search" class="input" type="text" placeholder="Søk intent (f.eks. Order_Status)" />
+
+      <select id="sort">
+        <option value="phrases_desc">Sorter: flest treningsfraser</option>
+        <option value="ngrams_desc">Sorter: flest flaggete n-grams</option>
+        <option value="maxng_desc">Sorter: høyeste n-gram frekvens</option>
+        <option value="name_asc">Sorter: intentnavn A–Å</option>
+      </select>
+
+      <select id="ngramSize">
+        <option value="2">N-gram: 2-ord (f.eks. “jeg vil”)</option>
+        <option value="3">N-gram: 3-ord</option>
+        <option value="2,3" selected>N-gram: 2 + 3-ord</option>
+      </select>
+
+      <span class="pill">Terskel: ≥ 3</span>
+    </div>
+
+    <div class="topbar-right">
+      <button id="reset-btn" class="secondary" type="button">Nullstill</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <div id="drop-zone" title="Dra og slipp en XLSX her">
+      Dra &amp; slipp<br/>XLSX
+      <div class="hint" style="margin-top:6px;">Kolonner: Intent + Training Phrase</div>
+    </div>
+
+    <div class="summary">
+      <div class="summary-row">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <span class="pill" id="file-pill">Fil: (ingen)</span>
+          <span class="pill" id="intent-pill">Intents: 0</span>
+          <span class="pill" id="phrases-pill">Treningsfraser: 0</span>
+        </div>
+        <div class="hint">Klikk på et kort for detaljer (fraser + n-grams).</div>
+      </div>
+
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty">Last opp en XLSX for å se oversikt.</div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal-backdrop" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div id="modal-title" class="modal-title"></div>
+          <div id="modal-meta" class="hint"></div>
+        </div>
+        <button id="close-modal" class="ghost" type="button">Lukk</button>
+      </div>
+
+      <div class="modal-cols">
+        <div>
+          <div class="pill" style="margin-bottom:8px;">Treningsfraser</div>
+          <table>
+            <thead>
+              <tr><th>#</th><th>Training Phrase</th></tr>
+            </thead>
+            <tbody id="phrases-tbody"></tbody>
+          </table>
+        </div>
+
+        <div>
+          <div class="pill" style="margin-bottom:8px;">Flaggete n-grams (≥ 3)</div>
+          <table>
+            <thead>
+              <tr><th>N-gram</th><th>Antall</th></tr>
+            </thead>
+            <tbody id="ngrams-tbody"></tbody>
+          </table>
+
+          <div class="hint" style="margin-top:10px;">
+            Tips: Bruk dette til å oppdage mye “fylleord” på tvers av fraser (f.eks. “jeg vil”, “kan du”, “jeg trenger”).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ---------------- State ----------------
+  const THRESHOLD = 3;
+
+  let rawRows = [];          // { intent, phrase }
+  let byIntent = [];         // computed cards
+  let fileName = "";
+
+  // ---------------- Elements ----------------
+  const uploadBtn = document.getElementById("upload-btn");
+  const fileInput = document.getElementById("file-input");
+  const resetBtn = document.getElementById("reset-btn");
+  const dropZone = document.getElementById("drop-zone");
+
+  const searchEl = document.getElementById("search");
+  const sortEl = document.getElementById("sort");
+  const ngramSizeEl = document.getElementById("ngramSize");
+
+  const gridEl = document.getElementById("grid");
+  const emptyEl = document.getElementById("empty");
+
+  const filePill = document.getElementById("file-pill");
+  const intentPill = document.getElementById("intent-pill");
+  const phrasesPill = document.getElementById("phrases-pill");
+
+  const modalBackdrop = document.getElementById("modal-backdrop");
+  const closeModalBtn = document.getElementById("close-modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalMeta = document.getElementById("modal-meta");
+  const phrasesTbody = document.getElementById("phrases-tbody");
+  const ngramsTbody = document.getElementById("ngrams-tbody");
+
+  // ---------------- Helpers ----------------
+  function norm(s){
+    return (s ?? "").toString().trim();
+  }
+
+  // Norsk-ish tokenisering: behold bokstaver/tall/æøå, splitt på whitespace etter å ha fjernet tegnsetting
+  function tokenize(text){
+    const t = norm(text)
+      .toLowerCase()
+      .replace(/[“”"’']/g, " ")
+      .replace(/[^a-z0-9æøå\s-]/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!t) return [];
+    return t.split(" ").filter(Boolean);
+  }
+
+  function makeNgrams(tokens, n){
+    const out = [];
+    for (let i = 0; i <= tokens.length - n; i++){
+      out.push(tokens.slice(i, i+n).join(" "));
+    }
+    return out;
+  }
+
+  function parseNgramSizes(value){
+    // "2" | "3" | "2,3"
+    return value.split(",").map(x => Number(x.trim())).filter(n => n === 2 || n === 3);
+  }
+
+  function compute(){
+    const map = new Map(); // intent -> phrases[]
+    for (const r of rawRows){
+      const intent = norm(r.intent);
+      const phrase = norm(r.phrase);
+      if (!intent || !phrase) continue;
+      if (!map.has(intent)) map.set(intent, []);
+      map.get(intent).push(phrase);
+    }
+
+    const sizes = parseNgramSizes(ngramSizeEl.value);
+
+    byIntent = Array.from(map.entries()).map(([intent, phrases]) => {
+      const counts = new Map(); // ngram -> count
+      for (const p of phrases){
+        const tokens = tokenize(p);
+        for (const n of sizes){
+          for (const ng of makeNgrams(tokens, n)){
+            counts.set(ng, (counts.get(ng) || 0) + 1);
+          }
+        }
+      }
+
+      const flagged = Array.from(counts.entries())
+        .filter(([ng, c]) => c >= THRESHOLD)
+        .map(([ng, c]) => ({ ngram: ng, count: c }))
+        .sort((a,b) => b.count - a.count || a.ngram.localeCompare(b.ngram));
+
+      const maxN = flagged.length ? flagged[0].count : 0;
+
+      return {
+        intent,
+        phrases,
+        phraseCount: phrases.length,
+        flagged,
+        flaggedCount: flagged.length,
+        maxN
+      };
+    });
+
+    render();
+  }
+
+  function sortAndFilter(items){
+    const q = norm(searchEl.value).toLowerCase();
+    let out = items;
+
+    if (q){
+      out = out.filter(x => x.intent.toLowerCase().includes(q));
+    }
+
+    const mode = sortEl.value;
+    out = [...out].sort((a,b) => {
+      if (mode === "phrases_desc") return b.phraseCount - a.phraseCount || a.intent.localeCompare(b.intent);
+      if (mode === "ngrams_desc") return b.flaggedCount - a.flaggedCount || b.phraseCount - a.phraseCount;
+      if (mode === "maxng_desc") return b.maxN - a.maxN || b.flaggedCount - a.flaggedCount || b.phraseCount - a.phraseCount;
+      if (mode === "name_asc") return a.intent.localeCompare(b.intent);
+      return 0;
+    });
+
+    return out;
+  }
+
+  function render(){
+    // Pills
+    filePill.textContent = fileName ? `Fil: ${fileName}` : "Fil: (ingen)";
+    intentPill.textContent = `Intents: ${byIntent.length}`;
+    const totalPhrases = byIntent.reduce((sum,x) => sum + x.phraseCount, 0);
+    phrasesPill.textContent = `Treningsfraser: ${totalPhrases}`;
+
+    gridEl.innerHTML = "";
+
+    if (!byIntent.length){
+      emptyEl.style.display = "block";
+      return;
+    }
+    emptyEl.style.display = "none";
+
+    const items = sortAndFilter(byIntent);
+
+    if (!items.length){
+      emptyEl.style.display = "block";
+      emptyEl.textContent = "Ingen intents matcher søket.";
+      return;
+    } else {
+      emptyEl.style.display = "none";
+      emptyEl.textContent = "Last opp en XLSX for å se oversikt.";
+    }
+
+    for (const item of items){
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const head = document.createElement("div");
+      head.className = "card-title";
+      head.innerHTML = `
+        <div class="intent-name">${escapeHtml(item.intent)}</div>
+        <span class="pill">${item.phraseCount} fraser</span>
+      `;
+
+      const meta = document.createElement("div");
+      meta.className = "card-meta";
+      meta.innerHTML = `
+        <span class="pill">Flaggete n-grams: ${item.flaggedCount}</span>
+        ${item.maxN ? `<span class="pill">Topp-frekvens: ${item.maxN}</span>` : `<span class="pill">Topp-frekvens: —</span>`}
+      `;
+
+      const ngrams = document.createElement("div");
+      ngrams.className = "ngrams";
+
+      const top = item.flagged.slice(0, 6);
+      if (!top.length){
+        const none = document.createElement("div");
+        none.className = "hint";
+        none.textContent = "Ingen n-grams over terskel (≥ 3).";
+        ngrams.appendChild(none);
+      } else {
+        for (const ng of top){
+          const b = document.createElement("div");
+          b.className = "ngram-badge";
+          b.title = `${ng.count} forekomster`;
+          b.textContent = `${ng.ngram} (${ng.count})`;
+          ngrams.appendChild(b);
+        }
+      }
+
+      card.appendChild(head);
+      card.appendChild(meta);
+      card.appendChild(ngrams);
+
+      card.addEventListener("click", () => openModal(item));
+      gridEl.appendChild(card);
+    }
+  }
+
+  function openModal(item){
+    modalTitle.textContent = item.intent;
+    modalMeta.textContent = `${item.phraseCount} treningsfraser · ${item.flaggedCount} flaggete n-grams (≥ ${THRESHOLD})`;
+
+    phrasesTbody.innerHTML = "";
+    item.phrases.forEach((p, idx) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td class="mono">${idx+1}</td><td>${escapeHtml(p)}</td>`;
+      phrasesTbody.appendChild(tr);
+    });
+
+    ngramsTbody.innerHTML = "";
+    if (!item.flagged.length){
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td colspan="2" class="hint">Ingen n-grams over terskel.</td>`;
+      ngramsTbody.appendChild(tr);
+    } else {
+      item.flagged.forEach(ng => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="mono">${escapeHtml(ng.ngram)}</td><td>${ng.count}</td>`;
+        ngramsTbody.appendChild(tr);
+      });
+    }
+
+    modalBackdrop.style.display = "flex";
+  }
+
+  function closeModal(){
+    modalBackdrop.style.display = "none";
+  }
+
+  function escapeHtml(str){
+    return norm(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  // ---------------- XLSX loader ----------------
+  const XLSX_SOURCES = [
+    "./xlsx.full.min.js",
+    "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js",
+    "https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"
+  ];
+
+  let xlsxLoadPromise = null;
+
+  function loadXlsx(){
+    if (window.XLSX) return Promise.resolve();
+    if (xlsxLoadPromise) return xlsxLoadPromise;
+
+    xlsxLoadPromise = new Promise((resolve, reject) => {
+      const tryNext = (i) => {
+        if (i >= XLSX_SOURCES.length){
+          reject(new Error("Kunne ikke laste XLSX-biblioteket fra CDN."));
+          return;
+        }
+        const s = document.createElement("script");
+        s.src = XLSX_SOURCES[i];
+        s.async = true;
+        s.onload = () => resolve();
+        s.onerror = () => tryNext(i + 1);
+        document.head.appendChild(s);
+      };
+      tryNext(0);
+    });
+
+    return xlsxLoadPromise;
+  }
+
+  // ---------------- XLSX reading ----------------
+  async function handleFile(file){
+    if (!file.name.toLowerCase().endsWith(".xlsx")){
+      alert("Vennligst last opp en .xlsx-fil.");
+      return;
+    }
+    fileName = file.name;
+
+    try {
+      await loadXlsx();
+    } catch (err){
+      console.error(err);
+      alert("Klarte ikke å laste XLSX-biblioteket. Nettverket/CSP blokkerer CDN. Legg xlsx.full.min.js lokalt ved siden av HTML-filen.");
+      return;
+    }
+
+    const buf = await file.arrayBuffer();
+    const wb = XLSX.read(buf, { type: "array" });
+
+    const firstSheetName = wb.SheetNames[0];
+    const ws = wb.Sheets[firstSheetName];
+
+    const json = XLSX.utils.sheet_to_json(ws, { defval: "" });
+
+    // Forvent kolonner: Intent, Training Phrase
+    // Ignorer Market_Language / Translated Training Phrase
+    rawRows = json.map(r => ({
+      intent: r["Intent"],
+      phrase: r["Training Phrase"]
+    })).filter(r => norm(r.intent) && norm(r.phrase));
+
+    compute();
+  }
+
+  // ---------------- Events ----------------
+  uploadBtn.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    if (file) handleFile(file);
+    fileInput.value = "";
+  });
+
+  resetBtn.addEventListener("click", () => {
+    rawRows = [];
+    byIntent = [];
+    fileName = "";
+    searchEl.value = "";
+    render();
+  });
+
+  // drag/drop
+  dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+  dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
+  dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+    const file = e.dataTransfer.files?.[0];
+    if (file) handleFile(file);
+  });
+
+  // controls
+  searchEl.addEventListener("input", render);
+  sortEl.addEventListener("change", render);
+  ngramSizeEl.addEventListener("change", compute);
+
+  // modal close
+  closeModalBtn.addEventListener("click", closeModal);
+  modalBackdrop.addEventListener("click", (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  // init
+  render();
+</script>
+</body>
+</html>
