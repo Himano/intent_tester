@@ -1,0 +1,714 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dialogflow tool</title>
+  <style>
+    :root {
+      --border: #d0d0d0;
+      --text: #222;
+      --muted: #666;
+      --bg: #fff;
+      --soft: #f7f7f7;
+      --accent: #d22b2b;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      color: var(--text);
+      background: var(--bg);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 100vh;
+    }
+
+    h2 {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-left,
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 7px 12px;
+      background-color: var(--accent);
+      border: 0;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    button:hover { filter: brightness(0.95); }
+
+    button.secondary { background: #444; }
+
+    .workspace {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 250px minmax(360px, 1fr) minmax(420px, 1.25fr);
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      gap: 10px;
+    }
+
+    .panel-title {
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .drop-small {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      background: var(--soft);
+      min-height: 90px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 8px;
+      font-size: 12px;
+      user-select: none;
+      transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .drop-small.dragover {
+      border-color: #666;
+      background: #f0f0f0;
+      color: #333;
+    }
+
+    .stats-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .bgram-list {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      min-height: 110px;
+      max-height: 280px;
+      overflow: auto;
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+
+    .bgram-item {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--soft);
+      padding: 4px 8px;
+      font-size: 12px;
+      width: fit-content;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .middle-block {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      resize: vertical;
+      color: var(--text);
+      box-sizing: border-box;
+      background: #fff;
+    }
+
+    #faq {
+      min-height: 210px;
+      height: 32vh;
+    }
+
+    .mode-switch {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      width: fit-content;
+      background: #fff;
+    }
+
+    .mode-btn {
+      background: transparent;
+      color: var(--text);
+      border-radius: 0;
+      border: 0;
+      border-right: 1px solid var(--border);
+      padding: 7px 10px;
+    }
+
+    .mode-btn:last-child { border-right: 0; }
+
+    .mode-btn.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    #testCases {
+      min-height: 185px;
+      height: 26vh;
+    }
+
+    .right-panel {
+      min-height: 0;
+    }
+
+    #output {
+      flex: 1;
+      min-height: 600px;
+      resize: none;
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 1000;
+    }
+
+    .modal {
+      width: min(900px, 95vw);
+      max-height: 92vh;
+      overflow: auto;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    #promptTextarea {
+      min-height: 280px;
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    @media (max-width: 1200px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      #output {
+        min-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>
+    Dialogflow tool
+    <span id="fileName" class="pill">File: (none)</span>
+  </h2>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <button id="uploadBtn" type="button">Import JSON</button>
+      <input id="fileInput" type="file" accept="application/json,.json" hidden />
+      <span class="hint">Import button is the main flow. Small drop-zone is on the left.</span>
+    </div>
+
+    <div class="topbar-right actions">
+      <button id="btnEditPrompt" type="button" class="secondary">Edit prompt</button>
+      <button id="btnCopyPrompt" type="button">Copy prompt</button>
+      <button id="btnGenerateJson" type="button">Generate Dialogflow JSON</button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <section class="panel">
+      <div class="panel-title">Mini panel</div>
+
+      <div id="dropZone" class="drop-small" title="Drag and drop JSON here">
+        Drag and drop JSON here
+      </div>
+
+      <div class="stats-box">
+        <div id="statTraining" class="hint">Training sentences on the right: 0</div>
+        <div id="statTestMode" class="hint">Test mode: Should hit</div>
+        <div id="statTestCount" class="hint">Test sentences in current mode: 0</div>
+      </div>
+
+      <div class="panel-title">N-gram check</div>
+      <div class="hint">Shows repeated 3+ word phrases with 3+ occurrences.</div>
+      <div id="bgramList" class="bgram-list">
+        <div class="hint">No repetitions yet.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-title">Middle section</div>
+
+      <div class="middle-block">
+        <div class="panel-title">FAQ article</div>
+        <textarea id="faq" placeholder="Paste FAQ article here..."></textarea>
+      </div>
+
+      <div class="middle-block">
+        <div class="panel-title">Test sentences</div>
+        <div class="mode-switch" role="tablist" aria-label="Test mode">
+          <button id="modeHit" class="mode-btn active" type="button" aria-pressed="true">Should hit</button>
+          <button id="modeNoHit" class="mode-btn" type="button" aria-pressed="false">Should not hit</button>
+        </div>
+        <textarea id="testCases" placeholder="One sentence per line..."></textarea>
+        <div id="testHint" class="hint">Current mode: Should hit</div>
+      </div>
+    </section>
+
+    <section class="panel right-panel">
+      <div class="panel-title">
+        <span>Training sentences</span>
+        <span id="rightCount" class="pill">0 sentences</span>
+      </div>
+      <textarea id="output" placeholder="Training sentences will appear here after import, or can be edited manually..."></textarea>
+      <div class="hint">This section is on the far right with extra height for easier editing.</div>
+    </section>
+  </div>
+
+  <div id="promptModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Edit prompt">
+    <div class="modal">
+      <h3>Edit prompt</h3>
+      <p class="hint">The prompt is stored in browser localStorage.</p>
+      <textarea id="promptTextarea"></textarea>
+      <div class="actions" style="justify-content:flex-end; margin-top:10px;">
+        <button id="btnSavePrompt" type="button">Save</button>
+        <button id="btnCancelPrompt" class="secondary" type="button">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PROMPT_KEY = "dialogflow_tool_prompt_template";
+
+    const defaultPrompt = `# Task:
+Below you have an FAQ article, one test set (mode can be should hit or should not hit), and current training sentences from the intent.
+Pick 5-10 good examples, 5-10 bad examples, and suggest 10 new training sentences.
+
+Respond in this format:
+Good sentences:
+1. ...
+
+Bad sentences:
+1. ...
+
+Suggested training sentences:
+1. ...`;
+
+    function getPromptTemplate() {
+      try {
+        return localStorage.getItem(PROMPT_KEY) || defaultPrompt;
+      } catch (err) {
+        return defaultPrompt;
+      }
+    }
+
+    function setPromptTemplate(value) {
+      try {
+        localStorage.setItem(PROMPT_KEY, value || defaultPrompt);
+      } catch (err) {
+        // ignore localStorage errors
+      }
+    }
+
+    let originalJson = null;
+    let originalFilename = null;
+
+    const testModeLabels = {
+      should_hit: "Should hit",
+      should_not_hit: "Should not hit"
+    };
+
+    const testCasesByMode = {
+      should_hit: "",
+      should_not_hit: ""
+    };
+
+    let activeTestMode = "should_hit";
+
+    const uploadBtn = document.getElementById("uploadBtn");
+    const fileInput = document.getElementById("fileInput");
+    const dropZone = document.getElementById("dropZone");
+    const fileName = document.getElementById("fileName");
+
+    const faq = document.getElementById("faq");
+    const testCases = document.getElementById("testCases");
+    const output = document.getElementById("output");
+
+    const modeHit = document.getElementById("modeHit");
+    const modeNoHit = document.getElementById("modeNoHit");
+    const testHint = document.getElementById("testHint");
+
+    const statTraining = document.getElementById("statTraining");
+    const statTestMode = document.getElementById("statTestMode");
+    const statTestCount = document.getElementById("statTestCount");
+    const rightCount = document.getElementById("rightCount");
+
+    const bgramList = document.getElementById("bgramList");
+
+    const btnEditPrompt = document.getElementById("btnEditPrompt");
+    const btnCopyPrompt = document.getElementById("btnCopyPrompt");
+    const btnGenerateJson = document.getElementById("btnGenerateJson");
+
+    const promptModal = document.getElementById("promptModal");
+    const promptTextarea = document.getElementById("promptTextarea");
+    const btnSavePrompt = document.getElementById("btnSavePrompt");
+    const btnCancelPrompt = document.getElementById("btnCancelPrompt");
+
+    function splitLines(text) {
+      return (text || "")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+    }
+
+    function tokenize(text) {
+      return (text || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .split(" ")
+        .filter(Boolean);
+    }
+
+    function computeRepeatedPhrases(lines, minWords = 3, minCount = 3, maxWords = 5) {
+      const counts = new Map();
+
+      lines.forEach((line) => {
+        const tokens = tokenize(line);
+        if (tokens.length < minWords) return;
+
+        for (let n = minWords; n <= Math.min(maxWords, tokens.length); n += 1) {
+          for (let i = 0; i <= tokens.length - n; i += 1) {
+            const phrase = tokens.slice(i, i + n).join(" ");
+            counts.set(phrase, (counts.get(phrase) || 0) + 1);
+          }
+        }
+      });
+
+      return Array.from(counts.entries())
+        .filter((entry) => entry[1] >= minCount)
+        .sort((a, b) => b[1] - a[1] || b[0].split(" ").length - a[0].split(" ").length || a[0].localeCompare(b[0]))
+        .slice(0, 25)
+        .map((entry) => ({ phrase: entry[0], count: entry[1] }));
+    }
+
+    function renderBgram() {
+      const lines = splitLines(output.value);
+      const results = computeRepeatedPhrases(lines, 3, 3, 5);
+      bgramList.innerHTML = "";
+
+      if (!results.length) {
+        const empty = document.createElement("div");
+        empty.className = "hint";
+        empty.textContent = "No 3+ word phrases repeated 3+ times.";
+        bgramList.appendChild(empty);
+        return;
+      }
+
+      results.forEach((item) => {
+        const chip = document.createElement("div");
+        chip.className = "bgram-item";
+        chip.title = `${item.count} occurrences`;
+        chip.textContent = `${item.phrase} (${item.count})`;
+        bgramList.appendChild(chip);
+      });
+    }
+
+    function updateModeUi() {
+      const label = testModeLabels[activeTestMode];
+      modeHit.classList.toggle("active", activeTestMode === "should_hit");
+      modeNoHit.classList.toggle("active", activeTestMode === "should_not_hit");
+      modeHit.setAttribute("aria-pressed", activeTestMode === "should_hit" ? "true" : "false");
+      modeNoHit.setAttribute("aria-pressed", activeTestMode === "should_not_hit" ? "true" : "false");
+      testHint.textContent = `Current mode: ${label}`;
+      statTestMode.textContent = `Test mode: ${label}`;
+    }
+
+    function setTestMode(nextMode) {
+      if (nextMode === activeTestMode) return;
+      testCasesByMode[activeTestMode] = testCases.value;
+      activeTestMode = nextMode;
+      testCases.value = testCasesByMode[activeTestMode] || "";
+      updateModeUi();
+      updateStats();
+    }
+
+    function updateStats() {
+      const trainingCount = splitLines(output.value).length;
+      const testCount = splitLines(testCases.value).length;
+
+      statTraining.textContent = `Training sentences on the right: ${trainingCount}`;
+      statTestCount.textContent = `Test sentences in current mode: ${testCount}`;
+      rightCount.textContent = `${trainingCount} sentences`;
+
+      renderBgram();
+    }
+
+    function extractPhrasesFromDialogflowJson(data) {
+      const phrases = [];
+
+      if (Array.isArray(data.userSays)) {
+        data.userSays.forEach((entry) => {
+          const chunks = Array.isArray(entry.data) ? entry.data.map((part) => part.text || "") : [];
+          const text = chunks.join("").trim();
+          if (text) phrases.push(text);
+        });
+      }
+
+      if (!phrases.length && Array.isArray(data.trainingPhrases)) {
+        data.trainingPhrases.forEach((entry) => {
+          const chunks = Array.isArray(entry.parts) ? entry.parts.map((part) => part.text || "") : [];
+          const text = chunks.join("").trim();
+          if (text) phrases.push(text);
+        });
+      }
+
+      return phrases;
+    }
+
+    function updateFileUi(name) {
+      const safeName = name || "(none)";
+      fileName.textContent = `File: ${safeName}`;
+      document.title = name ? `Dialogflow tool - ${name}` : "Dialogflow tool";
+    }
+
+    async function readFileAsText(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsText(file);
+      });
+    }
+
+    async function handleFile(file) {
+      if (!file) return;
+      const looksJson = file.name.toLowerCase().endsWith(".json") || file.type.includes("json");
+      if (!looksJson) {
+        alert("Please select a valid JSON file.");
+        return;
+      }
+
+      try {
+        const raw = await readFileAsText(file);
+        const data = JSON.parse(raw);
+
+        originalJson = data;
+        originalFilename = file.name.replace(/\.json$/i, "");
+        updateFileUi(originalFilename);
+
+        const phrases = extractPhrasesFromDialogflowJson(data);
+        output.value = phrases.join("\n");
+        updateStats();
+      } catch (err) {
+        console.error(err);
+        alert("Could not read the JSON file.");
+      }
+    }
+
+    function openPromptModal() {
+      promptTextarea.value = getPromptTemplate();
+      promptModal.style.display = "flex";
+    }
+
+    function closePromptModal() {
+      promptModal.style.display = "none";
+    }
+
+    async function copyToClipboard() {
+      const template = getPromptTemplate();
+      const faqText = faq.value.trim();
+      const testText = testCases.value.trim();
+      const modeLabel = testModeLabels[activeTestMode];
+      const trainingText = output.value.trim();
+
+      const full = `${template}\n\n# FAQ article:\n${faqText}\n\n# Test sentences (${modeLabel}):\n${testText}\n\n# Training sentences:\n${trainingText}\n`;
+
+      try {
+        await navigator.clipboard.writeText(full);
+      } catch (err) {
+        console.error(err);
+        alert("Could not copy to clipboard.");
+      }
+    }
+
+    function generateJson() {
+      const lines = splitLines(output.value);
+      if (!lines.length) {
+        alert("Training sentences are missing.");
+        return;
+      }
+
+      if (!originalJson) {
+        alert("No original JSON loaded. Import a file first.");
+        return;
+      }
+
+      const userSays = lines.map((phrase) => ({
+        data: [{ text: phrase, userDefined: false }],
+        isTemplate: false,
+        count: 0
+      }));
+
+      const updatedJson = { ...originalJson, userSays };
+
+      const blob = new Blob([JSON.stringify(updatedJson, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = originalFilename ? `${originalFilename}_updated.json` : "intent_updated.json";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    uploadBtn.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files && event.target.files[0] ? event.target.files[0] : null;
+      handleFile(file);
+      fileInput.value = "";
+    });
+
+    dropZone.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("dragover");
+    });
+
+    dropZone.addEventListener("drop", (event) => {
+      event.preventDefault();
+      dropZone.classList.remove("dragover");
+      const file = event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files[0] : null;
+      handleFile(file);
+    });
+
+    btnEditPrompt.addEventListener("click", openPromptModal);
+    btnCancelPrompt.addEventListener("click", closePromptModal);
+    btnSavePrompt.addEventListener("click", () => {
+      setPromptTemplate(promptTextarea.value);
+      closePromptModal();
+    });
+
+    promptModal.addEventListener("click", (event) => {
+      if (event.target === promptModal) closePromptModal();
+    });
+
+    btnCopyPrompt.addEventListener("click", copyToClipboard);
+    btnGenerateJson.addEventListener("click", generateJson);
+
+    modeHit.addEventListener("click", () => setTestMode("should_hit"));
+    modeNoHit.addEventListener("click", () => setTestMode("should_not_hit"));
+
+    output.addEventListener("input", updateStats);
+    testCases.addEventListener("input", () => {
+      testCasesByMode[activeTestMode] = testCases.value;
+      updateStats();
+    });
+
+    updateFileUi("");
+    updateModeUi();
+    testCases.value = testCasesByMode[activeTestMode];
+    updateStats();
+  </script>
+</body>
+</html>
