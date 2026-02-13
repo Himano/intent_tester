@@ -1,0 +1,320 @@
+﻿<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Speed Read</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --ink: #111827;
+      --muted: #4b5563;
+      --accent: #1d4ed8;
+      --pivot: #0f172a;
+      --border: #d1d5db;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at 20% 20%, #ffffff 0%, #edf2ff 50%, #e5e7eb 100%);
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .app {
+      width: min(900px, 100%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+      letter-spacing: 0.02em;
+    }
+
+    .reader {
+      border: 2px solid #cbd5e1;
+      border-radius: 12px;
+      min-height: 180px;
+      background: #f8fafc;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .guideline {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      transform: translateX(-50%);
+      background: rgba(29, 78, 216, 0.25);
+      pointer-events: none;
+    }
+
+    .word {
+      font-size: clamp(1.8rem, 5.4vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: 0.01em;
+      white-space: pre;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      align-items: baseline;
+      font-variant-ligatures: none;
+    }
+
+    .word .pivot {
+      color: var(--pivot);
+      font-weight: 900;
+      text-shadow: 0 0 0.01px #000;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .controls label {
+      font-size: 0.95rem;
+      color: var(--muted);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="range"] {
+      width: min(300px, 100%);
+      accent-color: var(--accent);
+    }
+
+    .speed-badge {
+      min-width: 120px;
+      text-align: right;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+    }
+
+    button.secondary {
+      background: #475569;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      resize: vertical;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 12px;
+      font: inherit;
+      line-height: 1.45;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .hint {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 700px) {
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .speed-badge {
+        text-align: left;
+      }
+
+      .controls button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>Speed Read</h1>
+
+    <section class="reader" aria-live="polite" aria-atomic="true">
+      <div class="guideline" aria-hidden="true"></div>
+      <div class="word" id="wordDisplay">Start</div>
+    </section>
+
+    <section class="controls">
+      <label for="speedRange">
+        Hastighet
+        <input id="speedRange" type="range" min="2" max="7" step="1" value="4" />
+      </label>
+      <div class="speed-badge" id="speedBadge">4 ord/sek</div>
+      <div>
+        <button id="toggleBtn">Start</button>
+        <button id="resetBtn" class="secondary" type="button">Reset</button>
+      </div>
+    </section>
+
+    <textarea id="textInput" placeholder="Lim inn tekst her..."></textarea>
+    <div class="hint">Tekstboksen ligger under lesefeltet. Velg 2-7 ord/sek og trykk Start.</div>
+  </main>
+
+  <script>
+    const textInput = document.getElementById('textInput');
+    const speedRange = document.getElementById('speedRange');
+    const speedBadge = document.getElementById('speedBadge');
+    const wordDisplay = document.getElementById('wordDisplay');
+    const toggleBtn = document.getElementById('toggleBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    let words = [];
+    let index = 0;
+    let timer = null;
+
+    function splitWords(text) {
+      return text
+        .replace(/\s+/g, ' ')
+        .trim()
+        .match(/\S+/g) || [];
+    }
+
+    function pivotIndex(word) {
+      return Math.floor((word.length - 1) / 2);
+    }
+
+    function renderWord(rawWord) {
+      const word = rawWord || '';
+      const p = pivotIndex(word);
+      const left = word.slice(0, p);
+      const pivot = word[p] || '';
+      const right = word.slice(p + 1);
+
+      wordDisplay.innerHTML = '';
+
+      const frag = document.createDocumentFragment();
+
+      const leftNode = document.createElement('span');
+      leftNode.textContent = left;
+
+      const pivotNode = document.createElement('span');
+      pivotNode.className = 'pivot';
+      pivotNode.textContent = pivot;
+
+      const rightNode = document.createElement('span');
+      rightNode.textContent = right;
+
+      frag.append(leftNode, pivotNode, rightNode);
+      wordDisplay.appendChild(frag);
+
+      const totalWidth = wordDisplay.getBoundingClientRect().width;
+      const leftWidth = leftNode.getBoundingClientRect().width;
+      const pivotWidth = pivotNode.getBoundingClientRect().width;
+      const pivotCenter = leftWidth + (pivotWidth / 2);
+
+      const shift = (totalWidth / 2) - pivotCenter;
+      wordDisplay.style.transform = `translateX(${shift.toFixed(2)}px)`;
+    }
+
+    function updateSpeedLabel() {
+      const speed = Number(speedRange.value);
+      speedBadge.textContent = `${speed} ord/sek`;
+    }
+
+    function stopReading() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+      toggleBtn.textContent = 'Start';
+    }
+
+    function step() {
+      if (index >= words.length) {
+        stopReading();
+        return;
+      }
+      renderWord(words[index]);
+      index += 1;
+    }
+
+    function startReading() {
+      words = splitWords(textInput.value);
+
+      if (!words.length) {
+        renderWord('Ingen tekst');
+        return;
+      }
+
+      if (index >= words.length) {
+        index = 0;
+      }
+
+      step();
+
+      const intervalMs = Math.round(1000 / Number(speedRange.value));
+      timer = setInterval(step, intervalMs);
+      toggleBtn.textContent = 'Pause';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      if (timer) {
+        stopReading();
+      } else {
+        startReading();
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      stopReading();
+      words = [];
+      index = 0;
+      renderWord('Start');
+    });
+
+    speedRange.addEventListener('input', () => {
+      updateSpeedLabel();
+
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+        startReading();
+      }
+    });
+
+    updateSpeedLabel();
+    renderWord('Start');
+  </script>
+</body>
+</html>
