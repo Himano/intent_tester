@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="no">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Intent tester</title>
+  <title>Tool Menu</title>
   <style>
     :root {
       --border: #d0d0d0;
@@ -11,1072 +11,147 @@
       --muted: #666;
       --bg: #fff;
       --soft: #f7f7f7;
-      --accent: #D22B2B;
+      --accent: #d22b2b;
     }
+
+    * { box-sizing: border-box; }
 
     html, body { height: 100%; }
 
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
+      font-family: Arial, sans-serif;
       color: var(--text);
       background: var(--bg);
-      height: 100%;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      overflow: hidden; /* kun tabellen scroller */
+      gap: 14px;
     }
 
-    h2 { margin: 0 0 12px 0; }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
 
-    .topbar {
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .header {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      padding: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: -10px;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    button {
-      padding: 7px 12px;
-      background-color: var(--accent);
-      border: 0;
-      color: #fff;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .small-btn{ padding:6px 10px; font-size:12px; border-radius:8px; }
-
-    button:hover { filter: brightness(0.95); }
-    button:active { transform: translateY(1px); }
-
-    button.secondary { background: #444; }
-
-    button.ghost {
-      background: transparent;
+    .pill {
+      display: inline-block;
       border: 1px solid var(--border);
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .intent-input {
-      height: 30px;
-      padding: 0 8px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      width: 170px;
-      font-size: 13px;
-    }
-
-    .hint {
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 3px 10px;
       font-size: 12px;
       color: var(--muted);
+      font-weight: 600;
     }
 
-    .workspace {
-      display: flex;
-      align-items: stretch;
-      gap: 16px;
-      margin: 10px 0 16px;
-    }
-
-    /* (2) Drag & drop-felt (litt større, samme høyde som score) */
-    #drop-zone {
-      width: 170px;
-      height: auto;
-      min-height: 200px;
-      border: 2px dashed var(--border);
-      border-radius: 10px;
+    .grid {
       display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--muted);
-      background: var(--soft);
-      user-select: none;
-      padding: 8px;
-      font-size: 12px;
-    }
-
-    #drop-zone.dragover {
-      border-color: #666;
-      background: #f0f0f0;
-      color: #333;
-    }
-/* (3) Score-panel i whitespacen */
-    .score-panel {
-      flex: 1;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 12px;
-      background: #fff;
-      min-height: 160px;
-    }
-
-    .score-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 12px;
-      margin-bottom: 8px;
     }
 
-    .score-header-left{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .score-title { font-weight: 700; }
-
-    .score-content{
-      display:flex;
-      gap:14px;
-      align-items:stretch;
-    }
-
-    /* (2) Test-bokser: små firkanter med whitespace til høyre */
-    .score-list {
-      display: flex;
-      gap: 10px;
-      align-items: stretch;
-      justify-content: flex-start;
-      flex-wrap: nowrap;
-      min-height: 112px;
-    }
-
-    .score-item {
-      width: 140px;
-      min-height: 112px;
+    .card {
       border: 1px solid var(--border);
       border-radius: 10px;
-      background: var(--soft);
-      padding: 10px;
+      background: #fff;
+      padding: 12px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       gap: 8px;
+      min-height: 150px;
     }
 
-    .score-item strong { font-size: 14px; }
-
-    /* (3) Top 3 intents-boks i whitespace til høyre */
-    .top3-panel{
-      width: 800px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: var(--soft);
-      padding: 10px;
-    }
-    .top3-title{
-      font-weight:700;
-      margin-bottom:8px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    #top3-content{
-      display:flex;
-      gap:10px;
-      align-items:stretch;
-      overflow-x:auto;
-      padding-bottom: 2px;
-    }
-    .top3-section{
-      width: 250px;
-      min-width: 180px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-      padding: 8px;
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-    .top3-subtitle{
-      font-size:12px;
-      color: var(--muted);
-    }
-    .top3-list{
-      display:grid;
-      gap:4px;
-      font-size:12px;
-    }
-.pill {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: #fff;
-      font-size: 12px;
-      color: var(--muted);
+    .card h2 {
+      margin: 0;
+      font-size: 16px;
     }
 
-    .table-scroll{
-      flex: 1;
-      overflow: auto;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-    }
-    #results-table thead th{
-      position: sticky;
-      top: 0;
-      z-index: 3;
-      background: var(--soft);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    thead tr { background-color: white; }
-
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px;
-      text-align: left;
-      vertical-align: top;
+    .card p {
+      margin: 0;
       font-size: 13px;
-    }
-
-    tr:nth-child(even) { background-color: #f9f9f9; }
-
-    th.small, td.small {
-      width: 110px;
-      white-space: nowrap;
-    }
-
-    th.run-col, td.run-col {
-      width: 140px;
-      white-space: nowrap;
-    }
-
-    th.remove-col, td.remove-col {
-      width: 70px;
-      white-space: nowrap;
-      text-align: center;
-    }
-
-    td.intent-cell { cursor: pointer; }
-
-    .intent-tooltip {
-      position: fixed;
-      max-width: 280px;
-      background: #222;
-      color: #fff;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 12px;
+      color: var(--muted);
       line-height: 1.4;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-      z-index: 1000;
+      flex: 1;
     }
 
-    .th-flex {
+    .actions {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      justify-content: flex-end;
     }
 
-    .copy-btn {
-      padding: 4px 8px;
-      font-size: 12px;
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 7px 12px;
+      background: var(--accent);
+      color: #fff;
       border-radius: 6px;
-    }
-
-    .remove-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      user-select: none;
-    }
-
-    .remove-toggle input { transform: translateY(1px); }
-
-    .empty {
-      color: var(--muted);
       font-size: 13px;
-      padding: 10px 0 0;
+      font-weight: 600;
+      line-height: 1;
     }
 
-    .note {
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* Gi score-kortene og top3-panelet samme baseline-høyde */
-.score-item,
-.top3-panel {
-  min-height: 140px;        /* juster til ønsket høyde */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Top3-innholdet kan scrolle horisontalt uten å øke høyden */
-#top3-content {
-  flex: 1;
-  overflow-x: auto;         /* siden du har venstre->høyre layout */
-  overflow-y: hidden;
-  
-}
-
-/* Scroll-containeren som bare tabellen scroller i */
-.table-scroll {
-  overflow: auto;
-  background: #fff;      /* viktig: samme som header */
-  padding-top: 0;
-}
-
-/* Unngå rare 1px linjer pga border collapse */
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 0;
-}
-
-/* Sticky header må dekke alt under */
-thead th {
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background: #fff;      /* SUPER viktig */
-  background-clip: padding-box;
-}
-
-/* Ofte fint å “skjule” glippen visuelt */
-thead th {
-  box-shadow: 0 1px 0 rgba(0,0,0,0.08);
-}
-
+    .btn:hover { filter: brightness(0.95); }
   </style>
 </head>
-
 <body>
-  <h2>Intent tester</h2>
-
-  <div class="topbar">
-    <div class="topbar-left">
-      <button id="upload-btn" type="button">Upload</button>
-      <input id="file-input" type="file" accept="application/json" hidden />
-      <input id="target-intent" class="intent-input" type="text" placeholder="Intent for scoring (Optional)" />
-      <span class="hint">Tip: fill in intent name before uploading or press "Run" after.</span>
+  <div class="header">
+    <div>
+      <h1>Tool Landing Page</h1>
+      <p class="hint">Midlertidig oversikt over verktøyfiler i prosjektet.</p>
     </div>
-
-    <div class="topbar-right">
-      <button id="reset-btn" class="secondary" type="button">Reset</button>
-    </div>
+    <span class="pill">Simple menu</span>
   </div>
 
-  <div class="workspace">
-    <!-- (2) Mindre drop-zone -->
-    <div id="drop-zone" title="Dra og slipp en JSON-fil her">Drag &amp; drop<br/>JSON here</div>
-
-    <!-- (3) Score-panel -->
-    <div class="score-panel">
-      <div class="score-header">
-        <div class="score-header-left">
-          <div class="score-title">Intent accuracy</div>
-          <button id="score-run-btn" class="secondary small-btn" type="button">Run</button>
-        </div>
-        <span id="score-target-pill" class="pill">Intent: (Empty)</span>
-      </div>
-
-      <div class="score-content">
-        <div style="flex:1; min-width: 0;">
-          <div id="score-list" class="score-list"></div>
-          <div id="score-empty" class="empty" style="display:none;">
-            Last inn en JSON for å se score.
-          </div>
-         
-        </div>
-
-        <div class="top3-panel">
-          <div class="top3-title">
-            <span>Top 3 (excluding target intent)</span>
-          </div>
-          <div id="top3-empty" class="empty" style="display:none;">Last inn en JSON for å se top-intents.</div>
-          <div id="top3-content"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="table-scroll">
-  <table id="results-table">
-    <thead>
-      <tr>
-        <!-- (5) Copy-knapp i TrainingPhrase-header -->
-        <th>
-          <div class="th-flex">
-                        <span>TrainingPhrase</span>
-            <button id="copy-all-btn" type="button" class="ghost copy-btn">Copy questions</button>
-
-            <button id="copy-non-target-btn" type="button" class="ghost copy-btn">Copy not target</button>
-          </div>
-        </th>
-
-        <!-- (7) Opptil 3 runs + (4) accuracy -->
-        <th class="run-col">Run 1</th>
-        <th class="run-col">Run 2</th>
-        <th class="run-col">Run 3</th>
-        <th class="small">Acc 1</th>
-        <th class="small">Acc 2</th>
-        <th class="small">Acc 3</th>
-<!-- (6) Toggle i Fjern-header -->
-        <th class="remove-col">
-          <div class="th-flex">
-            <label class="remove-toggle" title="When active: next 'Remove' deletes all rows with the same intent (then it turns off again)..">
-              <input id="remove-all-toggle" type="checkbox" />
-              <span>All of a intent</span>
-            </label>
-          </div>
-        </th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
-
-  <script>
-    // ---------- LocalStorage ----------
-    const LS_KEY = "intentTester.state.v2";
-
-    function loadState() {
-      try {
-        const raw = localStorage.getItem(LS_KEY);
-        if (!raw) return null;
-        return JSON.parse(raw);
-      } catch (e) {
-        console.warn("Kunne ikke lese localStorage:", e);
-        return null;
-      }
-    }
-
-    function saveState(state) {
-      try {
-        localStorage.setItem(LS_KEY, JSON.stringify(state));
-      } catch (e) {
-        console.warn("Kunne ikke lagre localStorage:", e);
-      }
-    }
-
-    function clearState() {
-      try {
-        localStorage.removeItem(LS_KEY);
-        localStorage.removeItem("intentTester.targetIntent");
-      } catch (e) {}
-    }
-
-    // ---------- Data model ----------
-    // rows: [{ phrase: string, runs: [{intent, acc}, {intent, acc}, {intent, acc}] }]
-    let state = {
-      rows: [],
-      runCount: 0
-    };
-
-    const dropZone = document.getElementById("drop-zone");
-    const tableBody = document.querySelector("#results-table tbody");
-    const uploadBtn = document.getElementById("upload-btn");
-    const fileInput = document.getElementById("file-input");
-    const resetBtn = document.getElementById("reset-btn");
-    const targetIntentInput = document.getElementById("target-intent");
-    const scoreListEl = document.getElementById("score-list");
-    const scoreEmptyEl = document.getElementById("score-empty");
-    const scoreTargetPill = document.getElementById("score-target-pill");
-    const copyAllBtn = document.getElementById("copy-all-btn");
-    const copyNonTargetBtn = document.getElementById("copy-non-target-btn");
-  const removeAllToggle = document.getElementById("remove-all-toggle");
-  const scoreRunBtn = document.getElementById("score-run-btn");
-  const top3ContentEl = document.getElementById("top3-content");
-  const top3EmptyEl = document.getElementById("top3-empty");
-  const top3ScopePill = document.getElementById("top3-scope-pill");
-  const tableScroll = document.querySelector(".table-scroll");
-  let tooltipEl = null;
-  let tooltipCell = null;
-
-    function normalizeIntent(s) {
-      return (s ?? "").toString().trim();
-    }
-
-    function normalizeIntentKey(s) {
-      return normalizeIntent(s).toLowerCase();
-    }
-
-    function normalizePhrase(s) {
-      return (s ?? "").toString().trim();
-    }
-
-function formatAccuracy(acc) {
-  if (acc === null || acc === undefined || acc === "" || Number.isNaN(Number(acc))) return "—";
-  const n = Number(acc);
-  return n.toFixed(3); // f.eks. 0.830 (velg 2–4 desimaler om du vil)
-}
-
-    function getPrimaryIntent(row) {
-      // Bruk første run som har en intent
-      for (let i = 0; i < 3; i++) {
-        const intent = row.runs?.[i]?.intent;
-        if (intent) return intent;
-      }
-      return "";
-    }
-
-    // ---------- (1) Upload ----------
-    uploadBtn.addEventListener("click", () => fileInput.click());
-    fileInput.addEventListener("change", (e) => {
-      const file = e.target.files?.[0];
-      if (file) handleFile(file);
-      fileInput.value = "";
-    });
-
-    // ---------- (1) Reset ----------
-    resetBtn.addEventListener("click", () => {
-      clearState();
-      // refresh om mulig
-      try {
-        location.reload();
-      } catch (e) {
-        // fallback: tøm UI
-        state = { rows: [], runCount: 0 };
-        render();
-      }
-    });
-
-    // ---------- Drag & drop ----------
-    dropZone.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropZone.classList.add("dragover");
-    });
-
-    dropZone.addEventListener("dragleave", () => {
-      dropZone.classList.remove("dragover");
-    });
-
-    dropZone.addEventListener("drop", (e) => {
-      e.preventDefault();
-      dropZone.classList.remove("dragover");
-      const file = e.dataTransfer.files?.[0];
-      if (file) handleFile(file);
-    });
-
-    async function handleFile(file) {
-      if (!file.name.toLowerCase().endsWith(".json")) {
-        alert("Upload a json file from the dialogflow tester.");
-        return;
-      }
-      if (state.runCount >= 3) {
-        alert("Reset to upload more runs.");
-        return;
-      }
-
-      const text = await file.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        alert("Kunne ikke lese JSON. Sjekk filformatet.");
-        return;
-      }
-
-      if (!Array.isArray(data)) {
-        alert("JSON må være en liste (array) med objekter.");
-        return;
-      }
-
-      // forventet format: { TrainingPhrase, Intent, Accuracy }
-      const runIdx = state.runCount; // 0..2
-
-      // bygg lookup eksisterende rader på phrase
-      const map = new Map(state.rows.map((r) => [r.phrase, r]));
-
-      data.forEach((item) => {
-        const phrase = normalizePhrase(item.TrainingPhrase);
-        if (!phrase) return;
-
-        const intent = normalizeIntent(item.Intent);
-        const acc = (item.Accuracy === undefined ? "" : item.Accuracy);
-
-        let row = map.get(phrase);
-        if (!row) {
-          row = {
-            phrase,
-            runs: [{ intent: "", acc: "" }, { intent: "", acc: "" }, { intent: "", acc: "" }]
-          };
-          state.rows.push(row);
-          map.set(phrase, row);
-        }
-
-        row.runs[runIdx] = { intent, acc };
-      });
-
-      state.runCount += 1;
-
-      // lagre
-      saveState(state);
-      render();
-    }
-
-    // ---------- (3) Score ----------
-    function computeScoreForRun(runIdx, targetKey) {
-      if (!targetKey) return null;
-      let total = 0;
-      let hit = 0;
-
-      for (const row of state.rows) {
-        const intentKey = normalizeIntentKey(row.runs?.[runIdx]?.intent);
-        if (!intentKey) continue; // teller kun rader som faktisk har intent i run
-        total += 1;
-        if (intentKey === targetKey) hit += 1;
-      }
-
-      if (total === 0) return null;
-      return {
-        hit,
-        total,
-        pct: Math.round((hit / total) * 1000) / 10 // 1 desimal
-      };
-    }
-
-    function updateTargetUI() {
-      const targetRaw = targetIntentInput.value ?? "";
-      const targetDisplay = normalizeIntent(targetRaw);
-      const targetKey = normalizeIntentKey(targetRaw);
-      scoreTargetPill.textContent = targetDisplay ? `Intent: ${targetDisplay}` : "Intent: (Empty)";
-      try { localStorage.setItem("intentTester.targetIntent", targetRaw); } catch (e) {}
-      return targetKey;
-    }
-
-    function computeTopIntentsForRun(runIdx, targetKey) {
-      const counts = new Map(); // key -> {display, count}
-      let total = 0;
-
-      for (const row of state.rows) {
-        const display = normalizeIntent(row.runs?.[runIdx]?.intent);
-        const key = normalizeIntentKey(display);
-        if (!key) continue;
-        total += 1;
-        if (targetKey && key === targetKey) continue;
-
-        const prev = counts.get(key);
-        if (prev) {
-          prev.count += 1;
-        } else {
-          counts.set(key, { display, count: 1 });
-        }
-      }
-
-      const items = Array.from(counts.entries()).map(([key, obj]) => {
-        const pct = total ? Math.round((obj.count / total) * 100) : 0;
-        return { key, intent: obj.display, count: obj.count, total, pct };
-      }).sort((a, b) => b.count - a.count);
-
-      return items.slice(0, 3);
-    }
-
-    function renderTop3() {
-      const targetKey = normalizeIntentKey(targetIntentInput.value);
-      top3ContentEl.innerHTML = "";
-
-      if (state.runCount === 0) {
-        top3EmptyEl.style.display = "block";
-        return;
-      }
-      top3EmptyEl.style.display = "none";
-
-      for (let i = 0; i < state.runCount; i++) {
-        const top3 = computeTopIntentsForRun(i, targetKey);
-
-        const section = document.createElement("div");
-        section.className = "top3-section";
-
-        const subtitle = document.createElement("div");
-        subtitle.className = "top3-subtitle";
-        subtitle.textContent = `Run ${i + 1}`;
-        section.appendChild(subtitle);
-
-        const list = document.createElement("div");
-        list.className = "top3-list";
-
-        if (!top3 || top3.length === 0) {
-          const row = document.createElement("div");
-          row.textContent = "N/A";
-          list.appendChild(row);
-        } else {
-          for (const item of top3) {
-            const row = document.createElement("div");
-            row.innerHTML = `<strong>${item.intent}</strong> — ${item.pct}% <span class="pill">${item.count}/${item.total}</span>`;
-            list.appendChild(row);
-          }
-        }
-
-        section.appendChild(list);
-        top3ContentEl.appendChild(section);
-      }
-    }
-
-    function renderScores() {
-      const targetKey = updateTargetUI();
-      scoreListEl.innerHTML = "";
-
-      if (state.runCount === 0) {
-        scoreEmptyEl.style.display = "block";
-        return;
-      }
-      scoreEmptyEl.style.display = "none";
-
-      for (let i = 0; i < state.runCount; i++) {
-        const score = computeScoreForRun(i, targetKey);
-        const label = `Run ${i + 1}`;
-
-        const div = document.createElement("div");
-        div.className = "score-item";
-
-        const top = document.createElement("div");
-        top.innerHTML = `<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
-          <strong>${label}</strong>
-        </div>`;
-
-        const bottom = document.createElement("div");
-        bottom.style.display = "flex";
-        bottom.style.alignItems = "flex-end";
-        bottom.style.justifyContent = "space-between";
-        bottom.style.gap = "10px";
-
-        const pct = document.createElement("div");
-        pct.style.fontSize = "22px";
-        pct.style.fontWeight = "800";
-
-        const meta = document.createElement("div");
-
-        if (!targetKey) {
-          pct.textContent = "—";
-          meta.innerHTML = `<span class="pill">ingen target</span>`;
-        } else if (!score) {
-          pct.textContent = "N/A";
-          meta.innerHTML = `<span class="pill">0 rader</span>`;
-        } else {
-          pct.textContent = `${score.pct}%`;
-          meta.innerHTML = `<span class="pill">${score.hit}/${score.total}</span>`;
-        }
-
-        bottom.appendChild(pct);
-        bottom.appendChild(meta);
-
-        div.appendChild(top);
-        div.appendChild(bottom);
-        scoreListEl.appendChild(div);
-      }
-    }
-
-    function renderScoreAndInsights() {
-      renderScores();
-      renderTop3();
-    }
-
-    targetIntentInput.addEventListener("input", () => {
-      updateTargetUI();
-    });
-
-    scoreRunBtn.addEventListener("click", () => {
-      renderScoreAndInsights();
-    });
-
-// ---------- Table render ----------
-    function render() {
-    tableBody.innerHTML = "";
-
-      for (const row of state.rows) {
-        const tr = document.createElement("tr");
-
-        const tdPhrase = document.createElement("td");
-        tdPhrase.textContent = row.phrase;
-
-        const makeIntentCell = (runIdx) => {
-          const td = document.createElement("td");
-          td.className = "intent-cell run-col";
-
-          const intentRaw = row.runs?.[runIdx]?.intent ?? "";
-          const intentNorm = normalizeIntentKey(intentRaw);
-
-          td.textContent = intentRaw || "—";
-
-          // tooltip-data (intent-beskrivelse) – case-insensitiv match
-          if (intentRaw) {
-            const match = intentDescriptions.find(
-              item => normalizeIntentKey(item.name) === intentNorm
-            );
-            if (match?.description) td.dataset.intentDesc = match.description;
-          }
-          return td;
-        };
-
-   const makeAccCell = (runIdx) => {
-  const td = document.createElement("td");
-  td.className = "small";
-
-  const accRaw = row.runs?.[runIdx]?.acc;   // <- her hentes den
-  td.textContent = formatAccuracy(accRaw);
-
-  return td;
-};
-
-        const tdIntent1 = makeIntentCell(0);
-        const tdAcc1 = makeAccCell(0);
-        const tdIntent2 = makeIntentCell(1);
-        const tdAcc2 = makeAccCell(1);
-        const tdIntent3 = makeIntentCell(2);
-        const tdAcc3 = makeAccCell(2);
-
-        const tdRemove = document.createElement("td");
-        tdRemove.className = "remove-col";
-        const btn = document.createElement("button");
-        btn.textContent = "Remove";
-        btn.type = "button";
-
-        btn.addEventListener("click", () => {
-          if (removeAllToggle.checked) {
-            // (6) slette alle av samme intent (auto-reset etterpå)
-            const intentToRemove = getPrimaryIntent(row);
-            if (intentToRemove) {
-              const keyToRemove = normalizeIntentKey(intentToRemove);
-              state.rows = state.rows.filter(r => normalizeIntentKey(getPrimaryIntent(r)) !== keyToRemove);
-            } else {
-              // hvis ingen intent, bare fjern denne
-              state.rows = state.rows.filter(r => r !== row);
-            }
-            removeAllToggle.checked = false;
-          } else {
-            state.rows = state.rows.filter(r => r !== row);
-          }
-
-          saveState(state);
-          render();
-        });
-
-        tdRemove.appendChild(btn);
-
-        tr.appendChild(tdPhrase);
-        tr.appendChild(tdIntent1);
-        tr.appendChild(tdIntent2);
-        tr.appendChild(tdIntent3);
-        tr.appendChild(tdAcc1);
-        tr.appendChild(tdAcc2);
-        tr.appendChild(tdAcc3);
-        tr.appendChild(tdRemove);
-
-        tableBody.appendChild(tr);
-      }
-
-      renderScoreAndInsights();
-    }
-
-    // ---------- (5) Copy all training phrases ----------
-    async function copyAllTrainingPhrases() {
-      const lines = state.rows.map(r => r.phrase).filter(Boolean);
-      const text = lines.join("\n");
-      if (!text) {
-        alert("Ingenting å kopiere enda.");
-        return;
-      }
-
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch (e) {
-        // fallback
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-    }
-
-    copyAllBtn.addEventListener("click", copyAllTrainingPhrases);
-
-    // ---------- Copy all questions NOT target intent ----------
-    async function copyNonTargetTrainingPhrases() {
-      const targetKey = normalizeIntentKey(targetIntentInput.value);
-      if (!targetKey) {
-        alert("Fyll inn target intent fÃ¸rst.");
-        return;
-      }
-
-      const lines = state.rows
-        .filter(r => normalizeIntentKey(getPrimaryIntent(r)) !== targetKey)
-        .map(r => r.phrase)
-        .filter(Boolean);
-
-      const text = lines.join("\n");
-      if (!text) {
-        alert("Ingen spÃ¸rsmÃ¥l Ã¥ kopiere for 'not target'.");
-        return;
-      }
-
-      try {
-        await navigator.clipboard.writeText(text);
-      } catch (e) {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.left = "-9999px";
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-      }
-    }
-
-    copyNonTargetBtn.addEventListener("click", copyNonTargetTrainingPhrases);
-
-    // ---------- Intent descriptions (fra original fil) ----------
-   let intentDescriptions = []; // behold navnet, resten av koden din kan være lik
-
-function flattenIntentOverviewJson(data) {
-  const byKey = new Map(); // de-dupe case-insensitivt
-
-  for (const group of Object.values(data || {})) {
-    if (!group || typeof group !== "object") continue;
-
-    for (const [nameRaw, descRaw] of Object.entries(group)) {
-      const name = (nameRaw ?? "").toString().trim();
-      if (!name) continue;
-
-      const key = normalizeIntentKey(name); // bruker din eksisterende helper
-      if (!key) continue;
-
-      // title-tooltips liker ikke nye linjer så godt
-      const description = (descRaw ?? "").toString().replace(/\s+/g, " ").trim();
-
-      const existing = byKey.get(key);
-      // behold første, men oppgrader hvis vi finner en bedre (ikke-tom) beskrivelse
-      if (!existing || (!existing.description && description)) {
-        byKey.set(key, { name, description });
-      }
-    }
-  }
-
-  return Array.from(byKey.values());
-}
-
-async function loadIntentDescriptions() {
-  try {
-    const res = await fetch("./intents.json", { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    intentDescriptions = flattenIntentOverviewJson(data);
-    console.log("Loaded intent descriptions:", intentDescriptions.length);
-  } catch (e) {
-    console.warn("Kunne ikke laste intents_komplett_oversikt.json – tooltips kan mangle.", e);
-    intentDescriptions = [];
-  }
-}
-    // ---------- Init ----------
-document.addEventListener("DOMContentLoaded", async () => {
-  const stored = loadState();
-  if (stored?.rows) state = stored;
-
-  const savedIntent = localStorage.getItem("intentTester.targetIntent");
-  if (savedIntent !== null) targetIntentInput.value = savedIntent;
-
-  await loadIntentDescriptions();  // <— NY
-  render();
-
-  // Opprett tooltip-element én gang
-  tooltipEl = document.createElement("div");
-  tooltipEl.className = "intent-tooltip";
-  tooltipEl.style.display = "none";
-  document.body.appendChild(tooltipEl);
-
-  // Klikk for å vise/skjule intent-informasjon
-  tableBody.addEventListener("click", (e) => {
-    const cell = e.target.closest(".intent-cell");
-    if (!cell) {
-      hideIntentTooltip();
-      return;
-    }
-
-    const desc = cell.dataset.intentDesc;
-    if (!desc) {
-      hideIntentTooltip();
-      return;
-    }
-
-    // Toggle: klikk samme celle -> skjul
-    if (tooltipCell === cell) {
-      hideIntentTooltip();
-      return;
-    }
-
-    showIntentTooltip(cell, desc);
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".intent-cell")) hideIntentTooltip();
-  });
-
-  // Skjul tooltip ved scrolling/resize/klikk utenfor
-  window.addEventListener("scroll", hideIntentTooltip, true);
-  window.addEventListener("resize", hideIntentTooltip);
-  tableScroll?.addEventListener("scroll", hideIntentTooltip, true);
-});
-
-function showIntentTooltip(cell, desc) {
-  tooltipCell = cell;
-  tooltipEl.textContent = desc;
-  tooltipEl.style.display = "block";
-
-  const rect = cell.getBoundingClientRect();
-  const tipRect = tooltipEl.getBoundingClientRect();
-  const padding = 8;
-
-  let top = rect.bottom + window.scrollY + 6;
-  let left = rect.left + window.scrollX;
-
-  // Høyrejuster hvis den går utenfor høyre kant
-  if (left + tipRect.width + padding > window.innerWidth) {
-    left = window.innerWidth - tipRect.width - padding + window.scrollX;
-  }
-
-  tooltipEl.style.top = `${top}px`;
-  tooltipEl.style.left = `${left}px`;
-}
-
-function hideIntentTooltip() {
-  tooltipCell = null;
-  if (tooltipEl) tooltipEl.style.display = "none";
-}
-  </script>
+  <main class="grid">
+    <article class="card">
+      <h2>Intent Tester</h2>
+      <p>Test og sammenlign intents med flere runs, score og tabellvisning.</p>
+      <div class="actions"><a class="btn" href="intent.html">Open</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Dialogflow Tool</h2>
+      <p>Importer intent JSON, rediger treningssetninger og bygg prompt.</p>
+      <div class="actions"><a class="btn" href="dialogflowtool.html">Open</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Dashboard</h2>
+      <p>Oversiktsvisning for datafiler og analysekort.</p>
+      <div class="actions"><a class="btn" href="dashboard.html">Open</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Speed Read</h2>
+      <p>Vis ett ord av gangen med justerbar lesehastighet.</p>
+      <div class="actions"><a class="btn" href="speedread.html">Open</a></div>
+    </article>
+
+    <article class="card">
+      <h2>Not Helpful</h2>
+      <p>Ekstra testside for hurtige eksperimenter.</p>
+      <div class="actions"><a class="btn" href="nothelpful.html">Open</a></div>
+    </article>
+  </main>
 </body>
 </html>
