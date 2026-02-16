@@ -19,7 +19,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       color: var(--text);
       background: var(--bg);
       height: 100%;
@@ -30,7 +30,7 @@
       overflow: hidden; /* kun tabellen scroller */
     }
 
-    h2 { margin: 0 0 12px 0; }
+    h2 { margin: 0 0 0 0; }
 
     .home-link{
       display:inline-flex;
@@ -40,8 +40,8 @@
       text-decoration: none;
     }
     .home-link svg{
-      width:20px;
-      height:20px;
+      width:30px;
+      height:30px;
       display:block;
     }
 
@@ -104,6 +104,34 @@
     .hint {
       font-size: 12px;
       color: var(--muted);
+    }
+    .fav-menu{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .headerbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .fav-menu a{
+      text-decoration:none;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:14px;
+      color:var(--text);
+      background:#fff;
+      white-space:nowrap;
+    }
+    .fav-menu .empty{
+      font-size:14px;
+      color:var(--muted);
     }
 
     .workspace {
@@ -393,12 +421,16 @@ thead th {
 </head>
 
 <body>
-  <h2>
-    <a class="home-link" href="index.html" aria-label="Til hjem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
-      <span>Intent tester</span>
-    </a>
-  </h2>
+  <div class="headerbar">
+    <h2>
+      <a class="home-link" href="index.html" aria-label="Til hjem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
+        <span>Intent tester</span>
+      </a>
+    </h2>
+    <div id="favMenu" class="fav-menu"></div>
+    <div class="no"> </div>
+  </div>
 
   <div class="topbar">
     <div class="topbar-left">
@@ -487,6 +519,36 @@ thead th {
   <script>
     // ---------- LocalStorage ----------
     const LS_KEY = "intentTester.state.v2";
+    const LS_FAVS = "tool_favorites.v1";
+
+    function escapeHtml(str){
+      return (str ?? "").toString()
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/\"/g,"&quot;");
+    }
+
+    function renderFavMenu(){
+      const el = document.getElementById("favMenu");
+      if (!el) return;
+      let favs = [];
+      try{
+        const raw = localStorage.getItem(LS_FAVS);
+        favs = raw ? JSON.parse(raw) : [];
+      }catch{
+        favs = [];
+      }
+      if (!favs.length){
+        el.innerHTML = `<span class="empty">Ingen favoritter</span>`;
+        return;
+      }
+      el.innerHTML = favs.slice(0,5).map(f => {
+        const href = escapeHtml(f.href || "");
+        const title = escapeHtml(f.title || f.href || "Favoritt");
+        return `<a href="${href}">${title}</a>`;
+      }).join("");
+    }
 
     function loadState() {
       try {
@@ -1022,6 +1084,7 @@ async function loadIntentDescriptions() {
 }
     // ---------- Init ----------
 document.addEventListener("DOMContentLoaded", async () => {
+  renderFavMenu();
   const stored = loadState();
   if (stored?.rows) state = stored;
 

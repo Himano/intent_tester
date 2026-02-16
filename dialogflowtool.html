@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -19,7 +19,7 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       color: var(--text);
       background: var(--bg);
       box-sizing: border-box;
@@ -45,8 +45,8 @@
       text-decoration: none;
     }
     .home-link svg{
-      width:20px;
-      height:20px;
+      width:30px;
+      height:30px;
       display:block;
     }
 
@@ -59,6 +59,34 @@
       font-size: 12px;
       color: var(--muted);
       font-weight: 600;
+    }
+    .fav-menu{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .headerbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .fav-menu a{
+      text-decoration:none;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:14px;
+      color:var(--text);
+      background:#fff;
+      white-space:nowrap;
+    }
+    .fav-menu .empty{
+      font-size:14px;
+      color:var(--muted);
     }
 
     .topbar {
@@ -162,12 +190,11 @@
       border-radius: 8px;
       background: #fff;
       min-height: 110px;
-      max-height: 280px;
-      overflow: auto;
       padding: 8px;
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
       gap: 6px;
-      align-content: start;
+      align-content: flex-start;
     }
 
     .bgram-item {
@@ -175,7 +202,8 @@
       border-radius: 999px;
       background: var(--soft);
       padding: 4px 8px;
-      font-size: 12px;
+      font-size: 11px;
+      line-height: 1.2;
       width: fit-content;
       max-width: 100%;
       white-space: nowrap;
@@ -304,13 +332,17 @@
   </style>
 </head>
 <body>
+  <div class="headerbar">
   <h2>
     <a class="home-link" href="index.html" aria-label="Home">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
       <span>Dialogflow tool</span>
     </a>
-    <span id="fileName" class="pill">File: (none)</span>
   </h2>
+    <div id="favMenu" class="fav-menu"></div>
+        <div class="no"> </div>
+
+  </div>
 
   <div class="topbar">
     <div class="topbar-left">
@@ -329,6 +361,8 @@
   <div class="workspace">
     <section class="panel">
       <div class="panel-title">Mini panel</div>
+          <span id="fileName" class="pill">File: (none)</span>
+
 
       <div id="dropZone" class="drop-small" title="Drag and drop JSON here">
         Drag and drop JSON here
@@ -390,6 +424,8 @@
 
   <script>
     const PROMPT_KEY = "dialogflow_tool_prompt_template";
+    const LS_FAVS = "tool_favorites.v1";
+    const LS_STATE = "dialogflow_tool_state.v1";
 
     const defaultPrompt = `# Task:
 Below you have an FAQ article, one test set (mode can be should hit or should not hit), and current training sentences from the intent.
@@ -421,7 +457,37 @@ Suggested training sentences:
       }
     }
 
+    function escapeHtml(str){
+      return (str ?? "").toString()
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/\"/g,"&quot;");
+    }
+
+    function renderFavMenu(){
+      const el = document.getElementById("favMenu");
+      if (!el) return;
+      let favs = [];
+      try{
+        const raw = localStorage.getItem(LS_FAVS);
+        favs = raw ? JSON.parse(raw) : [];
+      }catch{
+        favs = [];
+      }
+      if (!favs.length){
+        el.innerHTML = `<span class="empty">Ingen favoritter</span>`;
+        return;
+      }
+      el.innerHTML = favs.slice(0,5).map(f => {
+        const href = escapeHtml(f.href || "");
+        const title = escapeHtml(f.title || f.href || "Favoritt");
+        return `<a href="${href}">${title}</a>`;
+      }).join("");
+    }
+
     let originalJson = null;
+    let originalJsonRaw = null;
     let originalFilename = null;
 
     const testModeLabels = {
@@ -464,6 +530,54 @@ Suggested training sentences:
     const promptTextarea = document.getElementById("promptTextarea");
     const btnSavePrompt = document.getElementById("btnSavePrompt");
     const btnCancelPrompt = document.getElementById("btnCancelPrompt");
+
+    function loadState() {
+      try{
+        const raw = localStorage.getItem(LS_STATE);
+        return raw ? JSON.parse(raw) : null;
+      }catch{
+        return null;
+      }
+    }
+
+    function saveState() {
+      try{
+        const payload = {
+          originalFilename,
+          originalJsonRaw,
+          faq: faq.value || "",
+          output: output.value || "",
+          testCasesByMode,
+          activeTestMode
+        };
+        localStorage.setItem(LS_STATE, JSON.stringify(payload));
+      }catch{
+        // ignore localStorage errors
+      }
+    }
+
+    function applyState(state){
+      if (!state) return;
+      originalFilename = state.originalFilename || null;
+      originalJsonRaw = state.originalJsonRaw || null;
+      if (originalJsonRaw){
+        try{ originalJson = JSON.parse(originalJsonRaw); }
+        catch{ originalJson = null; }
+      }
+      if (state.faq !== undefined) faq.value = state.faq;
+      if (state.output !== undefined) output.value = state.output;
+      if (state.testCasesByMode && typeof state.testCasesByMode === "object"){
+        testCasesByMode.should_hit = state.testCasesByMode.should_hit || "";
+        testCasesByMode.should_not_hit = state.testCasesByMode.should_not_hit || "";
+      }
+      if (state.activeTestMode === "should_not_hit" || state.activeTestMode === "should_hit"){
+        activeTestMode = state.activeTestMode;
+      }
+      updateFileUi(originalFilename || "");
+      updateModeUi();
+      testCases.value = testCasesByMode[activeTestMode] || "";
+      updateStats();
+    }
 
     function splitLines(text) {
       return (text || "")
@@ -543,6 +657,7 @@ Suggested training sentences:
       testCases.value = testCasesByMode[activeTestMode] || "";
       updateModeUi();
       updateStats();
+      saveState();
     }
 
     function updateStats() {
@@ -606,12 +721,14 @@ Suggested training sentences:
         const data = JSON.parse(raw);
 
         originalJson = data;
+        originalJsonRaw = raw;
         originalFilename = file.name.replace(/\.json$/i, "");
         updateFileUi(originalFilename);
 
         const phrases = extractPhrasesFromDialogflowJson(data);
         output.value = phrases.join("\n");
         updateStats();
+        saveState();
       } catch (err) {
         console.error(err);
         alert("Could not read the JSON file.");
@@ -715,16 +832,27 @@ Suggested training sentences:
     modeHit.addEventListener("click", () => setTestMode("should_hit"));
     modeNoHit.addEventListener("click", () => setTestMode("should_not_hit"));
 
-    output.addEventListener("input", updateStats);
+    output.addEventListener("input", () => {
+      updateStats();
+      saveState();
+    });
     testCases.addEventListener("input", () => {
       testCasesByMode[activeTestMode] = testCases.value;
       updateStats();
+      saveState();
     });
+    faq.addEventListener("input", saveState);
 
-    updateFileUi("");
-    updateModeUi();
-    testCases.value = testCasesByMode[activeTestMode];
-    updateStats();
+    renderFavMenu();
+    const loadedState = loadState();
+    if (loadedState) {
+      applyState(loadedState);
+    } else {
+      updateFileUi("");
+      updateModeUi();
+      testCases.value = testCasesByMode[activeTestMode];
+      updateStats();
+    }
   </script>
 </body>
 </html>

@@ -29,9 +29,10 @@
       gap: 14px;
     }
 
-    h1 {
+    h2 {
       margin: 0;
-      font-size: 24px;
+      font-size: 22px;
+      text-align: center;
     }
 
     .hint {
@@ -40,16 +41,20 @@
       margin: 0;
     }
 
-    .header {
+    .section {
       border: 1px solid var(--border);
       border-radius: 10px;
       background: #fff;
-      padding: 14px;
+      padding: 12px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
       gap: 10px;
-      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--muted);
     }
 
     .pill {
@@ -96,6 +101,8 @@
     .actions {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
     }
 
     .btn {
@@ -111,47 +118,113 @@
     }
 
     .btn:hover { filter: brightness(0.95); }
+
+    .fav-btn{
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .fav-btn.active{
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
   </style>
 </head>
 <body>
-  <div class="header">
-    <div>
-      <h1>Tool Landing Page</h1>
-      <p class="hint">Midlertidig oversikt over verktøyfiler i prosjektet.</p>
-    </div>
-    <span class="pill">Simple menu</span>
-  </div>
+  <h2>Chatbot tools</h2>
 
-  <main class="grid">
-    <article class="card">
-      <h2>Intent Tester</h2>
-      <p>Test og sammenlign intents med flere runs, score og tabellvisning.</p>
-      <div class="actions"><a class="btn" href="intent.html">Open</a></div>
-    </article>
+  <section class="section">
+    <div class="section-title">Favourites</div>
+    <div id="favGrid" class="grid"></div>
+  </section>
 
-    <article class="card">
-      <h2>Dialogflow Tool</h2>
-      <p>Importer intent JSON, rediger treningssetninger og bygg prompt.</p>
-      <div class="actions"><a class="btn" href="dialogflowtool.html">Open</a></div>
-    </article>
+  <section class="section">
+    <div class="section-title">All tools</div>
+    <div id="allGrid" class="grid"></div>
+  </section>
 
-    <article class="card">
-      <h2>Dashboard</h2>
-      <p>Oversiktsvisning for datafiler og analysekort.</p>
-      <div class="actions"><a class="btn" href="dashboard.html">Open</a></div>
-    </article>
+  <script>
+  (function(){
+    const LS_KEY = "tool_favorites.v1";
+    const MAX_FAVS = 5;
 
-    <article class="card">
-      <h2>Speed Read</h2>
-      <p>Vis ett ord av gangen med justerbar lesehastighet.</p>
-      <div class="actions"><a class="btn" href="speedread.html">Open</a></div>
-    </article>
+    const tools = [
+      { href: "intent.html", title: "Intent Tester", desc: "Test og sammenlign intents med flere runs, score og tabellvisning." },
+      { href: "dialogflowtool.html", title: "Dialogflow Tool", desc: "Importer intent JSON, rediger treningssetninger og bygg prompt." },
+      { href: "dashboard.html", title: "Dashboard", desc: "Oversiktsvisning for datafiler og analysekort." },
+      { href: "speedread.html", title: "Speed Read", desc: "Vis ett ord av gangen med justerbar lesehastighet." },
+      { href: "nothelpful.html", title: "Not Helpful sorter", desc: "Import a transcript with filtering not helpful. <br /> Sort customer questions into the correct intent or find room for improvment in FAQ documents" },
+    ];
 
-    <article class="card">
-      <h2>Not Helpful</h2>
-      <p>Ekstra testside for hurtige eksperimenter.</p>
-      <div class="actions"><a class="btn" href="nothelpful.html">Open</a></div>
-    </article>
-  </main>
+    function loadFavs(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        return raw ? JSON.parse(raw) : [];
+      }catch{
+        return [];
+      }
+    }
+    function saveFavs(favs){
+      localStorage.setItem(LS_KEY, JSON.stringify(favs));
+    }
+    function isFav(favs, href){
+      return favs.some(x => x.href === href);
+    }
+    function renderCard(t, favs){
+      const isActive = isFav(favs, t.href);
+      return `
+        <article class="card">
+          <h2>${t.title}</h2>
+          <p>${t.desc}</p>
+          <div class="actions">
+            <button class="fav-btn ${isActive ? "active" : ""}" data-href="${t.href}" data-title="${t.title}" type="button">Fav</button>
+            <a class="btn" href="${t.href}">Open</a>
+          </div>
+        </article>
+      `;
+    }
+
+    function render(){
+      const favs = loadFavs();
+      const favSet = new Set(favs.map(f => f.href));
+      const favTools = tools.filter(t => favSet.has(t.href));
+      const otherTools = tools.filter(t => !favSet.has(t.href));
+
+      const favGrid = document.getElementById("favGrid");
+      const allGrid = document.getElementById("allGrid");
+      favGrid.innerHTML = favTools.length
+        ? favTools.map(t => renderCard(t, favs)).join("")
+        : `<p class="hint">Ingen favoritter valgt.</p>`;
+      allGrid.innerHTML = otherTools.map(t => renderCard(t, favs)).join("");
+
+      document.querySelectorAll(".fav-btn").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const href = btn.getAttribute("data-href");
+          const title = btn.getAttribute("data-title") || href;
+          let next = loadFavs();
+          if (isFav(next, href)){
+            next = next.filter(x => x.href !== href);
+          } else {
+            if (next.length >= MAX_FAVS){
+              alert("Du kan velge maks 5 favoritter.");
+              return;
+            }
+            next.push({ href, title });
+          }
+          saveFavs(next);
+          render();
+        });
+      });
+    }
+
+    render();
+  })();
+  </script>
 </body>
 </html>
