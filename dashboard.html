@@ -99,26 +99,6 @@
       align-items:stretch;
     }
 
-    #drop-zone{
-      width: 190px;
-      min-height: 140px;
-      border:2px dashed var(--border);
-      border-radius:10px;
-      background:var(--soft);
-      display:grid;
-      place-items:center;
-      text-align:center;
-      color:var(--muted);
-      user-select:none;
-      padding:10px;
-      font-size:12px;
-    }
-    #drop-zone.dragover{
-      border-color:#666;
-      background:#f0f0f0;
-      color:#333;
-    }
-
     .summary{
       flex:1;
       border:1px solid var(--border);
@@ -296,11 +276,6 @@
   </div>
 
   <div class="workspace">
-    <div id="drop-zone" title="Dra og slipp en XLSX her">
-      Dra &amp; slipp<br/>XLSX
-      <div class="hint" style="margin-top:6px;">Kolonner: Intent + Training Phrase</div>
-    </div>
-
     <div class="summary">
       <div class="summary-row">
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
@@ -358,6 +333,8 @@
 <script>
   // ---------------- State ----------------
   const THRESHOLD = 3;
+  const XLSX_STORAGE_KEY = "dashboard_uploaded_xlsx_v1";
+  const DEFAULT_XLSX_PATHS = ["./Treningsettninger.xlsx", "./treningsettninger.xlsx"];
 
   let rawRows = [];          // { intent, phrase }
   let byIntent = [];         // computed cards
@@ -367,7 +344,6 @@
   const uploadBtn = document.getElementById("upload-btn");
   const fileInput = document.getElementById("file-input");
   const resetBtn = document.getElementById("reset-btn");
-  const dropZone = document.getElementById("drop-zone");
 
   const searchEl = document.getElementById("search");
   const sortEl = document.getElementById("sort");
