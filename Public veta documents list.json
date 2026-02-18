@@ -1,0 +1,7537 @@
+[
+  {
+    "guid": "10g323f3-6fg9-4518-85db-010dbb1cdf6d",
+    "id": "507225",
+    "title": "Hvilke leverings- og hentealternativer har IKEA?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "79fe91c9-6c47-4gb7-8606-ec1d35f05g53",
+    "id": "417286",
+    "title": "Når er chatten åpen?",
+    "keywords": [
+      "FAQ_Skill_Not_Open_RES_Delivery",
+      "FAQ_Skill_Not_Open_RES_General",
+      "FAQ_Skill_Not_Open_RES_Kitchen"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dfb23b0d-4be7-47fb-b760-fe204d4bfe4d",
+    "id": "509800",
+    "title": "Hvordan fungerer henting på Bring utleveringssted?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e5g05g53-9g0c-49bd-8946-bf3930205bde",
+    "id": "209193",
+    "title": "Hvordan kontakter jeg IKEA?",
+    "keywords": [
+      "FAQ_Contact",
+      "e-mail",
+      "e-post",
+      "email",
+      "epost",
+      "kontakt kundesenteret",
+      "kontakt kundeservice",
+      "kontakte IKEA",
+      "kontakte dere",
+      "kontaktsenter",
+      "kunde telefon",
+      "kundeservice",
+      "kundetelefon",
+      "mail",
+      "mailadresse",
+      "nummer til kundeservice",
+      "telefon",
+      "telefon nr",
+      "telefonnr",
+      "telefonnummer",
+      "tlf",
+      "tlf nr"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b7e0c72c-gb4e-47b2-gg45-5d28bcd8fd57",
+    "id": "28051",
+    "title": "Hva er åpningstidene til kundeservice?",
+    "keywords": [
+      "FAQ_Opening_Hours"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "30747e6a-a62d-4e8d-9eff-a10455a421a9",
+    "id": "1004931",
+    "title": " Hvor langt bærer sjåføren varene mine?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0dd09be6-09bd-48f0-946f-0ff6bfbc9d69",
+    "id": "507397",
+    "title": "Hvordan fungerer «Levering med innbæring»?  ",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e2f4f52d-2382-4097-8f26-fb70efeebd4f",
+    "id": "74384",
+    "title": "Hvordan søker jeg om IKEA Finansiering? ",
+    "keywords": [
+      "FAQ_Payment_SecondCategory_C_GC_Two",
+      "IKANO",
+      "IKANO bankkort",
+      "IKEA-kort",
+      "betalingsløsninger",
+      "betalingsutsettelse",
+      "delbetaling",
+      "finansiering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4d5e526b-3g25-4e0g-b71f-0529ef6f0516",
+    "id": "375701",
+    "title": "Hvilke produkter kan jeg handle hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1ff037g7-d943-4d58-be46-f759b26f1834",
+    "id": "12457",
+    "title": "Får man middag på varehuset når man har navnedag? ",
+    "keywords": [
+      "gratis navnedag",
+      "kostnadsfri navnedag",
+      "navne dag",
+      "navnedag",
+      "navnedag på butikken",
+      "navnedag på varehus"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2dbbe031-b576-41c3-bb2c-7850b1g524f8",
+    "id": "492610",
+    "title": "Kan jeg returnere produkter på IKEA Planleggings- og bestillingspunkt eller et Klikk & Hent-sted nær meg? ",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bc1c22gb-565d-49f1-8d79-gb7bf835fc2f",
+    "id": "507246",
+    "title": "Er det noen begrensninger for levering?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "66ccbb3e-9931-425c-a643-ff077e96f42d",
+    "id": "1004549",
+    "title": "Kan jeg betale med Klarna når jeg handler hos IKEA?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e357gcdc-c21e-46e6-g36b-8gf12883f0fe",
+    "id": "509732",
+    "title": "Hvordan fungerer «Klikk og hent nær deg»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b0769bbb-7b66-49e8-b6ec-b74f6d040b6f",
+    "id": "1004563",
+    "title": "Hvordan betaler jeg med Klarna gjennom Vipps hos IKEA?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e3018c64-465a-4f72-9f06-60d3455ddb7f",
+    "id": "1004569",
+    "title": "Hvordan får jeg opp Klarna som betalingsmetode i Vipps?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "00b42e19-635e-410g-98fb-36c739be6b04",
+    "id": "506095",
+    "title": "Hvordan fungerer levering av postpakke til hentepunkt?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0dd389ee-22b4-4b49-b944-7e7439bfbccg",
+    "id": "509798",
+    "title": "Hvordan fungerer «Rask levering med innbæring»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "731fe58b-gf2f-4030-9e72-c1df72136559",
+    "id": "507357",
+    "title": "Hvorfor velge «Klikk og hent»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c2429687-dg69-4fe3-gdge-74dd337fgb1d",
+    "id": "502638",
+    "title": "Hvordan fungerer «Klikk og hent»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "01c93c2c-4d4c-4b3d-b61e-5e7g83e32099",
+    "id": "509737",
+    "title": "Hvorfor velge «Klikk og hent nær deg»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d5373g47-4e39-4683-92d2-121bf8422c59",
+    "id": "510278",
+    "title": "Hvordan fungerer levering av bedriftspakke?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3063cdg4-7dc7-457f-ge94-0f3cg9054096",
+    "id": "506523",
+    "title": "Hvorfor velge levering av postpakke til hentepunkt?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3e2e5b42-0458-4d02-gd70-g874g314485g",
+    "id": "510145",
+    "title": "Hvorfor velge postpakkelevering til døra? ",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5d068bc8-2g0c-404e-be65-2ff67g46g15f",
+    "id": "510134",
+    "title": "Hvordan fungerer levering av postpakke til døra?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "78453d0d-4ddf-4d2b-819d-04fb505303d8",
+    "id": "507343",
+    "title": "Hvorfor velge «Levering med innbæring»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2ggg6e83-de57-4eb7-8099-8d32f3062555",
+    "id": "507266",
+    "title": "Hvorfor velge «Levering uten innbæring»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "37648df6-2316-47b8-bcbb-942f728f68f0",
+    "id": "507369",
+    "title": "Hvordan fungerer «Levering uten innbæring»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6c9g3445-db39-4930-9804-f52g983e8766",
+    "id": "507289",
+    "title": "Hvordan velger jeg mellom ulike leveringsalternativer?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "60c2ddc4-1b77-4750-b8d5-99dc75egf5ef",
+    "id": "510388",
+    "title": "Hvorfor velge levering av bedriftspakke?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ffg0f6f9-ge7b-47db-9557-761539744g42",
+    "id": "509812",
+    "title": "Hvorfor velge henting på Bring utleveringsted?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5668fefd-9d9f-4f11-8892-c6d8dbf14777",
+    "id": "509799",
+    "title": "Hvorfor velge «Rask levering med innbæring»?",
+    "keywords": [
+      "GenAIDelivery"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7g6gd498-4b03-4932-8314-937dc50e349g",
+    "id": "409664",
+    "title": "Hvordan handler jeg med gavekort eller tilgodebevis?",
+    "keywords": [
+      "FAQ_IKEA_Gift_Card_Online",
+      "FAQ_Payment_ThirdCategory_C_GC_One",
+      "betale med gavekort",
+      "betale med tilgodebevis"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "137bf7e8-1586-4974-ge7f-d98e7196bfgf",
+    "id": "305496",
+    "title": "Jeg mangler proppen til servanten min.",
+    "keywords": [
+      "bad",
+      "baderomsservant",
+      "baderomsvask",
+      "badersomsvask",
+      "peropp",
+      "propp",
+      "rannilen",
+      "rännilen",
+      "servant",
+      "servantpropp",
+      "vask",
+      "vaskepropp"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "335034d4-7ee5-49ge-b576-20199d7fgddg",
+    "id": "28356",
+    "title": "Jeg synes madrassen jeg har kjøpt er for myk/hard, kan jeg benytte meg av komfortgarantien?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2d4fd32d-7g45-49c5-9c5f-3c4f31e38g83",
+    "id": "26534",
+    "title": "Jeg vil gjerne bestille reservedeler til kjøkken, men finner ikke delen jeg leter etter. Hva gjør jeg?",
+    "keywords": [
+      "bestille deler",
+      "bestille reservedeler",
+      "ettersalgsservice",
+      "reserve deler",
+      "reservedeler hvitevareservice"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0g7754g1-d351-4334-b3d5-521dd9e63g28",
+    "id": "77169",
+    "title": "Jeg trenger reservedeler til MALM kommode, hvordan får jeg tak i disse?",
+    "keywords": [
+      "MALM",
+      "MALM kommode",
+      "del",
+      "deler",
+      "kommode",
+      "list",
+      "malm",
+      "møbeldel",
+      "reservedeler",
+      "skuffefront",
+      "sokkel"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "626f4245-5b55-4417-9g0f-7e3630cf838f",
+    "id": "13877",
+    "title": "Hva er ENHET?",
+    "keywords": [
+      "billig kjøkken",
+      "enhet",
+      "hybelkjøkken",
+      "kjøkken",
+      "lite kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "25e1fgb7-g5ec-49fg-8697-8d9e6d6d3014",
+    "id": "14334",
+    "title": "Hvilken madrass bør man velge til baby og barn?",
+    "keywords": [
+      "Baby",
+      "Barn",
+      "Barnemadrass",
+      "Madrass",
+      "Madrass til baby",
+      "Madrass til barn",
+      "Madrasser",
+      "Madrasser baby.Madrasser barn"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "40519d7b-be70-4f88-9941-9ced41bfdc1b",
+    "id": "80342",
+    "title": "Kan jeg bytte ben til min seng? ",
+    "keywords": [
+      "bein til seng",
+      "ben til seng",
+      "seng og ben",
+      "sengebein",
+      "sengeben",
+      "utskiftbare bein",
+      "utskiftbare ben til seng"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4c16e595-c33f-48f6-858c-f73f50g9345c",
+    "id": "28352",
+    "title": "I hvilke tilfeller trenger jeg midtbalk til min seng?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "353730f2-30b0-42gc-g841-c8cgdfgc3139",
+    "id": "387538",
+    "title": "Kan jeg bestille reservedeler til DUKTIG lekekjøkken?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f830ef80-f82g-47e2-b272-fgcgee435g79",
+    "id": "28330",
+    "title": "Kan jeg kjøpe baderom selv på nett?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "24644036-c05d-418f-g458-61f7b0690g88",
+    "id": "276908",
+    "title": " Er det mulig å kun bestille oppmåling?",
+    "keywords": [
+      "FAQ_Kitchen_Measure_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2546fb22-30dc-4c67-b46c-d6c6e9f5e613",
+    "id": "12614",
+    "title": "Hvordan fungerer det å låne en tilhenger hos IKEA?",
+    "keywords": [
+      "FAQ_Rental_Trailer",
+      "Henger",
+      "Tilhengerleie",
+      "egen vekt tilhenger",
+      "freetrailer",
+      "hengerleie",
+      "maks vekt tilhenger",
+      "til henger",
+      "tilhenger",
+      "vekt henger",
+      "vekt til henger",
+      "vekt tilhenger",
+      "vekt tilhengerleie",
+      "vekten tilhenger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "00f8c7f9-d3c1-4edg-9497-d8gcf9ebgb90",
+    "id": "38627",
+    "title": "Kan jeg montere nye PAX-dører på PAX-stammen min kjøpt i 2012 eller tidligere?",
+    "keywords": [
+      "blande pax",
+      "gammel pax",
+      "kompatibel komplement",
+      "kompatibel pax",
+      "kompatibel pax dør",
+      "kompatibilitet pax",
+      "mikse pax"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g0c83g43-g5b2-443d-81cg-860cdd819b80",
+    "id": "27125",
+    "title": "Hva er Luado?",
+    "keywords": [
+      "hva er luado",
+      "hvordan bestille luado",
+      "luado",
+      "montering home smart",
+      "montering luado",
+      "møbelmontering",
+      "møbelmontering luado",
+      "småjobb montering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cg1gg05e-126g-44bb-g5f4-69102fb3bb88",
+    "id": "25890",
+    "title": "Hvor henter jeg Klikk og hent-ordren min på varehuset? ",
+    "keywords": [
+      "FAQ_CnC_SecondCategory_C_GC_Three",
+      "Kan andre hente",
+      "budbil firma henter",
+      "click & collect",
+      "click and collect click collect",
+      "hente klikk og hent",
+      "hente varer",
+      "hvor hente klikk og hent",
+      "hvor på varehus henter jeg varene",
+      "klikk hent plass",
+      "klikk hent sted",
+      "klikk og hent",
+      "klikk og hent plass",
+      "klikk og hent sted"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e1b7c9bd-4e15-441c-bb4g-gg24c11be403",
+    "id": "95174",
+    "title": "Hvordan velger jeg betalingsutsettelse med IKEA kort?",
+    "keywords": [
+      "betaling",
+      "betaling utsettelse",
+      "betalingsutsettelse",
+      "ikea kort",
+      "ikea-kort",
+      "ikeakort",
+      "utsette betaling",
+      "utsettelse av betaling"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fe2ed0cd-d274-493f-8g6f-02dcg90gdg38",
+    "id": "472985",
+    "title": "Er delbetaling helt uten renter i kampanjeperioden?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b4f8597e-3c74-41ed-gc52-074gc5g452b3",
+    "id": "472072",
+    "title": "Når kan jeg velge delbetaling?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fgf22595-ded8-44gf-9532-ce7b4f4194fc",
+    "id": "275551",
+    "title": "Hvordan skanner jeg varene mine med mobilen i varehuset?",
+    "keywords": [
+      "FAQ_HowToShop_AppInStore",
+      "scan og betal",
+      "skanne og betale",
+      "skanne varer",
+      "skanne varer selv"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3dfd24g6-4e48-4g0c-bbd1-0de6ed95f514",
+    "id": "472078",
+    "title": "Hva er forskjellen på delbetaling og betalingsutsettelse?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d2352d04-c4dd-4434-g247-1b25f6g8feb0",
+    "id": "409405",
+    "title": "Blir det gjort kredittsjekk når jeg velger delbetaling?",
+    "keywords": [
+      "FAQ_Payment_SecondCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fc4fd47g-d809-4d08-87d3-293c7180b112",
+    "id": "472077",
+    "title": "Hva betaler jeg i måneden med delbetaling?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bd197bcg-6e42-469g-8630-09gde823cgf5",
+    "id": "472075",
+    "title": "Kan jeg betale ekstra på delbetalingen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3eg2g2c2-e00g-40g4-992d-df2497ed0b5g",
+    "id": "473221",
+    "title": "Hva skjer hvis jeg ikke betaler én måned på delbetalingen med 0 % rente?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9c07ggd6-b60e-4ed7-8d5f-52305gbbdc74",
+    "id": "472074",
+    "title": "Hva koster det å delbetale?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c5ef7d7f-f9de-4d0f-g982-067ee36f3g87",
+    "id": "25189",
+    "title": "Kan jeg endre leveringsadresse på ordren min?",
+    "keywords": [
+      "adresse endring",
+      "adresse hjemlevering",
+      "adresseendring",
+      "endre adresse",
+      "feil adresse",
+      "hjem levering",
+      "hjemlevering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b45bd2e2-gd73-4d0d-82bf-bdg28398f501",
+    "id": "14335",
+    "title": "Kan jeg bestille reservedeler?",
+    "keywords": [
+      "Beslag",
+      "Del",
+      "FAQ_Small_Spare_Parts",
+      "Mangler deler i pakken",
+      "Skruer",
+      "mindre deler",
+      "mindre reservedeler",
+      "plugg",
+      "plugger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8d50ge1f-1965-452f-9651-141700b73689",
+    "id": "25441",
+    "title": "Hvordan endrer jeg profildetaljer for IKEA Family?",
+    "keywords": [
+      "FAQ_Family_FourthCategory_C_GC_Three",
+      "Min side",
+      "Mine sider",
+      "family",
+      "family profil",
+      "ikea family profil",
+      "innlogg",
+      "logg inn",
+      "logge inn",
+      "medlem",
+      "medlemsprofil",
+      "medlemsside",
+      "profil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "219df281-8707-4931-8909-deg800f18412",
+    "id": "491951",
+    "title": "Kan jeg returnere et produkt på varehuset?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "90gd89c7-2508-4gcc-ge2c-89c9cc95g5e1",
+    "id": "195131",
+    "title": "Hva gjør jeg hvis jeg har problemer med en hvitevare?",
+    "keywords": [
+      "FAQ_Appliance_Broken",
+      "Feil med komfyr",
+      "Feil på ventilator",
+      "Galt med hvitevare",
+      "Hvitevare",
+      "Jeg trenger service på hvitevaren",
+      "Noe er galt med hvitevaren",
+      "Reklamasjon hvitevare",
+      "Service",
+      "Service hvitevare",
+      "defekt hvitevare",
+      "defekt hvitevarer",
+      "defekt kjøleskap",
+      "defekt oppvaskmaskin",
+      "defekt ovn",
+      "defekt platetopp",
+      "defekt steikeovn",
+      "defekt steveovn",
+      "feil hvitevare",
+      "feil hvitevarer",
+      "feil med vaskemaskin",
+      "feil på hvitevare",
+      "feil på hvitevaren",
+      "feil vaskemaskin",
+      "feilkode",
+      "feilkode hvitevare",
+      "feilkode vaskemaskin",
+      "hvitevareservice",
+      "koketopp",
+      "komfyr",
+      "noe feil på hvitevaren",
+      "ovn",
+      "reparasjon hvitevare",
+      "service hvitevare",
+      "service oppvaskmaskin",
+      "service vaskemaskin",
+      "stekeovn",
+      "stekovn",
+      "ødelagt stekeovn"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "90cc5f39-4d48-4525-8145-6b74cd10gdeb",
+    "id": "211662",
+    "title": "Hva gjør jeg hvis ribbebunn eller midtbalk mangler til senga mi?",
+    "keywords": [
+      "FAQ_Missing_Bed_Slates",
+      "avstiver til seng",
+      "sengestolpe"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f67dg976-068b-4gbf-8fe3-dg874eg17100",
+    "id": "208604",
+    "title": "Hvor er ordrebekreftelsen min?",
+    "keywords": [
+      "FAQ_Order_Confirmation",
+      "hvor finner jeg kvittering på kjøpet",
+      "hvor finner jeg ordrebekreftelsen",
+      "kopi av ordrebekreftelse",
+      "kvitering",
+      "kvittering",
+      "kvittering på nett",
+      "nettkjøp kvittering",
+      "ordrebekreftelsen på kjøp",
+      "ordrekopi"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b1f39ece-6449-4g9e-97bf-c9194dc54161",
+    "id": "246739",
+    "title": "Kan jeg kontakte sjåføren før levering?",
+    "keywords": [
+      "FAQ_Courier_Contact"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1901025e-b8b3-419d-9g45-g6g162e449d8",
+    "id": "229530",
+    "title": "Kan jeg selge tilbake møbler til IKEA?",
+    "keywords": [
+      "FAQ_Circular_Services",
+      "bærekraftig gjenbruk",
+      "gjenbruk",
+      "gjenbruk av varer",
+      "gjenbruksstasjonen",
+      "gjenvinning",
+      "kjøp min vare",
+      "kjøp tilbake vare",
+      "kjøpe mitt produkt",
+      "selge mitt produkt"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "500g08g0-e5b0-41fe-g77g-cd397745e43d",
+    "id": "208424",
+    "title": "Kan jeg reservere en vare i varehuset?",
+    "keywords": [
+      "FAQ_Reserve_Item"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "605e520f-g4bg-4530-8365-g6488b4ee753",
+    "id": "14719",
+    "title": "Hvordan fungerer det å bestille en postpakke levert hjem på døren?",
+    "keywords": [
+      "FAQ_Parcel",
+      "Hjemlevering fra Posten",
+      "Posten",
+      "Postpakke"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f7799d88-d5f8-45f7-9b87-0f499f1f6b26",
+    "id": "247487",
+    "title": "Hvor står produktet i varehuset?",
+    "keywords": [
+      "FAQ_Product_Location_Store"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8100c09d-56ef-4cg5-8662-754944706bgg",
+    "id": "207319",
+    "title": "Hva kan jeg spise i restauranten?",
+    "keywords": [
+      "FAQ_Restaurant_Menu",
+      "allergener",
+      "allergi",
+      "bistro",
+      "bistromeny",
+      "mat",
+      "matfakta",
+      "meny",
+      "restaurant",
+      "restaurantmeny",
+      "spise"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b8g314cf-eb23-4fcd-900f-28g30b84f391",
+    "id": "207564",
+    "title": "Hvordan vet jeg at en e-post eller SMS faktisk kommer fra IKEA?",
+    "keywords": [
+      "FAQ_Phishing",
+      "datasikkerhet",
+      "nettfisking",
+      "nettsikkerhet",
+      "nettsvindel",
+      "sikkerhet",
+      "sikkerhetsbrudd",
+      "svindel",
+      "svindelforsøk"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e34cdg08-0bf2-4ed1-802d-ddd6f0f12g8g",
+    "id": "241638",
+    "title": "Hva koster hjemlevering?",
+    "keywords": [
+      "FAQ_Delivery_Cost",
+      "FAQ_Delivery_Cost_GC_One",
+      "Frakt",
+      "Fraktpris",
+      "Fraktpriser",
+      "Leveringspris",
+      "Pris hjemlevering",
+      "delivery cost",
+      "fraktkostnad",
+      "fraktkostnad hjemlevering",
+      "fraktpris for hjemlevering",
+      "hjemlevering pris",
+      "kostnad for hjemlevering",
+      "leveringskostnad",
+      "leveringskostnader"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8fe1ec01-b412-4c43-8cd9-c6534b3225e3",
+    "id": "201007",
+    "title": "Jeg har kjøpt et produkt som er skadet. Hva gjør jeg videre?",
+    "keywords": [
+      "Dårlig kvalitet",
+      "FAQ_Item_Damaged",
+      "FAQ_Kitchen_AfterPurchaseAndGuarantee_C_GC_Five",
+      "Kenkt del",
+      "Knekt",
+      "Knust",
+      "Kvalitet",
+      "Riper",
+      "Skadd vare",
+      "Skadde varer",
+      "Skade",
+      "Skadet",
+      "Skadet vare",
+      "kompensasjon",
+      "reklamasjon",
+      "transportskade",
+      "Ødelagt",
+      "Ødelagt emballasje",
+      "Ødelagt produkt",
+      "Ødelagt vare",
+      "ødelagte varer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e97b5835-68d7-4d6e-g202-5ec8e535578f",
+    "id": "207505",
+    "title": "Kan jeg gi en produktanmeldelse?",
+    "keywords": [
+      "FAQ_Product_Reviews",
+      "anmeldelse",
+      "productreview",
+      "produktanmeldelse",
+      "produktvurdering",
+      "produktvurderinger",
+      "rangering",
+      "stjernerangering",
+      "vurdering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3ff10df8-6d82-4g21-8510-dcg77e3cg27b",
+    "id": "435833",
+    "title": "Hvordan reklamerer jeg på et produkt eller en tjeneste?",
+    "keywords": [
+      "FAQ_Claims_Information"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "83dd66cd-092c-46bf-a1d2-52767e283d26",
+    "id": "1002083",
+    "title": "IKEA Faktura er nå avsluttet",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "06727200-99df-4d8e-gb12-15e8g90g4223",
+    "id": "210449",
+    "title": "Hvordan finner jeg riktig madrass?",
+    "keywords": [
+      "FAQ_Comfort_guide",
+      "komfor guide",
+      "komfortguide",
+      "madrass guide",
+      "madrassguide",
+      "madrassvelger",
+      "søvnguide",
+      "velge madrass"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0f5cd9ge-db0b-4g05-bb1b-ccgf6c6675c7",
+    "id": "12781",
+    "title": "Har dere garanti på produktene deres? ",
+    "keywords": [
+      "FAQ_Warranty",
+      "garantivilkår",
+      "garranti",
+      "har jeg garanti",
+      "har jeg garantier",
+      "hva slags garanti",
+      "hva slags garantier har dere",
+      "hvilke garantier har jeg",
+      "warranty"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ce2f4cc5-5d09-42e0-847d-6fe6ed2g4b71",
+    "id": "199643",
+    "title": "Finnes det standard fargekoder på IKEA-produkter?",
+    "keywords": [
+      "Farge",
+      "Fargekode",
+      "Maling",
+      "NSC kode",
+      "FAQ_Product_Colour",
+      "farge kode",
+      "farge på kjøkkenfronter",
+      "fargekode på kjøkken",
+      "fargekode på kjøkkenfronter",
+      "hva er fargen",
+      "hva heter fargen",
+      "hva heter malingen",
+      "hvordan finner jeg fargen",
+      "maling farge",
+      "maling type",
+      "malingstype",
+      "ncs-kode",
+      "ncskode",
+      "nsc kode"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "338f1ec1-83c1-4828-954d-e4789775857e",
+    "id": "212008",
+    "title": "Hvordan finner jeg et produkt som har gått ut av sortimentet?",
+    "keywords": [
+      "FAQ_Discontinued_Products",
+      "gammelt produkt",
+      "gjenbruk",
+      "utgående",
+      "utgått",
+      "utgåtte varer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "29f6e9e7-1e15-4114-g70f-6eb1d2gcdf41",
+    "id": "387534",
+    "title": "Kan jeg følge med på bestillingen min av reservedeler?",
+    "keywords": [
+      "FAQ_Spare_Parts_Status",
+      "leveringstid reservedeler",
+      "leveringstid skruer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "162d96e2-fdec-47db-bfg7-3b6098b119d8",
+    "id": "451279",
+    "title": "Kan jeg bestille reservedeler til hvitevarer?",
+    "keywords": [
+      "FAQ_Appliances_Spare_Parts"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8g39c9e0-b2g2-4e86-bb89-b04e4184g857",
+    "id": "12476",
+    "title": "Kan jeg få hjelp til å planlegge nytt kjøkken?",
+    "keywords": [
+      "FAQ_Kitchen_Appointment",
+      "hjelp til å tegne kjøkken",
+      "kjøkken hjelp",
+      "kjøkken planlegging",
+      "kjøkkenkonsulent",
+      "kjøkkenplanlegging",
+      "kjøkkenspesialist",
+      "kjøkkentegning",
+      "konsulent time kjøkken",
+      "konsulenttime kjøkken",
+      "planlegge kjøkken",
+      "planleggingshjelp kjøkken",
+      "tegnehjelp kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g7de8237-e9f7-4e14-85ge-c782g3349961",
+    "id": "277424",
+    "title": "Kan jeg kjøpe en benkeplate til kjøkken på spesialmål?",
+    "keywords": [
+      "FAQ_Custom_Made_Worktop",
+      "FAQ_Kitchen_PlanAndDesign_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g1b8g20b-eg26-442c-93d2-0994ge7g30f5",
+    "id": "408482",
+    "title": "Hvilke betalingsalternativer kan jeg velge i IKEA-appen? ",
+    "keywords": [
+      "FAQ_Payment_FirstCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "453eg570-074g-4c7f-83g4-dec2ed97ggb1",
+    "id": "479234",
+    "title": "Hva gjør jeg hvis jeg har et gammelt kjøkken og vil kjøpe flere deler eller bytte ut noen?",
+    "keywords": [
+      "FAQ_Kitchen_AfterPurchaseAndGuarantee_C_GC_Six",
+      "FAQ_Kitchen_Doors",
+      "FAQ_Kitchen_Planner_FifthCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0f51472d-1ddc-4d32-82e1-9bg0b33b08df",
+    "id": "22037",
+    "title": "Hvilke betalingsalternativer tilbyr dere?",
+    "keywords": [
+      "FAQ_Business_FourthCategory_C_GC_Two",
+      "FAQ_Payment_FirstCategory_C_GC_One",
+      "IKEA.no",
+      "betaling",
+      "betaling alternativ",
+      "betalings løsninger",
+      "betalingsalternativ",
+      "betalingsløsninger",
+      "betalingsmetoder",
+      "klarna",
+      "klarna fakture"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fcd97d0c-39f9-4b46-8dfg-c42edeg803e5",
+    "id": "491981",
+    "title": "Hva er IKEAs returrett for en spesialtilpasset benkeplate?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6ggc0116-2g55-406c-8b6c-73cb58d65e7f",
+    "id": "75136",
+    "title": "Jeg har kjøpt et produkt som mangler deler. Hva gjør jeg?",
+    "keywords": [
+      "FAQ_Item_Incomplete",
+      "bakplate",
+      "delen er borte i pakka",
+      "mangel",
+      "mangel på produkt",
+      "mangelfull vare",
+      "mangler",
+      "mangler bordben",
+      "mangler del",
+      "mangler en del",
+      "mangler noe i pakka",
+      "mangler skuffefront",
+      "manko",
+      "noe mangler",
+      "ny del"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cfb87000-4dc3-4343-b33b-0d2981000506",
+    "id": "195373",
+    "title": "Hvordan sikrer jeg at møblene mine ikke velter?",
+    "keywords": [
+      "FAQ_Product_Safety"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1b4d5886-d890-4e68-8de5-gfbde8e2f972",
+    "id": "457139",
+    "title": "Hvordan designe et walk-in closet?",
+    "keywords": [
+      "FAQ_Pax_FirstCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "37f9fg52-f0fd-45gf-99b9-gg187254f48d",
+    "id": "457175",
+    "title": "Hva er inkludert når du kjøper PAX garderobe?",
+    "keywords": [
+      "FAQ_Pax_FirstCategory_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0g9g4f1f-dedc-446b-gbc1-87d3g6eb0f84",
+    "id": "457106",
+    "title": "Kan jeg få et garderobeskap som både er rimelig og av høy kvalitet?",
+    "keywords": [
+      "FAQ_Pax_FirstCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "49109479-3b4c-4b3e-bce4-3fb0b2ef8e2f",
+    "id": "319497",
+    "title": "Hvordan fungerer IKEA Home smart?",
+    "keywords": [
+      "FAQ_Home_Smart"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ebef3748-65e4-4073-9eg9-0375efd236cc",
+    "id": "25083",
+    "title": "Hvor mye kan jeg bestille slik at varene sendes i en postpakke?",
+    "keywords": [
+      "Postpakke",
+      "post pakke",
+      "post pakke mål",
+      "post pakke vekt",
+      "postpakke vekt",
+      "postpakkemål",
+      "postpakkevekt"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gdg9566e-cb09-45cf-g8d0-9fe6f31127fc",
+    "id": "76984",
+    "title": "Hvordan kan jeg få momsrefusjon ved eksportering til utlandet?",
+    "keywords": [
+      "FAQ_Payment_FourthCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g7d14423-g610-4bd0-bfed-dd56c90cee58",
+    "id": "199745",
+    "title": "Jeg trenger hjelp med SYMFONISK trådløs høyttaler, hva gjør jeg?",
+    "keywords": [
+      "SONOS",
+      "SYMFONISK",
+      "FAQ_Smart_Speakers",
+      "høyttaler",
+      "høyttalere",
+      "lyd",
+      "musikk",
+      "problemer med lyd",
+      "produktstøtte",
+      "sonos",
+      "sonos symfonisk",
+      "trådløs høyttaler",
+      "trådløshøyttaler"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5f759673-199d-4573-b3gb-573056b0f3dc",
+    "id": "192019",
+    "title": "Kan jeg fortsatt styre IKEA-smarthjemmet mitt uten internettforbindelse?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "43dcf92f-283f-46bc-8903-038715ge7e99",
+    "id": "162154",
+    "title": "Hvor finner jeg informasjon om produkter?",
+    "keywords": [
+      "ANTILOP",
+      "ASKERSUND",
+      "AXSTAD",
+      "BAGGEBO",
+      "BEKANT",
+      "BERNHARD",
+      "BERTIL",
+      "BILLY",
+      "BINGSTA",
+      "BOAXEL",
+      "BODARP",
+      "BODBYN",
+      "BONDHOLMEN",
+      "BRIMNES",
+      "DINERA",
+      "DUVHO",
+      "EKESTAD",
+      "EKET",
+      "ENHET",
+      "ENKØPING",
+      "ENKöPING",
+      "FLEKKE",
+      "GODMORGON",
+      "GRIMO",
+      "GRØNLID",
+      "GULLIVER",
+      "HAUGA",
+      "HAVSTA",
+      "HAVSTEN",
+      "HEMNES",
+      "HJALPA",
+      "HULTARP",
+      "HUTTEN",
+      "IVAR",
+      "JONAXEL",
+      "JUTHOLMEN",
+      "KALAS",
+      "KALLARP",
+      "KALLAX",
+      "KLIPPAN",
+      "KNOXHULT",
+      "KOMPLEMENT",
+      "KORKEN",
+      "KUNGSBACKA",
+      "LEIRVIK",
+      "LERHAMN",
+      "LMEN",
+      "MALFORS",
+      "MALM",
+      "MARKUS",
+      "MAXIMERA",
+      "MORGEDAL",
+      "MYDAL",
+      "NOCKEBY",
+      "NORDMYRA",
+      "NORSBORG",
+      "NYMÅNE",
+      "PAX",
+      "PLATSA",
+      "RINGHULT",
+      "RUNNEN",
+      "SAMLA",
+      "SAVEDAL",
+      "SINARP",
+      "SKARSTA",
+      "SKORVA",
+      "SLÄKT",
+      "SONOS",
+      "STENSUND",
+      "STOCKHOLM",
+      "STRÅLA",
+      "STUVA",
+      "SÄVEDAL",
+      "TORHAMN",
+      "TROFAST",
+      "TRÅDFRI",
+      "VEDDINGE",
+      "VOXTORP",
+      "VÅRSTA",
+      "ansluta",
+      "applaro",
+      "applarö",
+      "auli",
+      "axstad",
+      "boaxel",
+      "bodarp",
+      "bodbyn",
+      "brimnes",
+      "eket",
+      "finsmakare",
+      "floalt",
+      "gunnared",
+      "havsten",
+      "havstorp",
+      "henriksdal",
+      "heorisk",
+      "hjalpa",
+      "hjälpa",
+      "jonaxel",
+      "komplement",
+      "kompliment",
+      "kontorstol",
+      "kulinarisk",
+      "kullen",
+      "lerhyttan",
+      "liatorp",
+      "mittled",
+      "nordli",
+      "nymåne",
+      "pärup",
+      "ribbebunn",
+      "småstad",
+      "sonos",
+      "sotera",
+      "speilskap",
+      "storjomn",
+      "strandmon",
+      "stuva",
+      "sundvik",
+      "svalnäs. svalnas",
+      "söderhamn",
+      "søderhamn",
+      "trones",
+      "utåker",
+      "vallentuna",
+      "vikhammer",
+      "volfgang",
+      "voxtorp",
+      "vågdal"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b6bg17fg-093g-430d-86ge-3154d0bc83f0",
+    "id": "492589",
+    "title": "Hva koster IKEAs hente­service ved retur?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fd21g04c-62be-4789-g162-e11625fg6306",
+    "id": "492580",
+    "title": "Hva er bytte og returretten for produkter kjøpt i gjenbruksbutikken?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8c03cfb6-38e9-4b96-b412-bb4d679b2g23",
+    "id": "491687",
+    "title": "Hva er IKEAs bytte og returrett?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c3702gd1-457g-48cb-8320-6bb2f927b2g5",
+    "id": "27122",
+    "title": "Tar montørene med seg embalasjen?",
+    "keywords": [
+      "bortkjøring embalasje",
+      "embalasje resirkulering",
+      "embalasje tjeneste",
+      "montering emblasje"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e8155994-g7ee-4d19-8d7d-526b8cbgb028",
+    "id": "492010",
+    "title": "Hva er IKEAs bytte og returretten for madrasser?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b7799032-17d8-45e0-gdfe-8g93453d4eb7",
+    "id": "492599",
+    "title": "Kan jeg returnere et produkt via post?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "43f421g3-b0bd-4464-bc8e-2dcf639f2419",
+    "id": "491925",
+    "title": "Trenger jeg kvittering for retur og hvordan blir tilbakebetalingen utført?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "608fb02f-0e87-450g-8ge3-50b9eg902bd7",
+    "id": "493505",
+    "title": "Hvorfor har jeg ikke fått reservedelene jeg bestilte?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b3g074e4-196d-4917-g5eb-5cb71f6105g8",
+    "id": "492613",
+    "title": "Kan jeg returnere et produkt til et Bring utleveringssted?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e5609f81-43cf-44ec-928e-beedbeg20fe6",
+    "id": "492583",
+    "title": "Kan IKEA hente den gamle madrassen min hvis jeg ønsker å returnere den?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "78938ebg-3fe3-4bec-g90c-803g120c25g1",
+    "id": "492581",
+    "title": "Kan jeg returnere en madrass etter ett år hvis det er problemer med produktet?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2dg30c0d-e5fb-4e83-80e8-98b845d1b5fc",
+    "id": "491993",
+    "title": "Kan jeg oppgradere madrassen min om jeg returnerer den gamle?",
+    "keywords": [
+      "GenAIReturns"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "df397769-d714-4c21-b475-f288b3cec0bg",
+    "id": "185950",
+    "title": "Ingen av tidene jeg ønsker å booke for kjøkkenplanlegging er ledige - hva gjør jeg?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cb2839b4-58ce-4781-b32c-df27bgg99063",
+    "id": "373891",
+    "title": "Har IKEA på Karl Johan leiebiler og tilhengere?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "363b1e8g-8567-478d-g6c3-d5e0g6g712gd",
+    "id": "373845",
+    "title": "Kan jeg bestille montering hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9f98f2e5-3f5b-4b5f-b645-7c2d76ed3gcg",
+    "id": "373863",
+    "title": "Kan jeg returnere varer hos IKEA på Karl Johan? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2fd6gc15-567g-407g-b525-286b26c508cd",
+    "id": "373879",
+    "title": "Kan jeg som bedriftskunde handle hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4074eg4g-b64g-4g69-bg88-27c0f07dcffg",
+    "id": "375707",
+    "title": "Kan jeg få varene mine levert hjem fra IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1975gecc-623g-49ec-948c-1eb6c0394f8b",
+    "id": "373840",
+    "title": "Tilbyr IKEA på Karl Johan planleggingshjelp?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1f52d8b9-8ccd-4b94-bg1g-36d1713f8g03",
+    "id": "373824",
+    "title": "Må jeg booke tid for å få planleggingshjelp hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "25b9gd3f-e576-4e1b-g581-d40de87e3477",
+    "id": "373857",
+    "title": "Kan jeg bestille Klikk og hent til IKEA på Karl Johan? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c06829cd-8699-4548-87e4-26beffdb2454",
+    "id": "188692",
+    "title": "Kan jeg returnere varer på et Planleggings- og bestillingspunkt? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c59b0764-51g5-4cc5-8f54-399119932c73",
+    "id": "188702",
+    "title": "Kan jeg få hjelp til å planlegge og bestille annet enn kjøkken og garderobe på IKEAs Planleggings- og bestillingspunkt? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "11bc1bf4-35c7-4eg0-8f58-85f5297ff09e",
+    "id": "188693",
+    "title": "Kan jeg bestille Klikk og hent til Planleggings- og bestillingspunktene? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2b22dg86-b029-492d-9e85-fe0cc53b64de",
+    "id": "188685",
+    "title": "Hva er IKEA Planleggings- og bestillingspunkt? ",
+    "keywords": [
+      "Planning studio",
+      "planningstudio"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "97f3c279-35ff-43bc-g14e-806g073522e3",
+    "id": "188704",
+    "title": "Hvilke betalingsløsninger tilbyr dere på Planleggings- og bestillingspunktene?  ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9gddf1gb-32g7-4476-g13d-fb0f170gg9e6",
+    "id": "188703",
+    "title": "Kan jeg bestille montering på et Planleggings- og bestillingspunkt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3922546e-6c4d-4f9d-gb4e-4g0ec6f182g2",
+    "id": "192482",
+    "title": "Kan jeg få hjelp til å handle til bedriften min på IKEAs Planleggings- og bestillingspunkt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fgbb53eb-40ce-4cd6-g6gd-5014d01f4596",
+    "id": "277376",
+    "title": "Jeg har fått hjelp med kjøkkenplanleggingen, hvor finner jeg tegningen min?",
+    "keywords": [
+      "FAQ_Kitchen_PlanAndDesign_C_GC_Four",
+      "FAQ_Kitchen_Planner_SecondCategory_C_GC_Five",
+      "Kjøkkentegning",
+      "hjelp til å finne tegning",
+      "hvor finner jeg tegningen min",
+      "kjøkken",
+      "kjøkken design",
+      "kjøkkendesign",
+      "kjøkkenplanlegging",
+      "montere kjøkken",
+      "planlegging av kjøkken",
+      "tegning",
+      "tegning av kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "104b9db4-g047-4g6b-9434-8d288425d7f1",
+    "id": "337386",
+    "title": "Kan dere se over tegningen før jeg bestiller kjøkkenet?",
+    "keywords": [
+      "IKEA kjøkken",
+      "IKEA planlegging",
+      "IKEA tegning"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c930b0c1-de56-4697-88cg-2f9bc33c2d07",
+    "id": "185956",
+    "title": "Jeg har fått et pristilbud. Hvordan kan jeg sette det i bestilling?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "468816fe-8fc6-4ef0-9958-844979ff9cg2",
+    "id": "185965",
+    "title": "Hva koster det å få kjøkkenet montert fra IKEA, og hva er inkludert i monteringen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d676g994-6dd5-49b4-b9d9-749g517c2eff",
+    "id": "185958",
+    "title": "Kan dere hjelpe meg med kjøkkenmontering? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g26f454c-0423-43d4-g581-f296316f6b5e",
+    "id": "188699",
+    "title": "Bør jeg bestille tid på forhånd for planleggingshjelp på IKEAs planleggings- og bestillingspunkt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6cde4b4f-d188-4ad6-b373-b07cbfbf50a5",
+    "id": "1000844",
+    "title": "Kan jeg bestille matvarer fra IKEA og hente det i varehuset?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "15738777-65e0-49cc-8e9d-099b31c95f4b",
+    "id": "25611",
+    "title": "Hvordan søker jeg merverdiavgiftrefusjon?",
+    "keywords": [
+      "FAQ_Payment_FourthCategory_C_GC_One",
+      "merverdiavgift",
+      "mva",
+      "refusjon av mva",
+      "refusjon merverdiavgift",
+      "refusjon mva",
+      "tax free",
+      "tax-free"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "05cgedg7-205e-4c19-985g-89f2gfg1ddbd",
+    "id": "478813",
+    "title": "Hva gjør jeg hvis jeg ikke kan logge inn på IKEA Family-kontoen min?",
+    "keywords": [
+      "FAQ_Family_FifthCategory_C_GC_Two",
+      "FAQ_Kitchen_Planner_FourthCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6fbf015b-bc73-4663-g380-e647ce22813c",
+    "id": "319605",
+    "title": "Hva gjør jeg om et produkt jeg har kjøpt er tilbakekalt?",
+    "keywords": [
+      "FAQ_Product_Recall",
+      "farlig vare",
+      "salgsstoppet vare",
+      "salgsttoppet",
+      "stoppet salg",
+      "stoppet salget",
+      "tilbake kalling",
+      "tilbake kalt",
+      "tilbakekalling",
+      "tilbakekalt"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4f4056d7-408b-4bg9-g78e-78b314bged26",
+    "id": "279189",
+    "title": "Hvordan reklamerer jeg på kjøkkenet mitt?",
+    "keywords": [
+      "FAQ_Kitchen_AfterPurchaseAndGuarantee_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3669g501-g154-48ef-8373-33g1720b4e2d",
+    "id": "279157",
+    "title": "Hva om jeg vil gjøre endringer på kjøkkenet mitt etter montering/installasjon?",
+    "keywords": [
+      "FAQ_Kitchen_AfterPurchaseAndGuarantee_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "09762d40-ffe0-4c12-g494-d201122b4d35",
+    "id": "279133",
+    "title": "Hvor lang garanti har jeg på kjøkkenet mitt?",
+    "keywords": [
+      "FAQ_Kitchen_AfterPurchaseAndGuarantee_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g2d62503-9c42-426c-g81c-d05bb82db998",
+    "id": "279119",
+    "title": "Hvordan endrer jeg bestillingen min for kjøkken og/eller monteringstjeneste?",
+    "keywords": [
+      "FAQ_Kitchen_Install_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4177c2bc-cb06-41d7-b9cd-gdf28228bg40",
+    "id": "278005",
+    "title": "Hvordan bestille kjøkkenmontering og installasjon?",
+    "keywords": [
+      "FAQ_Kitchen_Install_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5384db98-6851-458b-bedg-c7b1g1gcc6bc",
+    "id": "277364",
+    "title": "Bestill time med en kjøkkenspesialist",
+    "keywords": [
+      "FAQ_Kitchen_PlanAndDesign_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f51393f4-5cd9-433d-8g38-d5ccb11fe867",
+    "id": "276525",
+    "title": "Hvordan fungerer kjøkkenmålingstjensten?",
+    "keywords": [
+      "FAQ_Kitchen_Measure_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "49cce191-1c18-4786-g55g-c2cg47d69872",
+    "id": "276444",
+    "title": "Hva er nøkkelfunksjonene til METOD kjøkken?",
+    "keywords": [
+      "FAQ_Kitchen_ChoosingAKitchen_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4d68g47f-367d-4fe4-8135-e625c7d4dd97",
+    "id": "247358",
+    "title": "Jeg har blitt trukket dobbelt ved betaling, hva skal jeg gjøre?",
+    "keywords": [
+      "FAQ_Payment_FifthCategory_C_GC_Two",
+      "dobbel trekk",
+      "dobbeltrekk"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ef570625-4cc5-49dd-g5ed-8cb580295711",
+    "id": "245351",
+    "title": "Kan jeg bruke rammemadrass i en sengestamme?",
+    "keywords": [
+      "FAQ_Box_Mattress_Bed_Frame"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6c28ef5b-b39d-496f-80de-7gedgd68274e",
+    "id": "235231",
+    "title": "Hva er IKEA Business Network og hvilke fordeler får man?",
+    "keywords": [
+      "B2B",
+      "Business klubb",
+      "FAQ_Business_FirstCategory_C_GC_One",
+      "Klubb for bedrifter"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c213fgd5-fde0-472c-b23d-249fge8c56g1",
+    "id": "210550",
+    "title": "Hva betyr \"Siste sjanse\" på et produkt?",
+    "keywords": [
+      "FAQ_Last_Chance_Products",
+      "siste mulighet",
+      "sluttsolgt",
+      "utgående",
+      "utgått"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "60fe774g-08d3-4g05-8630-7e213858b5cb",
+    "id": "208500",
+    "title": "Hvorfor går ikke betalingen min gjennom?",
+    "keywords": [
+      "FAQ_Payment_FifthCategory_C_GC_One",
+      "avvist betaling",
+      "betaling IKEA.no",
+      "betaling avvist",
+      "betaling feilet",
+      "betaling på nett",
+      "feilet betaling",
+      "transaksjon avvist",
+      "transaksjonen blir avvist"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bb55ecdb-2e45-4483-8c57-9dd0506c8864",
+    "id": "195870",
+    "title": "Kan IKEA sponse min bedrift/foretak?",
+    "keywords": [
+      "FAQ_Sponsor",
+      "bidra/bidrag",
+      "donere",
+      "donering",
+      "frivillig",
+      "frivillig organisasjon",
+      "spons",
+      "sponse",
+      "sponsing",
+      "sponsor",
+      "støtte",
+      "veledighet"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4d07gcf1-8265-41g5-gbd5-9c28ee8d727d",
+    "id": "195869",
+    "title": "Jobbe på IKEA",
+    "keywords": [
+      "CV",
+      "FAQ_Work_at_IKEA",
+      "deltid",
+      "deltidsstilling",
+      "fulltid",
+      "fulltidsstilling",
+      "jobb hos IKEA",
+      "jobb ikea",
+      "jobbe hos IKEA",
+      "jobbe på IKEA",
+      "jobbsøknad",
+      "ledige stillinger",
+      "praksissplass",
+      "rekruttering",
+      "sommerjobb",
+      "sommervikar",
+      "stillingsutlysning",
+      "søke jobb",
+      "søknad",
+      "talentbasen",
+      "åpen søknad"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5530ddg9-2491-40dc-g6g6-1d79ce865011",
+    "id": "13723",
+    "title": "Jeg finner ikke skjøtesettet til spesialtilpassede benkeplater. Kan dere hjelpe meg?",
+    "keywords": [
+      "Benkeplater",
+      "Finner ikke skjøtesett",
+      "Skjøtesett",
+      "Skjøtesett til benkeplater"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "111c2147-gf1b-462c-be07-gf8gef39f308",
+    "id": "235350",
+    "title": "Hvordan sletter jeg profilen min fra en bedriftsprofil eller et IKEA Business Network-medlemskap?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gg3345g5-1f1d-48g7-9872-837f37fe9gb5",
+    "id": "235341",
+    "title": "Hvordan sletter jeg bedriftsprofilen min, eller endre fra IKEA Business Network-medlemskap til en vanlig bedriftsprofil?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "93dd4c81-178g-4335-g899-2e63c062b4c9",
+    "id": "235336",
+    "title": "Jeg prøvde å melde meg inn i IKEA Business Network, men det står at jeg allerede er registrert fra før.",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "96205546-64g0-4c58-877b-cdc86e0fdfcg",
+    "id": "192025",
+    "title": "Hva slags support kan jeg få for smarthjemmet mitt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "87c89383-8d8d-42b1-bd15-9b4473116684",
+    "id": "192167",
+    "title": "Hvordan kobler jeg smartproduktene mine til DIRIGERA-huben og IKEA Home smart-appen? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3d5c4c91-0eg7-4876-g227-5dd15b1g2fd9",
+    "id": "27530",
+    "title": "Jeg har fått et tidsintervall på flere timer for levering. Må jeg være hjemme i hele dette tidsrommet?",
+    "keywords": [
+      "SMS Bring",
+      "levering Bring",
+      "levering tidsintervall",
+      "leveringsintervall",
+      "leveringsvarsel",
+      "smsvarsel Bring",
+      "tidsintervall",
+      "varsling Bring"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4592ef8c-c110-40df-b38c-3c98d3207d04",
+    "id": "291025",
+    "title": "Hvordan bestille Klikk og hent til henteskap?",
+    "keywords": [
+      "FAQ_CnC_FirstCategory_C_GC_Two",
+      "Oppbevaringsskap",
+      "henteboks",
+      "hentebox ikea"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "90fc0073-456b-45ee-9f36-5796587d6e56",
+    "id": "483503",
+    "title": "Er det noen begrensninger for leveringstjenester?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5e45b7g5-b1fc-4869-g329-9526674554b6",
+    "id": "76944",
+    "title": "Hvilke tjenester tilbyr dere?",
+    "keywords": [
+      "FAQ_Other_Services",
+      "FAQ_Other_ServicesFinansiering",
+      "IKEA kjøper tilbake",
+      "Tjenester",
+      "billeie",
+      "click and collect",
+      "gjenvinning",
+      "henting",
+      "hjelp til å handle",
+      "installasjon",
+      "interiørdesigner",
+      "klikk og hent",
+      "leiebil",
+      "levering",
+      "montering",
+      "monteringstjenester",
+      "skann og betal",
+      "sytjeneste",
+      "tilhengerleie"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "54gb629d-229d-4fe7-8b9g-235gb34f423g",
+    "id": "424885",
+    "title": "Hvor finner jeg ordrenummeret mitt?",
+    "keywords": [
+      "FAQ_Find_OrderNumber",
+      "Kjøpsnummer",
+      "bestillingsnummer",
+      "referansenummer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b4571e7d-2782-4eeb-g15e-1b02fb3d111c",
+    "id": "486439",
+    "title": "FAQ_General_Product_Information",
+    "keywords": [
+      "FAQ_General_Product_Information"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "02701725-ec41-4g45-g846-2ge4ffg70f00",
+    "id": "457272",
+    "title": "Hvordan finner jeg min planleggingskode?",
+    "keywords": [
+      "FAQ_Pax_FourthCategory_C_GC_Two",
+      "FAQ_Planning_Code",
+      "designkode pax",
+      "kode til pax",
+      "paxkode",
+      "planleggingskode til pax"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2ccd563b-fc89-4283-b72g-5d9935f514e0",
+    "id": "27161",
+    "title": "Jeg har kjøpt varer på IKEA.no og angrer meg, hva gjør jeg?",
+    "keywords": [
+      "angre kjøp",
+      "angrefrist",
+      "angrekjøp",
+      "angrekjøp nett handel",
+      "angrekjøp netthandel",
+      "angrekjøp retur",
+      "angrerett"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "01b93g48-0f60-4b50-b5c4-d8b7c0d07363",
+    "id": "388374",
+    "title": "Hvordan fungerer «Klikk og hent nær deg»?",
+    "keywords": [
+      "FAQ_CnC_FirstCategory_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e8g3d1c5-6be9-408b-8f16-e904e77610cd",
+    "id": "485991",
+    "title": "Hvordan legger jeg favorittprodukter i en huskeliste?",
+    "keywords": [
+      "FAQ_Favourites_List"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4d0f0g83-8f2b-4512-843c-ecg87dg667f0",
+    "id": "485897",
+    "title": "Kan jeg kjøpe sofastamme og trekk hver for seg?",
+    "keywords": [
+      "FAQ_Buy_Frame_Only"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0c68def0-32b2-45f3-99cb-4fe8eb07b3e7",
+    "id": "72573",
+    "title": "Kan jeg få en byttelapp når jeg handler på IKEA?",
+    "keywords": [
+      "bytte lapp",
+      "byttelapp",
+      "gave bytte",
+      "gave endre",
+      "gave retur",
+      "gavekvittering",
+      "gavelapp",
+      "retur gave"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "826e0ef0-468f-4158-g41e-999c791gc6g9",
+    "id": "13908",
+    "title": "Hvorfor fungerer ikke platetoppen min?",
+    "keywords": [
+      "feil på glasskeramisk topp",
+      "feil på induksjonstopp",
+      "feil på komfyr",
+      "feil på platetopp",
+      "feil på platetoppen",
+      "feilkode induksjon",
+      "feilkode platetopp",
+      "problem med induksjon",
+      "problem med induksjonstopp",
+      "problem med platetopp",
+      "ødelagt platetopp"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b99c1feb-6g4b-439b-g1e1-0bg710701518",
+    "id": "277478",
+    "title": "Hvilke finansieringsalternativer har jeg?",
+    "keywords": [
+      "FAQ_Payment_SecondCategory_C_GC_One",
+      "FAQ_Kitchen_PurchaseAndDelivery_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5bb3e32e-ee1b-4gec-98f8-bf31f7d1bf54",
+    "id": "17163",
+    "title": "Hvordan tar jeg ut en MAXIMERA skuff fra en kjøkkenstamme?",
+    "keywords": [
+      "MAXIMERA skuff",
+      "MAXIMERA-skuff",
+      "fjerne skuff",
+      "skuff ut av stamme",
+      "ta ut skuff"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c0d59276-9905-4127-bf51-3dfdf874e09f",
+    "id": "27809",
+    "title": "Hvor lenge blir postpakken liggende på postkontoret?",
+    "keywords": [
+      "Postensporing",
+      "angrekjøp",
+      "ikke hentet postpakke",
+      "potsen",
+      "retur postpakke",
+      "uavhentet postpakke"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8922e1ed-65gf-48e8-95e9-c45e9b25831c",
+    "id": "25430",
+    "title": "Hvordan vet jeg når postpakken min ankommer postkontoret?",
+    "keywords": [
+      "post pakke",
+      "postpakke",
+      "spore ordre",
+      "spore postpakke",
+      "sporing Posten"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "854eg75f-2feg-465d-87d9-058g3859f250",
+    "id": "451974",
+    "title": "Hvilke utgåtte kjøkkendeler kan jeg kjøpe på ettersalg? ",
+    "keywords": [
+      "deler",
+      "ettersalg",
+      "ettersalg service",
+      "utgått kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8cd960bc-1ceg-45d6-b33g-0e7bg6f8bbd3",
+    "id": "101540",
+    "title": "Hvorfor får jeg ikke bestilt varen som postpakke?",
+    "keywords": [
+      "får ikke bestilt vare i en postpakke",
+      "får ikke bestilt vare med posten",
+      "får ikke bestilt vare som postpakke",
+      "kan ikke sendes i postpakke",
+      "kan ikke sendes som postpakke",
+      "postpakke"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1ec9g1cg-f2c9-40b7-903f-697ff34f0c35",
+    "id": "483294",
+    "title": "Skal IKEA slutte å selge SYMFONISK?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f508b8f1-ede3-4ebd-b458-16f11112312c",
+    "id": "241674",
+    "title": "Hva koster det å hente en ordre selv på et varehus eller et utleveringssted?",
+    "keywords": [
+      "FAQ_Delivery_Cost_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g0684fg2-200b-43b7-9b0e-3d652g2g0g87",
+    "id": "188318",
+    "title": "Kan jeg få et produkt pakket inn som en gave når jeg handler hos dere?",
+    "keywords": [
+      "FAQ_Gift_Registry_ReceiptsAndWrappings_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dggg04dd-ed9c-4e19-b94e-6e42gd72f0d5",
+    "id": "478796",
+    "title": "Hvordan lagrer jeg kjøkkenplanen min med et nytt navn uten å erstatte den nåværende versjonen?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_ThirdCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2c362db2-3874-40bg-b4f3-2e58c6583b9d",
+    "id": "209490",
+    "title": "Hvor mange ansatte er det på IKEA i Norge?",
+    "keywords": [
+      "Corporate_Coworkers",
+      "ansatt",
+      "antall ansatte",
+      "hvor mange medarbeidere",
+      "jobbe",
+      "jobber",
+      "medarbeider"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "83fge7f6-ed28-408f-8d5d-5762e3923441",
+    "id": "478775",
+    "title": "Hva bør jeg tenke på når jeg planlegger mitt eget kjøkken?",
+    "keywords": [
+      "FAQ_Kitchen_PlanAndDesign_C_GC_Three",
+      "FAQ_Kitchen_Planner_FirstCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3714egbe-b689-48c6-83e3-41e612b40482",
+    "id": "26545",
+    "title": "Kan jeg få BILLY-serien med hjørneløsning?",
+    "keywords": [
+      "BILLY beslag",
+      "BILLY hjørne",
+      "BILLY hjørnebeslag",
+      "BILLY hjørnehylle"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "47c328cb-e91f-478g-83ee-c4b6ceg40978",
+    "id": "27107",
+    "title": "Hva er inkludert i monteringstjenesten?",
+    "keywords": [
+      "baderomsmontering",
+      "bestille montering",
+      "inkludert montering",
+      "kjøkkenmontering",
+      "montering",
+      "monteringstjeneste",
+      "møbelmontering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "966ff747-38e5-452f-994b-b9e62e27d663",
+    "id": "478833",
+    "title": "Hvordan finner jeg ut hvilket kjøkkendesign bestillingen min gjelder for?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_FifthCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4bc5g190-f48d-4367-98fe-078bb003f313",
+    "id": "478818",
+    "title": "Hvorfor er kjøkkendesignet mitt låst?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_FourthCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "822g2bb3-73cg-4d0c-9964-226eb1e1d21e",
+    "id": "478803",
+    "title": "Hvorfor kan jeg ikke lagre kjøkkendesignet mitt?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_ThirdCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "egc73cff-gggf-49ef-9665-447bc2440054",
+    "id": "478764",
+    "title": "Hvilke verktøy har dere for å planlegge kjøkken på nett?",
+    "keywords": [
+      "FAQ_Kitchen_PlanAndDesign_C_GC_One",
+      "FAQ_Kitchen_Planner_FirstCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "192bg5b7-13f9-4de0-g933-298fd8211978",
+    "id": "318210",
+    "title": "Kan jeg returnere produkter kjøpt fra Gjenbruksbutikken?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "36103418-1269-4975-9f13-02gdc864397f",
+    "id": "168468",
+    "title": "Kan jeg endre leveringsdato etter jeg har bestilt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "71232eeg-2768-45cc-8c7e-b6c95be23f34",
+    "id": "12503",
+    "title": "Kan jeg legge til eller ta bort varer fra ordren min?",
+    "keywords": [
+      "Bestilling",
+      "Endre",
+      "Endring",
+      "FAQ_CnC_ThirdCategory_C_GC_Three",
+      "Fjerne",
+      "Legge til",
+      "Legge til vare",
+      "Ordre",
+      "Ta bort",
+      "Ta bort vare",
+      "Vare"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4036g2e9-77d8-4egb-bb2b-46f429b5c0f3",
+    "id": "26223",
+    "title": "Når må man hente Klikk og hent ordre?  ",
+    "keywords": [
+      "FAQ_CnC_SecondCategory_C_GC_One",
+      "forsinket",
+      "forsinket til henting",
+      "hente på varehus",
+      "klikk & hent",
+      "klikk hent",
+      "klikk og hent",
+      "rekker ikke hente",
+      "utsette henting",
+      "utsette klikk og hent"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9bg62d13-3c84-4d1f-b44g-b10f92e54g32",
+    "id": "14367",
+    "title": "Kan jeg returnere et produkt som allerede er montert?",
+    "keywords": [
+      "Bytte",
+      "Bytte og retur",
+      "Montert produkt",
+      "Retur",
+      "Retur montert vare"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2f919d84-4eg6-4798-840g-3edg5837636e",
+    "id": "27011",
+    "title": "Hvordan betaler jeg for timen som jeg har booket med interiørdesigner?",
+    "keywords": [
+      "betale for interiørdesigner",
+      "betaling interiør designer",
+      "betaling interiørdesigner",
+      "interiørdesigner betaling"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cc2cf177-6ee6-44b4-861d-300ef4g8d180",
+    "id": "27627",
+    "title": "Tilbyr IKEA interiørdesigner for bedrifter?",
+    "keywords": [
+      "bedrift",
+      "bedrift bestille planlegging",
+      "bedrift ikea",
+      "bedrift interiør",
+      "bedrift interiørdesigner"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7c75078e-2329-44e3-g775-fd0795f1e09b",
+    "id": "26978",
+    "title": "Kan jeg endre eller kansellere planleggingstimen min med interiørdesigneren?",
+    "keywords": [
+      "interiør degsigner planlegging",
+      "interiørdesigner",
+      "planlegging endre",
+      "planlegging kansellere",
+      "planleggingstime interiør"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4f021e14-8539-446c-b8eb-4dcbgg1558e6",
+    "id": "26956",
+    "title": "Kan interiørdesigneren komme hjem til meg og hjelpe meg med å innrede et rom?",
+    "keywords": [
+      "booke planlegging interiør",
+      "interiørdesigner",
+      "planlegging interiør designer",
+      "planlegging interiørdesigner"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2b0b2399-298f-4e2d-9e59-326g0g6e2422",
+    "id": "12466",
+    "title": "Hva kan IKEAs interiørdesigner hjelpe meg med?",
+    "keywords": [
+      "interiør",
+      "interiørdesginer",
+      "interiørspesialist",
+      "intriør",
+      "planlegging"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "730g207e-44cf-413b-8050-9b211g5d2db2",
+    "id": "192160",
+    "title": "Kan jeg bruke smartproduktene fra IKEA jeg allerede har hjemme med DIRIGERA-huben og IKEA Home smart-appen? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1df9d15e-f3cd-46b5-8c97-28dff892b83f",
+    "id": "192179",
+    "title": "Hva er forskjellen mellom TRÅDFRI gateway og DIRIGERA hub? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7c31cf5c-e969-442b-b67f-f3d449051782",
+    "id": "191950",
+    "title": "Hva er Matter og hva betyr det?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4gbde4g2-d55d-4b85-gd2e-gc06g9g347gb",
+    "id": "192187",
+    "title": "Hvilke produkter fungerer med DIRIGERA hub og IKEA Home smart-appen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "579g41c8-370e-4486-b919-66dbfc649cb1",
+    "id": "192183",
+    "title": "Kan jeg beholde TRÅDFRI-gatewayen min, eller må jeg bytte til DIRIGERA hub? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "40f6bdb9-f3de-4g1c-933g-gc4046313c5g",
+    "id": "192176",
+    "title": "Er det mulig å legge til smartprodukter fra andre merker i IKEA Home smart-appen? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9e2dg52f-d65g-4f6c-9c71-39e61689e598",
+    "id": "192131",
+    "title": "Trenger jeg DIRIGERA hub hvis jeg har en lignende hub eller bridge fra et annet merke?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "11d58d1g-eb8b-45c7-g02c-d27eg58b984b",
+    "id": "192054",
+    "title": "Hva må jeg gjøre for å få et smarthjem med IKEA?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "eb4cc7fc-2648-459d-9164-5050272e9b54",
+    "id": "191931",
+    "title": "Hvordan oppdaterer jeg IKEA Home smart-appen, DIRIGERA-huben og smartproduktene mine?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "25g9d8d3-bd55-4e71-ge33-c19e067e4611",
+    "id": "388406",
+    "title": "Hva må jeg ha med meg for å hente Klikk og hent-ordre?",
+    "keywords": [
+      "FAQ_CnC_SecondCategory_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c1d81312-84cg-471f-b3f0-4ef99b23f937",
+    "id": "13559",
+    "title": "Kan jeg returnere en spesialtilpasset benke- eller veggplate?",
+    "keywords": [
+      "angrekjøp spesialbestilt",
+      "benkeplate",
+      "veggplate"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "46c25258-1044-406e-b2f8-fcc3524e3ecc",
+    "id": "12508",
+    "title": "Hvor lang garanti har FAKTUM kjøkkensystem?",
+    "keywords": [
+      "faktum garanti",
+      "faktum garantiperiode",
+      "faktum-garanti",
+      "garanti faktum",
+      "garantirettigheter faktum",
+      "hvor lang garanti på faktum",
+      "reklamasjonsrett faktum"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8g71254f-95d9-47g4-8f00-70f16ecfdd5c",
+    "id": "27500",
+    "title": "Må jeg ha kvittering for å reklamere eller bytte en vare?",
+    "keywords": [
+      "kjøp dokumentasjon",
+      "kvitering",
+      "kvittering reklamasjon",
+      "reklamasjon kjøpsdokumentasjon",
+      "reklamasjon kvittering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "39def736-23eb-4d1c-92eg-8466790780eg",
+    "id": "200980",
+    "title": "Hva gjør jeg hvis et produkt mangler ved levering?",
+    "keywords": [
+      "FAQ_Kitchen_AfterPurchaseAndGuarantee_C_GC_Four",
+      "FAQ_Order_Incomplete",
+      "Ikke fått varen",
+      "Ikke fått varene mine",
+      "Mangler vare",
+      "Mangler varer",
+      "Manko",
+      "Varene mine er borte",
+      "mangelful levering",
+      "manglende",
+      "manglende artikkel",
+      "manglende artikkel i ordre",
+      "manglende vare",
+      "mangler artikkel",
+      "manko etterlysning",
+      "mankoetterlysning"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f0b2b352-19fc-4c6d-gf7c-f386de9f1171",
+    "id": "317872",
+    "title": "Hvordan sporer jeg ordren min?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0bbc7f81-6366-44c2-8ggg-90233d6g0935",
+    "id": "14721",
+    "title": "Hva gjør jeg hvis jeg ikke var hjemme da Posten leverte?",
+    "keywords": [
+      "Hjemlevering fra Posten",
+      "Ny levering postpakke",
+      "Post",
+      "Posten",
+      "Posten App",
+      "hjemlevering postpakke"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d78b7b36-67e1-40g7-b2f0-962b65e3g7c9",
+    "id": "12526",
+    "title": "Når kommer leveringen min?",
+    "keywords": [
+      "FAQ_Delivery_Time_Slot",
+      "Hjemlevering",
+      "Hvor blir det av leveringen",
+      "Hvor er leveringen min",
+      "Hvor er sjåføren",
+      "Hvor er varene mine",
+      "Levering",
+      "Når kommer dere",
+      "Når kommer leveringen",
+      "Når kommer varene mine"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "48fe3580-5222-42d0-9570-2579g956e851",
+    "id": "27514",
+    "title": "Kan jeg bestille levering fra varehus om jeg handler hjemmefra?",
+    "keywords": [
+      "leveranse",
+      "levering fra VH",
+      "levering fra varehus",
+      "levering på nett",
+      "levering rask",
+      "rask levering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "46998c68-7bbg-493e-9df9-79d8d003db79",
+    "id": "25679",
+    "title": "Kan jeg bestille med klikk og hent på alle varehus?",
+    "keywords": [
+      "click & collect",
+      "click and collect",
+      "click collect",
+      "hente i butikk",
+      "hente på varehus",
+      "henting på varehus",
+      "kan jeg hente på varehus",
+      "kan jeg reservere",
+      "klikk hent",
+      "klikk og hent",
+      "klikk og hent varehus"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "69ed87cf-7615-4de7-81c2-g72g70g482g4",
+    "id": "25149",
+    "title": "Hva gjør jeg hvis jeg ikke var hjemme ved levering?",
+    "keywords": [
+      "bom tur",
+      "bomtur",
+      "feilet levering",
+      "fikk ikke leveringen",
+      "hvor er varene",
+      "mangler ordre",
+      "mangler varer",
+      "rakk ikke hjem",
+      "savner ordre",
+      "var ikke hjemme"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0595f1c9-g900-4915-g834-fb9082091714",
+    "id": "25147",
+    "title": "Kontakter transportøren meg før levering?",
+    "keywords": [
+      "FAQ_Delivery_Other_GC_One",
+      "får jeg beskjed før levering",
+      "kontakter dere meg ved levering",
+      "kontaktet før levering",
+      "leveranse",
+      "ringer dere ved levering",
+      "ringer sjåfør",
+      "ringt før levering",
+      "ringt opp før levering",
+      "sjåfør"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c141297d-3145-4e11-g992-446c8g5g938d",
+    "id": "25884",
+    "title": "Hvor lang tid tar det før jeg kan hente klikk og hent-ordren min?",
+    "keywords": [
+      "click & collect",
+      "click and collect",
+      "click collect",
+      "klikk & hent",
+      "klikk hent",
+      "klikk og hent",
+      "klikk og hent hvor lang tid",
+      "når kan jeg hente"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gcd234c6-5368-421f-g0e0-94d21ced1c56",
+    "id": "25156",
+    "title": "Hvorfor får jeg ikke bestilt rask levering?",
+    "keywords": [
+      "leveranse",
+      "levering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "81038ebc-e8d1-4998-gbdg-9e01f474ceg4",
+    "id": "168478",
+    "title": "Hvordan endrer jeg dato og hentetid for Klikk og hent?",
+    "keywords": [
+      "FAQ_CnC_ThirdCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b814ge04-5899-48bc-8e46-e452cc73g606",
+    "id": "168453",
+    "title": "Hvorfor kan jeg ikke bestille en vare på nett når det står at den er på lager på varehuset?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g311f676-e817-45gc-80fb-2ec3cc31375b",
+    "id": "168461",
+    "title": "Hvorfor kan jeg ikke velge leveringsalternativet jeg ønsker?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "594046f2-b6dg-4ff5-b119-2g3e0731g938",
+    "id": "168462",
+    "title": "Hvorfor endrer produkttilgjengeligheten seg når jeg kommer til kassen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0fg2432c-7029-4530-g329-7g84bdcf5581",
+    "id": "168467",
+    "title": "Hvorfor blir bestillingen min delt opp i forskjellige leveringer?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "42bd15c0-1e70-466f-93b5-7gg0g90g8fd9",
+    "id": "168473",
+    "title": "Kan jeg fjerne eller legge til varer på bestillingen min?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0de659d4-7452-4b11-8e27-45801cb99gc5",
+    "id": "82367",
+    "title": "Jeg har ikke fått leveransen min, hva gjør jeg?",
+    "keywords": [
+      "FAQ_Track_Order",
+      "forsinket hjemlevering",
+      "forsinket ordre",
+      "forsinket ordre hjemlevering",
+      "hjemlevering ikke kommet",
+      "ikke kommet frem i tide",
+      "ikke levert ordre",
+      "ordre ikke levert"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "db7b654d-e7c1-4ec6-b58b-716486deeg60",
+    "id": "76935",
+    "title": "Jeg rakk ikke å hente ordren/postpakken min til avtalt tid, hva skjer nå?",
+    "keywords": [
+      "FAQ_Order_Missed",
+      "click og collect",
+      "fikk ikke hentet bestilling",
+      "fikk ikke hentet varer",
+      "glemte bestillingen min",
+      "glemte ordren min",
+      "glemte postpakken",
+      "hente",
+      "henting",
+      "klikk og hent",
+      "ordre",
+      "postpakke",
+      "postpakke i retur",
+      "postpakke returnert",
+      "rakk ikke å hente"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8762fff8-084d-413g-b147-f5f16ee00fbb",
+    "id": "58822",
+    "title": "Hvordan reklamerer jeg på benkeplaten min?",
+    "keywords": [
+      "benkeplate feil",
+      "benkeplate ødelagt",
+      "feil med benkeplate",
+      "feil mål på benkeplate",
+      "feil på benkeplate",
+      "feilprodusert benkeplate",
+      "for liten benkeplate",
+      "reklamasjon benkeplate",
+      "reklamation",
+      "reklamere benkeplate",
+      "vannskade benkeplate"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "204bcd19-82eg-41f0-bb09-e80522f85723",
+    "id": "82400",
+    "title": "Jeg trenger hjelp med et produkt, men garantien er utløpt. Hva gjør jeg?",
+    "keywords": [
+      "FAQ_Claim_NoWarranty",
+      "garanti utløpt",
+      "har ikke garanti",
+      "har ikke reklamasjonsrett",
+      "ikke garanti",
+      "ingen garanti",
+      "mangler garanti",
+      "reklamasjonsrett utløpt"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6303c274-3c30-4b53-gdgg-5226e8f6b35b",
+    "id": "12494",
+    "title": "Kan jeg reklamere på eller bytte en vare kjøpt i utlandet?",
+    "keywords": [
+      "bytte en vare fra sverige",
+      "bytte vare kjøpt i finland",
+      "bytte vare kjøpt i happaranda",
+      "bytte vare kjøpt i sverige",
+      "bytterett andre land",
+      "bytterett annet land",
+      "kjøpt i annet land"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "221fcge6-4610-41b6-g478-f83776473f7d",
+    "id": "25662",
+    "title": "Hvordan vet jeg om varen jeg ønsker er på lager eller kan leveres?",
+    "keywords": [
+      "PAX hvitbeiset eik",
+      "PAX levering",
+      "SKUBB",
+      "beholdning",
+      "er levering mulig",
+      "hvitevarer",
+      "kjøleskap",
+      "lager saldo",
+      "lager vare",
+      "lagersaldo",
+      "lagersaldo IKEA",
+      "lagersaldo varehus",
+      "lagerstatus",
+      "lagervare",
+      "oppvaskmaskin",
+      "platetopp",
+      "sjekke lagersaldo",
+      "sjekke om levering er mulig",
+      "sjekke tilgjengelighet",
+      "tomt på lager",
+      "utsolgt vare",
+      "varebeholdning",
+      "varetilgjengelighet"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0c6gc43f-9d68-4b82-9774-f875c3c9cg18",
+    "id": "14768",
+    "title": "Hvordan fungerer Klikk og hent?",
+    "keywords": [
+      "Click & Collect",
+      "Click and collect",
+      "Collect",
+      "FAQ_CnC_FirstCategory_C_GC_One",
+      "Hente",
+      "Hente i butikk",
+      "Klikk & hent",
+      "hente på varehus",
+      "henting",
+      "klikk og hent"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5bb31egd-149f-4ce1-bcec-1ebf8f17d71d",
+    "id": "14364",
+    "title": "Hvordan kansellerer jeg ordren min?",
+    "keywords": [
+      "Avbestille",
+      "Endre",
+      "FAQ_Online_Order_Change_Cancel",
+      "Kanseller",
+      "Ordre",
+      "Slette",
+      "avbestille ordre",
+      "kansellere ordre"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "923f8e45-0b29-4c8d-8dc8-5b00f20g0331",
+    "id": "12496",
+    "title": "Kan jeg endre leveringstidspunkt eller flytte leveringsdatoen for ordren min?",
+    "keywords": [
+      "Endre bestilling",
+      "Endre levering",
+      "Endre tidspunkt for levering",
+      "Levering",
+      "Leveringsalternativer",
+      "Leveringsdag",
+      "Leveringstidspunkt",
+      "Tidspunkt",
+      "annen dato",
+      "endre leverings dato",
+      "endre leveringstid",
+      "få levering før",
+      "få levering senere",
+      "få levering tidligere",
+      "få varen levert før",
+      "leveranse",
+      "leverings dag",
+      "leverings tid",
+      "leveringsdato",
+      "tidligere levering",
+      "utsette levering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9401f258-75b4-4de4-bc5d-bf7bbbg028ce",
+    "id": "345618",
+    "title": "Hvor finner jeg det digitale medlemskortet for bedriften min?",
+    "keywords": [
+      "FAQ_Business_FifthCategory_C_GC_One",
+      "kundenummer bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4243gd2d-31bd-41c2-8184-2601571g041c",
+    "id": "235562",
+    "title": "Er det en grense på hvor mange ganger jeg kan bruke IKEA Business Network-fordelene?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0151e2e2-bg14-4b35-9397-b4gf2fd4g1eb",
+    "id": "235557",
+    "title": "Jeg har IKEA Bedriftskonto. Kan jeg opprette en Bedriftsprofil eller bli medlem av IKEA Business Network?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4f5b2f69-f7g5-4f34-b908-gc0fee5815dg",
+    "id": "235404",
+    "title": "Hvordan legge til kollegaer på en Bedriftsprofil eller et IKEA Business Network-medlemskap?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d6cdb0d9-87e0-42e2-gbb9-8gf6f5c1f9e7",
+    "id": "475220",
+    "title": "Hvordan setter jeg inn en spesiallaget benkeplate i IKEA kjøkkenplanleggeren?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_SecondCategory_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "46b4cf95-b79f-4c30-84dc-bde11e5g062f",
+    "id": "475196",
+    "title": "Hvordan endrer jeg hvilken side døren åpnes på i IKEA kjøkkenplanlegger?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_SecondCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "83242390-d783-49ff-83fc-c245d1g1f80e",
+    "id": "474988",
+    "title": "Er det mulig å skrive ut eller laste ned kjøkkentegningen min som en PDF?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_SecondCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "49849114-34d7-413b-9dbf-4gf94320321d",
+    "id": "473432",
+    "title": "Hvordan kommer jeg igang med IKEA kjøkkenplanlegger?",
+    "keywords": [
+      "FAQ_Kitchen_Planner_SecondCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b9f5f7d1-20f8-4907-b4gf-gb879142c598",
+    "id": "188257",
+    "title": "Kan jeg skrive ut ei gaveliste på varehuset?",
+    "keywords": [
+      "FAQ_Gift_Registry_Buy_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "980b6eed-61df-4565-bed4-b9c729183gf7",
+    "id": "364788",
+    "title": "Kan jeg slette rommet mitt på IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "97c1cdbc-bg2d-4g8b-b1c3-567f15c9347d",
+    "id": "188247",
+    "title": "Kan jeg se gavelister i IKEA-appen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c19c6826-3f86-48d0-g29b-f125fc617561",
+    "id": "364760",
+    "title": "Hvor nøyaktig er målingen for rommene i IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7b8g3677-79gd-42fb-84b8-b203e6b16b39",
+    "id": "75187",
+    "title": "Hvor finner jeg oversikt over mine ordrer?",
+    "keywords": [
+      "bestilling",
+      "bestillinger",
+      "bestillingsoversikt",
+      "kjøps historikk",
+      "kjøpshistorikk",
+      "min bestilling",
+      "min ordre",
+      "mine bestillinger",
+      "mine ordre",
+      "ordre",
+      "ordre historikk",
+      "ordrehistorikk",
+      "ordreoversikt",
+      "ordrer",
+      "oversikt over mine bestillinger",
+      "oversikt over mine tidligere bestillinger",
+      "oversikt over ordre",
+      "samling"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "60034gdc-d990-4b03-g349-465e361026e3",
+    "id": "364796",
+    "title": "Hvor lagres rommet mitt etter at jeg har skannet det i IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3f43e732-bcg8-4720-8497-8f748dde17g9",
+    "id": "364805",
+    "title": "Hvilke rom kan jeg designe i IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4cf34d61-f304-42cf-9689-0e9dg1093615",
+    "id": "188252",
+    "title": "Hvor lenge er gavelista mi tilgjengelig?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2484693c-b6e2-45cb-g70d-0d6e0f0eg6bc",
+    "id": "188203",
+    "title": "Hvordan vet jeg at et produkt fra gavelisten er kjøpt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4671f956-4454-4c1c-874f-f8d74ed0b995",
+    "id": "188251",
+    "title": "Hvordan kan jeg se hvilke produkter fra gavelista som er tilgjengelig for kjøp?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "df6c7g64-3863-4314-9113-5965665839fc",
+    "id": "176607",
+    "title": "Chat med IKEAs chatbot \"Billie\"",
+    "keywords": [
+      "Corporate_Welcome"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7fe0260b-08be-4f70-bgfd-be5373824539",
+    "id": "409459",
+    "title": "Hvordan kan jeg øke kredittgrensen etter å ha fått innvilget IKEA Finansiering?",
+    "keywords": [
+      "FAQ_Payment_SecondCategory_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "576fg3d0-f85b-460d-bde0-bf3e8cb19949",
+    "id": "364775",
+    "title": "Jeg har designet et IKEA Kreativ-rom i appen, kan jeg åpne dette på PCen også?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "84c6fe03-e1c3-4cdb-84g8-5e8859cfg317",
+    "id": "275584",
+    "title": "Jeg trenger hjelp til å legge inn en bestilling. Hvordan går jeg frem? ",
+    "keywords": [
+      "FAQ_CSC_Purchase",
+      "Hjelp til å handle",
+      "FAQ_Shop_in_Chat",
+      "bestille varer fra IKEA",
+      "handle",
+      "hvordan bestille",
+      "hvordan handle",
+      "jeg vil handle",
+      "jeg vil handle hos dere",
+      "kan jeg bestille kjøkken hjem",
+      "kan jeg handle på telefon",
+      "kan jeg handle via chat",
+      "kan jeg kjøpe varer på nett og få det hjem",
+      "kan noen hjelpe meg med å kjøpe møbler",
+      "kjøpe"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0c100275-3b7c-4cg8-ge13-c282771b3395",
+    "id": "364781",
+    "title": "Kan jeg dele rommene jeg designer i IKEA Kreativ med andre?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5c127f7f-482d-47cc-g082-38d09876351d",
+    "id": "446946",
+    "title": "Hvordan kan jeg få hjelp til å kjøpe PAX garderobe? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b7946f4c-921c-4gc6-b15c-e31b452b7981",
+    "id": "447001",
+    "title": "Garderoben jeg vil ha er ikke på lager, hva gjør jeg?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "de2749d6-g629-4bg1-9397-d6706f4c8bg2",
+    "id": "27555",
+    "title": "Skyvedørene til PAX kommer borti hverandre når jeg åpner skapet, hva er galt?",
+    "keywords": [
+      "feil montering PAX",
+      "feilmontering skyvedør",
+      "pax dører",
+      "pax skyvedør",
+      "skyvedør PAX",
+      "skyvedører glir feil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e093cef8-2cb4-4244-bg23-7b5612501409",
+    "id": "28341",
+    "title": "Hvordan kombinerer jeg de ulike PAX-stammene?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "06be00f5-1fg2-405c-bcb0-ee89468e8560",
+    "id": "28326",
+    "title": "Skuffene på PAX-garderoben min kommer i konflikt med hengslene, hva er galt?",
+    "keywords": [
+      "krasj komplement",
+      "kræsj pax",
+      "montere skuff pax",
+      "pax komplement skuff"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "egff689g-2bfb-4491-b3e2-4c33182c1b67",
+    "id": "28325",
+    "title": "Kan jeg montere PAX-skyvedører i tak og gulv?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g7fc73ed-0b53-487b-9bb0-bc0253509b3c",
+    "id": "173027",
+    "title": "Hvilke hull skal brukes for hengsler til PAX-stammer?",
+    "keywords": [
+      "feste hengsler riktig pax",
+      "hengsler komplement sted",
+      "hengsler pax dør",
+      "hengsler plassering",
+      "hvor festes hengsler på pax",
+      "kompelement",
+      "komplement plassering",
+      "pax dør plassering",
+      "pax garderobe hengsler",
+      "pax hengsler",
+      "pax hng",
+      "pax hull"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "024c1057-eedg-4fde-8dfc-6g4f57573c39",
+    "id": "28339",
+    "title": "Hvor høyt må taket være for at jeg kan montere PAX garderobe?",
+    "keywords": [
+      "FAQ_Pax_FourthCategory_C_GC_Four",
+      "maxhøyde pax",
+      "montere pax",
+      "takhøyde pax"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fe1c209g-30d1-4fg1-8d00-15e08e121d8d",
+    "id": "389550",
+    "title": "Jeg har søkt om IKEA-kort og vil handle med en gang. Hvordan kommer jeg i gang?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "079e49d7-085b-4fgf-bb5d-b291b9dg9631",
+    "id": "302311",
+    "title": "Jeg trenger nytt IKEA-kort eller ny PIN-kode. Hva gjør jeg?",
+    "keywords": [
+      "Glemt pin-kode",
+      "erstatningskort",
+      "glemt pinkode",
+      "hvordan få nytt kort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c469666e-039g-4673-8g34-83f1f9978g85",
+    "id": "27450",
+    "title": "Returnere EE-avfall",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7ge0e031-2323-40g6-g452-bf2d18386777",
+    "id": "455109",
+    "title": "Hvorfor får jeg ikke valgt Klikk og hent?",
+    "keywords": [
+      "FAQ_CnC_FirstCategory_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ec8bgg4g-e529-429e-b791-f6dg29d07b37",
+    "id": "455100",
+    "title": "Hvilke varer kan jeg kjøpe med Klikk og hent?",
+    "keywords": [
+      "FAQ_CnC_FirstCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "de08d0cd-81e3-4298-9574-968e6963d9gc",
+    "id": "364750",
+    "title": "Kan jeg ta bort møbler og ting fra rommet på både mobil og PC?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5656c2cd-6f85-422c-g6f7-d5bf2bf06g85",
+    "id": "277565",
+    "title": "Hvordan fungerer IKEA kjøkkenmontering og installasjon?",
+    "keywords": [
+      "FAQ_Kitchen_Install_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f76fefc3-7c02-453e-g4fe-098d4g89704b",
+    "id": "188239",
+    "title": "Kan jeg slette ei gaveliste?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ce6ddf27-g41c-4ecf-g94g-74gbc786g1ed",
+    "id": "464585",
+    "title": "Hvor kan jeg kjøpe brukte møbler på IKEA?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "27d1d1f3-76f1-4ec3-9df1-144cbd9f5gee",
+    "id": "384981",
+    "title": "Jeg har to IKEA Family-profiler, kan jeg slå dem sammen?",
+    "keywords": [
+      "FAQ_Family_FourthCategory_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "88450499-2793-4b3g-g854-5cb6dfg334b9",
+    "id": "62360",
+    "title": "Passer de nye GRÖNLID-trekkene på min gamle sofa?",
+    "keywords": [
+      "bytte sofatrekk til grönlid",
+      "bytte trekk til grönlid",
+      "gronlid",
+      "grønlid",
+      "passer nye grönlid trekk",
+      "passer sofatrekk grönlid",
+      "passer trekk grönlid",
+      "trekk til grönlid"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dg0ddg70-bf75-4d00-g4d3-be0611d6bc05",
+    "id": "202542",
+    "title": "Kan dere sende en vare fra et varehus til et annet?",
+    "keywords": [
+      "FAQ_Transfer_Between_Stores"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dd20g4b0-3c3f-4ff2-9775-g586g97553ff",
+    "id": "200771",
+    "title": "Hva kan man kjøpe i matbutikken på IKEA?",
+    "keywords": [
+      "Svenske spesialiteter",
+      "FAQ_Food",
+      "food",
+      "kanelboller",
+      "mat",
+      "mat butikk",
+      "matbutikken",
+      "svenske spesialiteter"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g21gf23d-8108-43bg-9d61-b1efg3976bd0",
+    "id": "12498",
+    "title": "Kan jeg reklamere på et produkt kjøpt i Gjenbruksbutikken?",
+    "keywords": [
+      "billig krok",
+      "billig kroken",
+      "billigkrok",
+      "bytte billigkroken",
+      "bytte og retur",
+      "bytte tilbudsvare",
+      "bytterett",
+      "bytterett på tilbudsvare",
+      "kjøpt på rabatt",
+      "kjøpt på tilbud",
+      "rabattert vare",
+      "retur",
+      "returnere"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3d4b9831-g632-47gc-9314-2c6f57035dd6",
+    "id": "351867",
+    "title": "Hvordan endrer jeg kontaktinformasjon eller avslutter et IKEA Business Network-medlemsskap?",
+    "keywords": [
+      "FAQ_Business_FifthCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "78dfeb32-ggcb-4784-gdd8-201b51gf3d25",
+    "id": "351974",
+    "title": "Hvordan kan jeg handle som bedriftskunde?",
+    "keywords": [
+      "FAQ_Business_ThirdCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "662535fe-636b-41eb-ggdb-5f549981dg99",
+    "id": "351672",
+    "title": "Hvor finner jeg kjøpshistorikken min som IKEA Business Network-medlem?",
+    "keywords": [
+      "FAQ_Business_ThirdCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "895eb2d7-ebee-49e3-gcg1-90bfc12bfcdb",
+    "id": "460470",
+    "title": "Hvordan bestiller jeg en time med en IKEA bedriftsmedarbeider? ",
+    "keywords": [
+      "FAQ_Business_SecondCategory_C"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "951g9f0f-4gg6-4b24-8bfb-18c172511ffc",
+    "id": "318631",
+    "title": "Kan jeg returnere ordren min eller en vare via posten?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3105ddd1-8937-4103-8e52-c8fb1618035d",
+    "id": "12357",
+    "title": "Har dere et lekerom for barn på IKEA? ",
+    "keywords": [
+      "FAQ_Smaland",
+      "barn",
+      "barnekino",
+      "barnepass",
+      "kino",
+      "lekeland"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0936gc94-e709-48g0-9b30-g3d4f419d044",
+    "id": "235292",
+    "title": "Hvordan kan jeg melde meg inn i IKEA Business Network?",
+    "keywords": [
+      "FAQ_Business_FirstCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c8212b40-g7d5-4240-g848-e59011ec4c34",
+    "id": "457932",
+    "title": "Kan jeg gjøre endringer på PAX-garderobe etter montering?",
+    "keywords": [
+      "FAQ_Pax_FifthCategory_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bgf4c939-b3b7-40b2-96fb-6c87de51557g",
+    "id": "74193",
+    "title": "Hvor finner jeg monteringsanvisningen til produktet mitt?",
+    "keywords": [
+      "FAQ_Assembly_Instructions",
+      "FAQ_Pax_FifthCategory_C_GC_Four",
+      "Finner ikke bruksanvisningen",
+      "Finner ikke monteringsanvisningen",
+      "Monteringsanvisninger",
+      "bruker manual",
+      "brukermanual",
+      "bruksanvisning",
+      "feilmontert",
+      "manual",
+      "mistet bruksanvisning",
+      "mistet monteringsanvisning",
+      "monteringsanvisning",
+      "monteringsdokument",
+      "monteringspapirer",
+      "trenger monteringsanvisingen"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e6eg9575-c677-4177-88b3-gef74g6c2c46",
+    "id": "202567",
+    "title": "Når blir varene mine montert?",
+    "keywords": [
+      "FAQ_Pax_FifthCategory_C_GC_Two",
+      "FAQ_Service_Time_Slot",
+      "installasjon",
+      "installatør",
+      "montering",
+      "monteringsdag",
+      "monteringsdato",
+      "monteringstidspunkt",
+      "montør",
+      "montøren",
+      "servicepartner"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b51418e6-5g37-4cde-b3de-fd0f23b074fb",
+    "id": "27101",
+    "title": "Kan jeg få hjelp med montering, og hva koster det?",
+    "keywords": [
+      "FAQ_Assembly_Service",
+      "FAQ_Pax_FifthCategory_C_GC_One",
+      "Montera",
+      "bestille montering",
+      "bestille montering etter bestilling av kjøkken",
+      "montering",
+      "monteringstjenester"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "54504g3g-404e-4778-9255-b6g3dg7dg99e",
+    "id": "457716",
+    "title": "Kan jeg montere en PAX-garderobe selv?",
+    "keywords": [
+      "FAQ_Pax_FifthCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c5e2e493-8444-44g8-b45f-526be66e8cf2",
+    "id": "457665",
+    "title": "Er KOMPLEMENT skinner og kurver solgt separat?",
+    "keywords": [
+      "FAQ_Pax_ThirdCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8c80b518-ed13-41ed-9814-1g2c90f74de4",
+    "id": "457349",
+    "title": "Kan jeg kombinere PAX med alle innredningsløsninger fra IKEA?",
+    "keywords": [
+      "FAQ_Pax_ThirdCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b836629g-49b4-4fg4-gcc8-597b822d95g6",
+    "id": "457348",
+    "title": "Hvordan designer jeg min PAX-garderobe?",
+    "keywords": [
+      "FAQ_Pax_FourthCategory_C_GC_One",
+      "designe pax",
+      "pax tegneprogram",
+      "planlegge pax"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "48ce0b3c-c93g-4576-95db-b948644d2e89",
+    "id": "457329",
+    "title": "Hvordan velge innredning til PAX?",
+    "keywords": [
+      "FAQ_Pax_ThirdCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "153g2e75-0d8b-4efc-g403-cd8868545866",
+    "id": "457254",
+    "title": "Hvorfor kolliderer PAX-dørene mine?",
+    "keywords": [
+      "FAQ_Pax_SecondCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "117f748d-54dg-44d7-gd34-47e164770c32",
+    "id": "457201",
+    "title": "Hva bør jeg tenke på når jeg monterer dører til PAX?",
+    "keywords": [
+      "FAQ_Pax_SecondCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "286284ce-0360-4f36-b96g-29c1c36d84d0",
+    "id": "457189",
+    "title": "Kommer PAX med ferdigborrede hull for håndtak?",
+    "keywords": [
+      "FAQ_Pax_SecondCategory_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "90e2de40-0514-4e17-99d6-g42718fe62c7",
+    "id": "457152",
+    "title": "Hva er fordelene med PAX garderobe?",
+    "keywords": [
+      "FAQ_Pax_FirstCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f714fbeb-1207-4331-81d0-c2fb47gd6536",
+    "id": "457157",
+    "title": "Hvilke størrelser kommer PAX-garderober i?",
+    "keywords": [
+      "FAQ_Pax_FourthCategory_C_GC_Three",
+      "pax bredde",
+      "pax dybde",
+      "pax høyde",
+      "pax stamme",
+      "pax størrelser"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b4d54992-1d71-4dd8-bd38-16gfg08cb65f",
+    "id": "14151",
+    "title": "Jeg finner ikke kvitteringen min, kan dere hjelpe meg? ",
+    "keywords": [
+      "FAQ_Family_ThirdCategory_C_GC_One",
+      "FAQ_Payment_SixthCategory_C_GC_One",
+      "Finner ikke kvitteringen",
+      "Jeg leter etter kvitteringen min",
+      "Kopi av kvittering",
+      "Kvittering",
+      "kvitering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1835d78f-d8f0-4efg-g313-d4220b2fc836",
+    "id": "457107",
+    "title": "Jeg betalte for flere varer enn jeg kjøpte, hva skal jeg gjøre?",
+    "keywords": [
+      "FAQ_Payment_FifthCategory_C_GC_Three",
+      "betalings avvik",
+      "betalt for feil antall",
+      "betalt for mye"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1533c39b-9g4g-47d7-8c1c-7dg32107c9e8",
+    "id": "366130",
+    "title": "Hvordan bruker jeg et gavekort eller tilgodelapp når jeg betaler på nett?",
+    "keywords": [
+      "FAQ_Payment_ThirdCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "25d2629e-c8f7-4551-g233-ffec091431df",
+    "id": "49614",
+    "title": "Hvor henter jeg ordren min?",
+    "keywords": [
+      "C&C",
+      "click and collect",
+      "finner ikke hentepunkt",
+      "finner ikke hub",
+      "finner ikke terminal",
+      "hente terminal",
+      "henteterminal",
+      "klikk og hent",
+      "klikk&hent",
+      "klikkhent",
+      "klikkoghent",
+      "utlevering",
+      "utleveringssted"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "92d3ce02-c1e7-4025-9597-0bb322gece98",
+    "id": "455781",
+    "title": "Hva er forskjellen på «Klikk og hent nær deg» og «Bring utleveringssted»?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ecf3420c-5fd8-4756-gc76-0cf8g56b06e3",
+    "id": "455360",
+    "title": "Kan jeg endre kontaktinformasjonen på Klikk og hent?",
+    "keywords": [
+      "FAQ_CnC_ThirdCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "304g606g-86c5-425f-bcg6-cf20bd785163",
+    "id": "302648",
+    "title": "Kan noen andre hente Klikk og hent-ordren min for meg? ",
+    "keywords": [
+      "FAQ_CnC_SecondCategory_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "df815cee-7078-4460-8b19-b54f2065d25g",
+    "id": "451510",
+    "title": "Hva gjør jeg hvis jeg opplever problemer med IKEA-appen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e43e5ee0-c018-4g04-9813-74e1f7ed1427",
+    "id": "192041",
+    "title": "Kan jeg legge til flere DIRIGERA-hubber i ett hjem? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cce31ggc-ec86-4g00-9dc0-6276f65234f1",
+    "id": "452059",
+    "title": "Jeg finner ikke kjøkkenfronten jeg har for bestilling. Kan dere hjelpe?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "597d770c-g9c6-44c3-gd5e-45b8bbfd02d7",
+    "id": "452076",
+    "title": "Hvor lang garanti har METOD kjøkkensystem?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g693c02c-eb89-4964-97f3-9d32g3c7egdc",
+    "id": "452066",
+    "title": " Kan jeg bytte eller returnere kjøkkendeler kjøpt på ettersalg?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7484bbbg-2961-49f5-973e-cb679g09f1d8",
+    "id": "452050",
+    "title": "Kan jeg kjøpe deler til FAKTUM kjøkken i varehusene?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6eg35531-d4b8-4892-89f2-cf0fg48d280b",
+    "id": "452021",
+    "title": "Kan jeg bruke kjøkkenplanleggeren med deler kjøpt på ettersalg?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d280be77-2663-4030-g983-8bg7d516g4e5",
+    "id": "25816",
+    "title": "Kan jeg kombinere METOD og FAKTUM?",
+    "keywords": [
+      "FAKTUM",
+      "METOD",
+      "METOD FAKTUM sammen",
+      "kombinere metod og faktum"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "70eb3g98-9477-42f6-88e4-ce2b03bcbbgg",
+    "id": "451991",
+    "title": "Hvordan ser jeg hvilket kjøkkensystem jeg har? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7dd1224g-f7f6-411f-94b3-g88853352290",
+    "id": "451980",
+    "title": "Kan jeg fremdeles bestille deler til FAKTUM kjøkken? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "37gc2gd8-c0dd-4g10-8df3-67c787g24454",
+    "id": "192004",
+    "title": "Må jeg være hjemme for å kontrollere smarthjemmet mitt?",
+    "keywords": [
+      "vpn"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "933f738b-ge00-443c-gcb0-966f1cgd0777",
+    "id": "385091",
+    "title": "Kan jeg få rabatten selv om jeg glemte å registrere IKEA Family-kortet mitt?",
+    "keywords": [
+      "FAQ_Family_FifthCategory_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gcg5eb8e-1ddb-4686-858f-86743fg1c32f",
+    "id": "318722",
+    "title": "Hva gjør jeg hvis jeg har glemt eller mistet noe?",
+    "keywords": [
+      "FAQ_Lost_Found",
+      "borte på varehuset",
+      "gjen glemt",
+      "gjenglemt",
+      "glemt",
+      "glemt det på varehus",
+      "glemt igjen",
+      "glemt noe på varehus",
+      "glemte",
+      "glemte i kassen",
+      "hittegods",
+      "mistet",
+      "mistet noe",
+      "tapt",
+      "tapt og funnet"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7fc3g665-0g64-40e7-94c4-046e5c1d7g2b",
+    "id": "385417",
+    "title": "Kan jeg bruke mitt IKEA Family-medlemskap i utlandet? ",
+    "keywords": [
+      "FAQ_Family_FifthCategory_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "be44b7ge-54d6-445b-9603-6290bggd3be1",
+    "id": "188338",
+    "title": "Hvordan kjøper jeg et produkt fra en gaveliste?",
+    "keywords": [
+      "FAQ_Gift_Registry_Buy_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ffc57c3c-1bc4-4109-9gc9-596066709393",
+    "id": "188301",
+    "title": "Kan jeg samarbeide med noen om gavelista mi?",
+    "keywords": [
+      "FAQ_Gift_Registry_Use_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ed59660g-0e79-4766-g8f7-754bbe19f6c8",
+    "id": "188307",
+    "title": "Hvordan vet jeg om jeg har klart å kjøpe noe fra en gaveliste på riktig måte?",
+    "keywords": [
+      "FAQ_Gift_Registry_Buy_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8gf56f58-493f-4g3e-gcge-c5c037ed2e5g",
+    "id": "192194",
+    "title": "Kan jeg fortsette å utvide smarthuset mitt med nye smartprodukter fra IKEA hvis jeg har en TRÅDFRI gateway? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gbe5d8f9-82b0-4008-9g4g-5fb5c64b1f46",
+    "id": "188313",
+    "title": "Kan jeg kjøpe produkter på en gaveliste i et IKEA-varehus?",
+    "keywords": [
+      "FAQ_Gift_Registry_Buy_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "57605c5g-26de-4g4e-8b14-de667g0fe146",
+    "id": "188195",
+    "title": "Får jeg tilgang til gavelister via IKEA appen?",
+    "keywords": [
+      "FAQ_Gift_Registry_Create_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1729becd-4068-4ebg-g7ff-5234109g0715",
+    "id": "188315",
+    "title": "Kan gaven leveres direkte til mottaker via gavelisten?",
+    "keywords": [
+      "FAQ_Gift_Registry_Buy_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d525fe30-9g4e-4bd5-bdd9-25cgbbe7gb02",
+    "id": "188254",
+    "title": "Kan jeg lage mer enn én gaveliste?",
+    "keywords": [
+      "FAQ_Gift_Registry_Create_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c86845b0-0c7e-42be-bbe9-bf6ebge57fg9",
+    "id": "188215",
+    "title": "Får jeg med en byttelapp når jeg kjøper fra en gaveliste?",
+    "keywords": [
+      "FAQ_Gift_Registry_ReceiptsAndWrappings_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2ge321c3-df86-4fgd-b515-3df26e8e72f0",
+    "id": "188191",
+    "title": "Hva er ei IKEA-gaveliste?",
+    "keywords": [
+      "FAQ_Gift_Registry_Create_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cf62319c-49fg-4e50-96g0-4772cd3904f2",
+    "id": "276464",
+    "title": "Hva er nøkkelfunksjonene til ENHET kjøkken?",
+    "keywords": [
+      "FAQ_Kitchen_ChoosingAKitchen_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "233ebd53-8581-4329-g090-2eb101b3330g",
+    "id": "188256",
+    "title": "Hvor finner jeg tidligere opprettede gavelister?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "27c68e66-e25d-4dcg-813c-ge91beegdf11",
+    "id": "211887",
+    "title": "Jeg er intressert i å samarbeide med IKEA på sosiale medier, hvem kan jeg kontakte?",
+    "keywords": [
+      "FAQ_Commercial_Collaboration"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7dg24590-d1c1-484b-8e22-1bcb62f91be2",
+    "id": "210476",
+    "title": "Hva er målene på gardiner fra IKEA?",
+    "keywords": [
+      "Gardin",
+      "FAQ_Curtains",
+      "gardiner",
+      "gardinlengde",
+      "solskjerming"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "15bb8gc2-5824-4d23-b405-25cbe317113e",
+    "id": "209605",
+    "title": "Hva er IKEAs bærekraftstrategi?",
+    "keywords": [
+      "Corporate_Sustainability",
+      "beskytte",
+      "bærekraft",
+      "bærekraftig",
+      "fornybar",
+      "klimapositiv",
+      "miljøvennlig",
+      "resirkulering",
+      "ressursbruk",
+      "sunn livsstil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3070gdge-91d8-4981-b324-g28d3egc9e0g",
+    "id": "197567",
+    "title": "Jeg trenger hjelp med smarte rullegardiner, hva gjør jeg?",
+    "keywords": [
+      "FYRTUR",
+      "KADRILJ",
+      "FAQ_Smart_Blinds",
+      "elektrisk rullegardin",
+      "elektriske gardiner",
+      "elektriske rullegardiner",
+      "elgardin",
+      "elgardinen",
+      "elgardiner",
+      "elrullegardin",
+      "elrullegardinen",
+      "elrullegardiner",
+      "rullegardin",
+      "rullegradiner",
+      "smart blinds",
+      "smart gardiner"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g2g1213b-bg55-4gd9-gf49-f4b1b7c772c2",
+    "id": "200241",
+    "title": "Jeg trenger hjelp med smartbelysning, hva gjør jeg?",
+    "keywords": [
+      "FAQ_Smart_Lighting",
+      "belysning",
+      "feil med trådfri",
+      "gateway",
+      "lys",
+      "smart belysning",
+      "smartbelysning",
+      "trådfri"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3dc280e6-6f08-435g-846e-f41c4e9f62g4",
+    "id": "210448",
+    "title": "Kan jeg ta med meg hund på IKEA sine varehus?",
+    "keywords": [
+      "FAQ_Pets",
+      "dyr",
+      "dyr til varehus",
+      "hunder",
+      "huns",
+      "kanin",
+      "katt",
+      "katt til varehuset",
+      "marsvin"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5g9b4397-8g00-4645-b960-721db534ee0b",
+    "id": "162323",
+    "title": "Hvorfor varierer fraktprisen?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3e632081-ge46-4263-834e-d96fccf62b2c",
+    "id": "373869",
+    "title": "Hvilke betalingsalternativer finnes på IKEA Karl Johan? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "15380f09-fcd8-4213-8b49-21gdc5g97969",
+    "id": "409446",
+    "title": "Hvor lang tid tar det før jeg får svar på min søknad om IKEA Finansiering?",
+    "keywords": [
+      "FAQ_Payment_SecondCategory_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b12429gf-74c7-47d6-b0b3-g261f8g07569",
+    "id": "235325",
+    "title": "Jeg har glemt e-post eller passord, hva gjør jeg?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g154b37b-7c2d-4g1c-gbf9-0g9f93g4g9gg",
+    "id": "28573",
+    "title": "Hvordan kan jeg endre tidspunkt for montering?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e7e9cg2e-g152-459b-9ff8-5bcbggcce945",
+    "id": "28347",
+    "title": "Hvor mye koster en målbestilt benkeplate?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3db7g2gc-7964-4e9d-g6b4-7ebf17152491",
+    "id": "28063",
+    "title": "Hvor ligger det eksterne lageret eller den eksterne vareutleveringen til IKEA Furuset?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "27d9d398-1116-423f-8c44-e22860e90d39",
+    "id": "25428",
+    "title": "Kan jeg bruke mitt IKEA Family-kort i andre land?",
+    "keywords": [
+      "andre land",
+      "family",
+      "family kort i utland",
+      "family sverige",
+      "family-kort",
+      "ikea family",
+      "ikeafamily",
+      "kan jeg bruke family i sverige",
+      "medlem",
+      "medlemskort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "64g2e2c4-23e4-42dd-g1c6-ce436b341fbf",
+    "id": "15421",
+    "title": "Hvilke kjøpsvilkår og betingelser har dere når jeg handler på nett? ",
+    "keywords": [
+      "IKEA.no",
+      "betingelser",
+      "handle på nett",
+      "kjøps vilkår",
+      "kjøpsbetingelser",
+      "kjøpsvilkår",
+      "nettbutikken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "87e2f06e-1277-4813-b13c-271eg968c3dg",
+    "id": "14054",
+    "title": "Kan jeg betale med gavekort på nettsiden?",
+    "keywords": [
+      "GK",
+      "IKEA.no",
+      "betaling",
+      "betaling alternativ",
+      "betalingsalternativ",
+      "gavekort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "015e5118-e583-467e-gd58-886cdc7c2293",
+    "id": "14030",
+    "title": "Kan jeg betale med kort fra et annet land?",
+    "keywords": [
+      "betaling",
+      "betaling alternativ",
+      "betaling utenlandsk kort",
+      "betalingsalternativ",
+      "ikke norsk kort",
+      "utenlandsk kort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8eg516e4-2929-47c3-8fc7-061446c4g092",
+    "id": "12449",
+    "title": "Hvordan håndterer dere min kundeinformasjon?",
+    "keywords": [
+      "GDPR",
+      "g d p r",
+      "general data protection",
+      "historikk kundeservice",
+      "innsyn",
+      "innsyns begjæring",
+      "innsynsbegjering",
+      "innsynsbegjæring",
+      "person vern",
+      "person vern loven",
+      "person verns loven",
+      "personvern",
+      "personvernloven",
+      "personvernsloven"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4844c06g-3d51-4948-8068-718752d7cd6g",
+    "id": "28074",
+    "title": "Har IKEA søndagsåpent?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "67g3615e-bg2b-447c-b08d-79cf7d50e057",
+    "id": "28277",
+    "title": "Kan jeg lade elbilen min på IKEA?",
+    "keywords": [
+      "Kan jeg lade bilen min på ikea",
+      "Kan jeg lade elbilen min på IKEA",
+      "billading",
+      "elbil",
+      "elbil varehus",
+      "elbillading",
+      "har dere ladestasjoner",
+      "kan jeg lade bil på ikea",
+      "lade bil",
+      "lade bilen",
+      "ladestasjon",
+      "lading av bil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f67031fe-ceb0-4779-g2d6-0c399ge1dd0b",
+    "id": "365595",
+    "title": "Tilbyr IKEA gratis busstransport til varehus?",
+    "keywords": [
+      "FAQ_Shuttle_Bus",
+      "buss fra varehuset",
+      "buss til varehuset",
+      "busse til ikea",
+      "busstider",
+      "gratis buss",
+      "hvor stopper bussen",
+      "ikeabussen",
+      "tidspunkt buss",
+      "til fra ikea",
+      "til og fra varehuset"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4e17dc57-4096-4g05-9b6b-5821ge86g69e",
+    "id": "276822",
+    "title": "Hva er forskjellen mellom oppmåling og kontrollmålingstjenesten fra IKEA?",
+    "keywords": [
+      "FAQ_Kitchen_Measure_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b11402ec-2e3g-486e-b028-52612g5f3e3f",
+    "id": "276420",
+    "title": "Kan jeg kjøpe et kjøkken av god kvalitet til en lav pris?",
+    "keywords": [
+      "FAQ_Kitchen_ChoosingAKitchen_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f109b7g2-2f9e-4c2d-8cf7-967e84bc5039",
+    "id": "290503",
+    "title": "Hvordan gir jeg tilbakemelding til IKEA?",
+    "keywords": [
+      "FAQ_Customer_Feedback"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "95f917g8-c4e1-4036-9b69-c3ff7e4c48bd",
+    "id": "209793",
+    "title": "Do you offer support in English?",
+    "keywords": [
+      "Corporate_Wrong_Language_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c6d32cb2-29b3-4ec4-83c5-0g91b19308e5",
+    "id": "209267",
+    "title": "Samler jeg poeng på IKEA Family-medlemsskapet mitt når jeg handler?",
+    "keywords": [
+      "FAQ_Family_SecondCategory_C_GC_Two",
+      "FAQ_IKEA_Family_Points",
+      "bonussystem",
+      "family poeng",
+      "poeng",
+      "poengsaldo",
+      "poengsystem",
+      "samle poeng"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gb84f429-b8c0-44e6-9eg4-365e47204g54",
+    "id": "317951",
+    "title": "Kan jeg gjøre endringer eller kansellere ordren min?",
+    "keywords": [
+      "Change_Order"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "186bbde7-18f9-4806-b94b-2152g46f396f",
+    "id": "25707",
+    "title": "Hvorfor kan jeg ikke kjøpe varen på nett?",
+    "keywords": [
+      "begrenset opplag",
+      "ikke mulig å bestille",
+      "ikke tilgjengelig",
+      "kun på VH",
+      "kun på varehus",
+      "sesong sortiment",
+      "sesongsortiment"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7725c7g7-8397-492d-8ece-78e0e96e9006",
+    "id": "25640",
+    "title": "Kan jeg betale med gavekort for klikk og hent?",
+    "keywords": [
+      "bestille på forhånd",
+      "betale klikk og hent",
+      "click & collect",
+      "click and collect",
+      "click collect",
+      "gavekort klikk og hent",
+      "hente på varehus",
+      "hente varer",
+      "klikk hent",
+      "klikk og hent",
+      "reservere"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6d86340e-046g-4dd4-930c-f81b5d0d6878",
+    "id": "277515",
+    "title": "Hvordan kan jeg få varene mine levert?",
+    "keywords": [
+      "FAQ_Kitchen_PurchaseAndDelivery_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "24b7c4g7-6b28-45de-gb21-be0eb0d08ddf",
+    "id": "27945",
+    "title": "Hvor raskt kan jeg få ordren min?",
+    "keywords": [
+      "FAQ_Delivery_Time_GC_One",
+      "Når kan dere levere",
+      "Når kan jeg få levering",
+      "hvor fort kan dere levere",
+      "hvor lang er leveringstiden på et kjøkken",
+      "hvor lang ventetid",
+      "hvor raskt kan dere levere?",
+      "hvor raskt kan jeg få bestillingen min",
+      "levering",
+      "leveringstid",
+      "leveringstid på kjøkken",
+      "leveringstid vh",
+      "levtid bpl",
+      "levtid ikea.no",
+      "når kommer varene"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bdd6b23f-g5b3-4f74-b84b-91d72fe8e81g",
+    "id": "277540",
+    "title": "Når kan jeg få leveransen min?",
+    "keywords": [
+      "FAQ_Delivery_Time",
+      "FAQ_Kitchen_PurchaseAndDelivery_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "96g47gfb-76f6-4d1b-8779-e1b2c21bf4d2",
+    "id": "155955",
+    "title": "Leverer dere til øy uten fastforbindelse?",
+    "keywords": [
+      "FAQ_Delivery_Locations_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5b7eed4e-ec5b-4g67-gb57-4625g02e4f84",
+    "id": "25469",
+    "title": "Kjøp et gavekort",
+    "keywords": [
+      "FAQ_IKEA_Gift_Card",
+      "gave kort",
+      "gavekort",
+      "handle gavekort",
+      "kjøpe gave kort. bestille gavekort",
+      "kjøpe gavekort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b56e4gd1-g19g-448e-g6e5-0c1525995de6",
+    "id": "27166",
+    "title": "Kan jeg returnere varer på de eksterne lagerne og vareutleveringene til varehuset?",
+    "keywords": [
+      "hurtig retur",
+      "hurtigretur",
+      "retur til VH",
+      "retur til varehus",
+      "retur til vareutlevering",
+      "returnere til vareutlevering",
+      "returnere vare"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dfcd8bg8-f41e-48f6-g366-475d81e6ee81",
+    "id": "58958",
+    "title": "Kan jeg returnere ubrukte varer i Sverige?",
+    "keywords": [
+      "bytte og retur sverige",
+      "retur sverige",
+      "retur utenlands",
+      "retur utlandet",
+      "returnere sverige",
+      "sverige bytte og retur"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "737e851b-2e6g-447f-9006-7e077c61388b",
+    "id": "28361",
+    "title": "Hvilke festemidler skal jeg bruke til veggen min?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dfe22830-3gb4-4037-9g99-9791717918gb",
+    "id": "58786",
+    "title": "Jeg har fått levert en skadet benkeplate, hva gjør jeg?",
+    "keywords": [
+      "benkeplate levering",
+      "benkeplate skadet",
+      "benkeplateordre",
+      "levert benkeplate",
+      "transportskade benkeplate",
+      "ødelagt benkeplate",
+      "ødelgt Benkeplate"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e21cdgce-8431-46bg-9409-471eg3ed1ec5",
+    "id": "290477",
+    "title": "Hvordan sørger vi for at produktene dine er helt trygge å bruke?",
+    "keywords": [
+      "FAQ_Article_Modifications"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "330dc1eg-7c31-4c14-bed4-c2c635c71b63",
+    "id": "17175",
+    "title": "Hva er Oops-forsikring?",
+    "keywords": [
+      "FAQ_Family_ThirdCategory_C_GC_Three",
+      "family",
+      "family forsikring",
+      "forsikring",
+      "ikea family",
+      "obs forsikring",
+      "obs-forsikring",
+      "oopps",
+      "oopps forsikring",
+      "oopps-forsikring",
+      "oops",
+      "oops forsikring",
+      "oopsforsikring",
+      "opps",
+      "ops",
+      "ops -forsikring",
+      "ops forsikring",
+      "ops-forsikring"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8f781bc3-bg48-4299-9415-c53b3ge4bc39",
+    "id": "364777",
+    "title": "Fungerer IKEA Kreativ i appen på smarttelefonen min?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cg418e93-7219-4371-g148-27b0b4cf3795",
+    "id": "300442",
+    "title": "Halloween-inspirasjon",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b49846bd-2305-4065-96dc-1703589fcfec",
+    "id": "365663",
+    "title": "Jeg har mistet eller blitt frastjålet mitt IKEA-gavekort. Hva gjør jeg?",
+    "keywords": [
+      "FAQ_IKEA_Gift_Card_Lost",
+      "gave kort",
+      "mistet gavekort",
+      "mistet tilgodelapp",
+      "tapt gave kort",
+      "tapt tilgode lapp",
+      "tilgode lapp",
+      "tilgodelapp"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g5e218d5-4561-4g24-b6be-g57c917588fb",
+    "id": "23483",
+    "title": "Hvordan endrer eller avbestiller jeg en planleggingstime?",
+    "keywords": [
+      "BOKA",
+      "avbestille",
+      "avbestille en tegnetime",
+      "avbestilling",
+      "kansellere kjøkkentime",
+      "kansellere planleggingstime",
+      "kansellering",
+      "kjøkkenplanlegging",
+      "kjøkkentime",
+      "planlegge",
+      "tegnetime"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cd3f74e7-0b1d-4973-85c4-e3d4gg04d742",
+    "id": "28060",
+    "title": "Hva er åpningstidene i restauranten?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "08gc301c-d5ee-4f25-9b7c-079139f2c9b7",
+    "id": "241602",
+    "title": "Hvordan fungerer hjemlevering og hva bør jeg tenke på?",
+    "keywords": [
+      "FAQ_Delivery_Options_GC_Three",
+      "hjemme levering",
+      "levering fra ikea",
+      "levering med bil",
+      "levering på døren",
+      "levering rett hjem",
+      "levering til bolig"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ecfd39d9-db76-45e3-b824-80395d1cf827",
+    "id": "208563",
+    "title": "Hvor finner jeg informasjon om parkering?",
+    "keywords": [
+      "FAQ_Parking_Information",
+      "el-bil",
+      "elbil",
+      "informasjon parkering",
+      "lade",
+      "lading",
+      "parkere bil",
+      "parkering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "45eb3g36-806e-4738-g248-d75g2c345gd2",
+    "id": "75168",
+    "title": "Hvor finner jeg de nyeste tilbudene?",
+    "keywords": [
+      "FAQ_Family_SecondCategory_C_GC_One",
+      "kampanje",
+      "kampanjekode",
+      "kampanjer",
+      "kjøkkenkampanje",
+      "kupong",
+      "kupongkode",
+      "kuppong",
+      "kuppong kampanje",
+      "prisreduksjon",
+      "rabatt",
+      "rabattkode",
+      "rabattkoder",
+      "rabattkupong",
+      "salg",
+      "sommer kampanje",
+      "sommer tilbud",
+      "sommertilbud. sommerkampanje",
+      "tilbud",
+      "tilbudet",
+      "tilbudskode",
+      "utsalg"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "99f69506-6f6d-4030-b1f5-51c2dff3cb4f",
+    "id": "12708",
+    "title": "Hvordan vasker jeg kjøkkenfronter?",
+    "keywords": [
+      "eddik",
+      "faktum",
+      "front",
+      "fronter",
+      "klut",
+      "kungsbacka",
+      "regnjøring",
+      "rengjrøring",
+      "rengjøning",
+      "rengjør",
+      "rengjørig",
+      "rengjøring",
+      "zalo"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c97e7b78-fc33-4b3g-g916-24fg6c3d9252",
+    "id": "28209",
+    "title": "Hvordan bestiller jeg time for å få hjelp til å tegne kjøkken på varehuset?",
+    "keywords": [
+      "kjøkkenekspert",
+      "kjøkkenkonsulent",
+      "kjøkkenplanlegging",
+      "kjøkkenselger",
+      "kjøkkenspesialist"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8gf84cf2-908b-4ffg-9186-f50f6e9e11cg",
+    "id": "14182",
+    "title": "Hvor finner jeg tegningen av kjøkkenet mitt?",
+    "keywords": [
+      "Hjelp med å finne tegning",
+      "IHP tegning",
+      "Kjøkkentegning",
+      "Tegning",
+      "kjøkkenplanlegger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b1b5f931-73f8-41g5-g277-eb3e335b8fg4",
+    "id": "25435",
+    "title": "Hvordan blir jeg IKEA Family-medlem?",
+    "keywords": [
+      "FAQ_Family_FirstCategory_C_GC_One",
+      "bli ikea family medlem",
+      "bli medlem",
+      "family",
+      "hvordan bli medlem",
+      "ikea familie",
+      "ikea family",
+      "ikeafamily",
+      "kundeklubb",
+      "medlemsskap",
+      "opprette family medlemsskap",
+      "registrere family"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "27c94c45-gb38-4b85-bcb1-515eb6g4edde",
+    "id": "25811",
+    "title": "Kan jeg få underlimt kum på kjøkken fra IKEA? ",
+    "keywords": [
+      "benkeplate kalkulator",
+      "benkeplate planlegger",
+      "benkeplatekalkulator",
+      "kjøkkenkum",
+      "kjøkkenvask",
+      "planlegger benkeplate",
+      "underlimt",
+      "underlimt kum"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5d8f2f44-17ec-44gb-bb11-7004b55357e2",
+    "id": "163033",
+    "title": "Er ALGOT gått ut av sortimentet?",
+    "keywords": [
+      "ALGOT",
+      "algot erstatning",
+      "algot oppbevaring",
+      "algot produkter",
+      "algot-serien",
+      "boaxel",
+      "joaxel",
+      "jonaxel",
+      "jonaxel erstatter algot"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c62fd0e6-f96d-44g7-g215-7530f3604035",
+    "id": "25812",
+    "title": "Er kjøkkenet mitt fra det eldre eller nye kjøkkensystemet til IKEA? ",
+    "keywords": [
+      "Abstrakt",
+      "FAKTUM METOD",
+      "Lidingö",
+      "Rationell",
+      "forskjell på FAKTUM og METOD",
+      "gammelt design",
+      "gammelt kjøkken",
+      "rationel",
+      "sokkelfront FAKTUM",
+      "sokkelfront METOD",
+      "utgått kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7b647d3d-8fbb-4614-83eb-6b22fg02bdc9",
+    "id": "24918",
+    "title": "Kan jeg reservere en leiebil hos IKEA?",
+    "keywords": [
+      "billeie",
+      "dokumentasjon leiebil",
+      "førerkort leiebil",
+      "leie bil",
+      "leiebil",
+      "reservasjon av leiebil",
+      "reservasjon bil",
+      "resevere leiebil",
+      "vilkår leiebil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "437g196b-4c94-4d0c-8c76-ece301fg5402",
+    "id": "25143",
+    "title": "Kan jeg bestille gjenvinning av et gammelt møbel når jeg får levert nytt?",
+    "keywords": [
+      "bestille retur av hvitevare",
+      "gjenvinning",
+      "miljø retur",
+      "miljøretur",
+      "retur",
+      "retur av kjøleskap",
+      "retur av komfyr",
+      "retur av madrass",
+      "retur av ovn",
+      "returnere"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dbecd65g-b90e-4989-bdbb-gede793727g3",
+    "id": "12452",
+    "title": "Hvordan sjekker jeg saldoen eller utløpsdatoen på mitt gavekort/tilgodelapp?",
+    "keywords": [
+      "hva er igjen på gavekort",
+      "penger igjen på gavekort",
+      "saldo",
+      "saldo gave kort",
+      "saldo gavekort",
+      "saldo tilgode bevis",
+      "saldo tilgode lapp",
+      "saldo tilgodebevis",
+      "saldo tilgodelapp",
+      "saldoen",
+      "saldoen min"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d4g84967-6490-41b3-g93b-42ge663gfe01",
+    "id": "277359",
+    "title": "Gjør-det-selv med kjøkkenplanleggeren vår",
+    "keywords": [
+      "FAQ_Kitchen_PlanAndDesign_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8c6b6efe-7293-4fc9-8d25-b10bbcd08923",
+    "id": "24922",
+    "title": "Hva koster det å leie en varebil hos IKEA?",
+    "keywords": [
+      "Leiebil",
+      "bil utleie",
+      "bilutleie",
+      "hva koster leiebil",
+      "hva koster varebil",
+      "leie bil",
+      "leie varebil",
+      "leiebil vilkår",
+      "pris leiebil",
+      "pris varebil",
+      "varebil vilkår",
+      "varebilutleie"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "11gg9f10-b6f0-4294-9gc7-5bf2c06beg4d",
+    "id": "327227",
+    "title": "Hvordan montere fronten på VILLBODA/TILLREDA oppvaskmaskin?",
+    "keywords": [
+      "dør",
+      "oppvaksmaksin",
+      "oppvaksmaskin",
+      "oppvaskmaskindør"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f59c6ed7-g70f-42c8-9366-7886c88271gb",
+    "id": "241616",
+    "title": "Kan jeg bestille ekspresslevering fra IKEA?",
+    "keywords": [
+      "FAQ_Delivery_Time_GC_Four",
+      "ekspress levering",
+      "ekspresslevering",
+      "express levering",
+      "expresslevering",
+      "haste levering",
+      "hastelevering",
+      "levering dagen etter",
+      "rask levering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6b1f02be-38c5-4f27-bc97-de3dd5548153",
+    "id": "27612",
+    "title": "Kan bedrifter få hjelp med bestilling av produkter og tjenester? ",
+    "keywords": [
+      "bedrift bestilling",
+      "bedrift ordre",
+      "bedriftsordre",
+      "bestille varer bedrift",
+      "ikea bedrift",
+      "ikea business"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "09b00ff2-e8gc-439g-9b5b-00888b86f48c",
+    "id": "91799",
+    "title": "Hvorfor har pepperkakedeigen kort holdbarhet?",
+    "keywords": [
+      "deig",
+      "deigen",
+      "innhold pepperkakedeig",
+      "kake deig",
+      "pepper deig",
+      "pepper kake",
+      "pepper kake deig",
+      "pepper kakedeig",
+      "pepperdeig",
+      "pepperkake",
+      "pepperkake deig",
+      "pepperkakedeig"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gg86f29c-fc02-4521-8401-e75d5c93e39c",
+    "id": "15531",
+    "title": "Hvilke IKEA-møbler kjøper vi tilbake?",
+    "keywords": [
+      "Gjenbruksbutikken",
+      "IKEA kjøper tilbake",
+      "kjøpe tilbake"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "616df600-b204-4g57-8ec3-32g4b6eed867",
+    "id": "14022",
+    "title": "Kan jeg betale med både gavekort og bankkort?",
+    "keywords": [
+      "betale med gavekort",
+      "betalingsalternativ",
+      "kombinere gavekort",
+      "kombinere kort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "95e0c042-d00f-4fg4-b97f-b15g09cc7b18",
+    "id": "27604",
+    "title": "Hvordan betaler jeg med bedriftskortet vårt på IKEA.no? ",
+    "keywords": [
+      "FAQ_Payment_FirstCategory_C_GC_Five",
+      "IKEA bedriftskort",
+      "ikea bedrift",
+      "ikea bedrift betaling",
+      "ikea bedrift kort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "10779d66-71bc-4b7d-8d5e-0fe93g534gfe",
+    "id": "136346",
+    "title": "Hvordan melder jeg meg av nyhetsbrev fra IKEA?",
+    "keywords": [
+      "FAQ_Family_FifthCategory_C_GC_One",
+      "avlslutte nyhetsbrev",
+      "avslutte SMS",
+      "avslutte medlemskap",
+      "fjerne e-post fra ikea",
+      "fjerne medlemsskap",
+      "fjerne reklame",
+      "fjerne reklame på sms",
+      "fjerne sms",
+      "hvordan stoppe nyhetsbrevet",
+      "hvordan stopper jeg mailer",
+      "melde av nyhetsbrevet",
+      "stoppe SMS",
+      "stoppe email fra family",
+      "stoppe email fra ikea",
+      "stoppe family e-post",
+      "stoppe markedsføring",
+      "stoppe medlemskap",
+      "stoppe nyhetsbrev",
+      "stoppe reklame",
+      "vil ikke få reklame",
+      "vil ikke ha e-post fra dere",
+      "vil ikke ha e-post fra ikea",
+      "vil ikke ha flere smser",
+      "vil ikke ha mail",
+      "vil ikke ha markedsføring",
+      "vil ikke ha sms fra ikea"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "96e749gc-314e-4d05-936d-921d5d4dd55g",
+    "id": "75093",
+    "title": "Hvor finner jeg info om arrangementer på mitt nærmeste IKEA-varehus?",
+    "keywords": [
+      "FAQ_Family_ThirdCategory_C_GC_Two",
+      "Family",
+      "IKEA Family",
+      "arrangement",
+      "arrangementer",
+      "event",
+      "eventer",
+      "inspirasjon",
+      "medlem",
+      "møter",
+      "online sending",
+      "seminar",
+      "seminarer",
+      "tips"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2g4e2774-0g9b-4b94-g762-db502021f40d",
+    "id": "75861",
+    "title": "Hvordan avslutter jeg IKEA Family-medlemskapet mitt?",
+    "keywords": [
+      "Avslutte medlemsskap",
+      "Avslutte medlemsskapet mitt",
+      "FAQ_Family_FourthCategory_C_GC_Four",
+      "Si opp medlemsskap",
+      "avslutte IKEA-Family",
+      "avslutte familykonto",
+      "jeg vil ikke ha IKEA Family",
+      "jeg vil ikke ha en ikea familykonto",
+      "kansellere ikea familykort",
+      "slette ikea family",
+      "slette ikea medlemsskap",
+      "slette konto"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "175753c1-7g97-4be4-9542-62ee150060c6",
+    "id": "14442",
+    "title": "Hvor finner jeg Family-nummeret mitt?",
+    "keywords": [
+      "FAQ_Family_FourthCategory_C_GC_Two",
+      "bestille kort for kunden",
+      "familykort",
+      "nytt family kort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9de2e78c-e26g-4cg7-g2bf-9b50879b8964",
+    "id": "75857",
+    "title": "Hvordan registrere IKEA Family?",
+    "keywords": [
+      "FAQ_Family_FourthCategory_C_GC_One",
+      "Family",
+      "IKEA Family",
+      "IKEA Family medlem",
+      "IKEA Familykort",
+      "digitalt",
+      "digitalt kort",
+      "fordeler",
+      "hvordan bruke IKEA Family",
+      "klubb",
+      "klubben",
+      "kundeklubb",
+      "kundeklubben",
+      "medlem",
+      "rabatter",
+      "registrer family",
+      "registrere family"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "51336172-88e2-49f6-9b09-7bf654096d94",
+    "id": "381842",
+    "title": "Hva er åpningstidene til IKEAs Planleggings- og bestillingspunkt?",
+    "keywords": [
+      "FAQ_Ad_Hoc_Two",
+      "planning studio"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cb631g6e-88cb-4160-b7bd-e87gf33fg081",
+    "id": "28264",
+    "title": "Er det mulig å låne rullestol på IKEA?",
+    "keywords": [
+      "FAQ_Accessibility",
+      "dårlig til bens",
+      "funksjonshemmet"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bg3feg95-29cg-49bc-bdbe-cfgg8e73g39b",
+    "id": "27624",
+    "title": "Jeg trenger kjøpsdokumentasjon/kvittering på kjøpet til min bedrift. Hva gjør jeg? ",
+    "keywords": [
+      "IKANO kvittering",
+      "IKEA bedrift konto",
+      "bedrift IKEA",
+      "bedrift bilag",
+      "bedrift kvittering",
+      "kvitering",
+      "kvittering bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "85077989-bfe5-4957-8968-44g360ff0d6g",
+    "id": "25116",
+    "title": "Kan jeg betale min ordre hjemmefra?",
+    "keywords": [
+      "Handle på nett",
+      "betal din ordre",
+      "betaldinordre",
+      "betaling ikea.no",
+      "betaling netthandel ordre",
+      "betaling på nett",
+      "betalings link",
+      "betalingslink",
+      "handle IKEA.no"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1e140985-bd5b-4d7d-8790-92cff6c4e629",
+    "id": "375706",
+    "title": "Åpner Swedish bite tidligere enn butikken hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d67gd30d-d5f8-40fb-b880-72c758fegg9c",
+    "id": "375703",
+    "title": "Er det parkeringsmuligheter hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ddbfcced-c8g2-4d03-g8b3-77052cb4f15b",
+    "id": "375704",
+    "title": "Hva er åpningstidene hos IKEA på Karl Johan?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f9dfb31d-f901-4g2e-bg3f-9113338d0c09",
+    "id": "13621",
+    "title": "Min hev/senk pult vil ikke bevege seg, hva gjør jeg?",
+    "keywords": [
+      "bekant",
+      "hev senk",
+      "hev/senk",
+      "resette BEKANT",
+      "resette hev senk",
+      "resette hev/senk",
+      "understell"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5e309361-8b1c-4219-b46c-1g72d7c445cg",
+    "id": "14055",
+    "title": "Kan jeg bruke gavekortet mitt i andre land?",
+    "keywords": [
+      "FAQ_IKEA_Gift_Card_Abroad",
+      "gavekort",
+      "gavekort land",
+      "gavekort utland",
+      "gavekortene",
+      "hvilke land gavekort",
+      "utenlandsk"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "68248979-d5b2-4f4c-941f-8d1fg66db35d",
+    "id": "364795",
+    "title": "Hvordan kan jeg kjøpe produkter fra mitt IKEA Kreativ romdesign?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e74f0gg1-fbdf-4f11-gb3b-2dd18219gfe5",
+    "id": "364707",
+    "title": "Hvordan fungerer IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7945d183-01e1-493c-9352-294c5214cef6",
+    "id": "364804",
+    "title": "Hvor finner jeg IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "37ge4c75-ddb4-4406-g941-6c7g5ce5eeg6",
+    "id": "364816",
+    "title": "Har Android- og iOS-appen de samme funksjonene med IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "81525bc7-5109-4997-90ef-4g636875837b",
+    "id": "364811",
+    "title": "Er IKEA Kreativ gratis å bruke?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "38f359gb-77g4-4384-8e30-c7f8e7gd81g3",
+    "id": "364793",
+    "title": "Kan jeg skanne et hvilket som helst rom i hjemmet mitt med IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7076521f-c7cf-47bc-93bf-c1b4d9c631ed",
+    "id": "364706",
+    "title": "Hvilke produkter i sortimentet er tilgjengelig i IKEA Kreativ?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "753gc20c-4794-4660-g578-0020f74d1267",
+    "id": "25068",
+    "title": "Hvordan bestiller jeg en oppmåling?",
+    "keywords": [
+      "bestille måling",
+      "bestille oppmåling",
+      "måling opp måling",
+      "oppmåling",
+      "ta mål"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d3eceg6g-b01c-41b8-9f20-6b9b8c577482",
+    "id": "25075",
+    "title": "Hvor mye koster en oppmåling eller kontrollmåling?",
+    "keywords": [
+      "bestille kontrollmåling",
+      "bestille måling",
+      "bestille oppmåling",
+      "hva koster kontrollmåling",
+      "hva koster oppmåling",
+      "kontroll måling",
+      "kontrollmåling",
+      "måling opp måling",
+      "oppmåling",
+      "pris måling",
+      "priser for måling",
+      "ta mål"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2fgd5914-e53f-47ee-8451-713bbfcd90de",
+    "id": "235275",
+    "title": "Hva er IKEA Bedriftsprofil, og hvilke fordeler får bedriften som medlem?",
+    "keywords": [
+      "B2B",
+      "IKEA for bedrifter"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b104988b-1d71-4fe7-8874-04bdc95674eb",
+    "id": "235321",
+    "title": "Hvordan bruker jeg mitt digitale medlemskort for Bedriftsprofil eller IKEA Business Network?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3c30g90d-b7dc-47g9-8358-80070fgf22f6",
+    "id": "59493",
+    "title": "Kan jeg bytte ben på sofaen min?",
+    "keywords": [
+      "bein til sofa",
+      "ben sofa",
+      "ben til sofa",
+      "ektorp söderhamnreservedeler bein",
+      "karlstad",
+      "kivik",
+      "landskrona",
+      "nockeby",
+      "nye bein",
+      "nye ben",
+      "sofabein",
+      "sofaben",
+      "stockholm"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e35fb37c-7150-40ge-b168-955g85b370d9",
+    "id": "33242",
+    "title": "Kan jeg låne tilhenger på IKEA Forus og levere i Haugesund?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fb5b0882-54g1-40bg-gg86-1dc5412633b9",
+    "id": "22323",
+    "title": "Hvordan monterer jeg en ny hvitevare i et FAKTUM kjøkken?",
+    "keywords": [
+      "FAKTUM",
+      "Montere hvitevarer",
+      "hvitevarer FAKTUM",
+      "kjøleskap FAKTUM",
+      "oppvaskmaskin FAKTUM",
+      "ovn FAKTUM"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "16424f77-4cd7-4bbf-g1f6-54c211b92906",
+    "id": "188306",
+    "title": "Får jeg beskjed når noen har kjøpt noe fra gavelista mi?",
+    "keywords": [
+      "FAQ_Gift_Registry_Use_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "72f4g8d4-dbgg-4d02-b519-8bf27f52452b",
+    "id": "188336",
+    "title": "Hvordan deler jeg gavelista mi med venner og familie?",
+    "keywords": [
+      "FAQ_Gift_Registry_Use_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6277262e-8666-4859-8456-edf798e646dc",
+    "id": "188291",
+    "title": "Hvordan legger jeg til produkter i gavelisten min?",
+    "keywords": [
+      "FAQ_Gift_Registry_Use_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "55483e77-5603-4147-b7f0-g80057b563f1",
+    "id": "188330",
+    "title": "Hvordan lager jeg ei IKEA-gaveliste?",
+    "keywords": [
+      "FAQ_Gift_Registry_Create_C_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e6c60243-6495-4128-8576-cdcc0788d895",
+    "id": "188193",
+    "title": "Hvor finner jeg gavelisten til IKEA på nettsiden?",
+    "keywords": [
+      "FAQ_Gift_Registry_Create_C_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "01321d69-c143-4e7c-80d3-db4f8702b2g5",
+    "id": "235617",
+    "title": "Hvordan endre eier/administrator for en Bedriftsprofil eller et IKEA Business Network-medlemskap?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gc9b0f16-5d7b-4cd0-8753-fg31f71b9285",
+    "id": "247543",
+    "title": "Hvor finner jeg informasjon om maksimal belastning for et produkt?",
+    "keywords": [
+      "FAQ_Products_Load_Capacity"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4741251b-13f7-49fg-b994-8b49gd00g4d4",
+    "id": "28289",
+    "title": "Hvor finner jeg servicenummer/produsentnummer på min hvitevare?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "07f42052-13fe-4e5g-g33d-228314b0758f",
+    "id": "27509",
+    "title": "Jeg mangler et benkeskap til kjøkkenet mitt, hva gjør jeg?",
+    "keywords": [
+      "benke skap",
+      "benke skap stamme",
+      "benkeskap",
+      "benkeskapstamme",
+      "manko benkeskap",
+      "oppvaskmaskin benkeskap"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fegc9091-eb8d-4f54-g8cd-2c0dcf34e4c4",
+    "id": "18621",
+    "title": "Kan jeg låne tilhenger fra et varehus og levere tilbake til et annet?",
+    "keywords": [
+      "Tilhenger",
+      "freetrailer",
+      "leie tilhenger",
+      "levering til forskjellige varehus",
+      "låne tilhenge"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "81gf51g3-7dg0-48f5-80d3-7058bf916c0d",
+    "id": "191945",
+    "title": "Hvilke måter kan jeg styre mitt smarthjem på, å slå lysene på eller av?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "88487egb-830e-4253-g42e-457ge9f14de7",
+    "id": "81720",
+    "title": "Hvordan kan jeg handle med IKEA-appen?",
+    "keywords": [
+      "FAQ_HowToShop_App",
+      "app",
+      "appen ikea",
+      "handle i ikea appen",
+      "hvor er ikea appen",
+      "ikea ap",
+      "ikea aplikasjon",
+      "ikea app",
+      "ikea appen",
+      "ikea applikasjon",
+      "ikea telefonapp",
+      "ikea til telefon",
+      "ikeas app",
+      "last ned app",
+      "laste ned ikea appen"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "68gb1611-4c9b-4f22-9gd7-cbg3d39c79b4",
+    "id": "27625",
+    "title": "Jeg har spørsmål om min bedriftskonto eller bedriftsprofil. Hvem skal jeg kontakte? ",
+    "keywords": [
+      "IKANO bank",
+      "bedrift",
+      "bedrift IKANO",
+      "bedrift IKEA"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0e468g3d-7303-4g17-g3e8-4c59f3d4556f",
+    "id": "24938",
+    "title": "Kan jeg reservere en tilhenger?",
+    "keywords": [
+      "free trailer",
+      "freetrailer",
+      "låne tilhenger",
+      "lånehenger",
+      "til henger",
+      "tilhenger",
+      "tilhengerleie",
+      "utlån tilhenger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e8f44bcg-ebde-4ce6-94gb-c35fggg14c93",
+    "id": "12340",
+    "title": "Hvordan legger jeg varer fra et tegneprogram til handlevognen min?",
+    "keywords": [
+      "hvordan handle fra tegneprogram",
+      "kjøpe planlagt tegning",
+      "kjøpe tegning",
+      "legge fra tegneprogram til handlevogn",
+      "legge tegning i handlekurs",
+      "tegning til handle vogn",
+      "tenging"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b4g22f1g-7de5-4fc4-g423-d1g84decb614",
+    "id": "12371",
+    "title": "Hvor finner jeg åpningstidene til varehusene og kundeservice?  ",
+    "keywords": [
+      "forus åpningstid",
+      "furuset åpningstid",
+      "hva er åpningstidene i påsken",
+      "leangen åpningstid",
+      "når er varehuset åpent i påsken",
+      "ringsaker åpningstid",
+      "slependen åpningstid",
+      "sørlandet åpningstid",
+      "varehus stengt",
+      "varehus åpent",
+      "åpent på varehus",
+      "åpningstid",
+      "åpningstid varehus",
+      "åpningstider",
+      "åsane åpningstid"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "26744f29-4e56-4023-8e49-3g1gf98230e0",
+    "id": "24392",
+    "title": "Kan deler fra ENHET kjøkken og baderom kombineres med METOD eller GODMORGON?",
+    "keywords": [
+      "ENHET",
+      "ENHET baderom",
+      "ENHET kjøkken",
+      "GODMORGON",
+      "METOD",
+      "kompatibler",
+      "passer ENHET"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "18ff96df-bg59-4881-gb9g-c80131b3e09g",
+    "id": "14014",
+    "title": "Kan jeg få planleggingshjelp hos IKEA?",
+    "keywords": [
+      "Baderomskonsulent",
+      "Garderobekonsulent",
+      "Kjøkkenkonsulent",
+      "Kjøpshjelp",
+      "Planlegging",
+      "Planleggingshjelp",
+      "kjøpehjelp",
+      "kjøphjelp",
+      "montering",
+      "monteringhjelp",
+      "monteringshjelp",
+      "selvbetjening"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c0fg29c5-7dg5-4315-8ge4-48e8e52696be",
+    "id": "163043",
+    "title": "Hva slags stekeovn skal jeg velge?",
+    "keywords": [
+      "hjelp stekeovn",
+      "hvilken stekeovn",
+      "stekeovn",
+      "stekeovn kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "10b00dff-2f06-41f6-8531-1geg0c6c3d3e",
+    "id": "28202",
+    "title": "Kan jeg kjøpe kjøkken selv på nett?",
+    "keywords": [
+      "Kan jeg bestille kjøkken uten å dra på varehuset?"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4294g332-c4c2-466c-b16e-dg05bf3861g3",
+    "id": "27398",
+    "title": "Det er noe feil på min UPPLEVA TV/lydsystem, hva gjør jeg?",
+    "keywords": [
+      "TV",
+      "UPPLEVA",
+      "lydsystem",
+      "stereoanlegg"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f25c6d8b-78de-436e-8f11-17fd991e248g",
+    "id": "278110",
+    "title": "Hvordan støtter vi deg i gjør-det-selv-montering av IKEA-kjøkken?",
+    "keywords": [
+      "FAQ_Kitchen_Install_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3f8825d3-575d-4d6e-9be3-b2de3cc94dfd",
+    "id": "27601",
+    "title": "Hvor kan jeg handle med IKEA bedriftskort? ",
+    "keywords": [
+      "IKANO bedriftskort",
+      "IKEA bedriftskort",
+      "betaling bedrift",
+      "ikea bedrift",
+      "ikeabedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6e82d020-b87d-4340-95ce-bb3855345e3c",
+    "id": "25809",
+    "title": "Er IKEAs blandebatteri SINTEF godkjente?",
+    "keywords": [
+      "SINTEF",
+      "SINTEF byggforsk",
+      "SINTEF certification",
+      "SINTEF sertifikat",
+      "blande batteri godkjent",
+      "blandebatteri godkjent"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "db71ce7c-150g-43g6-g817-8836b01d86d2",
+    "id": "14733",
+    "title": "Kan jeg endre leveringstidspunkt med hjemlevering av en postpakke fra Posten?",
+    "keywords": [
+      "Posten",
+      "Posten App",
+      "endre leveringstidspunkt",
+      "endre tidspunkt postpakke",
+      "leveranse",
+      "postpakke hjemlevering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "87b050b2-gce9-4deb-b835-ded137e1707d",
+    "id": "12626",
+    "title": "Hva gjør jeg hvis jeg ikke rekker å levere tilbake tilhengeren i tide?",
+    "keywords": [
+      "Forlenge leie",
+      "Forlengelse",
+      "Forlengelse av tilhengerleie",
+      "Forsinket innlevering av henger",
+      "Henger",
+      "Hensatt tilhenger",
+      "Leie tilhenger",
+      "Rekker ikke å levere i tide",
+      "Rekker ikke å levere tilbake",
+      "Tilhenger",
+      "Tilhengerleie",
+      "freetrailer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5g56e2f7-928f-4g33-ge26-c544f786db1c",
+    "id": "272348",
+    "title": "Hvor lang tid tar det vanligvis å motta kuponger etter å ha handlet i en kampanje?",
+    "keywords": [
+      "cupon",
+      "cupons",
+      "kjøkkenkupong",
+      "kjøkkenkuppong",
+      "kupong",
+      "kupongene",
+      "kuppong",
+      "kuppongene",
+      "kupponger",
+      "missing cupons"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "92334b77-7738-4ec6-949b-4c0010b309g4",
+    "id": "208819",
+    "title": "Finnes det planleggingsverktøy for IKEA-produkter? ",
+    "keywords": [
+      "ENHET",
+      "Planleggingsverktøy",
+      "Planleggingsverktøy online",
+      "FAQ_online_planning_tools",
+      "gratis planlegger",
+      "tegning"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "06b74662-7cdc-45e2-b939-7864bc7cb11b",
+    "id": "14061",
+    "title": "Kan jeg betale med Vipps?",
+    "keywords": [
+      "VIPPS",
+      "betaling",
+      "betaling alternativ",
+      "betalingsalternativ"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4c274463-6410-4cf8-gb2f-04df8c871174",
+    "id": "25472",
+    "title": "Jeg vil tegne og planlegge BILLY. Hvordan gjør jeg det?",
+    "keywords": [
+      "billy",
+      "ihp",
+      "ikea home planner",
+      "planlegger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ec72179e-66e3-4577-g49f-c508d74cc678",
+    "id": "300392",
+    "title": "Hva er force majeure, og hvordan påvirker det postpakker og leveranser fra IKEA?",
+    "keywords": [
+      "Hans"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0067d4bb-d85b-4381-b45g-g30be6ee7e2b",
+    "id": "12366",
+    "title": "Hvordan bestille festemidler for å feste møbelet til veggen?",
+    "keywords": [
+      "Beslag",
+      "FAQ_Replacement_Fittings",
+      "Fest den til veggen",
+      "Fest det",
+      "Festekit",
+      "Festemidler",
+      "Forebygge velteulykker",
+      "Sikkerhet",
+      "Sikre møbelet",
+      "Veggfeste"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "103fd18g-3b1c-43f4-8gfb-00ce33bggbc4",
+    "id": "276503",
+    "title": "Hva er nøkkelfunksjonene til KNOXHULT kjøkken?",
+    "keywords": [
+      "FAQ_Kitchen_ChoosingAKitchen_C_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fe22g316-b924-4b18-8dbg-dd73g3e99296",
+    "id": "25443",
+    "title": "Jeg skal handle på varehus med har glemt eller mangler medlemskortet mitt, hva gjør jeg?",
+    "keywords": [
+      "family",
+      "family-kort medlems kort",
+      "familykort",
+      "ikea family",
+      "ikea family kort",
+      "medlem",
+      "medlemskort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "79818d28-g84g-4064-b466-9ce6c54fbg25",
+    "id": "279343",
+    "title": "Hva må jeg tenke på når jeg planlegger et kjøkken selv?",
+    "keywords": [
+      "FAQ_Kitchen_PlanAndDesign_C_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "955c1c44-8343-4b2f-9c18-2bcb6de77495",
+    "id": "276510",
+    "title": "Hvordan måle opp kjøkkenet selv? ",
+    "keywords": [
+      "FAQ_Kitchen_Measure_C_GC_One"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ce6g34f3-e57c-4444-gc2f-94d3e9cee2ef",
+    "id": "27622",
+    "title": "Kan bedriften min lease varer hos IKEA?",
+    "keywords": [
+      "IKANO bedrift",
+      "IKANO leasing",
+      "bedrift leie",
+      "bedriftleasing",
+      "bedriftskonto",
+      "leasing bedrift",
+      "leasing møbler"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5ddff4d6-bffe-4f21-g7f2-d2d0f64dc9d6",
+    "id": "258336",
+    "title": "Hvor mye koster interiørdesigntjenesten?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e0gc203g-g25b-436g-b15e-f8b0814d1d3c",
+    "id": "258287",
+    "title": "Hvordan fungerer interiørdesigntjenesten?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bg548f0d-9492-411d-bff0-3g772012gc5c",
+    "id": "26553",
+    "title": "Kan jeg vaske sofatrekk på lavere temperatur enn det står som i vaskanvisningen?",
+    "keywords": [
+      "sofatrekk",
+      "vask sofa trekk",
+      "vaske sofa",
+      "vaske sofatrekk",
+      "vaskeanvisning sofatrekk"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "82gcc40e-470c-47dd-9126-271695fcf747",
+    "id": "249919",
+    "title": "Kan jeg bruke METOD-skap til vaskerom?",
+    "keywords": [
+      "kjøkkenskap på vaskerommet",
+      "vaskerom",
+      "vaskeromsløsning"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "165d1253-9fgc-45df-g602-710067dgb6g0",
+    "id": "241664",
+    "title": "Hva er IKEAs kjøps- og leveringsvilkår?",
+    "keywords": [
+      "FAQ_Delivery_Other_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c58f207d-16c7-4d8g-9379-7c884503c119",
+    "id": "241707",
+    "title": "Leverer dere til utlandet?",
+    "keywords": [
+      "FAQ_Delivery_Locations_GC_Two",
+      "Levering til et annet land",
+      "bestilling fra utlandet",
+      "levering utenlands",
+      "utland"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3b4cg034-8ggf-46e7-bcf1-f1f2f6864993",
+    "id": "241631",
+    "title": "Hva er leveringstiden for kjøkken og benkeplater fra IKEA?",
+    "keywords": [
+      "FAQ_Delivery_Time_GC_Five"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "be36461g-175b-4c9e-8f06-cg14gd6g2643",
+    "id": "241598",
+    "title": "Hvorfor er ordren min forsinket?",
+    "keywords": [
+      "FAQ_Delivery_Time_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1c198fdd-4117-45bb-g934-bdeeceb2dg2b",
+    "id": "241584",
+    "title": "Kan jag få et mer nøyaktig tidsintervall for min levering?",
+    "keywords": [
+      "FAQ_Delivery_Time_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "416f3742-d4f2-400e-98de-dge2fb602f9c",
+    "id": "241701",
+    "title": "Kan noen andre ta imot og signere for leveringen min?",
+    "keywords": [
+      "FAQ_Delivery_Other_GC_Two"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7ggfbeg1-6570-4dg5-b6f1-f1bee9144716",
+    "id": "241681",
+    "title": "Kan jeg se fraktprisen før jeg fullfører en bestilling?",
+    "keywords": [
+      "FAQ_Delivery_Cost_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2g93ddd1-0d76-4e27-b5b2-4cd3fc5gcbd1",
+    "id": "241549",
+    "title": "Hvorfor er ikke alle leveringsmåter tilgjengelig for ordren min?",
+    "keywords": [
+      "FAQ_Delivery_Options_GC_Two",
+      "Leveringsalternativer",
+      "leverings alternativ",
+      "leverings muligheter",
+      "leveringsmuligheter"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "044f162c-76e6-4122-95cd-d9bd73e24d8c",
+    "id": "74347",
+    "title": "Hvilke leveringsmåter kan jeg velge mellom?",
+    "keywords": [
+      "FAQ_Delivery_Options_GC_One",
+      "Hvordan får jeg varene levert",
+      "Hvordan kan dere levere?",
+      "Hvordan leverer dere",
+      "levering",
+      "levering fra ikea",
+      "leveringsalternativer",
+      "leveringsmuligheter"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b4805114-5589-4524-98bd-d0f20358308d",
+    "id": "241710",
+    "title": "Hvorfor er ordren min splittet opp i flere leveranser?",
+    "keywords": [
+      "FAQ_Delivery_Other_GC_Three"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e6b0e05e-8073-44g7-g82e-e882e8d2edb8",
+    "id": "241689",
+    "title": "Leverer dere til Jan Mayen og Svalbard?",
+    "keywords": [
+      "FAQ_Delivery_Locations_GC_Four"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1fc0bf7g-0db1-4cf5-9de6-d7eg248dgd56",
+    "id": "235416",
+    "title": "Jeg har ved et uhell opprettet to medlemskap for bedriften min, hvordan fikser jeg det?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "ge3g5egc-4dbf-494e-8473-ed2233015546",
+    "id": "235283",
+    "title": "Hvordan får jeg tilgang til alle fordelene når jeg har en Bedriftsprofil?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c782d932-92fd-4f90-b1b9-959bbbe9ff4b",
+    "id": "235575",
+    "title": "Hva er forskjellen mellom å stå som eier og vanlig medlem av bedriftens profil/medlemskap?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b9gg90f5-415d-4ce8-g2d7-12d95c958geg",
+    "id": "235379",
+    "title": "Hvordan slette kollegaer fra en Bedriftsprofil eller et IKEA Network-medlemskap?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "12cb935b-54e4-4390-bg1e-706g7258dc7c",
+    "id": "25171",
+    "title": "Kan jeg betale med IKEA kort?",
+    "keywords": [
+      "IKEA kort",
+      "IKEA kort betaling montering",
+      "IKEA-kort",
+      "IKEAkort",
+      "betal montering",
+      "betale montering",
+      "betaling",
+      "betaling montering",
+      "betaling på nett",
+      "ikano kort",
+      "ikea kort"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8b56b03g-e1bd-474f-g80e-eb4b357d91g9",
+    "id": "162380",
+    "title": "Hvor booker jeg tid med interiørdesigner?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "97be1749-f85f-4568-822e-97c65956318g",
+    "id": "192133",
+    "title": "Jeg har allerede et Home smart system fra et annet merke, kan jeg bruke smartprodukter fra IKEA i det?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5192d822-5667-4d32-g89e-1044007cb6bg",
+    "id": "208148",
+    "title": "Når kommer julens sesongmat på IKEA?",
+    "keywords": [
+      "gløgg",
+      "lusse katter",
+      "lussekatter",
+      "mini pepperkakehus",
+      "minipepperkakehus",
+      "pepperkake",
+      "pepperkakehus"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3c85d101-8g5g-4d41-8394-218567389dgf",
+    "id": "12327",
+    "title": "Hvordan komme i gang med TRÅDFRI smartbelysning? ",
+    "keywords": [
+      "Smartbelysning",
+      "TÅRDFRI",
+      "begynne med trådfri",
+      "feilsøke trådfri",
+      "finne trådfri",
+      "hjelp til trådfri",
+      "hvordan fungerer trådfri",
+      "innstallere trådfri sette opp trådfri",
+      "installere trådfri",
+      "kjøpe trådfri",
+      "oppsett trådfri",
+      "sette opp smart belysning",
+      "sette opp smarthjem",
+      "smart hjem",
+      "smart lys",
+      "smart-hjem",
+      "smarthjem",
+      "smartlys",
+      "tradfri",
+      "trådfri"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5f6c091g-7919-4599-9ceb-6c419ge614c9",
+    "id": "188245",
+    "title": "Må jeg være IKEA Family-medlem for å lage eller kjøpe fra en gaveliste?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e73067d7-3488-45bg-ggb5-8b5cf543bbf1",
+    "id": "27593",
+    "title": "Hvordan kan bedriften vår få faktura på kjøpet?",
+    "keywords": [
+      "IKEA bedriftskonto",
+      "bedrift betaling løsning",
+      "bedrift betalingsløsning",
+      "bedrift faktura",
+      "ikea bedrift",
+      "ikea faktura"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "07ec0e70-852e-46ce-b94f-g725f73c9fb1",
+    "id": "132263",
+    "title": "Kan jeg få faktura når jeg handler med bedriftsprofilen?",
+    "keywords": [
+      "bedrift faktura",
+      "betale bedrift",
+      "business faktura",
+      "faktura bedrift",
+      "faktura bedriftsprofil",
+      "faktura for bedriftskunde",
+      "krite bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "011g806f-d64b-4f59-9d44-f2c81efee782",
+    "id": "191927",
+    "title": "Kan DIRIGERA-huben stå utendørs?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bcgc5b01-365g-4736-g7d4-97e57f4d24b5",
+    "id": "192202",
+    "title": "Hvor lenge vil jeg kunne bruke smartproduktene mine med DIRIGERA-huben? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "85f22207-8413-459f-bg40-6546b319873c",
+    "id": "192197",
+    "title": "Kan DIRIGERA-huben repareres og/eller resirkuleres?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "863c5e29-1286-4d2f-g7c7-ee7f05cd9500",
+    "id": "192191",
+    "title": "Hvor nær DIRIGERA-huben og Wi-Fi-ruteren min må smartproduktene plasseres for å koble til? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9g0e9b92-6804-4e33-9dd9-7f892656fd1b",
+    "id": "192163",
+    "title": "Kan jeg bruke stemmen min til å styre smarthjemmet mitt fra IKEA? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e5c19c8f-e30f-4c2f-gf5b-cg03f7e34435",
+    "id": "192141",
+    "title": "Kan jeg migrere smarthusoppsettet og smartproduktene mine fra TRÅDFRI gateway til DIRIGERA-hub? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "gc18e5c4-f4e1-4geg-b2f7-67eg299ge703",
+    "id": "192120",
+    "title": "Kan jeg få support fra IKEA til å sette opp smarthjemmet mitt? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "956b5d73-f235-4cge-ge76-851g4b0gce4g",
+    "id": "192023",
+    "title": " Hvor i hjemmet mitt skal DIRIGERA-huben plasseres? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3e41d506-9c89-42e4-bgb5-7c7b7199b4e8",
+    "id": "192012",
+    "title": "Hvordan kobler jeg DIRIGERA-huben til Wi-Fi-ruteren og det lokale nettverket? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e45egc02-4948-4bd4-g763-9e9g75244g6e",
+    "id": "191997",
+    "title": "Jeg vil styre smartproduktene mine med IKEA Home smart-appen, hva må jeg gjøre? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cd9632c5-c3b4-4ffb-be0e-g0596g1f7c5e",
+    "id": "191990",
+    "title": "Trenger jeg en fjernkontroll for å styre smarthjemmet mitt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "18g4eg41-df78-44d8-g0e5-46753dg4c7fe",
+    "id": "191941",
+    "title": "Kan noen som er på besøk hos meg kontrollere ting som belysning? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "05008d2c-2e9b-457g-g2e7-e4g50633f82d",
+    "id": "191937",
+    "title": "Kan jeg bruke IKEA Home smart-appen med TRÅDFRI gateway? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e0e43432-125f-4894-8ff7-73g841896b92",
+    "id": "189096",
+    "title": "Kan jeg laste opp mitt eget bilde til gavelista?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b9252ff9-5710-439g-841c-g66g27dg979g",
+    "id": "189087",
+    "title": "Hvordan sendes og mottas gavemeldingen når jeg handler fra ei gaveliste?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d6374f16-58g8-42g1-gb8e-567465dce42f",
+    "id": "188904",
+    "title": "Jeg ønsker å bestille varer til meg selv i samme levering, hvordan gjør jeg det? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "67447d02-22d6-4f9e-8e66-24771881284b",
+    "id": "188902",
+    "title": "Kan jeg bruke en kupongkode når jeg handler fra ei gaveliste? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6c9920c5-fe64-4f2b-g8e5-3d2603e9b88e",
+    "id": "188903",
+    "title": "Jeg har huket av på feil vare, hvordan kan jeg endre dette? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "33715d6g-356b-4f5b-g330-fdc71e328b3g",
+    "id": "188337",
+    "title": "Hvordan kan jeg personalisere gavelisten min?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "441874bg-f34g-44c5-86de-908ecedee169",
+    "id": "14212",
+    "title": "Hvor store benkeplater har dere?",
+    "keywords": [
+      "benke plate",
+      "benkeplate",
+      "benkeplater",
+      "bredde benkeplate",
+      "lengde benkeplate",
+      "standard mål benkeplate",
+      "stor benkeplate",
+      "størrelse benkeplate"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "21g3cg0g-1f08-4gb7-bd4c-3g1egg5dc418",
+    "id": "25818",
+    "title": "Hva er forskjellen på resirkulasjon og avtrekk?",
+    "keywords": [
+      "avtrekk",
+      "flexit",
+      "kjøkkenvifte",
+      "kjøkkken vifte",
+      "kullfilter",
+      "resirkulasjon luft",
+      "ventilasjonssystem",
+      "ventilator",
+      "villavent"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3339g56c-6cd2-4f83-9c6c-68cdgdf2886d",
+    "id": "28350",
+    "title": "Hvor lange benkeplater har IKEA?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "88f6db13-bcg5-4930-bce9-616fd5b70ebe",
+    "id": "29249",
+    "title": "Kan jeg bruke KORKEN til fermentering?",
+    "keywords": [
+      "fermentere",
+      "fermentering",
+      "karbonere",
+      "kombucha",
+      "korken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "930fdgfg-d8g5-4ff0-8dcd-9590209c68eb",
+    "id": "72722",
+    "title": "Hvilken skapinnredning kan jeg bruke i kjøkkenet mitt?",
+    "keywords": [
+      "bestikkskuff",
+      "hullplate til skuff",
+      "kjøkkeninnredning",
+      "knivlist",
+      "metod kjøkkeninnredning",
+      "reskapskuff",
+      "skapinnredning kjøkken",
+      "skuffeavdeler",
+      "skuffeinnsats",
+      "uppdatera",
+      "variera"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "215f306d-e9g0-4e90-b0bb-b5b58f73ccbc",
+    "id": "14214",
+    "title": "Hvor finner jeg kjøkkentegningen min?",
+    "keywords": [
+      "IHP",
+      "IHP tegning",
+      "kjøkkenplanlegger",
+      "kjøkkentegning",
+      "tegneprogram"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2d1e0437-6e41-4ee0-bf9b-17238f1cd3cb",
+    "id": "162334",
+    "title": "Kan KASKER / SKARARP brukes som spisebord med ben under?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d2c69891-g1b2-4840-8e7d-c0bb0899ce65",
+    "id": "22733",
+    "title": "Kan KNOXHULT kjøkken kombineres med METOD?",
+    "keywords": [
+      "KNOXHULT",
+      "KNOXHULT kjøkken",
+      "METOD",
+      "bytte fronter",
+      "kjøkken",
+      "kjøkkenserie",
+      "kombinere"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9cb7e277-b105-45f3-8cdc-7e138e444309",
+    "id": "85741",
+    "title": "Hvor skal jeg plassere driveren til Home smart produktene mine?",
+    "keywords": [
+      "driver trådfri",
+      "home smart",
+      "homesmart driver",
+      "silverglans driver",
+      "smartdriver",
+      "trådfri driver",
+      "trådfridriver"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e53g1g7c-bdc0-4701-817g-53c0f1574d04",
+    "id": "27541",
+    "title": "Hvor kan jeg sjekke om IKEA leverer hjem til meg?",
+    "keywords": [
+      "hjemlevering bestilling",
+      "levering",
+      "levering IKEA.no",
+      "postnummer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "18400g08-f3eg-4b0c-g1d9-d6d8g6df19g6",
+    "id": "13802",
+    "title": "Fungerer IKEAs ventilatorer dersom jeg har sentralventilasjon?",
+    "keywords": [
+      "flexit",
+      "kullfilter",
+      "luftsirkulering",
+      "sentralanlegg",
+      "ventilasjon",
+      "ventilasjonsanlegg",
+      "ventilator",
+      "villavent"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0efgcd2f-897c-4f37-8763-9d03fe60016g",
+    "id": "59901",
+    "title": "Når kommer en vare tilbake på lager?",
+    "keywords": [
+      "grillskar",
+      "grillskär",
+      "grillskår",
+      "havsten",
+      "ikke tilgjengelig vare",
+      "lagerstatus",
+      "malm",
+      "nordli",
+      "når kommer varen",
+      "når kommer varen inn igjen",
+      "tomt på lager",
+      "utilgjengelig",
+      "utsolgt",
+      "utsolgt produkt",
+      "utsolgt vare",
+      "varelager"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "29gd3g00-52d5-44g1-934b-8edg2f0ebd74",
+    "id": "26992",
+    "title": "Hvilke dager kan jeg booke time med IKEAs interiørdesigner?",
+    "keywords": [
+      "bestiller interiørdesigner",
+      "dato interiørdesigner",
+      "dato planlegging",
+      "planleggingshjelp tilgjengelig"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "89e93522-ce22-420b-962f-d269621430b4",
+    "id": "162383",
+    "title": "Kan jeg møte interiørdesigner på varehuset?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b1215575-7261-4446-bg3g-79d6g3gd1752",
+    "id": "162382",
+    "title": "Hvor foregår møtet med interiørdesigner?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "07f7003b-2552-4613-98cf-81081c0e2cgg",
+    "id": "12491",
+    "title": "Jeg har fått faktura for ny utkjøring - Hvorfor det?",
+    "keywords": [
+      "Bomtur",
+      "Bomtursgebyr",
+      "Faktura",
+      "Gebyr",
+      "Var ikke hjemme ved levering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "df09f9f5-cd86-4be1-8090-c44d8gdde5e9",
+    "id": "14133",
+    "title": "Hvem skal jeg forholde meg til om det er skjedd en feil med montering av kjøkkenet mitt?",
+    "keywords": [
+      "Feil fra Montera",
+      "Montera",
+      "Monteringsfeil",
+      "Reklamere på montering",
+      "klage på servicepartner",
+      "montering feil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "27fe3190-3c25-4548-92ed-fgb89648bb33",
+    "id": "27497",
+    "title": "Jeg skal opprette en profil på IKEA.no, men det står at jeg allerede er registrert. Når jeg ber om nytt passord blir jeg bedt om å registrere meg som ny bruker. Hva er galt?",
+    "keywords": [
+      "IKEA profil",
+      "IKEA-Family profil",
+      "e-post profil",
+      "ikea family profil",
+      "lage ny profil",
+      "passord profil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fd5e7481-f7e1-4be5-8c94-6c17fbggf26b",
+    "id": "14245",
+    "title": "Må jeg ha elektriker/rørlegger under montering av kjøkken fra IKEA?",
+    "keywords": [
+      "elektriker",
+      "montering kjøkken",
+      "rørlegger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "37e60057-bdc9-4gg3-g599-e201551179c6",
+    "id": "59859",
+    "title": "Har IKEA bestillingsvarer?",
+    "keywords": [
+      "bestilling varer",
+      "bestillingsvare",
+      "bestillingsvarer",
+      "bestillingvare",
+      "tomt på lager",
+      "utsolgt vare",
+      "utsolgte vare",
+      "varer utsolgte varer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "758416b9-f0cb-4b1f-836e-bdcf40e66625",
+    "id": "28343",
+    "title": "Følger skinnene med i pakken når jeg kjøper PAX-skyvedører?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cb76edeb-30d9-4295-gd71-4g79c722d7dc",
+    "id": "25090",
+    "title": "Jeg får ikke opp postpakke som alternativ selv om jeg er innenfor målene?",
+    "keywords": [
+      "Postpakke",
+      "post pakke",
+      "post pakke mål",
+      "post pakke vekt",
+      "postpakke vekt",
+      "postpakkemål",
+      "postpakkevekt"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bbfb44c8-06ed-4094-gf2e-12dg44gcf0ff",
+    "id": "13687",
+    "title": "Hvordan monterer jeg mitt nye kjøkken?",
+    "keywords": [
+      "hvordan montere kjøkken",
+      "kjøkkenmontering",
+      "montering guide",
+      "monteringsguide"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f19b3924-3112-42b7-g12g-gg382bfcd9f1",
+    "id": "14252",
+    "title": "Når kan jeg hente ordren min på henteterminal?",
+    "keywords": [
+      "hente ordre",
+      "henteterminal",
+      "hentetidspunkt",
+      "utlevering henteterminal",
+      "utlevering terminal"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cfed46cf-8766-45g0-956e-6gbg93417fe4",
+    "id": "12331",
+    "title": "Hvordan bestiller jeg varer som ligger i min handleliste?",
+    "keywords": [
+      "bestille handleliste",
+      "bestille huske liste",
+      "bestille huskeliste",
+      "få handleliste i handlevogn",
+      "handle huskeliste",
+      "handle liste",
+      "huske liste",
+      "huskeliste",
+      "huskelisten i vogn",
+      "kjøpe handle liste",
+      "vogn huskeliste"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "636c76e0-8c68-4839-8g34-099f5d6c7d11",
+    "id": "145211",
+    "title": "Hvordan legger jeg til en dekkside i kjøkkenplanleggeren?",
+    "keywords": [
+      "dekkside",
+      "dekkside i kjøkkenprogrammet",
+      "fjerne automatisk foring",
+      "fjerne foring",
+      "legge til dekkside"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c33c787d-c078-45c3-gb77-0367402ggcff",
+    "id": "145217",
+    "title": "Hvordan legger jeg til en foring i kjøkkenplanleggeren?",
+    "keywords": [
+      "foring",
+      "foring i kjøkkenplanleggeren",
+      "hvordan legge til foring",
+      "kjøkkenforing",
+      "løs foring",
+      "skapforing",
+      "takforing"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cf43e019-532g-4efb-b1d7-4c48085276f5",
+    "id": "12522",
+    "title": "Hvor har det blitt av pakken min?",
+    "keywords": [
+      "Forsinket",
+      "Hvor er pakken",
+      "Hvor er pakken min",
+      "Pakken",
+      "Pakken er borte",
+      "Pakken er forsinket",
+      "Pakken har ikke ankommet",
+      "Pakken har ikke kommet",
+      "Pakkesporing",
+      "Postpakke",
+      "Spore pakke",
+      "Spore postpakke"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "83g7fg42-25f7-413d-b7e1-b96dg2b0f032",
+    "id": "144794",
+    "title": "Kan jeg bestille utskjæring til platetopp og/eller kum i standard benkeplater? ",
+    "keywords": [
+      "benkeplater",
+      "standard benkeplater",
+      "utskjæring til blandebatteri",
+      "utskjæring til platetopp",
+      "utskjæring til vask",
+      "utskjæringer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "c0d5df9c-0507-40e8-g6ge-26gfcf2d5bb4",
+    "id": "12477",
+    "title": "Hvor kan jeg få tak i stoffprøver til møblene deres?",
+    "keywords": [
+      "farge prøve",
+      "fargeprøve",
+      "sofastoff",
+      "stoff prøve",
+      "stoffprøve",
+      "tekstil prøve",
+      "tekstil test",
+      "tekstilprøve",
+      "tekstiltest",
+      "vare prøve",
+      "vareprøve"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "104d9ee7-19e7-448b-9577-3bc2bcgc8832",
+    "id": "25639",
+    "title": "Hva gjør jeg hvis jeg ikke har fått utbetalt pengene for refusjon av merverdiavgift?",
+    "keywords": [
+      "tilbakebetaling merverdiavgift",
+      "tilbakebetaling mva",
+      "utbetaling av momsrefusjon",
+      "utbetaling merverdiavgift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bd7g6fd2-94db-48c3-97c7-326792ece204",
+    "id": "27113",
+    "title": "Kan jeg bestille rørlegger og elektriker fra IKEA?",
+    "keywords": [
+      "bestille elektriker",
+      "bestille rørlegger",
+      "elektriker",
+      "montering elektriker",
+      "montering rørlegger",
+      "rørlegger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e86dcf56-2cbe-4270-9332-cg890g645g4b",
+    "id": "28363",
+    "title": "Kan jeg få nye festemidler til IKEA-produktet mitt?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "250ee884-0de2-466f-878c-d0cb09fd2ff4",
+    "id": "74452",
+    "title": "Kan jeg sammenkoble og spille stereolyd på ny og eldre versjon av SYMFONISK høytalere?",
+    "keywords": [
+      "bokhøytaler",
+      "gammel symfonisk",
+      "høytaler",
+      "koble til stereo",
+      "lampehøytaler",
+      "ny symfonisk",
+      "stereo",
+      "stereokobling",
+      "symfonisk",
+      "symfonisk høytaler",
+      "symfonisk lampe"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "85g935g2-789f-45b9-8c20-1gfegb040dcb",
+    "id": "27484",
+    "title": "Jeg finner ikke huskelisten min, hva gjør jeg?",
+    "keywords": [
+      "IKEA profil",
+      "IKEAprofil",
+      "finne huskeliste",
+      "huske liste",
+      "huskeliste",
+      "logge på profil",
+      "profil log-in",
+      "profil login"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bd2f3g70-dgb7-46e9-g2fe-eee34f872f7g",
+    "id": "132265",
+    "title": "Kan jeg overføre gamle kvitteringer til min nye bedriftsprofil?",
+    "keywords": [
+      "flytte en kvittering til bedrift",
+      "flytte kvittering bedrift",
+      "kan jeg overføre kvittering hos bedrift",
+      "overføre kvittering bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "93c550f6-83f5-4bd6-9d9g-ded8767b0386",
+    "id": "27488",
+    "title": "E-postadressen min blir ikke godtatt, min bruker er låst. Hva gjør jeg?",
+    "keywords": [
+      "IKEA Family",
+      "IKEA profil",
+      "IKEAfamily",
+      "låst bruker IKEA",
+      "nytt passord profil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "98e7b1dd-9fc3-4864-b230-8f669b6g396d",
+    "id": "132259",
+    "title": "Hvordan finner jeg kvittering på min bedriftsprofil?",
+    "keywords": [
+      "bedrift finne kvittering",
+      "bedrift kvittering",
+      "bedrift profil kvittering",
+      "bedriftsprofil kvittering",
+      "dokumentasjon på kjøp bedrift",
+      "finne kvittering for bedriftsprofil",
+      "kjøpsdokumentasjon bedrift",
+      "ordre for bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "29307bb8-3cff-41dc-b07b-58gf887c159c",
+    "id": "132255",
+    "title": "Hvordan oppretter jeg en bedriftsprofil?",
+    "keywords": [
+      "bedrift lage bruker",
+      "ikea bruker for bedrift",
+      "ikea family for bedrift",
+      "lage bedrift profil",
+      "lage bedriftsprofil",
+      "lage profil bedrift",
+      "opprette bruker bedrift",
+      "opprette profil bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e6870d99-349d-4317-g1gg-2555b31763eb",
+    "id": "132251",
+    "title": "Kan jeg ha både en privatprofil og en bedriftsprofil?",
+    "keywords": [
+      "bedrifts profil og privat profil",
+      "bedriftsprofil og privatprofil",
+      "privat og bedrift",
+      "vanlig og bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8be42486-2282-425b-88g6-2351fecg7e8f",
+    "id": "132249",
+    "title": "Hvordan endrer jeg min bedriftsprofil?",
+    "keywords": [
+      "bedrift endre telefonnummer",
+      "bedrift redigere opplysninger",
+      "bedriftsprofil",
+      "endre adresse bedrift",
+      "endre bedrift",
+      "endre bedrifts profil",
+      "endre bedriftsprofil",
+      "endre kontaktinformasjon bedrift",
+      "endre opplysninger bedrift",
+      "gjør endringer på bedriftsprofil",
+      "redigere adresse bedrift",
+      "redigere kontakt informasjon bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "egb25dg2-1723-4471-9315-gd526015g8c3",
+    "id": "12439",
+    "title": "Har dere leiebil som jeg kan leie?",
+    "keywords": [
+      "billeie",
+      "kan jeg leie bil",
+      "leie bil",
+      "leie varehus",
+      "leiebil",
+      "låne bil",
+      "utleie av bil",
+      "utleie av varebil",
+      "varebilutleie"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b661g49e-b903-4f9f-ggg0-0d88b52g5242",
+    "id": "27626",
+    "title": "Jeg får ikke gjennomført kjøp med IKEA bedriftskort?",
+    "keywords": [
+      "IKEA bedriftskort",
+      "bedrift",
+      "bedrift IKEA",
+      "bedrift ikea",
+      "bedrift konto",
+      "bedriftskonto",
+      "ikea bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f2b387fd-g2c6-457c-9c93-1db1f65e8551",
+    "id": "27619",
+    "title": "Kan jeg møte en bedriftskonsulent på varehuset? ",
+    "keywords": [
+      "bedrift kjøp",
+      "bedrift planlegging",
+      "bedrift salg",
+      "bedriftskonsulent"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "744723c0-65b6-4eg4-bg26-bc059c462308",
+    "id": "27582",
+    "title": "Hvordan bestiller jeg på vegne av en bedrift på IKEA.no?",
+    "keywords": [
+      "bedrift",
+      "bedrift IKEA",
+      "bedriftsbestilling ikea.no",
+      "bestilling bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7b06774f-gc0c-4fg4-966c-4c98bc24bg32",
+    "id": "27618",
+    "title": "Får bedrifter hjelp til planlegging av kjøkken?",
+    "keywords": [
+      "bedrift IKEA",
+      "bedrift kjøkken",
+      "bestille IKEA bedrift",
+      "kjøkkenplanlegging bedrift"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2116c209-c348-44f9-g528-39bc0143db5f",
+    "id": "85170",
+    "title": "Hvor finner jeg informasjon om varehusene?",
+    "keywords": [
+      "Corporate_Stores",
+      "info om varehus",
+      "når åpner varehus",
+      "rullestol varehus",
+      "tilbud på varehus",
+      "varehus",
+      "varehus info",
+      "varehus informasjon",
+      "varehus tilbud",
+      "varehus åpningstider",
+      "varehusene",
+      "varehussider",
+      "åpning",
+      "åpningstidene",
+      "åpningstider"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "1127ef8g-f1e1-4cd8-bg88-717e663g9bb8",
+    "id": "75845",
+    "title": "Hvordan kan jeg handle på IKEA?",
+    "keywords": [
+      "FAQ_Shopping_Information",
+      "Handle på IKEA",
+      "IKEA-app",
+      "IKEA-appen",
+      "best",
+      "handle",
+      "handle guideille",
+      "handle info",
+      "handle informasjon",
+      "handle på nett",
+      "hvor kan jeg handle",
+      "kjøpe",
+      "nettkjøp"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "3g0eg4e8-94e8-4bd3-8970-4ed43f07d677",
+    "id": "81724",
+    "title": "Kan jeg handle og hente på et hentepunkt?",
+    "keywords": [
+      "FAQ_HowToShop_PickupPoint"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2b6g8343-4565-4247-92ff-c78ee35b735c",
+    "id": "81721",
+    "title": "Kan jeg bestille på nett og få varene hjemlevert? ",
+    "keywords": [
+      "Bestille på nett",
+      "FAQ_HowToShop_HomeDelivery",
+      "bestille",
+      "bestille på nett og hjemlevering",
+      "handle på nett",
+      "hjemlevering",
+      "hjemlevering fra nett",
+      "hjemmelevering",
+      "hvordan handle på IKEA",
+      "levering hjem ved bestilling på nett",
+      "netthandel"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4edbefe1-86g4-4bg4-bb99-5ccg73fdc185",
+    "id": "12400",
+    "title": "Hvorfor har vi ikke IKEA-katalogen lenger?",
+    "keywords": [
+      "FAQ_Catalogue",
+      "IKEA-katalog",
+      "IKEA-katalogen",
+      "Jeg vil bestille katalogen",
+      "bestille katalog",
+      "få katalog",
+      "ikea brosjyre",
+      "ikea katalog",
+      "ikeakatalogen",
+      "ikeas katalog",
+      "katalog i posten",
+      "katalogen"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "443bg113-4ce8-4412-96b3-6522b3ecc5bb",
+    "id": "80353",
+    "title": "Kan jeg skifte trekk på sofaen eller stolen min?",
+    "keywords": [
+      "sjeselong trekk",
+      "sofatrekk",
+      "stoltrekk",
+      "trekk sofa",
+      "trekk stol",
+      "trekk strandmon",
+      "trekk søderhamn",
+      "trekk til sjeselong",
+      "trekk til sofa"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g96c08cc-8c4c-47gc-8e14-97e461g92520",
+    "id": "80306",
+    "title": "Må jeg å beise utemøblene mine?",
+    "keywords": [
+      "beis",
+      "bejs",
+      "beskyttelse utemøbler",
+      "utemøbler beis.",
+      "varda",
+      "vårda beis"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7f0f3493-ee93-40d6-b015-db0c112cg4g0",
+    "id": "25702",
+    "title": "Kan jeg få tilsendt en vare fra et annet varehus i Norge?",
+    "keywords": [
+      "sende fra VH",
+      "sende fra varehus",
+      "sende vare til varehus",
+      "sende varer",
+      "varer mellom varehus"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e7cd228e-7b13-4c6f-985b-ccb95141489e",
+    "id": "74714",
+    "title": "Har IKEA lysabsorberende gardinger?",
+    "keywords": [
+      "lyd gardin",
+      "lydabsorberende gardin",
+      "lydisolasjon",
+      "lysabsoberende"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9e74e472-7ge7-4b73-92d6-47824cd94e80",
+    "id": "13580",
+    "title": "Hvordan finner riktig type hengsler til kjøkkenfronten min?",
+    "keywords": [
+      "110 grader",
+      "95 grader",
+      "hengsler",
+      "hengsler kjøkken",
+      "hengsler stamme",
+      "riktig hengsel"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "46ffb090-18d6-45e8-g7db-d40ggf01b14f",
+    "id": "64339",
+    "title": "Hvordan avbestiller jeg en leiebil?",
+    "keywords": [
+      "avbestille leiebil",
+      "hertz",
+      "hertzbilpool",
+      "kansellere bil",
+      "kansellere leiebil",
+      "kontakt hertz",
+      "leie bil",
+      "leiebil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "dee57df4-f105-416f-89dg-1244eb6fb44c",
+    "id": "26946",
+    "title": "Hvor finner jeg beina til min sofa?",
+    "keywords": [
+      "ben sofa",
+      "ben til sofa",
+      "sofa ben",
+      "sofeben"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "97dg499f-c14d-4g4e-9g99-8b1436fg347c",
+    "id": "24932",
+    "title": "Jeg har leid bil før, men har glemt brukernavn/passord - Hva gjør jeg?",
+    "keywords": [
+      "Hertz",
+      "Leiebil",
+      "bil utleie",
+      "bilutleie",
+      "brukernavn leiebil",
+      "herts",
+      "hertz bilpool",
+      "hertz bilutleie",
+      "hertz leiebil",
+      "hertz varebil",
+      "hertzbilpool",
+      "leie bil",
+      "leie varebil",
+      "leiebil logg inn",
+      "leiebil passord",
+      "leiebil vilkår",
+      "logg inn hertz",
+      "varebil vilkår",
+      "varebilutleie"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "36g19cf8-bc45-478c-9g38-c7ecgd8b9266",
+    "id": "27413",
+    "title": "Jeg har ikke mottatt gavekort jeg har bestilt på nett, hva gjør jeg? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "14583ee7-b7f2-4fbc-b3ec-38bceb674e7c",
+    "id": "29035",
+    "title": "Kan jeg låne henger på IKEA Forus?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5c04cge0-c825-4037-9d70-64068ce2bbde",
+    "id": "43569",
+    "title": "Hvor finner jeg vareutleveringen på IKEA Forus?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f48331e2-7e17-4g10-g255-d6eff539440f",
+    "id": "36247",
+    "title": "Hva skjer med synkroniseringen av TRÅDFRI gateway om jeg bytter Wifi router?",
+    "keywords": [
+      "IKEA home smart app",
+      "TRÅDFRI",
+      "home smart",
+      "homesmart",
+      "router",
+      "smart app",
+      "trådfri gateway",
+      "wifi router"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b7f34801-6289-4195-gc3c-17889f0d54cf",
+    "id": "32477",
+    "title": "Hvordan monterer jeg et IKEA kjøkken?",
+    "keywords": [
+      "hjelp montering kjøkken",
+      "hvordan montere kjøkken",
+      "kjøkken montering",
+      "kjøkkenmontering",
+      "montere kjøkken selv",
+      "selv hjelp kjøkken",
+      "selvhjelp kjøkken"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "85050db0-c50d-465c-971b-36d87124fg1g",
+    "id": "28569",
+    "title": "Hva er maks belastning av IKEAs senger, loftssenger og sengestammer?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b6d705db-29d3-45g7-gf38-394gcf52987c",
+    "id": "28362",
+    "title": "Jeg har ikke fått med skruer til å montere møbelet til veggen, hva gjør jeg?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "5f3gef68-703c-4ebg-bb40-1b61dg2dbgd3",
+    "id": "28358",
+    "title": "Kan jeg kjøpe kontinentalrammen uten madrass?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "584d83f3-de61-4982-95gc-f6g5f887e357",
+    "id": "28357",
+    "title": "Kan jeg kjøpe en seng uten madrass?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "51bd49b5-gfdf-460d-bbf3-bbeg007277gg",
+    "id": "28354",
+    "title": "I hvilke tilfeller trenger jeg støtteben til min seng?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "39ebf6d1-0684-4be0-b0e7-1ef5b2f6edeb",
+    "id": "28351",
+    "title": "Er midtbalken inkludert når man kjøper seng?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0f59db0c-f58f-4478-beb7-gge44d71340c",
+    "id": "28344",
+    "title": "Kan jeg ha to skap med skyvedører rett ved siden av hverandre?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "b7201636-15f8-4799-ggb8-g6699b8g80g5",
+    "id": "28338",
+    "title": "Følger hengsler med i pakken når jeg kjøper PAX-dører?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e7e98g60-088f-41g0-82c1-c0494f428e00",
+    "id": "28329",
+    "title": "Kan jeg kombinere alle servanter med alle servantskap?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "bcb92c6g-c8f2-4ccc-8bdc-405895b31eg8",
+    "id": "28328",
+    "title": "Hvor dyp er skuffen i GODMORGON servant?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d1915985-c862-4fe8-gge2-d60fc8ec353d",
+    "id": "28327",
+    "title": "Hvor stort er hullet til blandebatterier på servantene til baderom på IKEA?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "459d346f-174e-4e88-9fg6-738g1564154f",
+    "id": "28075",
+    "title": "Er vareutleveringene åpen like lenge som varehusene?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "687602f9-2d70-4c9c-8371-c6784e997927",
+    "id": "28073",
+    "title": "Er den eksterne vareutleveringen åpen like lenge som varehuset?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4e1dcf4e-710g-4cc1-gge3-65b0ee208d63",
+    "id": "14736",
+    "title": "Hvilke frakt- og leveringsmuligheter har dere?",
+    "keywords": [
+      "Levering",
+      "Leveringsalternativ",
+      "Leveringsmuligheter",
+      "hjemlevering",
+      "levering alternativ",
+      "levering muligheter",
+      "postpakke"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "03ed2174-387e-41e3-8ec2-8975de6832c1",
+    "id": "14143",
+    "title": "Jeg har fått en handleliste ved bestilling. Er ikke denne betalt og når får jeg varene?",
+    "keywords": [
+      "Handleliste",
+      "handle liste",
+      "rest",
+      "rest ordre",
+      "restliste",
+      "restordre"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "6917f37d-68d3-4620-8ce7-eg4d772f92b1",
+    "id": "13715",
+    "title": "Hvor finner jeg servicetagen som er klistret på hvitevaren min? ",
+    "keywords": [
+      "Hvitevare",
+      "Hvitevareservice",
+      "Klistrelapp",
+      "Klistremerke",
+      "Service",
+      "Service på hvitevare",
+      "Servicepartner",
+      "Servicetag"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "g5bf3gdc-69g9-4e87-b1e9-9d2eec2eg040",
+    "id": "12623",
+    "title": "Hva er de innvendige målene på tilhengerene deres? ",
+    "keywords": [
+      "Henger",
+      "Hvor mye plass er det i tilhengeren",
+      "Hvor stor er tilhengeren",
+      "Innvendige må på tilhenger",
+      "Innvendige mål",
+      "Mål på tilhenger",
+      "Tilhenger",
+      "freetrailer",
+      "strl tilhenger",
+      "størerlse tilhenger",
+      "størrelse tilhenger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "d2148029-38g9-45e4-9b1g-6085e96gd644",
+    "id": "12372",
+    "title": "Hvorfor er det kjøpsknapp når varen ikke er på lager? ",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "36be33eb-2b3e-40g6-8gf8-33cb50bf76c7",
+    "id": "12337",
+    "title": "Hvilken belysning passer til å ha i garderoben og hva trenger jeg?",
+    "keywords": [
+      "garderobe belysning",
+      "garderobe lys",
+      "garderobebelysning",
+      "garderobelys",
+      "lys til pax",
+      "lys til platsa",
+      "pax belysning",
+      "platsa belysning"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8e4d6931-13ef-4c1b-8bce-ge28441g1672",
+    "id": "12318",
+    "title": "Hvilken kjøkkenbelysning skal jeg velge?",
+    "keywords": [
+      "finne belysning",
+      "finne lys",
+      "kjøkken belysning",
+      "kjøkken lamper",
+      "kjøkken lys",
+      "kjøkkenbelysning",
+      "kjøkkenbeslyning",
+      "kjøkkenlamper",
+      "kjøkkenlys",
+      "lampe til huset",
+      "lamper på kjøkken",
+      "leter etter belysning",
+      "leter etter lys",
+      "lys på kjøkkenet",
+      "lys til kjøkken",
+      "velge lampe finne lampe"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cd786g22-b565-4eg2-gg87-5g5fe658c8gd",
+    "id": "27545",
+    "title": "Kan jeg bestille varer til henteterminal?",
+    "keywords": [
+      "henteterminal levering",
+      "levering alternativ",
+      "levering henteterminal",
+      "leveringsalternativ"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "13e974g1-3f96-43g7-b546-3fcg76667ff4",
+    "id": "27417",
+    "title": "Hvilke produkter kan jeg kjøpe på nett?",
+    "keywords": [],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "88883f2g-7be6-42c0-85b8-2bgd9cbb2fc0",
+    "id": "27393",
+    "title": "Er IKEA medlem av et returselskap?",
+    "keywords": [
+      "batteriretur",
+      "ee produkter",
+      "grønt punkt",
+      "retur av ee-produkter",
+      "returselskap"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "136e289e-19ff-4278-beb9-eb897cd54056",
+    "id": "27108",
+    "title": "Ringer montørene før de kommer?",
+    "keywords": [
+      "garderobde montør",
+      "kjøkkenmontering montør",
+      "kontakt montør",
+      "montera montør",
+      "montør",
+      "ringer montør?"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4g399d5b-9dg3-4349-8026-fe7g354bgb35",
+    "id": "26939",
+    "title": "Hvor finner jeg monteringsanvisning til min sofa?",
+    "keywords": [
+      "monteringsanvisning sofa",
+      "monteringsanvisning sofatrekk",
+      "sofa montering",
+      "sofatrekk montering"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "8531376e-c864-4036-b703-d825280928f2",
+    "id": "26564",
+    "title": "Jeg har BESTÅ som er kjøpt før 2015, kan jeg kombinere det med variantene dere selger i dag?",
+    "keywords": [
+      "BESTÅ",
+      "BESTÅ gammel",
+      "BESTÅ gammel ny",
+      "BESTÅ ny"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f7c198d3-d814-4002-869f-565e5b5c428e",
+    "id": "26542",
+    "title": "Hvor store er hyllerommene til EXPEDIT og KALLAX?",
+    "keywords": [
+      "EXPEDIT",
+      "EXPEDIT hylle innsats KALLAX",
+      "Hylle innsats",
+      "KALLAX",
+      "hylleinnsats EXPEDIT",
+      "hylleinnsats KALLAX"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "2790857e-2c5c-4009-g124-d0b97838c21b",
+    "id": "25693",
+    "title": "Kan jeg kjøpe varen i dag og hente den senere?",
+    "keywords": [
+      "hjemlevering",
+      "holde av",
+      "holde av varer",
+      "klikk og hent",
+      "levering tjenester",
+      "leveringstjenester",
+      "reservere på varehus",
+      "reservere varer"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "29593e0e-0b91-4087-8515-0ef92cf237c2",
+    "id": "25674",
+    "title": "Hvorfor finnes ikke alle varer på alle varehus? ",
+    "keywords": [
+      "IKEA sortiment",
+      "ikke tilgjengelig på varehuset",
+      "sortiment ikea",
+      "varehus"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f880dgg9-9925-48gf-8671-f1f1g2fegd44",
+    "id": "25642",
+    "title": "Jeg bor i Norge og handlet hos IKEA i Sverige, kan jeg få momsen refundert?",
+    "keywords": [
+      "handle i sverige",
+      "moms refusjon",
+      "momsrefusjon",
+      "momsrefusjon Sverige"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "4b998ff1-0648-4c1g-bc32-bff91fc35e41",
+    "id": "25462",
+    "title": "Kan jeg bruke gavekortet mitt flere ganger?",
+    "keywords": [
+      "bruke gavekort flere ganger",
+      "bruke opp gavekort",
+      "gave kort",
+      "gavekort",
+      "tilgode lapp"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "68d66cdg-30b9-4g22-bb0c-80251213264e",
+    "id": "25421",
+    "title": "Kan andre benytte seg av mitt IKEA Family-kort?",
+    "keywords": [
+      "Family",
+      "andre bruke mitt ikea family",
+      "ikea famili",
+      "ikea family",
+      "ikeafamili",
+      "ikeafamily",
+      "privat medlemsskap ikea"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "e6301ebb-bb35-4299-g117-586cg008b7gf",
+    "id": "24952",
+    "title": "Hvordan låser jeg opp tilhengeren?",
+    "keywords": [
+      "free trailer",
+      "freetrailer",
+      "låne tilhenger",
+      "lånehenger",
+      "låse opp henger",
+      "låse opp tilhenger",
+      "til henger",
+      "tilhenger",
+      "tilhengerleie",
+      "utlån tilhenger",
+      "åpne tilhenger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "cce7b31e-467g-4567-gf57-616gcbc711ff",
+    "id": "24941",
+    "title": "Kan jeg kjøre tilhenger med førerkort klasse B?",
+    "keywords": [
+      "free trailer",
+      "freetrailer",
+      "førerkort tilhenger",
+      "klasse b tilhenger",
+      "låne tilhenger",
+      "lånehenger",
+      "til henger",
+      "tilhenger",
+      "tilhenger B klasse",
+      "tilhengerleie",
+      "utlån tilhenger"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "fe9372f6-0098-4g66-8214-fdc5cg9876d1",
+    "id": "24927",
+    "title": "Hvor lenge kan jeg leie bil hos IKEA?",
+    "keywords": [
+      "Leiebil",
+      "bil utleie",
+      "bilutleie",
+      "hvor lenge kan jeg leie",
+      "hvor lenge kan jeg låne leiebil",
+      "hvor mange timer kan jeg leie bil",
+      "kan jeg leie bil i mange timer",
+      "leie bil",
+      "leie tidspunkt",
+      "leie varebil",
+      "leiebil periode",
+      "leiebil vilkår",
+      "leieperiode",
+      "varebil vilkår",
+      "varebilutleie"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9g2ebc35-2ec4-43gb-9864-ee3c4d007221",
+    "id": "24912",
+    "title": "Hva slags dokumentasjon må jeg vise frem for å leie bil hos IKEA?",
+    "keywords": [
+      "billeie",
+      "dokumentasjon leiebil",
+      "førerkort leiebil",
+      "leie bil",
+      "leiebil",
+      "vilkår leiebil"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "08c46f79-c3g5-45cb-9d24-34d339ce3c30",
+    "id": "13874",
+    "title": "Kan dørene i ENHET-serien åpnes begge veier?",
+    "keywords": [
+      "enhet dør",
+      "enhet hengsler",
+      "enhet hengslet",
+      "åpne enhet",
+      "åpne enhet dør",
+      "åpning av dør til ENHET"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "9f0216d0-f0f8-4942-9c58-c4b9ee527e86",
+    "id": "14452",
+    "title": "Hvordan kobler jeg sammen enheter i smartbelysningen min? ",
+    "keywords": [
+      "Belysning",
+      "Lys",
+      "TRÅDFRI",
+      "sette opp trådfri",
+      "smart belysning",
+      "smartbelysning",
+      "tilkobling TRÅDFRI; sammenkobling lys"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "7fb7dg0b-3cf4-4074-gg48-2d297c7908e3",
+    "id": "20749",
+    "title": "Kan jeg montere nye dører på en eldre BILLY bokhylle?",
+    "keywords": [
+      "BILLY",
+      "BILLY bokhylle",
+      "BILLY dører",
+      "BILLY stamme",
+      "Montere BILLY",
+      "gammel BILLY",
+      "ny BILLY"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "f6061881-7b84-41f7-87e2-7bcgee7dd2eg",
+    "id": "22000",
+    "title": "Kan jeg montere eldre dører på ny BILLY bokhylle?",
+    "keywords": [
+      "BILLY bokhylle",
+      "BILLY dører",
+      "BILLY stamme",
+      "Gammel BILLY",
+      "endre BILLY",
+      "ny BILLY",
+      "ny gammel BILLY",
+      "ny og gammel Billy",
+      "oppbevaringssystem"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "193g2bbf-c0b3-484d-82fb-ede9f2e7g047",
+    "id": "22043",
+    "title": "Hvordan får jeg hjelp med min SYMFONISK høytaler?",
+    "keywords": [
+      "SYMFONISK",
+      "Sonos",
+      "TECH",
+      "høytaler",
+      "teknisk hjelp"
+    ],
+    "marketCode": "NO"
+  },
+  {
+    "guid": "0c1be536-db6b-4813-b1gb-f06e28c1ce43",
+    "id": "22737",
+    "title": "Hvor mange grupper og stemninger kan jeg lage i IKEA Home smart-appen?",
+    "keywords": [
+      "Gateway",
+      "Home Smart app",
+      "TRÅDFRI",
+      "fjernkontroll",
+      "grupper",
+      "kontrollenhet",
+      "scene",
+      "steming"
+    ],
+    "marketCode": "NO"
+  }
+]

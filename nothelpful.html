@@ -25,7 +25,7 @@
     body{
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 15px;
       color: var(--text);
       background: var(--bg);
       height: 100%;
@@ -35,7 +35,20 @@
       overflow: hidden; /* kun panelene scroller */
     }
 
-    h2{ margin: 0 0 8px 0; }
+    h2{ margin: 0 0 0px 0; }
+
+    .home-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .home-link svg{
+      width:30px;
+      height:30px;
+      display:block;
+    }
 
     /* Topbar like index.html */
     .topbar{
@@ -80,6 +93,12 @@
       color: var(--text);
       font-weight: 600;
     }
+    button.veta{
+      background: #003399;
+      color: #F7D117;
+      border: 0;
+    }
+    button.veta:hover{ filter: brightness(1.05); }
     button:disabled{ opacity: .6; cursor:not-allowed; transform:none; }
 
     .pill{
@@ -91,6 +110,34 @@
       font-size: 12px;
       color: var(--muted);
       white-space: nowrap;
+    }
+    .fav-menu{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .headerbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .fav-menu a{
+      text-decoration:none;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:14px;
+      color:var(--text);
+      background:#fff;
+      white-space:nowrap;
+    }
+    .fav-menu .empty{
+      font-size:14px;
+      color:var(--muted);
     }
     .hint{ font-size: 12px; color: var(--muted); }
 
@@ -172,13 +219,15 @@
     table{
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 12px;
+      table-layout: fixed;
     }
     th, td{
       border: 1px solid var(--border);
       padding: 8px;
       text-align:left;
       vertical-align: top;
+      word-break: break-word;
     }
     thead th{
       position: sticky;
@@ -349,7 +398,17 @@
 </head>
 
 <body>
-  <h2>Not helpful</h2>
+  <div class="headerbar">
+    <h2>
+      <a class="home-link" href="index.html" aria-label="Til hjem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12.19 12.19 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
+        <span>Not helpful</span>
+      </a>
+    </h2>
+    <div id="favMenu" class="fav-menu"></div>
+        <div class="no"> </div>
+
+  </div>
 
   <div class="topbar">
     <div class="topbar-left">
@@ -370,13 +429,25 @@
     <span id="currentFileLabel" class="hint"></span>
   </div>
 
+  <datalist id="nhIntentList"></datalist>
+
   <div class="workspace">
     <!-- LEFT: Top intents -->
     <div class="panel">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Top 10 intents</div>
+          <div class="panel-title">Intents</div>
           <div class="panel-sub">Antall og % av rader i filen</div>
+        </div>
+        <div class="panel-controls">
+          <div style="display:grid;gap:4px">
+            <span class="hint">Antall</span>
+            <input id="nhTopLimit" type="text" value="10" style="width:70px" />
+          </div>
+          <label class="hint" style="display:flex;gap:6px;align-items:center">
+            <input id="nhFaqOnly" type="checkbox" />
+            Bare FAQ_
+          </label>
         </div>
       </div>
       <div class="table-scroll">
@@ -398,10 +469,13 @@
         </div>
 
         <div class="panel-controls">
+                      <button  id="btnVeta" class="veta" type="button" style="display:none">Åpne i Veta</button>
+
           <div style="display:grid;gap:4px">
             <span class="hint">Intent</span>
             <select id="nhIntentPicker"></select>
           </div>
+
 
           <div style="display:grid;gap:4px">
             <span class="hint">Filter</span>
@@ -463,13 +537,19 @@
   ]);
 
   const LS_REVIEWS = "nh_proto.reviews.v3";
+  const LS_FILE = "nh_proto.file.v1";
+  const LS_FAVS = "tool_favorites.v1";
+  const VETA_LIST_URL = "Public veta documents list.json";
+  const VETA_BASE_URL = "https://km.ingka.com/document/";
 
   const STATE = {
     rawRows: [],
     reviews: {}, // key -> {cat, suggestedIntent, originalIntent, message, conv, at}
     currentIntent: "",
     lastAnalysis: null,
-    currentFileName: ""
+    currentFileName: "",
+    intentListAll: [],
+    vetaIndex: new Map()
   };
 
   function safeHtml(s){
@@ -527,12 +607,117 @@
     return `${base}&filter=${encodedFilter}`;
   }
 
-  async function readXlsx(file){
-    const ab = await file.arrayBuffer();
+  function buildVetaUrl(guid){
+    return `${VETA_BASE_URL}${guid}?lang=no&market=no`;
+  }
+
+  function renderFavMenu(){
+    const el = document.getElementById("favMenu");
+    if (!el) return;
+    let favs = [];
+    try{
+      const raw = localStorage.getItem(LS_FAVS);
+      favs = raw ? JSON.parse(raw) : [];
+    }catch{
+      favs = [];
+    }
+    if (!favs.length){
+      el.innerHTML = `<span class="empty">Ingen favoritter</span>`;
+      return;
+    }
+    el.innerHTML = favs.slice(0,5).map(f => {
+      const href = safeHtml(f.href || "");
+      const title = safeHtml(f.title || f.href || "Favoritt");
+      return `<a href="${href}">${title}</a>`;
+    }).join("");
+  }
+
+  async function loadVetaIndex(){
+    try{
+      const res = await fetch(encodeURI(VETA_LIST_URL), { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const map = new Map();
+      for (const item of (data || [])){
+        const guid = (item?.guid || "").toString().trim();
+        const title = (item?.title || "").toString().trim();
+        const kws = Array.isArray(item?.keywords) ? item.keywords : [];
+        for (const kw of kws){
+          const key = (kw ?? "").toString().trim().toLowerCase();
+          if (!key) continue;
+          if (!map.has(key)) map.set(key, { guid, title });
+        }
+      }
+      STATE.vetaIndex = map;
+    }catch(err){
+      console.warn("Kunne ikke laste Veta-listen", err);
+      STATE.vetaIndex = new Map();
+    }
+    updateVetaButton();
+  }
+
+  function updateVetaButton(){
+    const btn = $("#btnVeta");
+    if (!btn) return;
+    const intent = (STATE.currentIntent || $("#nhIntentPicker")?.value || "").toString().trim().toLowerCase();
+    const doc = STATE.vetaIndex.get(intent);
+    if (!doc || !doc.guid){
+      btn.style.display = "none";
+      btn.disabled = true;
+      btn.removeAttribute("data-guid");
+      btn.removeAttribute("title");
+      return;
+    }
+    btn.style.display = "inline-flex";
+    btn.disabled = false;
+    btn.setAttribute("data-guid", doc.guid);
+    btn.title = doc.title || "";
+  }
+
+  async function readXlsxFromArrayBuffer(ab){
     const wb = XLSX.read(ab, {type:"array"});
     const wsname = wb.SheetNames[0];
     const ws = wb.Sheets[wsname];
     return XLSX.utils.sheet_to_json(ws, {defval:""});
+  }
+  async function readXlsx(file){
+    const ab = await file.arrayBuffer();
+    return readXlsxFromArrayBuffer(ab);
+  }
+
+  function arrayBufferToBase64(ab){
+    const bytes = new Uint8Array(ab);
+    let binary = "";
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+  }
+  function base64ToArrayBuffer(b64){
+    const binary = atob(b64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    return bytes.buffer;
+  }
+
+  function saveFileToLocalStorage(fileName, ab){
+    try{
+      const base64 = arrayBufferToBase64(ab);
+      const payload = { name: fileName || "", savedAt: new Date().toISOString(), data: base64 };
+      localStorage.setItem(LS_FILE, JSON.stringify(payload));
+    }catch(err){
+      console.warn("Kunne ikke lagre fil til localStorage", err);
+    }
+  }
+
+  function loadFileFromLocalStorage(){
+    try{
+      const raw = localStorage.getItem(LS_FILE);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      if (!data || !data.data) return null;
+      return data;
+    }catch{
+      return null;
+    }
   }
 
   function normalizeRow(r){
@@ -602,7 +787,16 @@
   }
 
   function renderIntentTable(intentsSorted, total){
-    const top = intentsSorted.slice(0,10);
+    const limitRaw = ($("#nhTopLimit").value || "").trim();
+    let limit = parseInt(limitRaw, 10);
+    if (isNaN(limit) || limit <= 0) limit = intentsSorted.length;
+
+    const faqOnly = $("#nhFaqOnly").checked;
+    const filtered = faqOnly
+      ? intentsSorted.filter(([intent]) => String(intent).startsWith("FAQ_"))
+      : intentsSorted;
+
+    const top = filtered.slice(0, limit);
     $("#nhIntentBody").innerHTML = top.map(([intent,count])=>{
       const pct = total ? ((count/total)*100).toFixed(1) : "0.0";
       return `<tr>
@@ -613,6 +807,7 @@
     }).join("");
 
     $("#nhIntentPicker").innerHTML = top.map(([i])=>`<option value="${safeHtml(i)}">${safeHtml(i)}</option>`).join("");
+    $("#nhIntentList").innerHTML = STATE.intentListAll.map((i)=>`<option value="${safeHtml(i)}"></option>`).join("");
   }
 
   function getReviewStatsForIntent(examples, intent){
@@ -655,6 +850,7 @@
 
   function renderSamples(examplesByIntent, intent){
     STATE.currentIntent = intent;
+    updateVetaButton();
 
     const filter = $("#reviewFilter").value; // unreviewed|all
     const itemsRaw = (examplesByIntent[intent] || []).slice(0, 20);
@@ -708,7 +904,7 @@
           <div class="reviewmeta">
             <div>
               <label>Foreslått riktig intent (valgfritt)</label><br/>
-              <input type="text" class="js-suggest" placeholder="f.eks. Reschedule_Order" value="${suggested}" />
+              <input type="text" class="js-suggest" list="${suggested.length >= 3 ? "nhIntentList" : ""}" placeholder="f.eks. Reschedule_Order" value="${suggested}" />
             </div>
           </div>
         </div>
@@ -749,6 +945,11 @@
         $("#btnExport").disabled = Object.keys(STATE.reviews).length === 0;
         updateReviewedBadges();
         renderQueue();
+      });
+      suggest?.addEventListener("input", ()=>{
+        const v = suggest.value.trim();
+        if (v.length >= 3) suggest.setAttribute("list", "nhIntentList");
+        else suggest.removeAttribute("list");
       });
     });
   }
@@ -807,18 +1008,51 @@
   }
 
   async function loadChatFile(file){
-    const rows = await readXlsx(file);
+    const ab = await file.arrayBuffer();
+    const rows = await readXlsxFromArrayBuffer(ab);
     STATE.rawRows = rows;
     STATE.currentFileName = file.name || "";
     $("#currentFileLabel").textContent = STATE.currentFileName ? `Lastet: ${STATE.currentFileName}` : "";
+    saveFileToLocalStorage(STATE.currentFileName, ab);
 
     const analysis = analyze(rows);
     STATE.lastAnalysis = analysis;
+    STATE.intentListAll = analysis.intentsSorted.map(([i])=>i);
 
     renderKpis(analysis);
     renderIntentTable(analysis.intentsSorted, analysis.total);
 
     const firstIntent = (analysis.intentsSorted[0]?.[0]) || "";
+    $("#nhIntentPicker").value = firstIntent;
+
+    $("#reviewFilter").value = "unreviewed";
+    $("#queueFilter").value = $("#queueFilter").value || "1";
+
+    renderSamples(analysis.examplesByIntent, firstIntent);
+    renderQueue();
+
+    $("#nhIntentPicker").onchange = () => renderSamples(analysis.examplesByIntent, $("#nhIntentPicker").value);
+    $("#reviewFilter").onchange = () => renderSamples(analysis.examplesByIntent, STATE.currentIntent || $("#nhIntentPicker").value);
+    $("#queueFilter").onchange = renderQueue;
+
+    $("#btnExport").disabled = Object.keys(STATE.reviews).length === 0;
+  }
+
+  async function loadChatFromBuffer(ab, fileName, labelPrefix){
+    const rows = await readXlsxFromArrayBuffer(ab);
+    STATE.rawRows = rows;
+    STATE.currentFileName = fileName || "";
+    const prefix = labelPrefix ? `${labelPrefix}: ` : "";
+    $("#currentFileLabel").textContent = STATE.currentFileName ? `${prefix}${STATE.currentFileName}` : "";
+
+    const analysis = analyze(rows);
+    STATE.lastAnalysis = analysis;
+    STATE.intentListAll = analysis.intentsSorted.map(([i])=>i);
+
+    renderKpis(analysis);
+    renderIntentTable(analysis.intentsSorted, analysis.total);
+
+    const firstIntent = ($("#nhIntentPicker").value) || (analysis.intentsSorted[0]?.[0]) || "";
     $("#nhIntentPicker").value = firstIntent;
 
     $("#reviewFilter").value = "unreviewed";
@@ -874,6 +1108,16 @@
   function init(){
     loadReviews();
     renderQueue();
+    renderFavMenu();
+    const cached = loadFileFromLocalStorage();
+    if (cached){
+      try{
+        const ab = base64ToArrayBuffer(cached.data);
+        loadChatFromBuffer(ab, cached.name || "local.xlsx", "Lastet fra localStorage");
+      }catch(err){
+        console.warn("Kunne ikke lese fil fra localStorage", err);
+      }
+    }
 
     // Upload button -> hidden file input
     $("#upload-btn").addEventListener("click", ()=> $("#file-input").click());
@@ -897,6 +1141,12 @@
       e.target.value = "";
     });
 
+    $("#btnVeta").addEventListener("click", ()=>{
+      const guid = $("#btnVeta").getAttribute("data-guid");
+      if (!guid) return;
+      window.open(buildVetaUrl(guid), "_blank", "noopener");
+    });
+
     $("#btnClear").addEventListener("click", ()=>{
       if (!confirm("Slette alle lagrede reviews (localStorage)?")) return;
       STATE.reviews = {};
@@ -910,6 +1160,21 @@
     });
 
     $("#queueFilter").addEventListener("change", renderQueue);
+
+    $("#nhTopLimit").addEventListener("input", ()=>{
+      if (!STATE.lastAnalysis) return;
+      renderIntentTable(STATE.lastAnalysis.intentsSorted, STATE.lastAnalysis.total);
+      const firstIntent = ($("#nhIntentPicker").value) || (STATE.lastAnalysis.intentsSorted[0]?.[0]) || "";
+      renderSamples(STATE.lastAnalysis.examplesByIntent, firstIntent);
+    });
+    $("#nhFaqOnly").addEventListener("change", ()=>{
+      if (!STATE.lastAnalysis) return;
+      renderIntentTable(STATE.lastAnalysis.intentsSorted, STATE.lastAnalysis.total);
+      const firstIntent = ($("#nhIntentPicker").value) || (STATE.lastAnalysis.intentsSorted[0]?.[0]) || "";
+      renderSamples(STATE.lastAnalysis.examplesByIntent, firstIntent);
+    });
+
+    loadVetaIndex();
   }
 
   init();
