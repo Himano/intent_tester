@@ -183,16 +183,17 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
+      margin-bottom: 10px;
     }
 
     .section-header{
       padding: 16px 18px;
       border-bottom: 1px solid var(--border-2);
-      background: linear-gradient(180deg, rgba(251,251,250,.85), rgba(255,255,255,1));
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 12px;
+      
     }
 
     .section-title{
@@ -363,6 +364,60 @@
       color: var(--muted);
     }
 
+    .hidden{ display:none !important; }
+
+    .view-toggle{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      margin-right: 6px;
+      background: #fff;
+      border: 1px solid var(--border-2);
+      border-radius: 999px;
+      padding: 4px;
+      margin-bottom: -20px;
+    }
+    .view-toggle .btn{
+      border-radius: 999px;
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+    .view-toggle .btn.active{
+      background: var(--brand);
+      color: #fff;
+      border-color: var(--brand);
+    }
+
+    .dep-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .dep-card{
+      border: 1px solid var(--border-2);
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: var(--shadow-sm);
+      cursor: grab;
+      user-select: none;
+    }
+    .dep-card.dragging{
+      opacity: .6;
+      transform: scale(0.98);
+    }
+    .dep-card:active{ cursor: grabbing; }
+    .dep-card h3{
+      margin: 0 0 6px 0;
+      font-size: 14px;
+    }
+    .dep-card p{
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+
     /* Litt mer “desktop” luft */
     @media (min-width: 1200px){
       :root{ --pad: 34px; --gap: 18px; }
@@ -378,8 +433,7 @@
     <header class="topbar">
       <div class="topbar-inner">
         <div class="brand">
-          <h1>Chatbot tools</h1>
-          <p class="sub">Rask tilgang til verktøyene dine. Søk, favorittmerk og åpne.</p>
+          <h1>XD Toolbox</h1>
         </div>
 
         <div class="controls">
@@ -404,6 +458,14 @@
     <main>
       <div class="layout">
 
+        <div class="section-header" style="padding-top:0;">
+          <div class="view-toggle" role="tablist" aria-label="View toggle">
+            <button class="btn btn-ghost active" id="viewToolsBtn" type="button" role="tab" aria-selected="true">Tools</button>
+            <button class="btn btn-ghost" id="viewDepsBtn" type="button" role="tab" aria-selected="false">Dependencies</button>
+          </div>
+        </div>
+
+        <div id="toolsView">
         <section class="section">
           <div class="section-header">
             <h2 class="section-title">Favourites</h2>
@@ -423,6 +485,19 @@
             <div id="allGrid" class="grid"></div>
           </div>
         </section>
+        </div>
+
+        <div id="depsView" class="hidden">
+          <section class="section">
+            <div class="section-header">
+              <h2 class="section-title">Dependencies: Drag and drop onto bookmarks row to use.</h2>
+              <p class="section-hint">Drag a dependency card onto your browser bookmarks bar to create a bookmarklet.</p>
+            </div>
+            <div class="section-body">
+              <div id="depGrid" class="dep-grid"></div>
+            </div>
+          </section>
+        </div>
 
       </div>
     </main>
@@ -446,6 +521,30 @@
     const $search = document.getElementById("searchInput");
     const $clear = document.getElementById("clearBtn");
     const $countText = document.getElementById("countText");
+    const $toolsView = document.getElementById("toolsView");
+    const $depsView = document.getElementById("depsView");
+    const $viewToolsBtn = document.getElementById("viewToolsBtn");
+    const $viewDepsBtn = document.getElementById("viewDepsBtn");
+    const $metaPill = document.getElementById("metaPill");
+    const $depGrid = document.getElementById("depGrid");
+
+    const dependencies = [
+      {
+        name: "Intent Tester",
+        desc: "Run test queries in Dialogflow and export a JSON report.",
+        code: "javascript:(function(){var inputSelector=\"#test-client-query-input\";var intentSelector=\"#test-client-link-intent\";var diagBtnSelector=\".json-box-button,button.md-raised.json-box-button\";var dialogSelector=\"md-dialog.json_dialog\";var delayAfterQuery=1200;var waitTimeout=12000;function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}function waitFor(fn,timeout){return new Promise(function(resolve,reject){var start=Date.now();(function loop(){try{var v=fn();if(v){resolve(v);return;}}catch(e){}if(Date.now()-start>timeout){reject(new Error(\"waitFor timeout\"));return;}setTimeout(loop,120);}());});}function triggerEnter(inputField){try{if(typeof angular!==\"undefined\"){var el=angular.element(inputField);var scope=el.scope&&el.scope();if(scope){scope.query=inputField.value;scope.$apply();var evt=new KeyboardEvent(\"keypress\",{key:\"Enter\",code:\"Enter\",keyCode:13,which:13,bubbles:true});inputField.dispatchEvent(evt);return;}}}catch(e){}inputField.dispatchEvent(new KeyboardEvent(\"keydown\",{key:\"Enter\",code:\"Enter\",keyCode:13,which:13,bubbles:true}));inputField.dispatchEvent(new KeyboardEvent(\"keyup\",{key:\"Enter\",code:\"Enter\",keyCode:13,which:13,bubbles:true}));}function clickRawTabIfAny(dialogEl){try{var t=[].slice.call(dialogEl.querySelectorAll(\"md-tab-item,md-dummy-tab\")).find(function(n){return /raw api response/i.test(n.textContent||\"\");});if(t&&!/md-active/.test(t.className||\"\")){t.click();}}catch(e){}}function getDialogCodeText(dialogEl){var cm=dialogEl.querySelector(\".CodeMirror\");return cm?(cm.textContent||\"\"):\"\";}function tryParseJSONFromText(txt){try{var s=txt;var i=s.indexOf(\"{\");var j=s.lastIndexOf(\"}\");if(i>=0&&j>i){s=s.slice(i,j+1);}return JSON.parse(s);}catch(_){return null;}}async function openDiagnostics(){var btn=document.querySelector(diagBtnSelector)||Array.from(document.querySelectorAll(\"button\")).find(function(b){return /diagnostic info/i.test(b.textContent||\"\")});if(!btn){throw new Error(\"Fant ikke 'Diagnostic info'-knappen.\");}btn.click();var dialogEl=await waitFor(function(){return document.querySelector(dialogSelector);},waitTimeout);await waitFor(function(){return dialogEl.querySelector(\".CodeMirror\");},waitTimeout);clickRawTabIfAny(dialogEl);return dialogEl;}async function waitForConfidenceInDialog(dialogEl,timeout){var start=Date.now(),m,intent=null,acc=null;while(Date.now()-start<timeout){var txt=getDialogCodeText(dialogEl)||\"\";if(!txt){await sleep(120);continue;}var data=tryParseJSONFromText(txt);if(data&&data.queryResult){if(typeof data.queryResult.intentDetectionConfidence===\"number\"){acc=data.queryResult.intentDetectionConfidence;}if(data.queryResult.intent&&data.queryResult.intent.displayName){intent=data.queryResult.intent.displayName;}}if(acc==null){m=txt.match(/\"intentDetectionConfidence\"\\s*:\\s*([0-9]+(?:\\.[0-9]+)?(?:e-?\\d+)?)/i);if(m){var v=parseFloat(m[1]);if(!isNaN(v))acc=v;}}if(!intent){m=txt.match(/\"displayName\"\\s*:\\s*\"([^\"]+)\"/);if(m)intent=m[1];}if(acc!=null&&intent){return{intent:intent,accuracy:acc};}await sleep(150);}return{intent:null,accuracy:null};}function getIntentTextFallback(){var el=document.querySelector(intentSelector);if(el){var t=(el.innerText||el.textContent||\"\").trim();if(t)return t;}var any=document.querySelector(\"[id*='intent'],[class*='intent']\");if(any){var t2=(any.innerText||any.textContent||\"\").trim();if(t2)return t2;}return \"No intent found\";}var input=prompt(\"Enter test sentences separated by line breaks:\");if(!input){return;}var testSentences=input.split(\"\\n\").map(function(s){return s.trim();}).filter(function(s){return s;});var results=[];(async function(){for(var i=0;i<testSentences.length;i++){var sentence=testSentences[i];var inputField=document.querySelector(inputSelector);if(!inputField){alert(\"Fant ikke input-feltet (#test-client-query-input). Oppdater inputSelector.\");return;}inputField.focus();inputField.value=sentence;triggerEnter(inputField);await sleep(delayAfterQuery);var dialogEl;try{dialogEl=await openDiagnostics();}catch(e){console.warn(e);results.push({TrainingPhrase:sentence,Intent:getIntentTextFallback(),Accuracy:null});continue;}try{var got=await waitForConfidenceInDialog(dialogEl,waitTimeout);var intentText=got.intent||getIntentTextFallback();results.push({TrainingPhrase:sentence,Intent:intentText,Accuracy:typeof got.accuracy===\"number\"?got.accuracy:null});}catch(e){console.warn(\"Extraction failed\",e);results.push({TrainingPhrase:sentence,Intent:getIntentTextFallback(),Accuracy:null});}try{var closeBtn=[].slice.call(dialogEl.querySelectorAll(\"button\")).find(function(b){return /close/i.test(b.textContent||\"\")});if(closeBtn)closeBtn.click();else document.body.click();}catch(_){}await sleep(220);}var blob=new Blob([JSON.stringify(results,null,2)],{type:\"application/json\"});var url=URL.createObjectURL(blob);var a=document.createElement(\"a\");a.href=url;a.download=\"chatbot_test_results.json\";a.click();URL.revokeObjectURL(url);})();})();"
+      },
+      {
+        name: "Fetch feedback",
+        desc: "Fetch feedback JSON using the current Auth0 tokens and download it.",
+        code: "javascript:(async()=>{try{const userKey=\"@@auth0spajs@@::qKc0nhxlgA9Gs6R3QoyaQoRY5B0umWMn::@@user@@\";const apiKey=\"@@auth0spajs@@::qKc0nhxlgA9Gs6R3QoyaQoRY5B0umWMn::https://ingka-icow-prod.eu.auth0.com/api/v2/::openid profile email\";const tryFetch=async(token,source)=>{if(!token)return{ok:false,source,status:\"no-token\",text:\"\"};console.log(\"[FB] Tester token-kilde:\",source);const res=await fetch(\"https://km-api-gateway-23xgppfrna-ew.a.run.app/read-document-feedback?market=no&lang=no\",{headers:{Authorization:\"Bearer \"+token}});const text=await res.text();console.log(\"[FB] Resultat fra\",source,\"=>\",res.status,res.statusText);if(!res.ok){return{ok:false,source,status:res.status,text};}let data;try{data=JSON.parse(text);}catch(e){console.error(\"[FB] Klarte ikke parse JSON:\",e);return{ok:false,source,status:\"bad-json\",text};}const blob=new Blob([JSON.stringify(data,null,2)],{type:\"application/json\"});const url=URL.createObjectURL(blob);const a=document.createElement(\"a\");a.href=url;a.download=\"feedback-no.json\";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);console.log(\"[FB] Lastet ned med token-kilde:\",source);return{ok:true,source,status:res.status,text:\"\"};};const rawUser=localStorage.getItem(userKey);const rawApi=localStorage.getItem(apiKey);let idToken=null,accessToken=null;if(rawUser){try{const stored=JSON.parse(rawUser);idToken=stored.id_token||null;}catch(e){console.error(\"[FB] Klarte ikke parse userKey:\",e);}}if(rawApi){try{const stored2=JSON.parse(rawApi);accessToken=stored2.body&&stored2.body.access_token;}catch(e){console.error(\"[FB] Klarte ikke parse apiKey:\",e);}}if(!idToken&&!accessToken){console.warn(\"[FB] Fant verken id_token eller access_token i localStorage.\");return;}let result=await tryFetch(idToken,\"id_token\");if(!result.ok){result=await tryFetch(accessToken,\"access_token\");if(!result.ok){console.warn(\"[FB] Begge forsøk feilet. Sjekk Console (F12) for detaljer.\");}}}catch(e){console.error(\"[FB] Uventet feil:\",e);}})();"
+      },
+      {
+        name: "Editor menu hider",
+        desc: "Toggle document info sidebar visibility in the editor.",
+        code: "javascript:(function(){function h(n){var s=document.querySelector('section.mt-5.grid.h-full.w-full');if(!s)return;var l=s.children[0],r=s.children[1];if(!r)r=s.querySelector('div.flex.h-full.flex-col.bg-white');if(!l)l=s.querySelector('div.h-full.overflow-y-auto.p-3');if(!l||!r)return;if(!window.__docOrigGridTemplate)window.__docOrigGridTemplate=window.getComputedStyle(s).gridTemplateColumns;if(n){s.style.gridTemplateColumns='1fr';r.style.position='absolute';r.style.left='-9999px';r.style.top='0';r.style.width='0';r.style.height='0';r.style.overflow='hidden';r.style.pointerEvents='none';r.style.opacity='0';l.style.gridColumn='1 / -1';l.style.width='100%';l.style.maxWidth='100%'}else{s.style.gridTemplateColumns=window.__docOrigGridTemplate||'';r.style.position='';r.style.left='';r.style.top='';r.style.width='';r.style.height='';r.style.overflow='';r.style.pointerEvents='';r.style.opacity='';l.style.gridColumn='';l.style.width='';l.style.maxWidth=''}}function b(){var c=document.querySelector('.mb-5.flex.w-full.justify-between .flex.w-full.justify-end');if(!c)return;var t=document.getElementById('doc-toggle-right');if(!t){t=document.createElement('button');t.id='doc-toggle-right';t.textContent='Hide document info';t.style.padding='4px 8px';t.style.fontSize='11px';t.style.border='1px solid #ccc';t.style.borderRadius='4px';t.style.background='#f5f5f5';t.style.cursor='pointer';t.style.marginTop='6px';t.addEventListener('click',function(){var e=!!window.__docRightHidden,n=!e;window.__docRightHidden=n;h(n);t.textContent=n?'Show document info':'Hide document info'});c.appendChild(t)}}if(typeof window.__docRightHidden!=='boolean')window.__docRightHidden=false;b()})();"
+      }
+    ];
 
     function loadFavs(){
       try{
@@ -501,7 +600,30 @@
             </a>
           </div>
         </article>
-      `;
+        `;
+    }
+
+    function renderDependencies(){
+      if (!$depGrid) return;
+      $depGrid.innerHTML = dependencies.map((d, i) => `
+        <div class="dep-card" draggable="true" data-index="${i}" title="Drag to your bookmarks bar">
+          <h3>${d.name}</h3>
+          <p>${d.desc}</p>
+        </div>
+      `).join("");
+      $depGrid.querySelectorAll(".dep-card").forEach(card => {
+        card.addEventListener("dragstart", e => {
+          const idx = Number(card.getAttribute("data-index"));
+          const dep = dependencies[idx];
+          e.dataTransfer.setData("text/plain", dep.code);
+          e.dataTransfer.setData("text/uri-list", dep.code);
+          e.dataTransfer.effectAllowed = "copy";
+          card.classList.add("dragging");
+        });
+        card.addEventListener("dragend", () => {
+          card.classList.remove("dragging");
+        });
+      });
     }
 
     function matchesSearch(t, q){
@@ -552,6 +674,19 @@
       });
     }
 
+    function setView(mode){
+      const isTools = mode === "tools";
+      $toolsView.classList.toggle("hidden", !isTools);
+      $depsView.classList.toggle("hidden", isTools);
+      $viewToolsBtn.classList.toggle("active", isTools);
+      $viewDepsBtn.classList.toggle("active", !isTools);
+      $viewToolsBtn.setAttribute("aria-selected", isTools ? "true" : "false");
+      $viewDepsBtn.setAttribute("aria-selected", !isTools ? "true" : "false");
+      $search.classList.toggle("hidden", !isTools);
+      $clear.classList.toggle("hidden", !isTools);
+      $metaPill.classList.toggle("hidden", !isTools);
+    }
+
     // Søk + clear
     $search.addEventListener("input", render);
     $clear.addEventListener("click", ()=>{
@@ -561,6 +696,11 @@
     });
 
     render();
+    renderDependencies();
+    setView("tools");
+
+    $viewToolsBtn.addEventListener("click", () => setView("tools"));
+    $viewDepsBtn.addEventListener("click", () => setView("deps"));
   })();
   </script>
 </body>
