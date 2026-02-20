@@ -420,7 +420,7 @@
     </div>
 
     <div class="topbar-right">
-      <button id="btnClear" class="secondary" type="button">Reset reviews</button>
+      <button id="btnClear" class="secondary" type="button">Reset</button>
     </div>
   </div>
 
@@ -1148,14 +1148,20 @@
     });
 
     $("#btnClear").addEventListener("click", ()=>{
-      if (!confirm("Slette alle lagrede reviews (localStorage)?")) return;
+      if (!confirm("Reset all local data (reviews and uploaded file)?")) return;
       STATE.reviews = {};
       saveReviews();
       $("#btnExport").disabled = true;
-
-      if (STATE.lastAnalysis){
-        renderSamples(STATE.lastAnalysis.examplesByIntent, STATE.currentIntent || $("#nhIntentPicker").value);
-      }
+      STATE.rawRows = [];
+      STATE.lastAnalysis = null;
+      STATE.currentFileName = "";
+      STATE.currentIntent = "";
+      $("#currentFileLabel").textContent = "";
+      $("#kpis").innerHTML = "";
+      $("#nhIntentPicker").innerHTML = "";
+      $("#nhSamples").innerHTML = `<div class="hint">No data loaded.</div>`;
+      try{ $("#file-input").value = ""; }catch{}
+      try{ localStorage.removeItem(LS_FILE); }catch{}
       renderQueue();
     });
 
