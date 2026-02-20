@@ -402,6 +402,12 @@
       cursor: grab;
       user-select: none;
     }
+    a.dep-card{
+      display: block;
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
     .dep-card.dragging{
       opacity: .6;
       transform: scale(0.98);
@@ -544,6 +550,12 @@
         desc: "Toggle document info sidebar visibility in the editor.",
         code: "javascript:(function(){function h(n){var s=document.querySelector('section.mt-5.grid.h-full.w-full');if(!s)return;var l=s.children[0],r=s.children[1];if(!r)r=s.querySelector('div.flex.h-full.flex-col.bg-white');if(!l)l=s.querySelector('div.h-full.overflow-y-auto.p-3');if(!l||!r)return;if(!window.__docOrigGridTemplate)window.__docOrigGridTemplate=window.getComputedStyle(s).gridTemplateColumns;if(n){s.style.gridTemplateColumns='1fr';r.style.position='absolute';r.style.left='-9999px';r.style.top='0';r.style.width='0';r.style.height='0';r.style.overflow='hidden';r.style.pointerEvents='none';r.style.opacity='0';l.style.gridColumn='1 / -1';l.style.width='100%';l.style.maxWidth='100%'}else{s.style.gridTemplateColumns=window.__docOrigGridTemplate||'';r.style.position='';r.style.left='';r.style.top='';r.style.width='';r.style.height='';r.style.overflow='';r.style.pointerEvents='';r.style.opacity='';l.style.gridColumn='';l.style.width='';l.style.maxWidth=''}}function b(){var c=document.querySelector('.mb-5.flex.w-full.justify-between .flex.w-full.justify-end');if(!c)return;var t=document.getElementById('doc-toggle-right');if(!t){t=document.createElement('button');t.id='doc-toggle-right';t.textContent='Hide document info';t.style.padding='4px 8px';t.style.fontSize='11px';t.style.border='1px solid #ccc';t.style.borderRadius='4px';t.style.background='#f5f5f5';t.style.cursor='pointer';t.style.marginTop='6px';t.addEventListener('click',function(){var e=!!window.__docRightHidden,n=!e;window.__docRightHidden=n;h(n);t.textContent=n?'Show document info':'Hide document info'});c.appendChild(t)}}if(typeof window.__docRightHidden!=='boolean')window.__docRightHidden=false;b()})();"
       }
+      ,
+      {
+        name: "Edge plugin for V *click to download*",
+        desc: "Download the Edge plugin zip.",
+        download: "Edge plugin.zip"
+      }
     ];
 
     function loadFavs(){
@@ -605,13 +617,24 @@
 
     function renderDependencies(){
       if (!$depGrid) return;
-      $depGrid.innerHTML = dependencies.map((d, i) => `
-        <div class="dep-card" draggable="true" data-index="${i}" title="Drag to your bookmarks bar">
-          <h3>${d.name}</h3>
-          <p>${d.desc}</p>
-        </div>
-      `).join("");
+      $depGrid.innerHTML = dependencies.map((d, i) => {
+        if (d.download){
+          return `
+            <a class="dep-card" href="${d.download}" download="${d.download}">
+              <h3>${d.name}</h3>
+              <p>${d.desc}</p>
+            </a>
+          `;
+        }
+        return `
+          <div class="dep-card" draggable="true" data-index="${i}" title="Drag to your bookmarks bar">
+            <h3>${d.name}</h3>
+            <p>${d.desc}</p>
+          </div>
+        `;
+      }).join("");
       $depGrid.querySelectorAll(".dep-card").forEach(card => {
+        if (card.tagName === "A") return;
         card.addEventListener("dragstart", e => {
           const idx = Number(card.getAttribute("data-index"));
           const dep = dependencies[idx];
