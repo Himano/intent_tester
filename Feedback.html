@@ -1,0 +1,1442 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Feedback insights</title>
+
+<style>
+    /* ===== Lys tematikk (kan utvides) ===== */
+    :root{
+      --bg:#f6f8fb;         /* bakgrunn */
+      --panel:#ffffff;      /* kort/panel */
+      --panel-2:#f3f6fb;    /* sekundær panel */
+      --text:#111827;       /* tekst */
+      --muted:#6b7280;      /* dempet tekst */
+      --brand:#2563eb;      /* aksent */
+      --ok:#16a34a;         /* ok */
+      --warn:#e11d48;       /* advarsel */
+      --border:#d1d9e6;     /* kantlinjer */
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg), #edf2f7);
+      color:var(--text);
+      font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;
+    }
+
+    .app{display:grid; grid-template-columns:280px 1fr; grid-template-rows:auto 1fr; height:100vh}
+    header{
+      grid-column:1/3; display:flex; align-items:center; gap:14px; justify-content:space-between;
+      padding:5px 16px; background:var(--panel); border-bottom:1px solid var(--border); box-shadow:var(--shadow);
+      position:sticky; top:0; z-index:10
+    }
+    .brand{display:flex; align-items:center; gap:10px}
+    .logo{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg, var(--brand), #4f8df7); box-shadow:0 6px 14px rgba(37,99,235,.35)}
+    h1{font-size:16px; margin:0; font-weight:700; letter-spacing:.2px}
+
+    .btn{appearance:none; border:1px solid var(--border); background:var(--panel-2); color:var(--text); font-size: small; padding:5px 8px; border-radius:12px; cursor:pointer; transition:.2s}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:var(--brand); color:#fff;margin-top: 5px; border-color:#1e4fd8}
+    .btn.ghost{background:transparent}
+
+    aside{background:var(--panel); border-right:1px solid var(--border); padding:14px 10px; overflow:auto}
+    .search{position:sticky; top:0; background:var(--panel); padding:6px 8px 12px}
+    .search input{width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; color:var(--text)}
+    .card{display:flex; gap:10px; align-items:center; border:1px solid var(--border); background:var(--panel-2); padding:10px; border-radius:12px; cursor:pointer; transition:.15s }
+    .card:hover{transform:translateY(-1px); border-color:var(--brand)}
+    .card.active{outline:2px solid var(--brand); border-color:transparent}
+    .card .emoji{font-size:18px}
+    .card .meta{display:grid}
+    .card .title{font-weight:700}
+    .card .desc{font-size:12px; color:var(--muted)}
+
+    main{position:relative; overflow:hidden}
+    .view{position:absolute; inset:0; overflow:auto; display:none}
+    .view.active{display:block}
+
+    .wrap{max-width:1200px; margin:0 auto; padding:18px; height: 100%;}
+    .toolbar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:space-between; margin-bottom:12px}
+
+    .notice{font-size:12px; color:var(--muted)}
+    .pill{font-size:11px; padding:3px 8px; border-radius:999px; border:1px solid var(--border); background:#fff}
+    .hint{font-size:12px; color:var(--muted)}
+
+    /* Enkle kort */
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:12px}
+    .card2{grid-column:span 12; background:#fff; border:1px solid var(--border); border-radius:16px; padding:14px; box-shadow:var(--shadow)}
+    @media(min-width:900px){ .span-6{grid-column:span 6} .span-4{grid-column:span 4} .span-8{grid-column:span 8} }
+
+    textarea, input[type="text"], input[type="file"], button{font:inherit}
+    textarea{width:100%; min-height:160px; border:1px solid var(--border); border-radius:12px; padding:10px}
+
+    /* Lokal lagring indikator */
+    .meter{position:absolute; left:12px; bottom:12px; font-size:11px; color:var(--muted); background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:6px 10px; box-shadow:var(--shadow)}
+
+    /* Seksjonsnavigasjon i toppen av main (mobilvennlig) */
+    .tabs{position:sticky; top:0; background:linear-gradient(#fff,#fff0); padding:10px; border-bottom:1px solid var(--border); display:flex; gap:8px; overflow:auto}
+    .tab{border:1px solid var(--border); background:#fff; border-radius:999px; padding:8px 12px; cursor:pointer}
+    .tab.active{background:var(--brand); color:#fff; border-color:#1e4fd8}
+  
+/* Venstremeny – mer kompakt */
+aside { padding: 10px 8px; }
+.list { display: grid; gap: 6px; margin-top: 6px; }
+
+/* Seksjonsoverskrift i venstremenyen */
+.sectionHeading {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--muted);
+  color: black;
+  padding: 8px 6px 4px;
+}
+
+/* Kort – kompakt høyde */
+.card {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel-2);
+  padding: 7px 8px;              /* ↓ lavere */
+  border-radius: 10px;            /* litt strammere */
+  cursor: pointer; transition: .15s;
+  line-height: 1.2;
+}
+.card .emoji { font-size: 16px; }
+.card .title { font-weight: 700; font-size: 13px; }
+.card .desc { font-size: 11px; color: var(--muted); }
+
+/* Fokus/hover kan gjerne være litt mer subtilt når ting er små */
+.card:hover { transform: translateY(-1px); border-color: var(--brand); }
+.card.active { outline: 2px solid var(--brand); border-color: transparent; }
+    
+
+/* Layout-hjelpere */
+.row-between { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.row-end { display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+.links-wrap .pill { display:inline-block; }
+
+/* Header bar + favorites (match other tools) */
+.headerbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:10px 16px;
+  background:var(--panel);
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.home-link{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:inherit;
+  text-decoration:none;
+}
+.home-link svg{
+  width:30px;
+  height:30px;
+  display:block;
+}
+.fav-menu{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.fav-menu a{
+  text-decoration:none;
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:4px 10px;
+  font-size:14px;
+  color:var(--text);
+  background:#fff;
+  white-space:nowrap;
+}
+.fav-menu .empty{
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* Modal */
+.modal { position:fixed; inset:0; display:none; }
+.modal.open { display:block; margin-top: 10px;}
+.modal__backdrop { position:absolute; inset:0; background:rgba(17,24,39,.35); }
+.modal__content {
+  position:relative; z-index:1; max-width:720px; margin:5vh auto; background:#fff;
+  border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:0;
+}
+.modal__header { display:flex; align-items:center; justify-content:space-between; gap:8px;
+  padding:12px 14px; border-bottom:1px solid var(--border); }
+.modal__body { padding:14px; display:grid; gap:12px; }
+
+.kb-form label { display:grid; gap:6px; font-weight:600; font-size:13px; }
+.kb-form input[type="text"],
+.kb-form input[type="url"],
+.kb-form textarea {
+  width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:#fff;
+}
+.toggle-type { display:flex; gap:16px; font-size:14px; }
+
+.modal__close { border:none; }
+
+/* Hurtig linker */
+#kbLinksWrap a{ text-decoration: none; color: #111827;}
+#kbLinksWrap a:hover{background-color: #dfe1e4;}
+
+/* Små ikonknapper på høyre side */
+.btnbar { display:flex; gap:6px; }
+.iconbtn {
+  min-width: 32px; height: 32px; padding: 0 8px;
+  border: 1px solid var(--border); background: var(--panel-2);
+  border-radius: 8px; cursor: pointer; font-weight: 700;
+}
+.iconbtn:hover { transform: translateY(-1px); border-color: var(--brand); }
+
+/* Når vi er i slettemodus kan vi markere pills litt tydeligere */
+.links-wrap[data-delmode="1"] .pill {
+  position: relative;
+  border-color: var(--warn);
+}
+.links-wrap[data-delmode="1"] .pill::after {
+  content: "×";
+  position: absolute; top: -6px; right: -6px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--warn); color: #fff; font-size: 12px;
+  display: grid; place-items: center;
+  border: 1px solid #fff;
+}
+
+/* Arkivliste */
+.archive-list { display: grid; gap: 10px; }
+.archive-card {
+  border: 1px solid var(--border); border-radius: 12px; padding: 10px; background: #fff;
+}
+.archive-card h4 { margin: 0 0 6px 0; font-size: 14px; }
+.archive-meta { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.archive-actions { display:flex; gap:8px; justify-content:flex-end; }
+.archive-actions .danger { border-color: var(--warn); }
+
+
+/* dialogflow tool section addon     */
+
+/* DF drop-boks – plass til knapper i hjørnet */
+#view-dialogflow .df-drop {
+  position: relative;
+  border: 2px dashed #94a3b8;
+  border-radius: 12px;
+  padding: 24px;
+  background: #fff;
+}
+#view-dialogflow .df-drop-actions {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* Treningssetninger tar hele høyden i høyre kort */
+#view-dialogflow .card2.span-6:last-child {
+  display: flex;
+  flex-direction: column;
+}
+#df-out {
+  flex: 1;
+  min-height: 260px; /* fallback */
+  resize: none;      /* valgfritt: lås størrelse, vi lar flex styre */
+}
+
+/* Prompt-modal textarea */
+#df-prompt-text {
+  width: 100%;
+  min-height: 240px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+}
+#view-dialogflow #df-out {
+  height: calc(100vh - 260px); /* justér tallet etter header/kanter */
+  min-height: 550px;
+}
+
+#df-edit-prompt { margin-right: auto; }
+
+#btnNullstill {
+  background-color: rgb(65, 101, 231);
+  color: white;
+  font-weight: 500;
+}
+
+#view-intenttester #it-open-confluence {
+  background: none;
+  color: var(--brand);
+  text-decoration: underline;
+  border: 1px solid transparent;
+}
+#view-intenttester #it-open-confluence:hover {
+  text-decoration: none;
+  border-color: var(--border);
+}
+
+/* Zebra-striper i Intent tester-tabellen */
+#it-table tbody tr:nth-child(even) {
+  background: #f7f9fc;         /* svakt grå/blått felt for annenhver rad */
+}
+#it-table tbody tr:nth-child(odd) {
+  background: #ffffff;
+}
+
+/* Litt tydeligere hover når du peker */
+#it-table tbody tr:hover {
+  background: #eef3ff;
+}
+
+/* Små detaljer for lesbarhet */
+#it-table td, #it-table th {
+  padding: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* (Valgfritt) Sticky header så kolonne-navn alltid vises */
+#it-table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+}
+
+.it-del:hover{
+background-color: red;
+color: white;
+}
+
+:root{ --bg:#f6f7fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --accent:#2563eb; --border:#e5e7eb; }
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;height:100%}
+body{display:flex;flex-direction:column;min-height:100vh}
+header{padding:12px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:2;display:flex;justify-content:space-between;align-items:center}
+h1{margin:0 0 2px 0;font-size:22px}
+h2{margin:0 0 8px 0;font-size:16px}
+p{margin:0}
+.subtle{color:var(--muted);font-size:12px}
+.controlsbar{padding:8px 16px;gap:12px;display:flex;justify-content:space-between;align-items:flex-start}
+.controls{display:flex;gap:16px;align-items:center;flex-wrap:nowrap;white-space:nowrap;overflow:hidden}
+.group{display:flex;gap:8px;align-items:center;white-space:nowrap}
+.status{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:inline-block}
+button{background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:6px 10px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.04);white-space:nowrap}
+button:hover{border-color:#d1d5db}
+input[type=file]{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:6px;max-width:220px;white-space:nowrap}
+#settingsBtn{padding:6px 10px}
+#settingsPanel{padding:10px 16px;border-bottom:1px solid var(--border);background:#fff}
+.hidden{display:none}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grid3 .full{grid-column:1/-1}
+label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:nowrap}
+.cards{display:grid;grid-template-columns:repeat(4,auto);gap:8px}
+.cards.mini{grid-template-columns:repeat(3,auto)}
+.card{background:var(--card);padding:10px 12px;border-radius:10px;border:1px solid var(--border);min-width:140px}
+.card h3{margin:0 0 2px 0;font-size:12px;color:#334155}
+.card p{margin:0;font-size:18px;font-weight:700}
+.main{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:8px 16px;flex:1;min-height:0}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;flex-direction:column;min-height:0}
+#intentTable{flex:1;overflow:auto;max-height:36vh}
+#intentTable table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+#intentTable th,#intentTable td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;font-size:13px}
+#intentTable th{background:#f8fafc;color:#334155;position:sticky;top:0}
+.rightPanel{display:flex;flex-direction:column;gap:8px;min-height:0}
+.pickerRow{display:flex;gap:8px;align-items:center}
+#samples{flex:1;min-height:120px;max-height:36vh;overflow:auto;border:1px dashed var(--border);border-radius:8px;padding:6px;background:#fff}
+.sample{padding:4px 0;border-bottom:1px dashed var(--border);font-size:13px;display:flex;justify-content:space-between;gap:8px}
+.sample:last-child{border-bottom:none}
+.sample a{font-size:12px;color:#2563eb;text-decoration:none;white-space:nowrap}
+.chartWrap{padding:8px 16px}
+#rateChart{max-height:260px}
+.footer{padding:8px 16px;border-top:1px solid var(--border);color:#64748b}
+
+/* centered header date */
+.headerCenter{position:absolute;left:50%;transform:translateX(-50%);top:18px}
+
+#intentTable a.intent-link{color:var(--accent);text-decoration:none}
+#intentTable a.intent-link:hover{text-decoration:underline}
+
+#intentTable a.intent-link { text-decoration: none; color: black; }
+#intentTable a.intent-link:hover { text-decoration: underline; color: black; }
+
+#intentTable tr:hover {
+  background-color: #eaeaea;
+}
+
+/* Alternating background for samples list */
+#samples > .sample:nth-child(even) {
+  background: #f7f7f7; /* light gray */
+}
+
+/* (optional) small hover to match the table feel */
+#samples > .sample:hover {
+  background: #ececec;
+}
+
+/* (optional) if you want a bit of spacing inside each sample row */
+#samples > .sample { 
+  padding: 6px 8px;           /* adjust if you already set padding elsewhere */
+  border-radius: 6px;         /* optional: soften edges */
+}
+
+.grid3{
+    display: none;
+}
+
+#view-Not_helpful_rate .wrap {
+  max-width: 1900px;   /* increase from the default */
+  width: 95%;          /* optional, fills more of the viewport */
+}
+
+#view-feedback table tr:nth-child(even){ background:#f7f7f7; }
+#view-feedback table tr:hover{ background:#ececec; }
+
+#view-feedback .controlsbar { padding: 8px 16px; }
+#view-feedback .controlsbar .controls { flex-wrap: wrap; gap: 12px; }
+#view-feedback .card h3 { margin-bottom: 6px; }
+
+#view-feedback .controlsbar { padding: 8px 16px; }
+#view-feedback .controlsbar .controls { display:flex; flex-wrap:wrap; gap:12px; }
+#view-feedback table { width:100%; border-collapse:collapse; font-size:12px; }
+#view-feedback table th, 
+#view-feedback table td { border:1px solid var(--border); padding:6px 8px; text-align:left; }
+#view-feedback table th { background:#fafafa; }
+#view-feedback table tr:nth-child(even){ background:#f7f7f7; }
+#view-feedback table tr:hover{ background:#ececec; }
+#view-feedback .wrap { max-width: 1600px; width: 95%; }
+
+/* --- Feedback view layout fixes --- */
+#view-feedback .wrap {
+  max-width: 1600px;
+  width: 95%;
+}
+
+#view-feedback .grid {
+  /* force top-to-bottom stacking of cards */
+  display: grid;
+  grid-template-columns: 1fr;  /* single column */
+  gap: 16px;
+}
+
+/* controls row should wrap instead of cramming horizontally */
+#view-feedback .controlsbar { padding: 8px 16px; }
+#view-feedback .controlsbar .controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* common “span” helpers scoped to this view so we don’t disturb others */
+#view-feedback .span-12 { width: 100%; }
+#view-feedback .span-4  { flex: 1 1 320px; min-width: 280px; }
+
+
+
+/* tables: full width + readable */
+#view-feedback table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+#view-feedback th, #view-feedback td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+}
+#view-feedback thead th { background: #fafafa; }
+#view-feedback tbody tr:nth-child(even) { background: #f7f7f7; }
+#view-feedback tbody tr:hover { background: #ececec; }
+
+/* optional: on very wide screens, let the two bottom cards sit one per row anyway */
+@media (min-width: 1200px) {
+  #view-feedback .grid { grid-template-columns: 1fr; } /* keep single column */
+}
+/* ---- Feedback view layout (scoped) ---- */
+#view-feedback .wrap { max-width: 1600px; width: 95%; }
+
+/* Make the main feedback grid one column so cards stack */
+#view-feedback .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+
+/* Rows inside the Insights card */
+#view-feedback .fb-row {
+  display: block;   /* stack children vertically by default */
+  margin-top: 12px;
+}
+
+/* First row is the only one with two columns */
+#view-feedback .fb-row:first-of-type {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Two equal halves on wide screens, full width on narrow */
+#view-feedback .fb-col-half { flex: 1 1 420px; min-width: 320px; }
+#view-feedback .fb-col-full { width: 100%; }
+
+/* Tables look like the rest of the app */
+#view-feedback table { width: 100%; border-collapse: collapse; font-size: 12px; }
+#view-feedback th, #view-feedback td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; }
+#view-feedback thead th { background: #fafafa; }
+#view-feedback tbody tr:nth-child(even) { background: #f7f7f7; }
+#view-feedback tbody tr:hover { background: #ececec; }
+
+/* Feedback view – stack rows top→bottom except the first one */
+#view-feedback .card .fb-row { 
+  display: block;            /* stacked by default */
+  margin-top: 12px;
+}
+
+/* First Insights row: two columns (Resolved by / Assigned to) */
+#view-feedback .card .fb-row:first-of-type {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Column helpers for the first row (responsive halves) */
+#view-feedback .card .fb-col-half { 
+  flex: 1 1 420px; 
+  min-width: 320px; 
+}
+#view-feedback .card .fb-col-full { 
+  width: 100%; 
+}
+
+#view-feedback .row { display: block; }  /* stack by default */
+
+/* ==== FEEDBACK VIEW: force vertical stacking & unwrap controls ==== */
+
+/* 1) Make each feedback card occupy a single column (stack cards) */
+#view-feedback .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* 2) Any ".span-4/.span-6/.span-8" inside feedback should stop side-by-side */
+#view-feedback .span-4,
+#view-feedback .span-6,
+#view-feedback .span-8 {
+  grid-column: 1 / -1 !important;
+}
+
+/* 3) Most of the squish came from global .row/.controls flex + nowrap.
+      Inside feedback cards, rows should stack. */
+#view-feedback .card .row {
+  display: block !important;   /* kill flex in this view */
+}
+
+/* 4) And the children inside those rows should be full width blocks */
+#view-feedback .card .row > * {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* 5) Keep ONLY the first Insights row (Resolved by / Assigned to) side-by-side */
+#view-feedback .card .row.fb-row:first-of-type {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px;
+}
+#view-feedback .card .row.fb-row:first-of-type > .fb-col-half {
+  flex: 1 1 420px;
+  min-width: 320px;
+}
+
+/* 6) Controls: allow wrapping (override global nowrap/overflow) */
+#view-feedback .controlsbar .controls {
+  display: flex;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  gap: 12px;
+}
+
+/* 7) Tables stay readable full-width */
+#view-feedback table { width: 100%; border-collapse: collapse; font-size: 12px; }
+#view-feedback th, #view-feedback td { border: 1px solid var(--border); padding: 6px 8px; text-align: left; }
+#view-feedback thead th { background: #fafafa; }
+#view-feedback tbody tr:nth-child(even) { background: #f7f7f7; }
+#view-feedback tbody tr:hover { background: #ececec; }
+
+/* Force rows to stack in Feedback view */
+#view-feedback .row,
+#view-feedback .card .row,
+#view-feedback .fb-row {
+  display: block !important;
+}
+
+/* Only the FIRST Insights row should be two columns */
+#view-feedback .card .row.fb-row:first-of-type {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px;
+}
+#view-feedback .card .row.fb-row:first-of-type > .fb-col-half {
+  flex: 1 1 420px;
+  min-width: 320px;
+}
+
+.anoying{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+  display: block !important;
+   display: flex;
+  flex-wrap: wrap !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  gap: 12px;
+}
+
+     #insights header{padding:16px 20px;border-bottom:1px solid var(--ring);background:#fff;position:sticky;top:0;z-index:10}
+     #insights h1{font-size:18px;margin:0}
+    #insights .container{max-width:1100px;margin:18px auto;padding:0 16px}
+     #insights .controls{display:grid;gap:12px;grid-template-columns:1fr;align-items:end}
+     #insights .row{display:flex;gap:8px;flex-wrap:wrap}
+ 
+     #insights .card{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:12px}
+     #insights label{font-size:12px;color:var(--muted);display:block;margin-bottom:6px}
+     #insights input[type="file"], select, button, textarea{border:1px solid var(--ring);border-radius:10px;padding:8px 10px;font:inherit;background:#fff}
+     #insights textarea{width:100%;min-height:120px;resize:vertical}
+     #insights button{cursor:pointer}
+     #insights button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+     #insights .stats{font-size:14px;color:#374151}
+     #insights .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-top:16px}
+     #insights .fcard{border:1px solid var(--ring);background:#fff;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}
+     #insights .fhead{font-weight:600}
+     #insights .meta{font-size:12px;color:#4b5563}
+     #insights .badge{display:inline-block;border:1px solid var(--ring);padding:2px 6px;border-radius:999px;font-size:11px;color:#374151;background:#fafafa}
+    #insights .muted{color:#9ca3af}
+    #insights  .table{width:100%;border-collapse:collapse;font-size:12px}
+    #insights  .table th,.table td{border:1px solid var(--ring);padding:6px 8px;text-align:left}
+    #insights  .table th{background:#fafafa}
+     #insights .desc{font-size:12px;color:#374151;white-space:pre-wrap}
+     #insights .entry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:12px}
+     #insights .entry-card{position:relative;border:1px solid var(--ring);background:#fff;border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:6px}
+     #insights .entry-card h4{margin:0;font-size:13px}
+     #insights .entry-meta{font-size:12px;color:#4b5563}
+     #insights .age-dot{position:absolute;top:10px;right:10px;width:10px;height:10px;border-radius:50%}
+     #insights .age-dot.warn{background:#f97316}
+     #insights .age-dot.danger{background:#ef4444}
+     #insights .hidden{display:none !important;}
+    #insights #grid{display: none;}
+    #insights #insights1{margin-top: 10px;}
+
+    /* --- INSIGHTS: stack rows top→bottom, except the first one --- */
+#insights .row {               /* default: vertical stack */
+  display: block !important;
+  margin-top: 12px;
+}
+#insights .row:first-of-type { /* first row: two columns */
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+#insights .row:first-of-type > div {
+  flex: 1 1 340px;
+  min-width: 320px;
+}
+
+/* --- INSIGHTS: make tables look like the rest of the app --- */
+#insights table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  background: #fff;
+}
+#insights th, #insights td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+}
+#insights thead th { background: #f8fafc; position: sticky; top: 0; }
+#insights tbody tr:nth-child(even) { background: #f7f7f7; }
+#insights tbody tr:hover { background: #ececec; }
+
+/* --- INSIGHTS: use main content card styling, not sidebar cards --- */
+#insights .card2 {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+/* keep the width you already set on the container */
+#insights .container { max-width: 1100px; margin: 18px auto; padding: 0 16px; }
+
+/* ---- INSIGHTS1: stack everything top→bottom, except the first row ---- */
+
+/* 1) Make the container flow vertically */
+#insights1 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px;
+}
+
+/* 2) The FIRST child row (Resolved by / Assigned to) = two columns */
+#insights1 > .row:first-child {
+  display: flex !important;      /* override any block/grid */
+  flex-wrap: wrap;
+  gap: 12px;
+}
+#insights1 > .row:first-child > div {
+  flex: 1 1 340px;
+  min-width: 320px;
+}
+
+
+
+/* 4) Tables inside insights1 keep full width and consistent look */
+#insights1 table { width:100%; border-collapse:collapse; font-size:12px; }
+#insights1 th, #insights1 td { border:1px solid var(--border); padding:6px 8px; text-align:left; }
+#insights1 thead th { background:#f8fafc; }
+#insights1 tbody tr:nth-child(even){ background:#f7f7f7; }
+#insights1 tbody tr:hover{ background:#ececec; }
+
+
+/* ===== INSIGHTS1 layout ===== */
+
+/* Stack the rows top → bottom */
+#insights1 {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px;
+}
+
+/* Each row lays out its direct children left → right (wrapping on small screens) */
+#insights1 .row {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Children inside a row share space evenly; set a sensible min width */
+#insights1 .row > * {
+  flex: 1 1 340px;   /* grows, but minimum ~340px before wrapping */
+  min-width: 320px;
+}
+
+/* If a row has only one child, make it full width */
+#insights1 .row > *:only-child {
+  flex: 1 1 100%;
+  min-width: 0;
+}
+
+/* (optional) table look */
+#insights1 table { width:100%; border-collapse:collapse; font-size:12px; }
+#insights1 th, #insights1 td { border:1px solid var(--border); padding:6px 8px; text-align:left; }
+#insights1 thead th { background:#f8fafc; }
+#insights1 tbody tr:nth-child(even){ background:#f7f7f7; }
+#insights1 tbody tr:hover{ background:#ececec; }
+
+/* ===== INSIGHTS1: equal-width cells per row ===== */
+#insights1 {
+  display: flex !important;
+  flex-direction: column !important;  /* rows stack */
+  gap: 12px;
+  width: 100%;
+}
+
+#insights1 .row {
+  display: flex !important;           /* items go left→right */
+  flex-wrap: wrap;                    /* wrap on small screens */
+  align-items: stretch;               /* make all cells same height */
+  gap: 12px;
+  width: 100%;
+}
+
+/* Make EACH child take an equal slice of the row’s width */
+#insights1 .row > * {
+  flex: 1 1 0 !important;             /* equal growth, no intrinsic basis */
+  min-width: 0;                        /* allow shrinking instead of overflow */
+}
+
+/* If a row has just one child, it automatically fills */
+#insights1 .row > *:only-child {
+  flex-basis: 100%;
+}
+
+/* Optional: nicer structure inside each cell */
+#insights1 .row > * {
+  display: flex;
+  flex-direction: column;
+}
+#insights1 .row > * > label { margin-bottom: 6px; }
+#insights1 .row > * > div   { flex: 1 1 auto; }
+
+/* Keep date range inputs grouped on the left */
+#insights1 .date-range {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  gap: 6px;
+  width: auto;
+}
+#insights1 .date-range > * {
+  flex: 0 0 auto !important;
+}
+
+/* Keep tables full width & consistent */
+#insights1 table { width:100%; border-collapse:collapse; font-size:12px; }
+#insights1 th, #insights1 td { border:1px solid var(--border); padding:6px 8px; text-align:left; }
+#insights1 thead th { background:#f8fafc; }
+#insights1 tbody tr:nth-child(even){ background:#f7f7f7; }
+#insights1 tbody tr:hover{ background:#ececec; }
+
+
+
+</style></head>
+<body>
+<div class="headerbar">
+  <h2>
+    <a class="home-link" href="index.html" aria-label="Back to hub">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
+      <span>Feedback insights</span>
+    </a>
+  </h2>
+  <div id="favMenu" class="fav-menu"></div>
+</div>
+<section id="insights">
+<div class="container">
+<div class="controls card2">
+<div class="row">
+<div style="flex:1 1 260px">
+<label for="file">Load JSON file</label>
+<input accept="application/json,.json,.txt" id="file" type="file"/>
+</div>
+<div style="flex:1 1 160px">
+<label for="sortField">Sort by</label>
+<select id="sortField">
+<option selected="" value="createdDate">Created date</option>
+<option value="resolvedDate">Resolved date</option>
+</select>
+</div>
+<div style="flex:1 1 160px">
+<label for="sortOrder">Order</label>
+<select id="sortOrder">
+<option selected="" value="desc">Newest to Oldest</option>
+<option value="asc">Oldest to Newest</option>
+</select>
+</div>
+<div style="flex:1 1 220px">
+<label> </label>
+<label style="display:flex;gap:8px;align-items:center">
+<input checked="" id="hideAuto" type="checkbox"/>
+<span>Hide auto link-fix items</span>
+</label>
+</div>
+<div style="align-self:end">
+<button id="clearBtn" style="display:none;" title="Clear loaded data">Clear</button>
+</div>
+</div>
+<div style="display:none">
+<label for="paste">…or paste JSON below (click “Use pasted JSON”)</label>
+<textarea id="paste" placeholder='Paste the full API response (either {"feedbacks":[…]} or just the array)…'></textarea>
+<div class="row">
+<button class="primary" id="usePaste">Use pasted JSON</button>
+</div>
+</div>
+<div aria-live="polite" class="stats" id="stats"></div>
+
+</div>
+<div class="card2" id="insights1">
+<h2 style="margin:0 0 8px 0;">Insights</h2>
+<div class="row">
+<div style="flex:1 1 340px">
+<label>Date range (Created)</label>
+<div class="date-range" style="gap:6px">
+<input id="fromDate" type="date"/>
+<span style="align-self:center">-></span>
+<input id="toDate" type="date"/>
+<button id="applyRange">Apply</button>
+</div>
+</div>
+</div>
+<div class="row">
+<div style="flex:1 1 340px">
+<label>Resolved by (top)</label>
+<div id="tblResolvedBy"></div>
+</div>
+<div style="flex:1 1 340px">
+<label>Assigned to (top)</label>
+<div id="tblAssignedTo"></div>
+</div>
+</div>
+<div class="row" style="margin-top:12px">
+<div style="flex:1 1 340px">
+<label>By Category (Sales / Resolution / Skill / Unknown)</label>
+<div id="tblCategory"></div>
+</div>
+</div>
+<div class="row" style="margin-top:12px">
+<div style="flex:1 1 340px">
+<label>Resolution per Month</label>
+<div id="tblResPerMonth"></div>
+</div>
+<div style="flex:1 1 340px">
+<label>Sales per Month</label>
+<div id="tblSalesPerMonth"></div>
+</div>
+<div style="flex:1 1 340px">
+<label>Unknown per Month</label>
+<div id="tblUnknownPerMonth"></div>
+</div>
+</div>
+<div class="row" style="margin-top:12px">
+<div style="flex:1 1 340px">
+<label>Feedbacks per Month</label>
+<div id="tblMonths"></div>
+</div>
+</div>
+</div>
+<div style="flex:1 1 340px; margin-top: 12px;">
+<label style="display:none;">Articles with the most feedback</label>
+<div id="tblTopDocs" style="flex:1 1 340px"></div>
+<div class="row-between" style="margin-top:12px">
+<div class="hint">Feedback entries <span id="entryCount">(0)</span></div>
+<div class="row-end">
+  <select id="filterResolvedBy" title="Filter by resolved by">
+    <option value="all">All resolved by</option>
+  </select>
+  <button class="btn ghost" id="toggleOver5" type="button">>5 days only</button>
+  <button class="btn" id="toggleTopDocEntries" type="button">Show entries</button>
+</div>
+</div>
+<div class="entry-grid hidden" id="topDocEntries"></div>
+</div>
+<div class="grid" id="grid"></div>
+</div>
+</section>
+
+<script>
+(() => {
+  // Feedback insights – standalone (feedback.html)
+  const root = document.getElementById('insights');
+  if (!root) return;
+
+  const fileInput     = root.querySelector('#file');
+  const pasteBtn      = root.querySelector('#usePaste');
+  const pasteArea     = root.querySelector('#paste');
+  const grid          = root.querySelector('#grid');
+  const stats         = root.querySelector('#stats');
+  const sortFieldSel  = root.querySelector('#sortField');
+  const sortOrderSel  = root.querySelector('#sortOrder');
+  const clearBtn      = root.querySelector('#clearBtn');
+  const hideAutoEl    = root.querySelector('#hideAuto');
+  const topDocEntriesEl = root.querySelector('#topDocEntries');
+  const toggleTopDocEntriesBtn = root.querySelector('#toggleTopDocEntries');
+  const filterResolvedByEl = root.querySelector('#filterResolvedBy');
+  const toggleOver5Btn = root.querySelector('#toggleOver5');
+
+  const fromDateInp   = root.querySelector('#fromDate');
+  const toDateInp     = root.querySelector('#toDate');
+  const applyRange    = root.querySelector('#applyRange');
+
+  if (!fileInput || !grid || !stats || !sortFieldSel || !sortOrderSel) return;
+
+  /** @type {any[]} */
+  let data = [];
+  const LS_KEY = 'FeedbackJSON';
+  const LS_FAVS = 'tool_favorites.v1';
+  let showOver5Only = false;
+
+  function parseJSON(raw){
+    let obj = raw;
+    if (typeof raw === 'string') obj = JSON.parse(raw);
+
+    // Accept either an object with .feedbacks or a raw array
+    if (Array.isArray(obj)) return obj;
+    if (obj && Array.isArray(obj.feedbacks)) return obj.feedbacks;
+
+    throw new Error('JSON must be an array or an object with a "feedbacks" array');
+  }
+
+  function renderFavMenu(){
+    const el = document.getElementById('favMenu');
+    if (!el) return;
+    let favs = [];
+    try{
+      const raw = localStorage.getItem(LS_FAVS);
+      favs = raw ? JSON.parse(raw) : [];
+    }catch{
+      favs = [];
+    }
+    if (!Array.isArray(favs) || !favs.length){
+      el.innerHTML = '<span class="empty">No favorites</span>';
+      return;
+    }
+    el.innerHTML = favs.slice(0,5).map(f => {
+      const title = f.title || f.href || 'Favorite';
+      return `<a href="${escapeHtml(f.href || '#')}">${escapeHtml(title)}</a>`;
+    }).join('');
+  }
+
+  function loadFromLocalStorage(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if (!raw) return;
+      data = parseJSON(raw);
+      update();
+    }catch (err){
+      console.warn('Failed to load feedbacks from localStorage', err);
+    }
+  }
+
+  function saveToLocalStorage(){
+    try{
+      localStorage.setItem(LS_KEY, JSON.stringify(data));
+    }catch (err){
+      console.warn('Failed to save feedbacks to localStorage', err);
+    }
+  }
+
+  function toDate(val){
+    if (!val) return null;
+    const d = new Date(val);
+    return isNaN(d) ? null : d;
+  }
+
+  function fmtDate(d){
+    if (!d) return '—';
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,'0');
+    const day = String(d.getDate()).padStart(2,'0');
+    return `${y}-${m}-${day}`;
+  }
+
+  function parseDateInput(s){
+    // expects "YYYY-MM-DD"
+    if (!s) return null;
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+    if (!m) return null;
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    return isNaN(d) ? null : d;
+  }
+
+  function isAutoRaw(it){
+    const t = (it.title || '').toLowerCase();
+    const d = (it.description || '').toLowerCase();
+    const p = (it.proposedSolution || '').toLowerCase();
+    const cb = (it.createdBy || '').toLowerCase();
+
+    const titleAuto = t.startsWith('in document ') && t.includes('use https instead of http');
+    const createdByAuto = cb === 'system_user';
+    const descStartsLink = d.trim().startsWith('link http') || d.trim().startsWith('link https');
+    const descAuto = descStartsLink && d.includes('requires optimisation');
+    const propAuto = p.includes('update from http to https');
+
+    return titleAuto || createdByAuto || descAuto || propAuto;
+  }
+
+  function normalize(list){
+    return list.map(it => {
+      const created = toDate(it.createdDate);
+      const assignedDate = toDate(it.assignedDate);
+      const resolved = toDate(it.resolvedDate);
+      const assignedRaw = it.assignedTo;
+      const assignedTo = Array.isArray(assignedRaw) ? assignedRaw.join(', ') : (assignedRaw || '');
+      const docId = (it.documentId != null ? String(it.documentId) : '');
+      return {
+        title: it.title || '',
+        status: it.status || '',
+        area: it.area || '',
+        createdDate: created,
+        assignedDate: assignedDate,
+        resolvedDate: resolved,
+        createdTS: created ? created.getTime() : Number.NEGATIVE_INFINITY,
+        resolvedTS: resolved ? resolved.getTime() : Number.POSITIVE_INFINITY,
+        feedbackId: it.feedbackId || '',
+        documentId: docId,
+        documentTitle: it.documentTitle || '',
+        assignedTo: assignedTo,
+        resolvedBy: it.resolvedBy || '',
+        description: it.description || '',
+        proposedSolution: it.proposedSolution || '',
+        resolvedComment: it.resolvedComment || ''
+      };
+    });
+  }
+
+  function sortData(items){
+    const field = sortFieldSel.value; // 'createdDate' | 'resolvedDate'
+    const order = sortOrderSel.value; // 'asc' | 'desc'
+    const key = field === 'resolvedDate' ? 'resolvedTS' : 'createdTS';
+    const dir = order === 'asc' ? 1 : -1;
+    return [...items].sort((a,b) => (a[key] - b[key]) * dir);
+  }
+
+  function escapeHtml(s){
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      "\"":"&quot;",
+      "'":"&#39;"
+    })[c]);
+  }
+
+  function cleanResolvedComment(s){
+    const lines = String(s ?? '').split(/\r?\n/);
+    const filtered = lines.filter(line => {
+      const t = line.trim();
+      if (t.startsWith('@Title-')) return false;
+      if (t.toLowerCase().startsWith('sammendrag:')) return false;
+      return true;
+    });
+    return filtered.join('\n').trim();
+  }
+
+  function daysBetween(a, b){
+    if (!a || !b) return null;
+    const ms = b.getTime() - a.getTime();
+    if (!isFinite(ms)) return null;
+    return ms / 86400000;
+  }
+
+  function ageClass(assignedDate, resolvedDate){
+    const days = daysBetween(assignedDate, resolvedDate);
+    if (days == null) return '';
+    if (days > 10) return 'danger';
+    if (days > 5) return 'warn';
+    return '';
+  }
+
+  function updateResolvedByOptions(items){
+    if (!filterResolvedByEl) return;
+    const current = filterResolvedByEl.value || 'all';
+    const names = Array.from(new Set(items.map(it => (it.resolvedBy || '').trim()).filter(Boolean)));
+    names.sort((a,b)=>a.localeCompare(b));
+    const options = ['all', ...names];
+    filterResolvedByEl.innerHTML = options.map(v => {
+      const label = v === 'all' ? 'All resolved by' : v;
+      return `<option value="${escapeHtml(v)}">${escapeHtml(label)}</option>`;
+    }).join('');
+    if (options.includes(current)){
+      filterResolvedByEl.value = current;
+    }
+  }
+
+  function filterEntries(items){
+    let out = items;
+    const selected = filterResolvedByEl?.value || 'all';
+    if (selected && selected !== 'all'){
+      out = out.filter(it => (it.resolvedBy || '').trim() === selected);
+    }
+    if (showOver5Only){
+      out = out.filter(it => {
+        const days = daysBetween(it.assignedDate, it.resolvedDate);
+        return days != null && days > 5;
+      });
+    }
+    return out;
+  }
+
+  function renderTopDocEntries(items){
+    if (!topDocEntriesEl) return;
+    topDocEntriesEl.innerHTML = '';
+    const countEl = root.querySelector('#entryCount');
+    if (countEl) countEl.textContent = `(${items.length})`;
+    const frag = document.createDocumentFragment();
+    for (const it of items){
+      const el = document.createElement('div');
+      el.className = 'entry-card';
+      const category = classifyCategory(it.area || it.title);
+      const age = ageClass(it.assignedDate, it.resolvedDate);
+      const dot = age ? `<span class="age-dot ${age}"></span>` : '';
+      el.innerHTML = ''
+        + dot
+        + '<h4>' + escapeHtml(it.documentTitle || it.documentId || '—') + '</h4>'
+        + '<div class="entry-meta">Title: <strong>' + escapeHtml(it.title || '—') + '</strong></div>'
+        + '<div class="entry-meta">Category: <span class="badge">' + escapeHtml(category) + '</span></div>'
+        + '<div class="entry-meta">Assigned: <strong>' + fmtDate(it.assignedDate) + '</strong> · Resolved: <strong>' + fmtDate(it.resolvedDate) + '</strong></div>'
+        + '<div class="entry-meta">Resolved by: <span class="badge">' + escapeHtml(it.resolvedBy || '—') + '</span></div>'
+        + '<div class="entry-meta">Issue</div>'
+        + '<div class="desc">' + escapeHtml(it.description || '') + '</div>'
+        + '<div class="entry-meta">Proposed solution</div>'
+        + '<div class="desc">' + escapeHtml(it.proposedSolution || '') + '</div>'
+        + '<div class="entry-meta">Resolved comment</div>'
+        + '<div class="desc">' + escapeHtml(cleanResolvedComment(it.resolvedComment || '')) + '</div>';
+      frag.appendChild(el);
+    }
+    topDocEntriesEl.appendChild(frag);
+  }
+
+  function render(items){
+    grid.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    for (const it of items){
+      const el = document.createElement('div');
+      el.className = 'fcard';
+      el.innerHTML = ''
+        + '<div class="fhead">' + escapeHtml(it.title || '(untitled)') + '</div>'
+        + '<div class="meta">Status: <span class="badge">' + escapeHtml(it.status || '—') + '</span>'
+        + ' &nbsp; Area: <span class="badge">' + escapeHtml(it.area || '—') + '</span></div>'
+        + '<div>Article: <strong>' + escapeHtml(it.documentTitle || it.documentId || '—') + '</strong></div>'
+        + '<div>Created: <strong>' + fmtDate(it.createdDate) + '</strong></div>'
+        + '<div>Resolved: <strong>' + fmtDate(it.resolvedDate) + '</strong></div>'
+        + '<div class="meta">Assigned to: <span class="badge">' + escapeHtml(it.assignedTo || '—') + '</span> · Resolved by: <span class="badge">' + escapeHtml(it.resolvedBy || '—') + '</span></div>'
+        + '<div class="desc">' + escapeHtml(it.description || '') + '</div>'
+        + '<div class="meta muted">FID: ' + escapeHtml(it.feedbackId) + ' · DID: ' + escapeHtml(it.documentId) + '</div>';
+      frag.appendChild(el);
+    }
+    grid.appendChild(frag);
+  }
+
+  function renderTable(targetId, headers, rows){
+    const mount = root.querySelector('#' + targetId);
+    if (!mount) return;
+
+    const table = document.createElement('table');
+    table.className = 'table';
+
+    const thead = document.createElement('thead');
+    const trh = document.createElement('tr');
+    headers.forEach(h => {
+      const th = document.createElement('th');
+      th.textContent = h;
+      trh.appendChild(th);
+    });
+    thead.appendChild(trh);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    for (const row of rows){
+      const tr = document.createElement('tr');
+      for (const cell of row){
+        const td = document.createElement('td');
+        td.textContent = (cell == null ? '' : String(cell));
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+
+    mount.innerHTML = '';
+    mount.appendChild(table);
+  }
+
+  function aggregateCounts(items, key){
+    const map = new Map();
+    for (const it of items){
+      const v = it[key];
+      const k = (typeof v === 'string' ? v : Array.isArray(v) ? v.join(', ') : (v != null ? String(v) : '')).trim() || '—';
+      map.set(k, (map.get(k) || 0) + 1);
+    }
+    const arr = [];
+    map.forEach((count, name) => arr.push({name, count}));
+    arr.sort((a,b) => b.count - a.count);
+    return arr;
+  }
+
+  function classifyCategory(area){
+    const s = String(area || '').toLowerCase();
+    if (s.includes('skill')) return 'Skill';
+    if (s.includes('sales')) return 'Sales';
+    if (s.includes('resolution')) return 'Resolution';
+    if (s.includes("sorry, i don't know") || s.includes('unknown') || s.trim()==='') return 'Unknown';
+    return 'Unknown';
+  }
+
+  function topDocs(items){
+    const map = new Map();
+    for (const it of items){
+      const id = (it.documentId != null ? String(it.documentId) : '').trim() || '—';
+      const title = it.documentTitle || '';
+      const entry = map.get(id) || {id, title, total:0, resolved:0};
+      entry.total++;
+      if (it.resolvedDate) entry.resolved++;
+      map.set(id, entry);
+    }
+    const arr = Array.from(map.values());
+    arr.sort((a,b) => b.total - a.total);
+    return arr;
+  }
+
+  function monthKey(d){
+    if(!d) return null;
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,'0');
+    return `${y}-${m}`;
+  }
+
+  function update(){
+    let raw = data.slice();
+
+    if (hideAutoEl && hideAutoEl.checked){
+      raw = raw.filter(it => !isAutoRaw(it));
+    }
+
+    // Filter by createdDate range (inclusive) if set
+    const fromD = parseDateInput(fromDateInp?.value || '');
+    const toD   = parseDateInput(toDateInp?.value   || '');
+    if (fromD || toD){
+      raw = raw.filter(it => {
+        const d = toDate(it.createdDate);
+        if (!d) return false;
+        if (fromD && d < fromD) return false;
+        if (toD   && d > toD)   return false;
+        return true;
+      });
+    }
+
+    const normalized = normalize(raw);
+    const sorted = sortData(normalized);
+    render(sorted);
+    updateResolvedByOptions(sorted);
+    renderTopDocEntries(filterEntries(sorted));
+
+    const resolvedOnly = normalized.filter(x => !!x.resolvedDate);
+    const byResolved = aggregateCounts(resolvedOnly, 'resolvedBy').slice(0, 20);
+    const byAssigned = aggregateCounts(normalized, 'assignedTo').slice(0, 20);
+    const docs = topDocs(normalized).slice(0, 15);
+
+    renderTable('tblResolvedBy', ['Name','Resolved'], byResolved.map(r => [r.name, r.count]));
+    renderTable('tblAssignedTo', ['Name','Assigned'], byAssigned.map(r => [r.name, r.count]));
+    renderTable('tblTopDocs', ['Articles with the most feedback','Total','Resolved'],
+      docs.map(d => [ (d.title || d.id || '—') + (d.id ? ` [${d.id}]` : ''), d.total, d.resolved ])
+    );
+
+    // Category counts
+    const catMap = new Map();
+    for (const it of normalized){
+      const c = classifyCategory(it.area);
+      catMap.set(c, (catMap.get(c)||0) + 1);
+    }
+    const catRows = [];
+    catMap.forEach((count, name) => catRows.push({name, count}));
+    catRows.sort((a,b)=>b.count-a.count);
+    renderTable('tblCategory', ['Category','Count'], catRows.map(r => [r.name, r.count]));
+
+    // Feedbacks per month
+    const monthMap = new Map();
+    for (const it of normalized){
+      const k = monthKey(it.createdDate);
+      if (!k) continue;
+      monthMap.set(k, (monthMap.get(k)||0) + 1);
+    }
+    const months = [];
+    monthMap.forEach((count, month) => months.push({month, count}));
+    months.sort((a,b)=> a.month.localeCompare(b.month));
+    renderTable('tblMonths', ['Month','Count'], months.map(m => [m.month, m.count]));
+
+    // Per-category months (by createdDate)
+    const resMap = new Map(), salesMap = new Map(), unkMap = new Map();
+    for (const it of normalized){
+      const k = monthKey(it.createdDate);
+      if (!k) continue;
+      const cat = classifyCategory(it.area);
+      if (cat === 'Resolution') resMap.set(k, (resMap.get(k)||0) + 1);
+      else if (cat === 'Sales') salesMap.set(k, (salesMap.get(k)||0) + 1);
+      else if (cat === 'Unknown') unkMap.set(k, (unkMap.get(k)||0) + 1);
+    }
+    const rowsFromMap = (map) => {
+      const arr = [];
+      map.forEach((count, month) => arr.push({month, count}));
+      arr.sort((a,b)=> a.month.localeCompare(b.month));
+      return arr.map(x => [x.month, x.count]);
+    };
+    renderTable('tblResPerMonth', ['Month','Resolution'], rowsFromMap(resMap));
+    renderTable('tblSalesPerMonth', ['Month','Sales'], rowsFromMap(salesMap));
+    renderTable('tblUnknownPerMonth', ['Month','Unknown'], rowsFromMap(unkMap));
+
+    const total = normalized.length;
+    const resolved = resolvedOnly.length;
+    const active = total - resolved;
+    const hidden = data.length - raw.length;
+    stats.textContent =
+      `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.` +
+      (hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '');
+    if (clearBtn){
+      clearBtn.style.display = total > 0 ? 'inline-block' : 'none';
+    }
+  }
+
+  // Handlers
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files && fileInput.files[0];
+    if (!file) return;
+    const text = await file.text();
+    try {
+      data = parseJSON(text);
+      saveToLocalStorage();
+      update();
+    } catch (err){
+      alert('Failed to parse JSON: ' + (err?.message || err));
+    }
+  });
+
+  pasteBtn?.addEventListener('click', () => {
+    try{
+      data = parseJSON(pasteArea?.value || '');
+      saveToLocalStorage();
+      update();
+    } catch (err){
+      alert('Failed to parse pasted JSON: ' + (err?.message || err));
+    }
+  });
+
+  sortFieldSel.addEventListener('change', update);
+  sortOrderSel.addEventListener('change', update);
+  hideAutoEl?.addEventListener('change', update);
+  applyRange?.addEventListener('click', update);
+  filterResolvedByEl?.addEventListener('change', update);
+  toggleOver5Btn?.addEventListener('click', () => {
+    showOver5Only = !showOver5Only;
+    if (toggleOver5Btn){
+      toggleOver5Btn.textContent = showOver5Only ? 'All durations' : '>5 days only';
+    }
+    update();
+  });
+  toggleTopDocEntriesBtn?.addEventListener('click', () => {
+    if (!topDocEntriesEl || !toggleTopDocEntriesBtn) return;
+    topDocEntriesEl.classList.toggle('hidden');
+    toggleTopDocEntriesBtn.textContent = topDocEntriesEl.classList.contains('hidden')
+      ? 'Show entries'
+      : 'Hide entries';
+  });
+
+  clearBtn?.addEventListener('click', () => {
+    data = [];
+    grid.innerHTML = '';
+    stats.textContent = '';
+    fileInput.value = '';
+    if (pasteArea) pasteArea.value = '';
+    if (topDocEntriesEl) topDocEntriesEl.innerHTML = '';
+    if (filterResolvedByEl) filterResolvedByEl.value = 'all';
+    showOver5Only = false;
+    if (toggleOver5Btn) toggleOver5Btn.textContent = '>5 days only';
+    try{ localStorage.removeItem(LS_KEY); }catch{}
+    update();
+  });
+
+  renderFavMenu();
+  loadFromLocalStorage();
+  update();
+})();
+
+</script></body>
+</html>
+
+
+
+

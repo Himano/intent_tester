@@ -4,150 +4,429 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tool Menu</title>
+
   <style>
-    :root {
-      --border: #d0d0d0;
-      --text: #222;
-      --muted: #666;
-      --bg: #fff;
-      --soft: #f7f7f7;
-      --accent: #d22b2b;
+    :root{
+      /* IKEA-ish, men dempet */
+      --bg: #f6f6f5;
+      --surface: #ffffff;
+      --surface-2: #fbfbfa;
+
+      --text: #1f1f1f;
+      --muted: #5f6368;
+
+      --border: #d6d7d9;
+      --border-2: #ececec;
+
+      --brand: #0058a3;     /* IKEA-blå */
+      --brand-2: #0b66c3;
+
+      --danger: #b42318;
+
+      --shadow: 0 8px 22px rgba(0,0,0,.06);
+      --shadow-sm: 0 4px 12px rgba(0,0,0,.05);
+
+      --radius: 16px;
+      --radius-sm: 12px;
+
+      --pad: 28px;
+      --gap: 16px;
+
+      --ring: 0 0 0 3px rgba(0,88,163,.18);
+
+      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
 
-    html, body { height: 100%; }
-
-    body {
+    body{
       margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
+      font-family: var(--font);
       color: var(--text);
       background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
     }
 
-    h2 {
-      margin: 0;
-      font-size: 22px;
-      text-align: center;
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: 13px;
-      margin: 0;
-    }
-
-    .section {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .section-title {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .pill {
-      display: inline-block;
-      border: 1px solid var(--border);
-      background: var(--soft);
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .grid {
+    /* Desktop-first layout */
+    .app{
+      min-height: 100%;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-rows: auto 1fr;
+    }
+
+    
+
+    .topbar{
+      background: rgba(246,246,245,.86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-2);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-inner{
+      padding: 18px var(--pad);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand{
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand h1{
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+
+    .brand .sub{
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .controls{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .search{
+      width: min(520px, 52vw);
+      position: relative;
+    }
+
+    .search input{
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 0 42px 0 44px;
+      font-size: 13px;
+      outline: none;
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .search input:focus{
+      border-color: rgba(0,88,163,.55);
+      box-shadow: var(--ring);
+    }
+
+    .search .icon{
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .search .clear{
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      color: var(--muted);
+      display: grid;
+      place-items: center;
+    }
+
+    .search .clear:hover{
+      background: var(--surface-2);
+      border-color: var(--border-2);
+    }
+
+    .meta-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-2);
+      background: rgba(255,255,255,.75);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    main{
+      padding: 22px var(--pad) 34px;
+    }
+
+    .layout{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .section{
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .section-header{
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-2);
+      background: linear-gradient(180deg, rgba(251,251,250,.85), rgba(255,255,255,1));
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       gap: 12px;
     }
 
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #fff;
-      padding: 12px;
+    .section-title{
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+
+    .section-hint{
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .section-body{
+      padding: 18px;
+    }
+
+.grid{
+  display: grid;
+  gap: var(--gap);
+  align-items: stretch;
+
+  /* default for desktop */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* 5 kolonner på store skjermer (typisk 27") */
+@media (min-width: 1600px){
+  .grid{
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+    .empty{
+      margin: 0;
+      padding: 14px 16px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card{
+      border: 1px solid var(--border-2);
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      min-height: 150px;
+      gap: 10px;
+      min-height: 168px;
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     }
 
-    .card h2 {
+    .card:hover{
+      transform: translateY(-1px);
+      border-color: rgba(0,0,0,.10);
+      box-shadow: var(--shadow);
+    }
+
+    .card-top{
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card h2{
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
+      letter-spacing: .1px;
+      line-height: 1.2;
     }
 
-    .card p {
+    .card p{
       margin: 0;
       font-size: 13px;
       color: var(--muted);
-      line-height: 1.4;
+      line-height: 1.45;
       flex: 1;
     }
 
-    .actions {
+    .actions{
       display: flex;
-      justify-content: flex-end;
       align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .left-actions{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       gap: 8px;
-    }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      padding: 7px 12px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 6px;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 999px;
       font-size: 13px;
-      font-weight: 600;
-      line-height: 1;
+      font-weight: 650;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      user-select: none;
+      transition: background .15s ease, border-color .15s ease, filter .15s ease, box-shadow .15s ease;
+      white-space: nowrap;
     }
 
-    .btn:hover { filter: brightness(0.95); }
+    .btn:focus-visible{ outline: none; box-shadow: var(--ring); }
+
+    .btn-primary{
+      background: var(--brand);
+      color: #fff;
+    }
+    .btn-primary:hover{ background: var(--brand-2); }
+
+    .btn-ghost{
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text);
+    }
+    .btn-ghost:hover{
+      background: var(--surface-2);
+      border-color: rgba(0,0,0,.14);
+    }
 
     .fav-btn{
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--text);
-      border-radius: 999px;
-      padding: 5px 10px;
-      font-size: 12px;
-      cursor: pointer;
-      line-height: 1;
+      width: 36px;
+      padding: 0;
     }
+
+    .star{
+      width: 18px;
+      height: 18px;
+    }
+
     .fav-btn.active{
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
+      border-color: rgba(0,88,163,.25);
+      background: rgba(0,88,163,.08);
+    }
+    .fav-btn.active .star{
+      color: var(--brand);
+      fill: var(--brand);
+    }
+
+    .star{
+      color: var(--muted);
+      fill: transparent;
+      transition: color .15s ease, fill .15s ease;
+    }
+
+    .kbd{
+      font-variant-numeric: tabular-nums;
+      border: 1px solid var(--border-2);
+      background: rgba(255,255,255,.6);
+      border-radius: 8px;
+      padding: 2px 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Litt mer “desktop” luft */
+    @media (min-width: 1200px){
+      :root{ --pad: 34px; --gap: 18px; }
+      .topbar-inner{ padding: 20px var(--pad); }
+      main{ padding: 24px var(--pad) 40px; }
     }
   </style>
 </head>
+
 <body>
-  <h2>Chatbot tools</h2>
+  <div class="app">
 
-  <section class="section">
-    <div class="section-title">Favourites</div>
-    <div id="favGrid" class="grid"></div>
-  </section>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <h1>Chatbot tools</h1>
+          <p class="sub">Rask tilgang til verktøyene dine. Søk, favorittmerk og åpne.</p>
+        </div>
 
-  <section class="section">
-    <div class="section-title">All tools</div>
-    <div id="allGrid" class="grid"></div>
-  </section>
+        <div class="controls">
+          <div class="search">
+            
+            <input id="searchInput" type="text" placeholder="Search for a tool…" autocomplete="off" />
+            <button id="clearBtn" class="clear" type="button" title="Tøm søk" aria-label="Tøm søk">
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59L7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.9 4.89a1 1 0 1 0 1.42 1.42L12 13.41l4.89 4.9a1 1 0 0 0 1.42-1.42L13.41 12l4.9-4.89a1 1 0 0 0-.01-1.4Z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div id="metaPill" class="meta-pill" title="Status">
+            <span id="countText">0 tools</span>
+            <span class="kbd">Fav max 5</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="layout">
+
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">Favourites</h2>
+            <p class="section-hint">Vises øverst for rask tilgang.</p>
+          </div>
+          <div class="section-body">
+            <div id="favGrid" class="grid"></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-header">
+            <h2 class="section-title">All tools</h2>
+            <p class="section-hint">Alt samlet – filtrer med søkefeltet.</p>
+          </div>
+          <div class="section-body">
+            <div id="allGrid" class="grid"></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
 
   <script>
   (function(){
@@ -155,12 +434,18 @@
     const MAX_FAVS = 5;
 
     const tools = [
-      { href: "intent.html", title: "Intent Tester", desc: "Test og sammenlign intents med flere runs, score og tabellvisning." },
-      { href: "dialogflowtool.html", title: "Dialogflow Tool", desc: "Importer intent JSON, rediger treningssetninger og bygg prompt." },
-      { href: "dashboard.html", title: "Dashboard", desc: "Oversiktsvisning for datafiler og analysekort." },
-      { href: "speedread.html", title: "Speed Read", desc: "Vis ett ord av gangen med justerbar lesehastighet." },
-      { href: "nothelpful.html", title: "Not Helpful sorter", desc: "Import a transcript with filtering not helpful. <br /> Sort customer questions into the correct intent or find room for improvment in FAQ documents" },
+      { href: "intent.html", title: "Intent Tester", desc: "Import the JSON provided by the Dialogflow script to see how well your intents/trainingphrases work." },
+      { href: "dialogflowtool.html", title: "Dialogflow Tool", desc: "Importer intent JSON, edit trainingphrases and generate a new Dialogflow ready JSON file." },
+      { href: "dashboard.html", title: "Trainingphrase dashboard", desc: "Import the xlsx trainingphrase overview from powerBI to get a full overview over trainingphrases and Ngrams." },
+      { href: "nothelpful.html", title: "Not Helpful sorter", desc: "Import a transcript with filtering not helpful.<br/>Sort customer questions into the correct intent or find room for improvement in FAQ documents." },
+      { href: "Feedback.html", title: "Feedback insights", desc: "Load feedback JSON, explore insights, and review resolved comments by document." },
     ];
+
+    const $favGrid = document.getElementById("favGrid");
+    const $allGrid = document.getElementById("allGrid");
+    const $search = document.getElementById("searchInput");
+    const $clear = document.getElementById("clearBtn");
+    const $countText = document.getElementById("countText");
 
     function loadFavs(){
       try{
@@ -176,38 +461,81 @@
     function isFav(favs, href){
       return favs.some(x => x.href === href);
     }
+
+    function starIcon(){
+      return `
+        <svg class="star" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            fill="currentColor"></path>
+        </svg>
+      `;
+    }
+
     function renderCard(t, favs){
-      const isActive = isFav(favs, t.href);
+      const active = isFav(favs, t.href);
+      const favLabel = active ? "Fjern fav" : "Legg til fav";
       return `
         <article class="card">
-          <h2>${t.title}</h2>
+          <div class="card-top">
+            <h2>${t.title}</h2>
+          </div>
           <p>${t.desc}</p>
           <div class="actions">
-            <button class="fav-btn ${isActive ? "active" : ""}" data-href="${t.href}" data-title="${t.title}" type="button">Fav</button>
-            <a class="btn" href="${t.href}">Open</a>
+            <div class="left-actions">
+              <button
+                class="btn btn-ghost fav-btn ${active ? "active" : ""}"
+                data-href="${t.href}"
+                data-title="${t.title}"
+                type="button"
+                title="${favLabel}"
+                aria-label="${favLabel}">
+                ${starIcon()}
+              </button>
+            </div>
+            <a class="btn btn-primary" href="${t.href}">
+              Open
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M14 3h7v7h-2V6.41l-9.29 9.3l-1.42-1.42l9.3-9.29H14z"/>
+                <path fill="currentColor" d="M5 5h6V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-2v6H5z"/>
+              </svg>
+            </a>
           </div>
         </article>
       `;
     }
 
+    function matchesSearch(t, q){
+      if (!q) return true;
+      const s = (t.title + " " + t.desc).toLowerCase();
+      return s.includes(q);
+    }
+
     function render(){
       const favs = loadFavs();
       const favSet = new Set(favs.map(f => f.href));
-      const favTools = tools.filter(t => favSet.has(t.href));
-      const otherTools = tools.filter(t => !favSet.has(t.href));
+      const q = ($search.value || "").trim().toLowerCase();
 
-      const favGrid = document.getElementById("favGrid");
-      const allGrid = document.getElementById("allGrid");
-      favGrid.innerHTML = favTools.length
+      const favTools = tools.filter(t => favSet.has(t.href) && matchesSearch(t, q));
+      const otherTools = tools.filter(t => !favSet.has(t.href) && matchesSearch(t, q));
+
+      $favGrid.innerHTML = favTools.length
         ? favTools.map(t => renderCard(t, favs)).join("")
-        : `<p class="hint">Ingen favoritter valgt.</p>`;
-      allGrid.innerHTML = otherTools.map(t => renderCard(t, favs)).join("");
+        : `<p class="empty">Ingen favoritter valgt${q ? " (eller ingen treff i søk)." : "."}</p>`;
+
+      $allGrid.innerHTML = otherTools.length
+        ? otherTools.map(t => renderCard(t, favs)).join("")
+        : `<p class="empty">Ingen treff. Prøv et annet søk.</p>`;
+
+      const visibleCount = favTools.length + otherTools.length;
+      $countText.textContent = `${visibleCount} tool${visibleCount === 1 ? "" : "s"}${q ? " (filtrert)" : ""}`;
 
       document.querySelectorAll(".fav-btn").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const href = btn.getAttribute("data-href");
           const title = btn.getAttribute("data-title") || href;
+
           let next = loadFavs();
+
           if (isFav(next, href)){
             next = next.filter(x => x.href !== href);
           } else {
@@ -217,11 +545,20 @@
             }
             next.push({ href, title });
           }
+
           saveFavs(next);
           render();
         });
       });
     }
+
+    // Søk + clear
+    $search.addEventListener("input", render);
+    $clear.addEventListener("click", ()=>{
+      $search.value = "";
+      $search.focus();
+      render();
+    });
 
     render();
   })();
