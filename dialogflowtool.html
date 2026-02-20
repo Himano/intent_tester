@@ -428,17 +428,20 @@
     const LS_STATE = "dialogflow_tool_state.v1";
 
     const defaultPrompt = `# Task:
-Below you have an FAQ article, one test set (mode can be should hit or should not hit), and current training sentences from the intent.
-Pick 5-10 good examples, 5-10 bad examples, and suggest 10 new training sentences.
+Below you have an FAQ article content, a list of customer questions that should hit the intent but does not, and current training sentences from the intent. 
+
+I want you to analyze the current Trainingphrases and suggest 4-6 new ones to better capture the test sentences.
+We are using Dialogflow ES.
+
+Also check if any of the current trainingphrases should be removed. 
+Give them to me in Norwegian. 
 
 Respond in this format:
-Good sentences:
+
+Bad Phrases that should be reviewed:
 1. ...
 
-Bad sentences:
-1. ...
-
-Suggested training sentences:
+Suggested training phrases:
 1. ...`;
 
     function getPromptTemplate() {
