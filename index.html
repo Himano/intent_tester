@@ -412,6 +412,30 @@
       opacity: .6;
       transform: scale(0.98);
     }
+    .dep-markets{
+      display:flex;
+      gap:6px;
+      margin-top:8px;
+      flex-wrap:wrap;
+    }
+    .dep-market-btn{
+      border:1px solid var(--border-2);
+      background:#fff;
+      color:var(--text);
+      border-radius:999px;
+      padding:4px 8px;
+      font-size:11px;
+      cursor:pointer;
+      user-select: none;
+    }
+    .dep-market-btn.active{
+      border-color: var(--brand);
+      color: var(--brand);
+      box-shadow: var(--ring);
+    }
+    .dep-card.dep-bookmark{
+      cursor: grab;
+    }
     .dep-card:active{ cursor: grabbing; }
     .dep-card h3{
       margin: 0 0 6px 0;
@@ -544,6 +568,8 @@
         name: "Fetch feedback",
         desc: "Fetch feedback JSON using the current Auth0 tokens and download it.",
         code: "javascript:(async()=>{try{const userKey=\"@@auth0spajs@@::qKc0nhxlgA9Gs6R3QoyaQoRY5B0umWMn::@@user@@\";const apiKey=\"@@auth0spajs@@::qKc0nhxlgA9Gs6R3QoyaQoRY5B0umWMn::https://ingka-icow-prod.eu.auth0.com/api/v2/::openid profile email\";const tryFetch=async(token,source)=>{if(!token)return{ok:false,source,status:\"no-token\",text:\"\"};console.log(\"[FB] Tester token-kilde:\",source);const res=await fetch(\"https://km-api-gateway-23xgppfrna-ew.a.run.app/read-document-feedback?market=no&lang=no\",{headers:{Authorization:\"Bearer \"+token}});const text=await res.text();console.log(\"[FB] Resultat fra\",source,\"=>\",res.status,res.statusText);if(!res.ok){return{ok:false,source,status:res.status,text};}let data;try{data=JSON.parse(text);}catch(e){console.error(\"[FB] Klarte ikke parse JSON:\",e);return{ok:false,source,status:\"bad-json\",text};}const blob=new Blob([JSON.stringify(data,null,2)],{type:\"application/json\"});const url=URL.createObjectURL(blob);const a=document.createElement(\"a\");a.href=url;a.download=\"feedback-no.json\";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);console.log(\"[FB] Lastet ned med token-kilde:\",source);return{ok:true,source,status:res.status,text:\"\"};};const rawUser=localStorage.getItem(userKey);const rawApi=localStorage.getItem(apiKey);let idToken=null,accessToken=null;if(rawUser){try{const stored=JSON.parse(rawUser);idToken=stored.id_token||null;}catch(e){console.error(\"[FB] Klarte ikke parse userKey:\",e);}}if(rawApi){try{const stored2=JSON.parse(rawApi);accessToken=stored2.body&&stored2.body.access_token;}catch(e){console.error(\"[FB] Klarte ikke parse apiKey:\",e);}}if(!idToken&&!accessToken){console.warn(\"[FB] Fant verken id_token eller access_token i localStorage.\");return;}let result=await tryFetch(idToken,\"id_token\");if(!result.ok){result=await tryFetch(accessToken,\"access_token\");if(!result.ok){console.warn(\"[FB] Begge forsøk feilet. Sjekk Console (F12) for detaljer.\");}}}catch(e){console.error(\"[FB] Uventet feil:\",e);}})();"
+        ,
+        market: "no"
       },
       {
         name: "Editor menu hider",
@@ -615,6 +641,16 @@
         `;
     }
 
+    function buildFeedbackCode(baseCode, market){
+      const m = (market || "no").toLowerCase();
+      const langMap = { no: "no", se: "sv", dk: "da", fi: "fi" };
+      const lang = langMap[m] || "no";
+      return baseCode.replace(
+        /read-document-feedback\?market=[a-z]{2}&lang=[a-z]{2}/i,
+        `read-document-feedback?market=${m}&lang=${lang}`
+      );
+    }
+
     function renderDependencies(){
       if (!$depGrid) return;
       $depGrid.innerHTML = dependencies.map((d, i) => {
@@ -626,6 +662,20 @@
             </a>
           `;
         }
+        if (d.name === "Fetch feedback"){
+          return `
+            <a class="dep-card dep-bookmark" href="#" draggable="true" data-index="${i}">
+              <h3>${d.name}</h3>
+              <p>${d.desc}</p>
+              <div class="dep-markets" data-market="${d.market || "no"}">
+                <button class="dep-market-btn active" type="button" data-market="no">NO</button>
+                <button class="dep-market-btn" type="button" data-market="se">SE</button>
+                <button class="dep-market-btn" type="button" data-market="dk">DK</button>
+                <button class="dep-market-btn" type="button" data-market="fi">FI</button>
+              </div>
+            </a>
+          `;
+        }
         return `
           <div class="dep-card" draggable="true" data-index="${i}" title="Drag to your bookmarks bar">
             <h3>${d.name}</h3>
@@ -634,12 +684,51 @@
         `;
       }).join("");
       $depGrid.querySelectorAll(".dep-card").forEach(card => {
-        if (card.tagName === "A") return;
+        if (card.tagName === "A" && !card.classList.contains("dep-bookmark")) return;
+        card.querySelectorAll(".dep-market-btn").forEach(btn => {
+          btn.addEventListener("click", e => {
+            e.preventDefault();
+            e.stopPropagation();
+            const wrap = btn.closest(".dep-markets");
+            if (!wrap) return;
+            const market = btn.getAttribute("data-market");
+            wrap.setAttribute("data-market", market);
+            wrap.querySelectorAll(".dep-market-btn").forEach(b => b.classList.toggle("active", b === btn));
+            if (card.classList.contains("dep-bookmark")){
+              const idx = Number(card.getAttribute("data-index"));
+              const baseCode = dependencies[idx]?.code || "";
+              card.setAttribute("href", buildFeedbackCode(baseCode, market));
+            } else {
+              card.setAttribute("data-market", market);
+            }
+          });
+        });
+        if (card.classList.contains("dep-bookmark")){
+          const idx = Number(card.getAttribute("data-index"));
+          const baseCode = dependencies[idx]?.code || "";
+          const wrap = card.querySelector(".dep-markets");
+          const market = (wrap?.getAttribute("data-market") || "no").toLowerCase();
+          card.setAttribute("href", buildFeedbackCode(baseCode, market));
+          card.addEventListener("dragstart", e => {
+            e.dataTransfer.setData("text/uri-list", card.getAttribute("href") || "");
+            e.dataTransfer.setData("text/plain", card.getAttribute("href") || "");
+            e.dataTransfer.effectAllowed = "copy";
+            card.classList.add("dragging");
+          });
+          card.addEventListener("dragend", () => card.classList.remove("dragging"));
+          return;
+        }
         card.addEventListener("dragstart", e => {
           const idx = Number(card.getAttribute("data-index"));
           const dep = dependencies[idx];
-          e.dataTransfer.setData("text/plain", dep.code);
-          e.dataTransfer.setData("text/uri-list", dep.code);
+          let code = dep.code;
+          const wrap = card.querySelector(".dep-markets");
+          if (wrap && typeof dep.code === "string"){
+            const market = (card.getAttribute("data-market") || wrap.getAttribute("data-market") || "no").toLowerCase();
+            code = buildFeedbackCode(dep.code, market);
+          }
+          e.dataTransfer.setData("text/plain", code);
+          e.dataTransfer.setData("text/uri-list", code);
           e.dataTransfer.effectAllowed = "copy";
           card.classList.add("dragging");
         });
