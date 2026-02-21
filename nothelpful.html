@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="no">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -400,7 +400,7 @@
 <body>
   <div class="headerbar">
     <h2>
-      <a class="home-link" href="index.html" aria-label="Til hjem">
+      <a class="home-link" href="index.html" aria-label="Home">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12.19 12.19 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
         <span>Not helpful</span>
       </a>
@@ -437,23 +437,23 @@
       <div class="panel-header">
         <div>
           <div class="panel-title">Intents</div>
-          <div class="panel-sub">Antall og % av rader i filen</div>
+          <div class="panel-sub">Count and % of rows in file</div>
         </div>
         <div class="panel-controls">
           <div style="display:grid;gap:4px">
-            <span class="hint">Antall</span>
+            <span class="hint">Count</span>
             <input id="nhTopLimit" type="text" value="10" style="width:70px" />
           </div>
           <label class="hint" style="display:flex;gap:6px;align-items:center">
             <input id="nhFaqOnly" type="checkbox" />
-            Bare FAQ_
+            Only FAQ_
           </label>
         </div>
       </div>
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Intent</th><th>Antall</th><th>%</th></tr>
+            <tr><th>Intent</th><th>Count</th><th>%</th></tr>
           </thead>
           <tbody id="nhIntentBody"></tbody>
         </table>
@@ -464,12 +464,12 @@
     <div class="panel">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Utvalgte chatlogger</div>
-          <div class="panel-sub">Klikk 1/2/3 og legg ev. inn foreslått riktig intent</div>
+          <div class="panel-title">Selected chat logs</div>
+          <div class="panel-sub">Click 1/2/3 and optionally add a suggested correct intent</div>
         </div>
 
         <div class="panel-controls">
-                      <button  id="btnVeta" class="veta" type="button" style="display:none">Åpne i Veta</button>
+                      <button  id="btnVeta" class="veta" type="button" style="display:none">Open in Veta</button>
 
           <div style="display:grid;gap:4px">
             <span class="hint">Intent</span>
@@ -480,13 +480,13 @@
           <div style="display:grid;gap:4px">
             <span class="hint">Filter</span>
             <select id="reviewFilter">
-              <option value="unreviewed">Bare umerkede</option>
-              <option value="all">Alle</option>
+              <option value="unreviewed">Unreviewed only</option>
+              <option value="all">All</option>
             </select>
           </div>
 
           <span class="pill">Reviewed: <strong id="reviewedCount">0</strong></span>
-          <span class="pill">Umerkede: <strong id="unreviewedCount">0</strong></span>
+          <span class="pill">Unreviewed: <strong id="unreviewedCount">0</strong></span>
         </div>
       </div>
 
@@ -497,17 +497,17 @@
     <div class="panel rightPanel">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Review-liste (global)</div>
-          <div class="panel-sub">Vis alt du har merket — uansett intent</div>
+          <div class="panel-title">Review list (global)</div>
+          <div class="panel-sub">See everything you've marked — regardless of intent</div>
         </div>
 
         <div class="panel-controls">
           <div style="display:grid;gap:4px">
-            <span class="hint">Kategori</span>
+            <span class="hint">Category</span>
             <select id="queueFilter">
-              <option value="1">1 — Feil intent</option>
-              <option value="2">2 — Mangler/feil dekning</option>
-              <option value="3">3 — OK/Usikker</option>
+              <option value="1">1 — Wrong intent</option>
+              <option value="2">2 — Missing/wrong coverage</option>
+              <option value="3">3 — OK/Uncertain</option>
             </select>
           </div>
           <span class="pill">Items: <strong id="queueCount">0</strong></span>
@@ -607,8 +607,19 @@
     return `${base}&filter=${encodedFilter}`;
   }
 
-  function buildVetaUrl(guid){
-    return `${VETA_BASE_URL}${guid}?lang=no&market=no`;
+  function marketToLang(market){
+    const m = (market || "").toString().trim().toUpperCase();
+    if (m === "NO") return "no";
+    if (m === "SE") return "sv";
+    if (m === "DK") return "da";
+    if (m === "FI") return "fi";
+    return "no";
+  }
+
+  function buildVetaUrl(guid, lang, market){
+    const l = (lang || "").toString().trim().toLowerCase() || "no";
+    const m = (market || "").toString().trim().toLowerCase() || "no";
+    return `${VETA_BASE_URL}${guid}?lang=${encodeURIComponent(l)}&market=${encodeURIComponent(m)}`;
   }
 
   function renderFavMenu(){
@@ -622,7 +633,7 @@
       favs = [];
     }
     if (!favs.length){
-      el.innerHTML = `<span class="empty">Ingen favoritter</span>`;
+      el.innerHTML = `<span class="empty">No favorites</span>`;
       return;
     }
     el.innerHTML = favs.slice(0,5).map(f => {
@@ -641,11 +652,14 @@
       for (const item of (data || [])){
         const guid = (item?.guid || "").toString().trim();
         const title = (item?.title || "").toString().trim();
+        const marketCode = (item?.marketCode || "").toString().trim().toUpperCase();
+        const langRaw = (item?.lang || item?.isoLang || item?.language || "").toString().trim().toLowerCase();
+        const lang = langRaw || marketToLang(marketCode);
         const kws = Array.isArray(item?.keywords) ? item.keywords : [];
         for (const kw of kws){
           const key = (kw ?? "").toString().trim().toLowerCase();
           if (!key) continue;
-          if (!map.has(key)) map.set(key, { guid, title });
+          if (!map.has(key)) map.set(key, { guid, title, marketCode, lang });
         }
       }
       STATE.vetaIndex = map;
@@ -665,12 +679,16 @@
       btn.style.display = "none";
       btn.disabled = true;
       btn.removeAttribute("data-guid");
+      btn.removeAttribute("data-market");
+      btn.removeAttribute("data-lang");
       btn.removeAttribute("title");
       return;
     }
     btn.style.display = "inline-flex";
     btn.disabled = false;
     btn.setAttribute("data-guid", doc.guid);
+    if (doc.marketCode) btn.setAttribute("data-market", doc.marketCode);
+    if (doc.lang) btn.setAttribute("data-lang", doc.lang);
     btn.title = doc.title || "";
   }
 
@@ -863,20 +881,20 @@
     });
 
     if (!itemsRaw.length){
-      $("#nhSamples").innerHTML = `<div class="hint">Ingen eksempler her (støyord-filter kan ha fjernet de korte meldingene).</div>`;
+      $("#nhSamples").innerHTML = `<div class="hint">No examples here (noise-word filter may have removed short messages).</div>`;
       updateReviewedBadges();
       return;
     }
 
     if (items.length === 0){
-      $("#nhSamples").innerHTML = `<div class="hint">Ingen umerkede igjen her. Bytt filter til “Alle” for å se alt.</div>`;
+      $("#nhSamples").innerHTML = `<div class="hint">No unreviewed left here. Switch filter to “All” to see everything.</div>`;
       updateReviewedBadges();
       return;
     }
 
     $("#nhSamples").innerHTML = items.map(e=>{
       const link = buildConvLink(e.conv);
-      const right = e.conv ? `<a class="link" href="${safeHtml(link)}" target="_blank">Open • ${safeHtml(e.conv)}</a>` : `<span class="hint">Ingen convId</span>`;
+      const right = e.conv ? `<a class="link" href="${safeHtml(link)}" target="_blank">Open • ${safeHtml(e.conv)}</a>` : `<span class="hint">No convId</span>`;
 
       const key = makeSampleKey(e.conv, e.text);
       const r = STATE.reviews[key] || {};
@@ -891,19 +909,19 @@
           </div>
 
           <div class="reviewbar" role="group" aria-label="Klassifiser">
-            <button class="rbtn r1" data-cat="1" aria-pressed="${cat==="1"}" type="button">1 — Feil intent</button>
-            <button class="rbtn r2" data-cat="2" aria-pressed="${cat==="2"}" type="button">2 — Mangler/feil dekning</button>
-            <button class="rbtn r3" data-cat="3" aria-pressed="${cat==="3"}" type="button">3 — OK/Usikker</button>
+            <button class="rbtn r1" data-cat="1" aria-pressed="${cat==="1"}" type="button">1 — Wrong intent</button>
+            <button class="rbtn r2" data-cat="2" aria-pressed="${cat==="2"}" type="button">2 — Missing/wrong coverage</button>
+            <button class="rbtn r3" data-cat="3" aria-pressed="${cat==="3"}" type="button">3 — OK/Uncertain</button>
             <button class="rbtn" data-cat="" aria-pressed="${cat===""}" type="button">Clear</button>
 
             <span class="hint" style="margin-left:auto">
-              ${cat ? `Merket: <strong>${cat}</strong>` : `Umerket`}
+              ${cat ? `Marked: <strong>${cat}</strong>` : `Unmarked`}
             </span>
           </div>
 
           <div class="reviewmeta">
             <div>
-              <label>Foreslått riktig intent (valgfritt)</label><br/>
+              <label>Suggested correct intent (optional)</label><br/>
               <input type="text" class="js-suggest" list="${suggested.length >= 3 ? "nhIntentList" : ""}" placeholder="f.eks. Reschedule_Order" value="${suggested}" />
             </div>
           </div>
@@ -967,7 +985,7 @@
     $("#queueCount").textContent = String(items.length);
 
     if (!items.length){
-      $("#nhQueue").innerHTML = `<div class="hint">Ingen items i denne kategorien enda.</div>`;
+      $("#nhQueue").innerHTML = `<div class="hint">No items in this category yet.</div>`;
       return;
     }
 
@@ -981,13 +999,13 @@
             <div class="qtext">${safeHtml((it.message || "").trim())}</div>
             <div class="qactions">
               ${it.conv ? `<a class="link" href="${safeHtml(link)}" target="_blank">Open</a>` : `<span class="hint">No convId</span>`}
-              <button class="xbtn js-remove" type="button">Fjern</button>
+              <button class="xbtn js-remove" type="button">Remove</button>
             </div>
           </div>
 
           <div class="chips">
             <span class="chip">Original: <strong>${safeHtml(it.originalIntent || "—")}</strong></span>
-            ${suggested ? `<span class="chip">Foreslått: <strong>${safeHtml(suggested)}</strong></span>` : ``}
+            ${suggested ? `<span class="chip">Suggested: <strong>${safeHtml(suggested)}</strong></span>` : ``}
           </div>
         </div>
       `;
@@ -1012,7 +1030,7 @@
     const rows = await readXlsxFromArrayBuffer(ab);
     STATE.rawRows = rows;
     STATE.currentFileName = file.name || "";
-    $("#currentFileLabel").textContent = STATE.currentFileName ? `Lastet: ${STATE.currentFileName}` : "";
+    $("#currentFileLabel").textContent = STATE.currentFileName ? `Loaded: ${STATE.currentFileName}` : "";
     saveFileToLocalStorage(STATE.currentFileName, ab);
 
     const analysis = analyze(rows);
@@ -1113,7 +1131,7 @@
     if (cached){
       try{
         const ab = base64ToArrayBuffer(cached.data);
-        loadChatFromBuffer(ab, cached.name || "local.xlsx", "Lastet fra localStorage");
+        loadChatFromBuffer(ab, cached.name || "local.xlsx", "Loaded from localStorage");
       }catch(err){
         console.warn("Kunne ikke lese fil fra localStorage", err);
       }
@@ -1127,7 +1145,7 @@
       try{ await loadChatFile(f); }
       catch(err){
         console.error(err);
-        alert("Klarte ikke å lese filen. Sjekk at det er en xlsx/xls med forventede kolonnenavn.");
+        alert("Could not read the file. Make sure it is an xlsx/xls with the expected column names.");
       } finally {
         e.target.value = "";
       }
@@ -1143,8 +1161,10 @@
 
     $("#btnVeta").addEventListener("click", ()=>{
       const guid = $("#btnVeta").getAttribute("data-guid");
+      const lang = $("#btnVeta").getAttribute("data-lang") || "no";
+      const market = $("#btnVeta").getAttribute("data-market") || "NO";
       if (!guid) return;
-      window.open(buildVetaUrl(guid), "_blank", "noopener");
+      window.open(buildVetaUrl(guid, lang, market), "_blank", "noopener");
     });
 
     $("#btnClear").addEventListener("click", ()=>{
