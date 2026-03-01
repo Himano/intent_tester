@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project Overview</title>
+  <style>
+    :root{
+      --border:#d0d0d0;
+      --text:#222;
+      --muted:#666;
+      --bg:#fff;
+      --soft:#f7f7f7;
+      --accent:#D22B2B;
+      --shadow: 0 1px 0 rgba(0,0,0,0.08);
+    }
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+
+    body{
+      margin:0;
+      padding:16px;
+      font-family: Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      overflow:hidden; /* columns scroll internally */
+    }
+
+    .app{
+      height:100%;
+      display:flex;
+      gap:16px;
+    }
+
+    .col{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      min-width: 280px;
+      overflow:hidden;
+    }
+    .col.left{ width: 340px; }
+    .col.mid{ flex: 1; min-width: 420px; }
+    .col.right{ width: 360px; }
+
+    .col-header{
+      padding:12px 12px 10px;
+      border-bottom:1px solid var(--border);
+      background: var(--soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .col-title{ font-weight:800; letter-spacing:0.2px; }
+    .col-body{
+      padding:12px;
+      overflow:auto;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .card{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card-head{
+      padding:10px 12px;
+      border-bottom:1px solid var(--border);
+      background:var(--soft);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .card-title{ font-weight:800; font-size:14px; }
+    .card-body{
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    label{
+      font-size:12px;
+      color:var(--muted);
+      display:block;
+      margin-bottom:6px;
+    }
+    input[type="text"], input[type="url"], input[type="date"], select, textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:8px 10px;
+      font-size:13px;
+      outline:none;
+      background:#fff;
+    }
+    textarea{ min-height: 90px; resize: vertical; }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 980px){
+      body{ overflow:auto; }
+      .app{ flex-direction:column; height:auto; overflow:visible; }
+      .col.left, .col.right{ width:auto; }
+      .col.mid{ min-width: auto; }
+      .grid2{ grid-template-columns: 1fr; }
+    }
+
+    .pill{
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--muted);
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    button{
+      padding:7px 12px;
+      border:0;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      line-height:1;
+      white-space:nowrap;
+      background:var(--accent);
+      color:#fff;
+    }
+    button:hover{ filter:brightness(0.95); }
+    button:active{ transform: translateY(1px); }
+    button.secondary{ background:#444; }
+    button.ghost{
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+    button.small{ padding:6px 10px; font-size:12px; border-radius:10px; }
+
+    .muted{ color:var(--muted); font-size:12px; }
+    .tiny{ font-size:12px; color:var(--muted); }
+
+    /* Links list */
+    .link-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+    }
+    .link-item a{
+      color: var(--text);
+      text-decoration:none;
+      font-size:13px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      max-width: 220px;
+    }
+    .link-item a:hover{ text-decoration:underline; }
+
+    /* Post list */
+    .post{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .post-top{
+      padding:10px 12px;
+      background:var(--soft);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+    }
+    .post-title{
+      font-weight:800;
+      font-size:14px;
+      margin:0;
+    }
+    .post-meta{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      margin-top:2px;
+    }
+    .post-summary{
+      padding:10px 12px;
+      font-size:13px;
+      color:var(--text);
+    }
+    .post-details{
+      padding:0 12px 12px;
+      display:none;
+      gap:10px;
+    }
+    .post-details.open{ display:flex; flex-direction:column; }
+
+    .post-body{
+      white-space:pre-wrap;
+      font-size:13px;
+      line-height:1.35;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px;
+      background:#fff;
+    }
+    .post-url a{
+      color: var(--text);
+      text-decoration:underline;
+      font-size:13px;
+      word-break: break-all;
+    }
+
+    .icon-btn{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      flex: 0 0 auto;
+    }
+    .icon-btn.pinned{
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight:900;
+    }
+
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,0.35);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index: 50;
+    }
+    .modal-backdrop.open{ display:flex; }
+    .modal{
+      width: min(820px, 100%);
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+      overflow:hidden;
+    }
+    .modal-header{
+      padding:12px;
+      background:var(--soft);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .modal-body{
+      padding:12px;
+      display:grid;
+      gap:10px;
+    }
+
+    .filter-bar{
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .filter-head{
+      padding:10px 12px;
+      background:var(--soft);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .filter-body{
+      padding:12px;
+      display:grid;
+      gap:10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- LEFT -->
+    <section class="col left">
+      <div class="col-header">
+        <div>
+          <div class="col-title">Project</div>
+          <div class="muted">Overview + resources</div>
+        </div>
+        <button id="saveProjectBtn" class="ghost small" type="button" title="Save project info">Save</button>
+      </div>
+
+      <div class="col-body">
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Project info</div>
+            <span id="projectUpdatedPill" class="pill">Last updated: —</span>
+          </div>
+          <div class="card-body">
+            <div>
+              <label for="projectTitle">Title</label>
+              <input id="projectTitle" type="text" placeholder="e.g., Knowledge Base Improvements" />
+            </div>
+
+            <div class="grid2">
+              <div>
+                <label for="projectStarted">Started</label>
+                <input id="projectStarted" type="date" />
+              </div>
+              <div>
+                <label for="projectLastUpdate">Last update</label>
+                <input id="projectLastUpdate" type="date" />
+              </div>
+            </div>
+
+            <div>
+              <label for="projectDesc">Description</label>
+              <textarea id="projectDesc" placeholder="Short project description..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Relevant links</div>
+            <button id="addLinkBtn" class="secondary small" type="button">+ Add</button>
+          </div>
+          <div class="card-body" style="gap:8px;">
+            <div id="linksList" style="display:flex; flex-direction:column; gap:8px;"></div>
+            <div id="linksEmpty" class="tiny">No links yet.</div>
+          </div>
+        </div>
+
+        <div class="tiny">
+          Tip: This page uses localStorage, so your data stays in this browser.
+        </div>
+      </div>
+    </section>
+
+    <!-- MIDDLE -->
+    <section class="col mid">
+      <div class="col-header">
+        <div>
+          <div class="col-title">Update log</div>
+          <div class="muted">Search, filter, edit, pin</div>
+        </div>
+        <div class="row" style="justify-content:flex-end;">
+          <button id="newPostBtn" type="button">+ Add update</button>
+        </div>
+      </div>
+
+      <div class="col-body">
+        <!-- Filters -->
+        <div class="filter-bar">
+          <div class="filter-head">
+            <div style="font-weight:800;">Search & filters</div>
+            <button id="clearFiltersBtn" class="ghost small" type="button">Reset</button>
+          </div>
+          <div class="filter-body">
+            <div class="grid2">
+              <div>
+                <label for="searchText">Search text</label>
+                <input id="searchText" type="text" placeholder="Search title, summary, body, URL..." />
+              </div>
+              <div>
+                <label for="sortMode">Sort</label>
+                <select id="sortMode">
+                  <option value="newest">Newest first</option>
+                  <option value="oldest">Oldest first</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid2">
+              <div>
+                <label for="dateFrom">Date from</label>
+                <input id="dateFrom" type="date" />
+              </div>
+              <div>
+                <label for="dateTo">Date to</label>
+                <input id="dateTo" type="date" />
+              </div>
+            </div>
+
+            <div class="row">
+              <label style="display:flex; align-items:center; gap:8px; margin:0;">
+                <input id="pinnedOnly" type="checkbox" />
+                <span class="tiny" style="color:var(--text);">Pinned only</span>
+              </label>
+
+              <span id="resultCountPill" class="pill">0 results</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Posts -->
+        <div id="postsList" style="display:flex; flex-direction:column; gap:12px;"></div>
+        <div id="postsEmpty" class="tiny">No updates yet. Click “Add update” to create your first entry.</div>
+      </div>
+    </section>
+
+    <!-- RIGHT -->
+    <section class="col right">
+      <div class="col-header">
+        <div>
+          <div class="col-title">Pinned</div>
+          <div class="muted">Quick access</div>
+        </div>
+        <button id="clearPinsBtn" class="ghost small" type="button" title="Unpin all">Clear</button>
+      </div>
+
+      <div class="col-body">
+        <div id="pinnedList" style="display:flex; flex-direction:column; gap:12px;"></div>
+        <div id="pinnedEmpty" class="tiny">Nothing pinned yet. Use the pin icon in the update list.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL: Add/Edit post -->
+  <div id="modalBackdrop" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <div id="modalTitle" style="font-weight:900;">New update</div>
+          <div class="muted">Title, summary, body, URL</div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button id="closeModalBtn" class="ghost small" type="button">Close</button>
+          <button id="savePostBtn" type="button">Save</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label for="postTitle">Title</label>
+          <input id="postTitle" type="text" placeholder="e.g., Improved intent coverage metrics" />
+        </div>
+        <div class="grid2">
+          <div>
+            <label for="postDate">Date</label>
+            <input id="postDate" type="date" />
+          </div>
+          <div>
+            <label for="postUrl">URL (optional)</label>
+            <input id="postUrl" type="url" placeholder="https://..." />
+          </div>
+        </div>
+        <div>
+          <label for="postSummary">Summary</label>
+          <textarea id="postSummary" placeholder="Short summary shown in the feed..."></textarea>
+        </div>
+        <div>
+          <label for="postBody">Body</label>
+          <textarea id="postBody" style="min-height:160px;" placeholder="Full details..."></textarea>
+        </div>
+        <div class="row" style="justify-content:space-between;">
+          <div class="tiny" id="editingHint">Creating a new update.</div>
+          <button id="deletePostBtn" class="ghost small" type="button" style="display:none;">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Storage ----------
+    const LS_KEY = "projectOverview.state.v2";
+
+    const defaultState = () => ({
+      project: {
+        title: "Untitled project",
+        started: "",
+        lastUpdate: "",
+        description: ""
+      },
+      links: [],
+      posts: []
+    });
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(LS_KEY);
+        if(!raw) return defaultState();
+        const parsed = JSON.parse(raw);
+        return {
+          ...defaultState(),
+          ...parsed,
+          project: { ...defaultState().project, ...(parsed.project || {}) },
+          links: Array.isArray(parsed.links) ? parsed.links : [],
+          posts: Array.isArray(parsed.posts) ? parsed.posts : []
+        };
+      }catch(e){
+        console.warn("Could not load state:", e);
+        return defaultState();
+      }
+    }
+
+    function saveState(){
+      try{
+        localStorage.setItem(LS_KEY, JSON.stringify(state));
+      }catch(e){
+        console.warn("Could not save state:", e);
+      }
+    }
+
+    function uid(){
+      return Math.random().toString(16).slice(2) + Date.now().toString(16);
+    }
+
+    function todayISO(){
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth()+1).padStart(2,"0");
+      const day = String(d.getDate()).padStart(2,"0");
+      return `${y}-${m}-${day}`;
+    }
+
+    function parseISODate(s){
+      // Returns timestamp for YYYY-MM-DD (or NaN)
+      if(!s) return NaN;
+      const t = Date.parse(s + "T00:00:00");
+      return Number.isFinite(t) ? t : NaN;
+    }
+
+    function escapeHtml(str){
+      return (str ?? "").toString()
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#39;");
+    }
+    function escapeAttr(str){ return escapeHtml(str).replaceAll("`","&#96;"); }
+
+    let state = loadState();
+
+    // ---------- Elements ----------
+    const projectTitleEl = document.getElementById("projectTitle");
+    const projectStartedEl = document.getElementById("projectStarted");
+    const projectLastUpdateEl = document.getElementById("projectLastUpdate");
+    const projectDescEl = document.getElementById("projectDesc");
+    const projectUpdatedPill = document.getElementById("projectUpdatedPill");
+    const saveProjectBtn = document.getElementById("saveProjectBtn");
+
+    const linksList = document.getElementById("linksList");
+    const linksEmpty = document.getElementById("linksEmpty");
+    const addLinkBtn = document.getElementById("addLinkBtn");
+
+    const postsList = document.getElementById("postsList");
+    const postsEmpty = document.getElementById("postsEmpty");
+    const newPostBtn = document.getElementById("newPostBtn");
+
+    const pinnedList = document.getElementById("pinnedList");
+    const pinnedEmpty = document.getElementById("pinnedEmpty");
+    const clearPinsBtn = document.getElementById("clearPinsBtn");
+
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    const savePostBtn = document.getElementById("savePostBtn");
+    const deletePostBtn = document.getElementById("deletePostBtn");
+    const modalTitleEl = document.getElementById("modalTitle");
+    const editingHintEl = document.getElementById("editingHint");
+
+    const postTitleEl = document.getElementById("postTitle");
+    const postDateEl = document.getElementById("postDate");
+    const postUrlEl = document.getElementById("postUrl");
+    const postSummaryEl = document.getElementById("postSummary");
+    const postBodyEl = document.getElementById("postBody");
+
+    // Filters
+    const searchTextEl = document.getElementById("searchText");
+    const pinnedOnlyEl = document.getElementById("pinnedOnly");
+    const dateFromEl = document.getElementById("dateFrom");
+    const dateToEl = document.getElementById("dateTo");
+    const sortModeEl = document.getElementById("sortMode");
+    const clearFiltersBtn = document.getElementById("clearFiltersBtn");
+    const resultCountPill = document.getElementById("resultCountPill");
+
+    // ---------- Project ----------
+    function renderProject(){
+      projectTitleEl.value = state.project.title || "";
+      projectStartedEl.value = state.project.started || "";
+      projectLastUpdateEl.value = state.project.lastUpdate || "";
+      projectDescEl.value = state.project.description || "";
+      projectUpdatedPill.textContent = `Last updated: ${state.project.lastUpdate || "—"}`;
+      document.title = state.project.title ? `${state.project.title} — Project Overview` : "Project Overview";
+    }
+
+    function saveProject(){
+      state.project.title = (projectTitleEl.value || "").trim() || "Untitled project";
+      state.project.started = projectStartedEl.value || "";
+      state.project.lastUpdate = projectLastUpdateEl.value || "";
+      state.project.description = (projectDescEl.value || "").trim();
+      saveState();
+      renderProject();
+    }
+
+    saveProjectBtn.addEventListener("click", saveProject);
+
+    // ---------- Links ----------
+    function renderLinks(){
+      linksList.innerHTML = "";
+
+      if(!state.links.length){
+        linksEmpty.style.display = "block";
+        return;
+      }
+      linksEmpty.style.display = "none";
+
+      for(const link of state.links){
+        const item = document.createElement("div");
+        item.className = "link-item";
+
+        const a = document.createElement("a");
+        a.href = link.url || "#";
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = link.title || link.url || "Link";
+        a.title = link.url || "";
+
+        const actions = document.createElement("div");
+        actions.style.display = "flex";
+        actions.style.gap = "8px";
+
+        const editBtn = document.createElement("button");
+        editBtn.className = "ghost small";
+        editBtn.type = "button";
+        editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", () => {
+          const title = prompt("Link title:", link.title || "");
+          if(title === null) return;
+          const url = prompt("URL:", link.url || "");
+          if(url === null) return;
+          link.title = (title || "").trim() || (url || "").trim();
+          link.url = (url || "").trim();
+          saveState();
+          renderLinks();
+        });
+
+        const delBtn = document.createElement("button");
+        delBtn.className = "ghost small";
+        delBtn.type = "button";
+        delBtn.textContent = "Remove";
+        delBtn.addEventListener("click", () => {
+          state.links = state.links.filter(x => x.id !== link.id);
+          saveState();
+          renderLinks();
+        });
+
+        actions.appendChild(editBtn);
+        actions.appendChild(delBtn);
+
+        item.appendChild(a);
+        item.appendChild(actions);
+        linksList.appendChild(item);
+      }
+    }
+
+    addLinkBtn.addEventListener("click", () => {
+      const title = prompt("Link title:", "");
+      if(title === null) return;
+      const url = prompt("URL:", "https://");
+      if(url === null) return;
+
+      const cleanUrl = (url || "").trim();
+      state.links.unshift({
+        id: uid(),
+        title: (title || "").trim() || cleanUrl,
+        url: cleanUrl
+      });
+      saveState();
+      renderLinks();
+    });
+
+    // ---------- Posts (Add/Edit modal) ----------
+    let editingPostId = null;
+
+    function openModalForNew(){
+      editingPostId = null;
+      modalTitleEl.textContent = "New update";
+      editingHintEl.textContent = "Creating a new update.";
+      deletePostBtn.style.display = "none";
+
+      postTitleEl.value = "";
+      postSummaryEl.value = "";
+      postBodyEl.value = "";
+      postUrlEl.value = "";
+      postDateEl.value = todayISO();
+
+      modalBackdrop.classList.add("open");
+      postTitleEl.focus();
+    }
+
+    function openModalForEdit(postId){
+      const post = state.posts.find(p => p.id === postId);
+      if(!post) return;
+
+      editingPostId = postId;
+      modalTitleEl.textContent = "Edit update";
+      editingHintEl.textContent = "Editing an existing update.";
+      deletePostBtn.style.display = "inline-block";
+
+      postTitleEl.value = post.title || "";
+      postSummaryEl.value = post.summary || "";
+      postBodyEl.value = post.body || "";
+      postUrlEl.value = post.url || "";
+      postDateEl.value = post.date || todayISO();
+
+      modalBackdrop.classList.add("open");
+      postTitleEl.focus();
+    }
+
+    function closeModal(){
+      modalBackdrop.classList.remove("open");
+    }
+
+    newPostBtn.addEventListener("click", openModalForNew);
+    closeModalBtn.addEventListener("click", closeModal);
+    modalBackdrop.addEventListener("click", (e) => {
+      if(e.target === modalBackdrop) closeModal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeModal();
+    });
+
+    function upsertPost(){
+      const title = (postTitleEl.value || "").trim();
+      const summary = (postSummaryEl.value || "").trim();
+      const body = (postBodyEl.value || "").trim();
+      const url = (postUrlEl.value || "").trim();
+      const date = postDateEl.value || todayISO();
+
+      if(!title || !summary){
+        alert("Please add at least a Title and a Summary.");
+        return;
+      }
+
+      if(editingPostId){
+        const p = state.posts.find(x => x.id === editingPostId);
+        if(!p) return;
+
+        p.title = title;
+        p.summary = summary;
+        p.body = body;
+        p.url = url;
+        p.date = date;
+        p.updatedAt = Date.now();
+      }else{
+        state.posts.unshift({
+          id: uid(),
+          title,
+          date,
+          summary,
+          body,
+          url,
+          pinned: false,
+          createdAt: Date.now(),
+          updatedAt: null
+        });
+      }
+
+      // Keep project "last update" aligned (useful default)
+      state.project.lastUpdate = date;
+
+      saveState();
+      closeModal();
+      renderAll();
+    }
+
+    savePostBtn.addEventListener("click", upsertPost);
+
+    function deletePost(postId){
+      if(!confirm("Delete this update?")) return;
+      state.posts = state.posts.filter(x => x.id !== postId);
+      saveState();
+      renderAll();
+    }
+
+    deletePostBtn.addEventListener("click", () => {
+      if(!editingPostId) return;
+      const id = editingPostId;
+      closeModal();
+      editingPostId = null;
+      deletePost(id);
+    });
+
+    function togglePin(postId){
+      const p = state.posts.find(x => x.id === postId);
+      if(!p) return;
+      p.pinned = !p.pinned;
+      saveState();
+      renderAll();
+    }
+
+    // ---------- Filters ----------
+    const filterState = {
+      text: "",
+      pinnedOnly: false,
+      dateFrom: "",
+      dateTo: "",
+      sort: "newest"
+    };
+
+    function readFiltersFromUI(){
+      filterState.text = (searchTextEl.value || "").trim().toLowerCase();
+      filterState.pinnedOnly = !!pinnedOnlyEl.checked;
+      filterState.dateFrom = dateFromEl.value || "";
+      filterState.dateTo = dateToEl.value || "";
+      filterState.sort = sortModeEl.value || "newest";
+    }
+
+    function clearFilters(){
+      searchTextEl.value = "";
+      pinnedOnlyEl.checked = false;
+      dateFromEl.value = "";
+      dateToEl.value = "";
+      sortModeEl.value = "newest";
+      readFiltersFromUI();
+      renderAll();
+    }
+
+    clearFiltersBtn.addEventListener("click", clearFilters);
+
+    [searchTextEl, pinnedOnlyEl, dateFromEl, dateToEl, sortModeEl].forEach(el => {
+      el.addEventListener("input", () => { readFiltersFromUI(); renderAll(); });
+      el.addEventListener("change", () => { readFiltersFromUI(); renderAll(); });
+    });
+
+    function postMatchesFilters(post){
+      if(filterState.pinnedOnly && !post.pinned) return false;
+
+      const fromT = parseISODate(filterState.dateFrom);
+      const toT = parseISODate(filterState.dateTo);
+      const postT = parseISODate(post.date);
+
+      if(Number.isFinite(fromT) && Number.isFinite(postT) && postT < fromT) return false;
+      if(Number.isFinite(toT) && Number.isFinite(postT) && postT > toT) return false;
+
+      if(filterState.text){
+        const hay = [
+          post.title || "",
+          post.summary || "",
+          post.body || "",
+          post.url || "",
+          post.date || ""
+        ].join(" ").toLowerCase();
+        if(!hay.includes(filterState.text)) return false;
+      }
+
+      return true;
+    }
+
+    function getFilteredPosts(){
+      let posts = [...state.posts].filter(postMatchesFilters);
+
+      posts.sort((a,b) => {
+        const ta = parseISODate(a.date);
+        const tb = parseISODate(b.date);
+        if(filterState.sort === "oldest"){
+          return (ta || 0) - (tb || 0);
+        }
+        return (tb || 0) - (ta || 0);
+      });
+
+      return posts;
+    }
+
+    // ---------- Render posts ----------
+    function renderPosts(){
+      const filtered = getFilteredPosts();
+      resultCountPill.textContent = `${filtered.length} result${filtered.length === 1 ? "" : "s"}`;
+
+      postsList.innerHTML = "";
+      if(!filtered.length){
+        postsEmpty.style.display = "block";
+        return;
+      }
+      postsEmpty.style.display = "none";
+
+      for(const post of filtered){
+        const wrap = document.createElement("div");
+        wrap.className = "post";
+
+        const top = document.createElement("div");
+        top.className = "post-top";
+
+        const left = document.createElement("div");
+        left.style.minWidth = "0";
+
+        const title = document.createElement("h3");
+        title.className = "post-title";
+        title.textContent = post.title;
+
+        const meta = document.createElement("div");
+        meta.className = "post-meta";
+        meta.innerHTML = `<span class="pill">${post.date || "—"}</span>`;
+
+        left.appendChild(title);
+        left.appendChild(meta);
+
+        const right = document.createElement("div");
+        right.style.display = "flex";
+        right.style.gap = "8px";
+        right.style.alignItems = "flex-start";
+
+        const pinBtn = document.createElement("button");
+        pinBtn.type = "button";
+        pinBtn.className = "icon-btn" + (post.pinned ? " pinned" : "");
+        pinBtn.title = post.pinned ? "Unpin" : "Pin";
+        pinBtn.textContent = "📌";
+        pinBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          togglePin(post.id);
+        });
+
+        const editBtn = document.createElement("button");
+        editBtn.type = "button";
+        editBtn.className = "icon-btn";
+        editBtn.title = "Edit";
+        editBtn.textContent = "✏️";
+        editBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openModalForEdit(post.id);
+        });
+
+        right.appendChild(pinBtn);
+        right.appendChild(editBtn);
+
+        top.appendChild(left);
+        top.appendChild(right);
+
+        const summary = document.createElement("div");
+        summary.className = "post-summary";
+        summary.textContent = post.summary || "";
+
+        const details = document.createElement("div");
+        details.className = "post-details";
+
+        const body = document.createElement("div");
+        body.className = "post-body";
+        body.textContent = post.body || "(No body text.)";
+
+        const url = document.createElement("div");
+        url.className = "post-url";
+        url.innerHTML = post.url
+          ? `<div class="tiny">URL: <a href="${escapeAttr(post.url)}" target="_blank" rel="noopener">${escapeHtml(post.url)}</a></div>`
+          : `<div class="tiny">URL: —</div>`;
+
+        const actions = document.createElement("div");
+        actions.style.display = "flex";
+        actions.style.gap = "10px";
+        actions.style.flexWrap = "wrap";
+
+        const del = document.createElement("button");
+        del.type = "button";
+        del.className = "ghost small";
+        del.textContent = "Delete";
+        del.addEventListener("click", (e) => {
+          e.stopPropagation();
+          deletePost(post.id);
+        });
+
+        actions.appendChild(del);
+
+        details.appendChild(body);
+        details.appendChild(url);
+        details.appendChild(actions);
+
+        let open = false;
+        top.addEventListener("click", () => {
+          open = !open;
+          details.classList.toggle("open", open);
+        });
+
+        wrap.appendChild(top);
+        wrap.appendChild(summary);
+        wrap.appendChild(details);
+
+        postsList.appendChild(wrap);
+      }
+    }
+
+    function renderPinned(){
+      pinnedList.innerHTML = "";
+      const pinned = state.posts.filter(p => p.pinned);
+
+      if(!pinned.length){
+        pinnedEmpty.style.display = "block";
+        return;
+      }
+      pinnedEmpty.style.display = "none";
+
+      for(const post of pinned){
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const head = document.createElement("div");
+        head.className = "card-head";
+        head.innerHTML = `<div class="card-title">${escapeHtml(post.title)}</div>
+                          <span class="pill">${post.date || "—"}</span>`;
+
+        const body = document.createElement("div");
+        body.className = "card-body";
+
+        const s = document.createElement("div");
+        s.style.fontSize = "13px";
+        s.textContent = post.summary || "";
+
+        const btnRow = document.createElement("div");
+        btnRow.className = "row";
+
+        const openEdit = document.createElement("button");
+        openEdit.type = "button";
+        openEdit.className = "ghost small";
+        openEdit.textContent = "Edit";
+        openEdit.addEventListener("click", () => openModalForEdit(post.id));
+
+        const unpin = document.createElement("button");
+        unpin.type = "button";
+        unpin.className = "ghost small";
+        unpin.textContent = "Unpin";
+        unpin.addEventListener("click", () => togglePin(post.id));
+
+        btnRow.appendChild(openEdit);
+        btnRow.appendChild(unpin);
+
+        body.appendChild(s);
+        body.appendChild(btnRow);
+
+        card.appendChild(head);
+        card.appendChild(body);
+        pinnedList.appendChild(card);
+      }
+    }
+
+    clearPinsBtn.addEventListener("click", () => {
+      for(const p of state.posts) p.pinned = false;
+      saveState();
+      renderAll();
+    });
+
+    // ---------- Render all ----------
+    function renderAll(){
+      renderProject();
+      renderLinks();
+      renderPosts();
+      renderPinned();
+    }
+
+    // ---------- Init ----------
+    document.addEventListener("DOMContentLoaded", () => {
+      if(!state.project.title) state.project.title = "Untitled project";
+      if(!state.project.started) state.project.started = todayISO();
+      if(!state.project.lastUpdate) state.project.lastUpdate = state.project.started;
+
+      // init filters
+      readFiltersFromUI();
+
+      saveState();
+      renderAll();
+    });
+  </script>
+</body>
+</html>
