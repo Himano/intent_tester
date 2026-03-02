@@ -6,35 +6,26 @@
   <title>Tool Menu</title>
 
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap");
+
     :root{
-      /* IKEA-ish, men dempet */
-      --bg: #f6f6f5;
-      --surface: #ffffff;
-      --surface-2: #fbfbfa;
-
-      --text: #1f1f1f;
-      --muted: #5f6368;
-
-      --border: #d6d7d9;
-      --border-2: #ececec;
-
-      --brand: #0058a3;     /* IKEA-blå */
-      --brand-2: #0b66c3;
-
-      --danger: #b42318;
-
-      --shadow: 0 8px 22px rgba(0,0,0,.06);
-      --shadow-sm: 0 4px 12px rgba(0,0,0,.05);
-
-      --radius: 16px;
-      --radius-sm: 12px;
-
-      --pad: 28px;
-      --gap: 16px;
-
-      --ring: 0 0 0 3px rgba(0,88,163,.18);
-
-      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      --ink: #0b0b0b;
+      --paper: #fff7dc;
+      --paper-2: #fff0b3;
+      --paper-3: #f7ffe9;
+      --accent: #003399;
+      --accent-2: #ffd400;
+      --accent-3: #00d1b2;
+      --muted: #2e2e2e;
+      --border: 3px solid #0b0b0b;
+      --shadow: 6px 6px 0 #0b0b0b;
+      --shadow-soft: 3px 3px 0 #0b0b0b;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --pad: 24px;
+      --gap: 14px;
+      --ring: 0 0 0 4px rgba(0,51,153,.25);
+      --font: "Space Grotesk", "Trebuchet MS", Arial, sans-serif;
     }
 
     *{ box-sizing: border-box; }
@@ -43,34 +34,35 @@
     body{
       margin: 0;
       font-family: var(--font);
-      color: var(--text);
-      background: var(--bg);
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 420px at 8% 0%, rgba(255, 212, 0, 0.35), transparent 60%),
+        radial-gradient(1000px 520px at 90% -4%, rgba(0, 209, 178, 0.25), transparent 60%),
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 1px, transparent 1px, transparent 22px),
+        var(--paper);
     }
 
-    /* Desktop-first layout */
     .app{
       min-height: 100%;
       display: grid;
       grid-template-rows: auto 1fr;
     }
 
-    
-
     .topbar{
-      background: rgba(246,246,245,.86);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border-2);
+      background: rgba(255, 255, 255, .88);
+      border-bottom: var(--border);
       position: sticky;
       top: 0;
       z-index: 10;
+      box-shadow: var(--shadow);
     }
 
     .topbar-inner{
-      padding: 18px var(--pad);
+      padding: 16px var(--pad);
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
 
     .brand{
@@ -81,14 +73,17 @@
 
     .brand h1{
       margin: 0;
-      font-size: 18px;
-      letter-spacing: .2px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      font-weight: 800;
     }
 
     .brand .sub{
       margin: 0;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted);
+      font-weight: 600;
     }
 
     .controls{
@@ -106,19 +101,19 @@
     .search input{
       width: 100%;
       height: 42px;
-      border: 1px solid var(--border);
-      background: var(--surface);
+      border: var(--border);
+      background: #fff;
       border-radius: 999px;
-      padding: 0 42px 0 44px;
+      padding: 0 42px 0px 44px;
       font-size: 13px;
       outline: none;
-      box-shadow: 0 1px 0 rgba(0,0,0,.02);
-      transition: border-color .15s ease, box-shadow .15s ease;
+      box-shadow: var(--shadow-soft);
+      transition: transform .12s ease, box-shadow .12s ease;
     }
 
     .search input:focus{
-      border-color: rgba(0,88,163,.55);
-      box-shadow: var(--ring);
+      box-shadow: var(--ring), var(--shadow-soft);
+      transform: translate(-1px, -1px);
     }
 
     .search .icon{
@@ -134,23 +129,24 @@
 
     .search .clear{
       position: absolute;
-      right: 8px;
-      top: 50%;
+      right: 9px;
+      top: 48%;
       transform: translateY(-50%);
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 999px;
-      border: 1px solid transparent;
-      background: transparent;
+      border: var(--border);
+      background: var(--paper-2);
       cursor: pointer;
-      color: var(--muted);
+      color: var(--ink);
       display: grid;
       place-items: center;
+      box-shadow: var(--shadow-soft);
+      font-weight: 800;
     }
-
-    .search .clear:hover{
-      background: var(--surface-2);
-      border-color: var(--border-2);
+    .search .clear:active{
+      transform: translate(2px, 2px);
+      box-shadow: 0 0 0 #0b0b0b;
     }
 
     .meta-pill{
@@ -160,15 +156,17 @@
       height: 36px;
       padding: 0 12px;
       border-radius: 999px;
-      border: 1px solid var(--border-2);
-      background: rgba(255,255,255,.75);
-      color: var(--muted);
+      border: var(--border);
+      background: #fff;
+      color: var(--ink);
       font-size: 12px;
       white-space: nowrap;
+      box-shadow: var(--shadow-soft);
+      font-weight: 700;
     }
 
     main{
-      padding: 22px var(--pad) 34px;
+      padding: 20px var(--pad) 34px;
     }
 
     .layout{
@@ -178,83 +176,96 @@
     }
 
     .section{
-      background: var(--surface);
-      border: 1px solid var(--border-2);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
+      background: #fff;
+      border: var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
       overflow: hidden;
       margin-bottom: 10px;
     }
 
     .section-header{
-      padding: 16px 18px;
-      border-bottom: 1px solid var(--border-2);
+      padding: 14px 16px;
+      border-bottom: var(--border);
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 12px;
+      background: #fff;
       
     }
+
+
 
     .section-title{
       margin: 0;
       font-size: 14px;
       letter-spacing: .2px;
+      text-transform: uppercase;
+      font-weight: 800;
     }
 
     .section-hint{
       margin: 0;
       font-size: 12px;
       color: var(--muted);
+      font-weight: 600;
     }
+
+    #s-h{
+      background-color: transparent;
+      border-bottom: transparent;
+      margin-bottom: -15px;
+    }
+
+    
 
     .section-body{
-      padding: 18px;
+      padding: 16px;
     }
 
-.grid{
-  display: grid;
-  gap: var(--gap);
-  align-items: stretch;
+    .grid{
+      display: grid;
+      gap: var(--gap);
+      align-items: stretch;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 
-  /* default for desktop */
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-/* 5 kolonner på store skjermer (typisk 27") */
-@media (min-width: 1600px){
-  .grid{
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
+    @media (min-width: 1600px){
+      .grid{
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
 
     .empty{
       margin: 0;
       padding: 14px 16px;
-      border: 1px dashed var(--border);
+      border: var(--border);
       border-radius: var(--radius-sm);
-      background: var(--surface-2);
-      color: var(--muted);
+      background: var(--paper-2);
+      color: var(--ink);
       font-size: 13px;
+      font-weight: 700;
+      box-shadow: var(--shadow-soft);
     }
 
     .card{
-      border: 1px solid var(--border-2);
-      background: var(--surface);
-      border-radius: var(--radius);
+      border: var(--border);
+      background: #fff;
+      border-radius: 14px;
       padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       min-height: 168px;
-      box-shadow: 0 1px 0 rgba(0,0,0,.02);
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      box-shadow: var(--shadow);
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+      animation: cardPop 220ms ease both;
     }
 
     .card:hover{
-      transform: translateY(-1px);
-      border-color: rgba(0,0,0,.10);
-      box-shadow: var(--shadow);
+      transform: translate(-2px, -2px);
+      background: var(--paper-2);
     }
 
     .card-top{
@@ -269,6 +280,7 @@
       font-size: 15px;
       letter-spacing: .1px;
       line-height: 1.2;
+      font-weight: 800;
     }
 
     .card p{
@@ -277,6 +289,7 @@
       color: var(--muted);
       line-height: 1.45;
       flex: 1;
+      font-weight: 600;
     }
 
     .actions{
@@ -302,31 +315,33 @@
       padding: 0 12px;
       border-radius: 999px;
       font-size: 13px;
-      font-weight: 650;
+      font-weight: 800;
       text-decoration: none;
-      border: 1px solid transparent;
+      border: var(--border);
       cursor: pointer;
       user-select: none;
-      transition: background .15s ease, border-color .15s ease, filter .15s ease, box-shadow .15s ease;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
       white-space: nowrap;
+      box-shadow: var(--shadow-soft);
+      text-transform: uppercase;
+      letter-spacing: .02em;
     }
 
-    .btn:focus-visible{ outline: none; box-shadow: var(--ring); }
+    .btn:focus-visible{ outline: none; box-shadow: var(--ring), var(--shadow-soft); }
+    .btn:active{ transform: translate(2px, 2px); box-shadow: 0 0 0 #0b0b0b; }
 
     .btn-primary{
-      background: var(--brand);
+      background: var(--accent);
       color: #fff;
     }
-    .btn-primary:hover{ background: var(--brand-2); }
+    .btn-primary:hover{ filter: saturate(1.1); }
 
     .btn-ghost{
-      background: transparent;
-      border-color: var(--border);
-      color: var(--text);
+      background: #fff;
+      color: var(--ink);
     }
     .btn-ghost:hover{
-      background: var(--surface-2);
-      border-color: rgba(0,0,0,.14);
+      background: var(--paper-2);
     }
 
     .fav-btn{
@@ -340,12 +355,12 @@
     }
 
     .fav-btn.active{
-      border-color: rgba(0,88,163,.25);
-      background: rgba(0,88,163,.08);
+      background: var(--accent-2);
     }
     .fav-btn.active .star{
-      color: var(--brand);
-      fill: var(--brand);
+      color: var(--ink);
+      fill: var(--ink);
+      
     }
 
     .star{
@@ -356,36 +371,46 @@
 
     .kbd{
       font-variant-numeric: tabular-nums;
-      border: 1px solid var(--border-2);
-      background: rgba(255,255,255,.6);
+      border: var(--border);
+      background: #fff;
       border-radius: 8px;
       padding: 2px 8px;
       font-size: 12px;
-      color: var(--muted);
+      color: var(--ink);
+      box-shadow: var(--shadow-soft);
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
     .hidden{ display:none !important; }
+    .vis-hidden{
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
 
     .view-toggle{
       display:flex;
-      gap:6px;
+      gap:8px;
       align-items:center;
       margin-right: 6px;
-      background: #fff;
-      border: 1px solid var(--border-2);
+      background: transparent;
+      border: 4px solid black;
       border-radius: 999px;
-      padding: 4px;
-      margin-bottom: -20px;
+      padding: 10px 10px;
+      margin-bottom: 0;
+      box-shadow: var(--shadow-soft);
+      background-color: white;
+      
     }
+
     .view-toggle .btn{
       border-radius: 999px;
       font-size: 12px;
       padding: 6px 10px;
     }
     .view-toggle .btn.active{
-      background: var(--brand);
-      color: #fff;
-      border-color: var(--brand);
+      background: var(--accent);
+      color: #003399;
+      background-color:#ffd400;
     }
 
     .dep-grid{
@@ -394,11 +419,11 @@
       gap: 10px;
     }
     .dep-card{
-      border: 1px solid var(--border-2);
+      border: var(--border);
       background: #fff;
       border-radius: 14px;
       padding: 10px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: var(--shadow);
       cursor: grab;
       user-select: none;
     }
@@ -419,19 +444,21 @@
       flex-wrap:wrap;
     }
     .dep-market-btn{
-      border:1px solid var(--border-2);
+      border: var(--border);
       background:#fff;
-      color:var(--text);
+      color:var(--ink);
       border-radius:999px;
       padding:4px 8px;
       font-size:11px;
       cursor:pointer;
       user-select: none;
+      box-shadow: var(--shadow-soft);
+      font-weight: 700;
     }
     .dep-market-btn.active{
-      border-color: var(--brand);
-      color: var(--brand);
-      box-shadow: var(--ring);
+      background: var(--accent-3);
+      color: #003399;
+      background-color:#ffd400;
     }
     .dep-card.dep-bookmark{
       cursor: grab;
@@ -440,19 +467,31 @@
     .dep-card h3{
       margin: 0 0 6px 0;
       font-size: 14px;
+      font-weight: 800;
     }
     .dep-card p{
       margin: 0;
       font-size: 12px;
       color: var(--muted);
+      font-weight: 600;
     }
 
+    @media (max-width: 980px){
+      .topbar-inner{
+        grid-template-columns: 1fr;
+      }
+      .search{ width: 100%; }
+    }
 
-    /* Litt mer “desktop” luft */
     @media (min-width: 1200px){
-      :root{ --pad: 34px; --gap: 18px; }
-      .topbar-inner{ padding: 20px var(--pad); }
-      main{ padding: 24px var(--pad) 40px; }
+      :root{ --pad: 30px; --gap: 16px; }
+      .topbar-inner{ padding: 18px var(--pad); }
+      main{ padding: 22px var(--pad) 38px; }
+    }
+
+    @keyframes cardPop {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -477,10 +516,7 @@
             </button>
           </div>
 
-          <div id="metaPill" class="meta-pill" title="Status">
-            <span id="countText">0 tools</span>
-            <span class="kbd">Fav max 5</span>
-          </div>
+       
         </div>
       </div>
     </header>
@@ -488,8 +524,8 @@
     <main>
       <div class="layout">
 
-        <div class="section-header" style="padding-top:0;">
-          <div class="view-toggle" role="tablist" aria-label="View toggle">
+        <div id="s-h" class="section-header" style="padding-top:0;">
+          <div  class="view-toggle" role="tablist" aria-label="View toggle">
             <button class="btn btn-ghost active" id="viewToolsBtn" type="button" role="tab" aria-selected="true">Tools</button>
             <button class="btn btn-ghost" id="viewDepsBtn" type="button" role="tab" aria-selected="false">Dependencies</button>
           </div>
@@ -497,9 +533,9 @@
 
         <div id="toolsView">
         <section class="section">
-          <div class="section-header">
+          <div  class="section-header">
             <h2 class="section-title">Favourites</h2>
-            <p class="section-hint">Vises øverst for rask tilgang.</p>
+           
           </div>
           <div class="section-body">
             <div id="favGrid" class="grid"></div>
@@ -509,7 +545,7 @@
         <section class="section">
           <div class="section-header">
             <h2 class="section-title">All tools</h2>
-            <p class="section-hint">Alt samlet – filtrer med søkefeltet.</p>
+           
           </div>
           <div class="section-body">
             <div id="allGrid" class="grid"></div>
@@ -541,7 +577,7 @@
     const tools = [
       { href: "intent.html", title: "Intent Tester", desc: "Import the JSON provided by the Dialogflow script to see how well your intents/trainingphrases work." },
       { href: "dialogflowtool.html", title: "Dialogflow Tool", desc: "Importer intent JSON, edit trainingphrases and generate a new Dialogflow ready JSON file." },
-      { href: "dashboard.html", title: "Trainingphrase dashboard", desc: "Import the xlsx trainingphrase overview from powerBI to get a full overview over trainingphrases and Ngrams." },
+      { href: "dashboard.html", title: "Trainingphrase overview dashboard", desc: "Import the xlsx trainingphrase overview from powerBI to get a full overview over trainingphrases and Ngrams." },
       { href: "nothelpful.html", title: "Not Helpful sorter", desc: "Import a transcript with filtering not helpful.<br/>Sort customer questions into the correct intent or find room for improvement in FAQ documents." },
       { href: "Feedback.html", title: "Feedback insights", desc: "Load feedback JSON, explore insights, and review resolved comments by document." },
     ];
@@ -555,7 +591,6 @@
     const $depsView = document.getElementById("depsView");
     const $viewToolsBtn = document.getElementById("viewToolsBtn");
     const $viewDepsBtn = document.getElementById("viewDepsBtn");
-    const $metaPill = document.getElementById("metaPill");
     const $depGrid = document.getElementById("depGrid");
 
     const dependencies = [
@@ -760,8 +795,6 @@
         ? otherTools.map(t => renderCard(t, favs)).join("")
         : `<p class="empty">Ingen treff. Prøv et annet søk.</p>`;
 
-      const visibleCount = favTools.length + otherTools.length;
-      $countText.textContent = `${visibleCount} tool${visibleCount === 1 ? "" : "s"}${q ? " (filtrert)" : ""}`;
 
       document.querySelectorAll(".fav-btn").forEach(btn=>{
         btn.addEventListener("click", ()=>{
@@ -794,9 +827,8 @@
       $viewDepsBtn.classList.toggle("active", !isTools);
       $viewToolsBtn.setAttribute("aria-selected", isTools ? "true" : "false");
       $viewDepsBtn.setAttribute("aria-selected", !isTools ? "true" : "false");
-      $search.classList.toggle("hidden", !isTools);
-      $clear.classList.toggle("hidden", !isTools);
-      $metaPill.classList.toggle("hidden", !isTools);
+      $search.classList.toggle("vis-hidden", !isTools);
+      $clear.classList.toggle("vis-hidden", !isTools);
     }
 
     // Søk + clear

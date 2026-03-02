@@ -3,34 +3,46 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Treningsfrase-dashboard</title>
+  <title>Trainingphrase overview</title>
 
   <!-- SheetJS (XLSX parser) - loaded dynamically with CDN fallbacks -->
 
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap");
+
     :root {
-      --border: #d0d0d0;
-      --text: #222;
-      --muted: #666;
-      --bg: #fff;
-      --soft: #f7f7f7;
-      --accent: #D22B2B;
+      --ink: #0b0b0b;
+      --paper: #fef7e7;
+      --paper-2: #fff5cf;
+      --accent: #003399;
+      --accent-2: #00d1b2;
+      --accent-3: #ffd400;
+      --muted: #2e2e2e;
+      --shadow: 6px 6px 0 #0b0b0b;
+      --shadow-soft: 3px 3px 0 #0b0b0b;
+      --radius: 10px;
+      --border: 3px solid #0b0b0b;
     }
 
     html, body { height: 100%; }
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Space Grotesk", "Trebuchet MS", Arial, sans-serif;
       margin: 0;
-      padding: 20px;
-      color: var(--text);
-      background: var(--bg);
+      padding: 18px;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 420px at 8% -6%, rgba(255, 212, 0, 0.28), transparent 60%),
+        radial-gradient(900px 520px at 92% -4%, rgba(0, 91, 255, 0.18), transparent 62%),
+        repeating-linear-gradient(0deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 1px, transparent 1px, transparent 28px),
+        #fff7e9;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    h2 { margin: 0; }
+    h2 { margin: 0; font-size: 22px; letter-spacing: -0.01em; }
 
     .headerbar{
       display:flex;
@@ -41,7 +53,7 @@
       margin-bottom: 6px;
     }
 
-  .topbar{
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -56,47 +68,59 @@
     }
 
     button {
-      padding: 7px 12px;
+      padding: 8px 12px;
       background-color: var(--accent);
-      border: 0;
+      border: var(--border);
       color: #fff;
-      border-radius: 6px;
+      border-radius: var(--radius);
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 800;
       line-height: 1;
       white-space: nowrap;
+      box-shadow: var(--shadow);
+      transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
-    button:hover { filter: brightness(0.95); }
-    button:active { transform: translateY(1px); }
+    button:hover { filter: saturate(1.1); }
+    button:active {
+      transform: translate(3px, 3px);
+      box-shadow: 0 0 0 #0b0b0b;
+    }
 
-    button.secondary { background: #444; }
+    button.secondary { background: var(--accent-2); }
     button.ghost {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-weight: 600;
+      background: var(--paper-2);
+      border: var(--border);
+      color: var(--ink);
+      font-weight: 800;
+      box-shadow: var(--shadow-soft);
+      text-transform: none;
     }
 
     .input, select {
-      height: 30px;
-      padding: 0 8px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
+      height: 34px;
+      padding: 0 10px;
+      border: var(--border);
+      border-radius: var(--radius);
       font-size: 13px;
       background: #fff;
-      color: var(--text);
+      color: var(--ink);
+      box-shadow: var(--shadow-soft);
     }
-    .input { width: 220px; }
+    .input { width: 230px; }
 
     .pill {
       display:inline-block;
-      padding:2px 8px;
+      padding:4px 10px;
       border-radius:999px;
-      border:1px solid var(--border);
-      background:#fff;
+      border: var(--border);
+      background: #fff;
       font-size:12px;
-      color:var(--muted);
+      color: var(--ink);
       white-space:nowrap;
+      box-shadow: var(--shadow-soft);
+      font-weight: 700;
     }
     .fav-menu{
       display:flex;
@@ -107,20 +131,23 @@
     }
     .fav-menu a{
       text-decoration:none;
-      border:1px solid var(--border);
+      border: var(--border);
       border-radius:999px;
       padding:4px 10px;
       font-size:14px;
-      color:var(--text);
-      background:#fff;
+      color: var(--ink);
+      background: #fff;
       white-space:nowrap;
+      box-shadow: var(--shadow-soft);
+      font-weight: 700;
     }
     .fav-menu .empty{
       font-size:14px;
-      color:var(--muted);
+      color: var(--muted);
+      font-weight: 700;
     }
 
-    .hint { font-size: 12px; color: var(--muted); }
+    .hint { font-size: 12px; color: var(--muted); font-weight: 600; }
 
     /* Layout */
     .workspace{
@@ -131,14 +158,15 @@
 
     .summary{
       flex:1;
-      border:1px solid var(--border);
-      border-radius:10px;
-      padding:10px 12px;
-      background:#fff;
+      border: var(--border);
+      border-radius: 16px;
+      padding:12px 14px;
+      background: #fff;
       display:flex;
       flex-direction:column;
       gap:10px;
       min-height:140px;
+      box-shadow: var(--shadow);
     }
 
     .summary-row{
@@ -156,16 +184,22 @@
     }
 
     .card{
-      border:1px solid var(--border);
-      border-radius:10px;
-      background:#fff;
-      padding:10px;
+      border: var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding:12px;
       display:flex;
       flex-direction:column;
       gap:8px;
       cursor:pointer;
+      box-shadow: var(--shadow);
+      transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+      animation: cardPop 220ms ease both;
     }
-    .card:hover{ background:#fcfcfc; }
+    .card:hover{
+      transform: translate(-2px, -2px);
+      background: var(--paper-2);
+    }
 
     .card-title{
       display:flex;
@@ -191,29 +225,32 @@
       gap:6px;
     }
     .ngram-badge{
-      border:1px solid var(--border);
-      background:var(--soft);
+      border: var(--border);
+      background: var(--accent-3);
       border-radius:999px;
       padding:2px 8px;
       font-size:12px;
-      color:var(--text);
+      color: var(--ink);
       max-width:100%;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
+      box-shadow: var(--shadow-soft);
+      font-weight: 700;
     }
 
     .empty{
-      color:var(--muted);
+      color: var(--muted);
       font-size:13px;
       padding:8px 0 0;
+      font-weight: 600;
     }
 
     /* Modal */
     .modal-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,0.35);
+      background:rgba(0,0,0,0.45);
       display:none;
       align-items:center;
       justify-content:center;
@@ -225,9 +262,9 @@
       max-height:92vh;
       overflow:auto;
       background:#fff;
-      border-radius:12px;
-      border:1px solid var(--border);
-      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      border-radius:16px;
+      border: var(--border);
+      box-shadow: 10px 10px 0 #0b0b0b;
       padding:12px;
     }
     .modal-header{
@@ -249,14 +286,16 @@
     }
     @media (max-width: 900px){
       .modal-cols{ grid-template-columns: 1fr; }
+      .input { width: 100%; }
     }
 
     table{
       width:100%;
       border-collapse:collapse;
+      background:#fff;
     }
     th, td{
-      border:1px solid var(--border);
+      border: var(--border);
       padding:8px;
       text-align:left;
       vertical-align:top;
@@ -265,12 +304,12 @@
     thead th{
       position:sticky;
       top:0;
-      background:var(--soft);
+      background: var(--paper-2);
       z-index:2;
     }
-    tr:nth-child(even){ background:#f9f9f9; }
+    tr:nth-child(even){ background:#fff9df; }
 
-    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    .mono{ font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
     .home-link{
       display:inline-flex;
@@ -278,12 +317,23 @@
       gap:8px;
       color: inherit;
       text-decoration: none;
+      background: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: var(--border);
+      box-shadow: var(--shadow-soft);
     }
     .home-link svg{
       width:30px;
       height:30px;
       display:block;
     }
+
+    @keyframes cardPop {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
   </style>
 </head>
 
@@ -291,8 +341,8 @@
   <div class="headerbar">
     <h2>
       <a class="home-link" href="index.html" aria-label="Til hjem">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
-        <span>Treningsfrase-dashboard</span>
+        <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
+        <span>Trainingphrase overview</span>
       </a>
     </h2>
     <div id="favMenu" class="fav-menu"></div>
