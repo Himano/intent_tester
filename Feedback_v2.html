@@ -838,6 +838,17 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   margin-top: 10px;
 }
 
+#insights1 .category-view-toggle {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 6px;
+}
+#insights1 .category-view-toggle .btn.primary {
+  margin-top: 0;
+}
+
 
 
 </style></head>
@@ -927,7 +938,10 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 </div>
 <div class="row" style="margin-top:12px">
 <div style="flex:1 1 340px">
-<label>By Category (Sales / Resolution / Skill / Unknown)</label>
+<div class="category-view-toggle" role="group" aria-label="Category table view">
+<button class="btn primary" id="catViewSimple" type="button" aria-pressed="true">Simple view</button>
+<button class="btn ghost" id="catViewDetailed" type="button" aria-pressed="false">Detailed view</button>
+</div>
 <div id="tblCategory"></div>
 </div>
 </div>
@@ -1001,6 +1015,8 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   const statsTopEl = root.querySelector('#statsTop');
   const presetFY26Btn = root.querySelector('#presetFY26');
   const presetThisMonthBtn = root.querySelector('#presetThisMonth');
+  const catViewSimpleBtn = root.querySelector('#catViewSimple');
+  const catViewDetailedBtn = root.querySelector('#catViewDetailed');
 
   const fromDateInp   = root.querySelector('#fromDate');
   const toDateInp     = root.querySelector('#toDate');
@@ -1013,6 +1029,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   const LS_KEY = 'FeedbackJSON';
   const LS_FAVS = 'tool_favorites.v1';
   let showOver5Only = false;
+  let categoryView = 'simple';
 
   function parseJSON(raw){
     let obj = raw;
@@ -1340,13 +1357,67 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return arr;
   }
 
-  function classifyCategory(area){
+  const DETAILED_UNKNOWN_CATEGORY = "Sorry, I don't know";
+  const DETAILED_CATEGORIES = [
+    'Resolution Kitchen',
+    'Resolution Delivery',
+    'Sales General',
+    'Resolution General',
+    'Kitchen Sales',
+    'Sales Kitchen',
+    'Sales Sales',
+    'Store Resolution',
+    'General Resolution',
+    DETAILED_UNKNOWN_CATEGORY
+  ];
+  const DETAILED_CATEGORY_KEY_MAP = {
+    resolutionkitchen: 'Resolution Kitchen',
+    resolutiondelivery: 'Resolution Delivery',
+    salesgeneral: 'Sales General',
+    resolutiongeneral: 'Resolution General',
+    kitchensales: 'Kitchen Sales',
+    saleskitchen: 'Sales Kitchen',
+    salessales: 'Sales Sales',
+    storeresolution: 'Store Resolution',
+    generalresolution: 'General Resolution',
+    sorryidontknow: DETAILED_UNKNOWN_CATEGORY
+  };
+
+  function categoryKey(area){
+    return String(area || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+  }
+
+  function classifyCategorySimple(area){
     const s = String(area || '').toLowerCase();
     if (s.includes('skill')) return 'Skill';
     if (s.includes('sales')) return 'Sales';
     if (s.includes('resolution')) return 'Resolution';
     if (s.includes("sorry, i don't know") || s.includes('unknown') || s.trim()==='') return 'Unknown';
     return 'Unknown';
+  }
+
+  function classifyCategoryDetailed(area){
+    const key = categoryKey(area);
+    if (!key || key === 'unknown' || key.includes('sorryidontknow')) return DETAILED_UNKNOWN_CATEGORY;
+    return DETAILED_CATEGORY_KEY_MAP[key] || DETAILED_UNKNOWN_CATEGORY;
+  }
+
+  function classifyCategory(area){
+    return classifyCategorySimple(area);
+  }
+
+  function syncCategoryViewButtons(){
+    const simpleActive = categoryView === 'simple';
+    if (catViewSimpleBtn){
+      catViewSimpleBtn.classList.toggle('primary', simpleActive);
+      catViewSimpleBtn.classList.toggle('ghost', !simpleActive);
+      catViewSimpleBtn.setAttribute('aria-pressed', simpleActive ? 'true' : 'false');
+    }
+    if (catViewDetailedBtn){
+      catViewDetailedBtn.classList.toggle('primary', !simpleActive);
+      catViewDetailedBtn.classList.toggle('ghost', simpleActive);
+      catViewDetailedBtn.setAttribute('aria-pressed', simpleActive ? 'false' : 'true');
+    }
   }
 
   function topDocs(items){
@@ -1410,6 +1481,9 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 
     // Category counts + durations (exclude negative days)
     const catStats = new Map();
+    const classifyForCategoryTable = categoryView === 'detailed'
+      ? classifyCategoryDetailed
+      : classifyCategorySimple;
     for (const it of normalized){
       const { accept, resolve, handle } = calcDurations(it);
       const hasAccept = accept != null && accept >= 0;
@@ -1418,7 +1492,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       // Kun rader med komplett, ikke-negativt data teller i alle kolonner
       if (!(hasAccept && hasResolve && hasHandle)) continue;
 
-      const cat = classifyCategory(it.area);
+      const cat = classifyForCategoryTable(it.area);
       const s = catStats.get(cat) || { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 };
       s.count++;
       s.aatSum += accept; s.aatN++;
@@ -1426,13 +1500,16 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       s.ahtSum += handle; s.ahtN++;
       catStats.set(cat, s);
     }
-    const catRows = Array.from(catStats.entries()).map(([name, s]) => ({
+    const toCategoryRow = (name, s) => ({
       name,
       count: s.count,
       aat: s.aatN ? s.aatSum / s.aatN : null,
       art: s.artN ? s.artSum / s.artN : null,
       aht: s.ahtN ? s.ahtSum / s.ahtN : null
-    })).sort((a,b)=> b.count - a.count);
+    });
+    const catRows = categoryView === 'detailed'
+      ? DETAILED_CATEGORIES.map(name => toCategoryRow(name, catStats.get(name) || { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 }))
+      : Array.from(catStats.entries()).map(([name, s]) => toCategoryRow(name, s)).sort((a,b)=> b.count - a.count);
     renderTable('tblCategory', ['Category','Count','Avr. accept time','Avr. resolution time','Avr. handling time'],
       catRows.map(r => [r.name, r.count, fmtAvgDays(r.aat), fmtAvgDays(r.art), fmtAvgDays(r.aht)]));
 
@@ -1529,6 +1606,18 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   sortOrderSel.addEventListener('change', update);
   hideAutoEl?.addEventListener('change', update);
   applyRange?.addEventListener('click', update);
+  catViewSimpleBtn?.addEventListener('click', () => {
+    if (categoryView === 'simple') return;
+    categoryView = 'simple';
+    syncCategoryViewButtons();
+    update();
+  });
+  catViewDetailedBtn?.addEventListener('click', () => {
+    if (categoryView === 'detailed') return;
+    categoryView = 'detailed';
+    syncCategoryViewButtons();
+    update();
+  });
   filterResolvedByEl?.addEventListener('change', update);
   toggleOver5Btn?.addEventListener('click', () => {
     showOver5Only = !showOver5Only;
@@ -1560,6 +1649,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   });
 
   renderFavMenu();
+  syncCategoryViewButtons();
   loadFromLocalStorage();
   update();
 })();
