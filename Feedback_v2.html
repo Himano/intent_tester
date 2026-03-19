@@ -803,6 +803,41 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 #insights1 tbody tr:nth-child(even){ background:#f7f7f7; }
 #insights1 tbody tr:hover{ background:#ececec; }
 
+/* Collapsible month sections */
+#insights1 .month-collapsible {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 10px;
+  background: #fff;
+}
+#insights1 .month-collapsible + .month-collapsible {
+  margin-top: 12px;
+}
+#insights1 .month-collapsible > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #1f2937;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#insights1 .month-collapsible > summary::-webkit-details-marker {
+  display: none;
+}
+#insights1 .month-collapsible > summary::before {
+  content: "▸";
+  font-size: 12px;
+  color: var(--muted);
+  transition: transform .15s ease;
+}
+#insights1 .month-collapsible[open] > summary::before {
+  transform: rotate(90deg);
+}
+#insights1 .month-collapsible .row {
+  margin-top: 10px;
+}
+
 
 
 </style></head>
@@ -896,7 +931,9 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 <div id="tblCategory"></div>
 </div>
 </div>
-<div class="row" style="margin-top:12px">
+<details class="month-collapsible">
+<summary>Monthly categories (Resolution / Sales / Unknown)</summary>
+<div class="row">
 <div style="flex:1 1 340px">
 <label>Resolution per Month</label>
 <div id="tblResPerMonth"></div>
@@ -910,12 +947,16 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 <div id="tblUnknownPerMonth"></div>
 </div>
 </div>
-<div class="row" style="margin-top:12px">
+</details>
+<details class="month-collapsible">
+<summary>Feedbacks per Month</summary>
+<div class="row">
 <div style="flex:1 1 340px">
 <label>Feedbacks per Month</label>
 <div id="tblMonths"></div>
 </div>
 </div>
+</details>
 </div>
 <div style="flex:1 1 340px; margin-top: 12px;">
 <label style="display:none;">Articles with the most feedback</label>
