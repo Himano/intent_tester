@@ -818,7 +818,11 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 </div>
 <section id="insights">
 <div class="container">
-<div class="controls card2">
+<div class="row-between" style="margin-bottom:10px">
+  <div></div>
+  <button class="btn ghost" id="toggleControls" type="button">Show upload panel</button>
+</div>
+<div class="controls card2" id="controlsCard" style="display:none;">
 <div class="row">
 <div style="flex:1 1 260px">
 <label for="file">Load JSON file</label>
@@ -860,15 +864,19 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 
 </div>
 <div class="card2" id="insights1">
-<h2 style="margin:0 0 8px 0;">Insights</h2>
+<div class="row-between" style="margin:0 0 8px 0;">
+  <small id="statsTop" class="hint" style="font-weight:700;"></small>
+</div>
 <div class="row">
 <div style="flex:1 1 340px">
 <label>Date range (Created)</label>
 <div class="date-range" style="gap:6px">
 <input id="fromDate" type="date"/>
-<span style="align-self:center">-></span>
+<span style="align-self:center">-</span>
 <input id="toDate" type="date"/>
 <button id="applyRange">Apply</button>
+<button class="btn ghost" id="presetFY26" type="button" title="1 Sep 2025 to today">FY26</button>
+<button class="btn ghost" id="presetThisMonth" type="button" title="Current month to today">This month</button>
 </div>
 </div>
 </div>
@@ -947,6 +955,11 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   const toggleTopDocEntriesBtn = root.querySelector('#toggleTopDocEntries');
   const filterResolvedByEl = root.querySelector('#filterResolvedBy');
   const toggleOver5Btn = root.querySelector('#toggleOver5');
+  const controlsCard = root.querySelector('#controlsCard');
+  const toggleControlsBtn = root.querySelector('#toggleControls');
+  const statsTopEl = root.querySelector('#statsTop');
+  const presetFY26Btn = root.querySelector('#presetFY26');
+  const presetThisMonthBtn = root.querySelector('#presetThisMonth');
 
   const fromDateInp   = root.querySelector('#fromDate');
   const toDateInp     = root.querySelector('#toDate');
@@ -969,6 +982,12 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     if (obj && Array.isArray(obj.feedbacks)) return obj.feedbacks;
 
     throw new Error('JSON must be an array or an object with a "feedbacks" array');
+  }
+
+  function setDateRange(from, to){
+    if (fromDateInp) fromDateInp.value = from ? fmtDate(from) : '';
+    if (toDateInp) toDateInp.value = to ? fmtDate(to) : '';
+    update();
   }
 
   function renderFavMenu(){
@@ -1351,13 +1370,19 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     // Category counts + durations (exclude negative days)
     const catStats = new Map();
     for (const it of normalized){
+      const { accept, resolve, handle } = calcDurations(it);
+      const hasAccept = accept != null && accept >= 0;
+      const hasResolve = resolve != null && resolve >= 0;
+      const hasHandle = handle != null && handle >= 0;
+      // Kun rader med komplett, ikke-negativt data teller i alle kolonner
+      if (!(hasAccept && hasResolve && hasHandle)) continue;
+
       const cat = classifyCategory(it.area);
       const s = catStats.get(cat) || { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 };
       s.count++;
-      const { accept, resolve, handle } = calcDurations(it);
-      if (accept != null && accept >= 0){ s.aatSum += accept; s.aatN++; }
-      if (resolve != null && resolve >= 0){ s.artSum += resolve; s.artN++; }
-      if (handle != null && handle >= 0){ s.ahtSum += handle; s.ahtN++; }
+      s.aatSum += accept; s.aatN++;
+      s.artSum += resolve; s.artN++;
+      s.ahtSum += handle; s.ahtN++;
       catStats.set(cat, s);
     }
     const catRows = Array.from(catStats.entries()).map(([name, s]) => ({
@@ -1406,15 +1431,36 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const resolved = resolvedOnly.length;
     const active = total - resolved;
     const hidden = data.length - raw.length;
-    stats.textContent =
-      `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.` +
-      (hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '');
+    const statsBase = `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.`;
+    const statsHidden = hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '';
+    stats.textContent = statsBase + statsHidden;          // full detalj i upload-panelet
+    if (statsTopEl) statsTopEl.textContent = statsBase;   // topp-linjen uten hidden-detalj
     if (clearBtn){
       clearBtn.style.display = total > 0 ? 'inline-block' : 'none';
     }
   }
 
   // Handlers
+  toggleControlsBtn?.addEventListener('click', () => {
+    const isHidden = controlsCard?.style.display === 'none';
+    const nextHidden = !isHidden;
+    if (controlsCard) controlsCard.style.display = nextHidden ? 'none' : '';
+    if (toggleControlsBtn) toggleControlsBtn.textContent = nextHidden ? 'Show upload panel' : 'Hide upload panel';
+  });
+
+  presetFY26Btn?.addEventListener('click', () => {
+    const from = new Date(2025, 8, 1); // 1 Sep 2025
+    const to = new Date();             // today
+    setDateRange(from, to);
+  });
+
+  presetThisMonthBtn?.addEventListener('click', () => {
+    const now = new Date();
+    const from = new Date(now.getFullYear(), now.getMonth(), 1);
+    const to = new Date();
+    setDateRange(from, to);
+  });
+
   fileInput.addEventListener('change', async () => {
     const file = fileInput.files && fileInput.files[0];
     if (!file) return;
