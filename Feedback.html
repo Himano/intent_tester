@@ -976,11 +976,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 <label style="display:none;">Articles with the most feedback</label>
 <div id="tblTopDocs" style="flex:1 1 340px"></div>
 <div class="row-between" style="margin-top:12px">
-<<<<<<< HEAD
-<div class="hint">Feedback entries <span id="entryCount">(0)</span> · Avg days <span id="avgDays">—</span></div>
-=======
 <div class="hint">Feedback entries <span id="entryCount">(0)</span> <span id="entryAht" class="hint"></span></div>
->>>>>>> c51ad4fd93f476395e033975a5412e0a274bdab6
 <div class="row-end">
   <select id="filterResolvedBy" title="Filter by resolved by">
     <option value="all">All resolved by</option>
@@ -1259,22 +1255,6 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     if (!topDocEntriesEl) return;
     topDocEntriesEl.innerHTML = '';
     const countEl = root.querySelector('#entryCount');
-<<<<<<< HEAD
-    if (countEl) countEl.textContent = `(${items.length})`;
-    const avgEl = root.querySelector('#avgDays');
-    if (avgEl){
-      const durations = items
-        .map(it => daysBetween(it.assignedDate, it.resolvedDate))
-        .filter(d => d != null && isFinite(d) && d >= 0);
-      if (!durations.length){
-        avgEl.textContent = '—';
-      }else{
-        const sum = durations.reduce((a,b)=>a+b, 0);
-        const avg = sum / durations.length;
-        const rounded = Math.round(avg * 10) / 10;
-        avgEl.textContent = String(rounded);
-      }
-=======
     const counted = items.filter(it => {
       const { handle } = calcDurations(it);
       return handle != null && handle >= 0;
@@ -1284,7 +1264,6 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const avgHandle = averageHandleTime(items);
     if (ahtEl){
       ahtEl.textContent = avgHandle != null ? `· AHT ${fmtAvgDays(avgHandle)}d` : '';
->>>>>>> c51ad4fd93f476395e033975a5412e0a274bdab6
     }
     const frag = document.createDocumentFragment();
     for (const it of items){
