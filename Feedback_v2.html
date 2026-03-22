@@ -838,6 +838,10 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   margin-top: 10px;
 }
 
+.month-collapsible {
+  margin-top: 5px;
+}
+
 #insights1 .category-view-toggle {
   display: flex;
   gap: 8px;
@@ -847,6 +851,37 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 }
 #insights1 .category-view-toggle .btn.primary {
   margin-top: 0;
+}
+#handleTrendChart {
+  min-height: 180px;
+}
+#handleTrendChart svg {
+  width: 100%;
+  height: 180px;
+  display: block;
+}
+#handleTrendChart .trend-axis {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+#handleTrendChart .trend-area {
+  fill: rgba(37, 99, 235, 0.12);
+}
+#handleTrendChart .trend-line {
+  stroke: var(--brand);
+  stroke-width: 2;
+  fill: none;
+}
+#handleTrendChart .trend-dot {
+  fill: var(--brand);
+}
+#handleTrendChart .trend-label {
+  fill: var(--muted);
+  font-size: 11px;
+}
+#handleTrendChart .trend-value {
+  fill: var(--text);
+  font-size: 11px;
 }
 
 
@@ -906,16 +941,12 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 <button class="primary" id="usePaste">Use pasted JSON</button>
 </div>
 </div>
-<div aria-live="polite" class="stats" id="stats"></div>
 
 </div>
-<div class="card2" id="insights1">
-<div class="row-between" style="margin:0 0 8px 0;">
-  <small id="statsTop" class="hint" style="font-weight:700;"></small>
-</div>
+<div class="card2" id="filtersCard">
+<div aria-live="polite" class="stats" id="stats"></div>
 <div class="row">
 <div style="flex:1 1 340px">
-<label>Date range (Created)</label>
 <div class="date-range" style="gap:6px">
 <input id="fromDate" type="date"/>
 <span style="align-self:center">-</span>
@@ -926,6 +957,26 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 </div>
 </div>
 </div>
+</div>
+<details class="month-collapsible" open style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px 12px;">
+<summary>Avg. handling time by month graph</summary>
+<div class="row" style="margin-top:10px">
+<div style="flex:1 1 340px">
+<div id="handleTrendChart"></div>
+</div>
+</div>
+<div class="row" style="margin-top:8px">
+<div style="flex:1 1 220px">
+<label for="handleTrendSkill">Graph filter</label>
+<select id="handleTrendSkill">
+<option selected="" value="all">All feedbacks</option>
+<option value="resolution">Resolution</option>
+<option value="sales">Sales</option>
+</select>
+</div>
+</div>
+</details>
+<div class="card2" id="insights1">
 <div class="row">
 <div style="flex:1 1 340px">
 <label>Resolved by (top)</label>
@@ -1012,7 +1063,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   const toggleOver5Btn = root.querySelector('#toggleOver5');
   const controlsCard = root.querySelector('#controlsCard');
   const toggleControlsBtn = root.querySelector('#toggleControls');
-  const statsTopEl = root.querySelector('#statsTop');
+  const handleTrendSkillEl = root.querySelector('#handleTrendSkill');
   const presetFY26Btn = root.querySelector('#presetFY26');
   const presetThisMonthBtn = root.querySelector('#presetThisMonth');
   const catViewSimpleBtn = root.querySelector('#catViewSimple');
@@ -1442,6 +1493,71 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return `${y}-${m}`;
   }
 
+  function buildHandleTrend(items){
+    const map = new Map();
+    const skillFilter = handleTrendSkillEl?.value || 'all';
+    for (const it of items){
+      if (skillFilter === 'resolution' && classifyCategorySimple(it.area) !== 'Resolution') continue;
+      if (skillFilter === 'sales' && classifyCategorySimple(it.area) !== 'Sales') continue;
+      const k = monthKey(it.createdDate);
+      if (!k) continue;
+      const { handle } = calcDurations(it);
+      if (handle == null || handle < 0) continue;
+      const entry = map.get(k) || { sum:0, n:0 };
+      entry.sum += handle;
+      entry.n++;
+      map.set(k, entry);
+    }
+    const rows = [];
+    map.forEach((val, month) => {
+      if (!val.n) return;
+      rows.push({ month, avg: val.sum / val.n });
+    });
+    rows.sort((a,b)=> a.month.localeCompare(b.month));
+    return rows;
+  }
+
+  function renderHandleTrend(rows){
+    const el = document.getElementById('handleTrendChart');
+    if (!el) return;
+    if (!rows.length){
+      el.innerHTML = '<div class="hint">No handling time data for selected range.</div>';
+      return;
+    }
+    const w = 600, h = 180;
+    const pad = { l: 36, r: 12, t: 12, b: 26 };
+    const innerW = w - pad.l - pad.r;
+    const innerH = h - pad.t - pad.b;
+    const max = Math.max(...rows.map(r => r.avg)) || 1;
+    const points = rows.map((r, i) => {
+      const x = rows.length === 1 ? pad.l + innerW / 2 : pad.l + (i * innerW / (rows.length - 1));
+      const y = pad.t + (1 - (r.avg / max)) * innerH;
+      return { x, y, month: r.month, avg: r.avg };
+    });
+    const line = points.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+    const area = `M ${pad.l},${pad.t + innerH} L ${line} L ${pad.l + innerW},${pad.t + innerH} Z`;
+    const labelIdx = rows.length <= 3 ? rows.map((_, i) => i) : [0, Math.floor(rows.length / 2), rows.length - 1];
+    const labels = Array.from(new Set(labelIdx)).map(i => {
+      const p = points[i];
+      return `<text class="trend-label" x="${p.x}" y="${pad.t + innerH + 18}" text-anchor="middle">${p.month}</text>`;
+    }).join('');
+    const yMid = pad.t + innerH / 2;
+    const midVal = max / 2;
+    el.innerHTML = `
+      <svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Average handling time by month">
+        <line class="trend-axis" x1="${pad.l}" y1="${pad.t + innerH}" x2="${pad.l + innerW}" y2="${pad.t + innerH}"></line>
+        <text class="trend-label" x="${pad.l - 4}" y="${pad.t + 4}" text-anchor="end">${max.toFixed(1)}d</text>
+        <text class="trend-label" x="${pad.l - 4}" y="${yMid + 4}" text-anchor="end">${midVal.toFixed(1)}d</text>
+        <text class="trend-label" x="${pad.l - 4}" y="${pad.t + innerH}" text-anchor="end">0d</text>
+        <path class="trend-area" d="${area}"></path>
+        <polyline class="trend-line" points="${line}"></polyline>
+        ${points.map(p => `<circle class="trend-dot" cx="${p.x}" cy="${p.y}" r="2.5"></circle>`).join('')}
+        ${points.map(p => `<text class="trend-value" x="${p.x}" y="${p.y - 6}" text-anchor="middle">${p.avg.toFixed(1)}d</text>`).join('')}
+        ${labels}
+      </svg>
+    `;
+  }
+
   function update(){
     let raw = data.slice();
 
@@ -1513,6 +1629,8 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     renderTable('tblCategory', ['Category','Count','Avr. accept time','Avr. resolution time','Avr. handling time'],
       catRows.map(r => [r.name, r.count, fmtAvgDays(r.aat), fmtAvgDays(r.art), fmtAvgDays(r.aht)]));
 
+    renderHandleTrend(buildHandleTrend(normalized));
+
     // Feedbacks per month
     const monthMap = new Map();
     for (const it of normalized){
@@ -1552,7 +1670,6 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const statsBase = `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.`;
     const statsHidden = hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '';
     stats.textContent = statsBase + statsHidden;          // full detalj i upload-panelet
-    if (statsTopEl) statsTopEl.textContent = statsBase;   // topp-linjen uten hidden-detalj
     if (clearBtn){
       clearBtn.style.display = total > 0 ? 'inline-block' : 'none';
     }
@@ -1606,6 +1723,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   sortOrderSel.addEventListener('change', update);
   hideAutoEl?.addEventListener('change', update);
   applyRange?.addEventListener('click', update);
+  handleTrendSkillEl?.addEventListener('change', update);
   catViewSimpleBtn?.addEventListener('click', () => {
     if (categoryView === 'simple') return;
     categoryView = 'simple';
