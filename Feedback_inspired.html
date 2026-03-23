@@ -1203,6 +1203,11 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       const assignedDate = toDate(it.assignedDate);
       const resolved = toDate(it.resolvedDate);
       const assignedRaw = it.assignedTo;
+      const assignedToList = Array.isArray(assignedRaw)
+        ? assignedRaw.map(v => String(v ?? '').trim()).filter(Boolean)
+        : (assignedRaw != null && String(assignedRaw).trim()
+          ? [String(assignedRaw).trim()]
+          : []);
       const assignedTo = Array.isArray(assignedRaw) ? assignedRaw.join(', ') : (assignedRaw || '');
       const docId = (it.documentId != null ? String(it.documentId) : '');
       return {
@@ -1218,6 +1223,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
         documentId: docId,
         documentTitle: it.documentTitle || '',
         assignedTo: assignedTo,
+        assignedToList: assignedToList,
         resolvedBy: it.resolvedBy || '',
         description: it.description || '',
         proposedSolution: it.proposedSolution || '',
@@ -1456,6 +1462,16 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return String(name || '').toLowerCase().replace(/\s+/g, ' ').trim();
   }
 
+  function isReassignedResolvedItem(item){
+    const resolvedKey = normalizeNameKey(item?.resolvedBy || '');
+    if (!resolvedKey || resolvedKey === '—') return false;
+    const assignedKeys = (Array.isArray(item?.assignedToList) ? item.assignedToList : [])
+      .map(name => normalizeNameKey(name))
+      .filter(k => k && k !== '—');
+    if (!assignedKeys.length) return false;
+    return !assignedKeys.includes(resolvedKey);
+  }
+
   const DETAILED_UNKNOWN_CATEGORY = "Sorry, I don't know";
   const DETAILED_CATEGORIES = [
     'Resolution Kitchen',
@@ -1636,6 +1652,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const docs = topDocs(normalized).slice(0, 15);
 
     const ahtMap = new Map();
+    const reassignedMap = new Map();
     for (const it of resolvedOnly){
       const rawName = (it.resolvedBy || '').trim() || '—';
       const key = normalizeNameKey(rawName);
@@ -1646,6 +1663,9 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       entry.sum += safeHandle;
       entry.n++;
       ahtMap.set(key, entry);
+      if (isReassignedResolvedItem(it)){
+        reassignedMap.set(key, (reassignedMap.get(key) || 0) + 1);
+      }
     }
     const byAht = Array.from(ahtMap.entries()).map(([key, v]) => ({
       key,
@@ -1655,10 +1675,12 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     if (tblLeaderboard){
       const ahtByKey = new Map(byAht.map(x => [x.key, x.avg]));
       const rows = byResolved.map(r => {
-        const aht = ahtByKey.get(normalizeNameKey(r.name));
-        return [r.name, r.count, aht != null ? fmtAvgDays(aht) : '—'];
+        const key = normalizeNameKey(r.name);
+        const aht = ahtByKey.get(key);
+        const reassigned = reassignedMap.get(key) || 0;
+        return [r.name, r.count, reassigned, aht != null ? fmtAvgDays(aht) : '—'];
       });
-      renderTable('tblLeaderboard', ['Name','Resolved','Avg. handling time'], rows);
+      renderTable('tblLeaderboard', ['Name','Resolved','Reassigned','Avg. handling time'], rows);
     }
     renderTable('tblTopDocs', ['Articles with the most feedback','Total','Resolved'],
       docs.map(d => [ (d.title || d.id || '—') + (d.id ? ` [${d.id}]` : ''), d.total, d.resolved ])
