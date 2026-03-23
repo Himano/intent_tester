@@ -1262,9 +1262,19 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return ms / 86400000;
   }
 
+  function effectiveAssignedDate(item){
+    const assigned = item?.assignedDate || null;
+    const resolved = item?.resolvedDate || null;
+    if (assigned && resolved && resolved.getTime() < assigned.getTime()){
+      return resolved;
+    }
+    return assigned;
+  }
+
   function calcDurations(item){
-    const accept = daysBetween(item.createdDate, item.assignedDate);
-    const resolve = daysBetween(item.assignedDate, item.resolvedDate);
+    const effectiveAssigned = effectiveAssignedDate(item);
+    const accept = daysBetween(item.createdDate, effectiveAssigned);
+    const resolve = daysBetween(effectiveAssigned, item.resolvedDate);
     const handle = daysBetween(item.createdDate, item.resolvedDate);
     return { accept, resolve, handle };
   }
@@ -1322,7 +1332,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     }
     if (showOver5Only){
       out = out.filter(it => {
-        const days = daysBetween(it.assignedDate, it.resolvedDate);
+        const { resolve: days } = calcDurations(it);
         return days != null && days > 5;
       });
     }
@@ -1353,7 +1363,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       const el = document.createElement('div');
       el.className = 'entry-card';
       const category = classifyCategory(it.area || it.title);
-      const age = ageClass(it.assignedDate, it.resolvedDate);
+      const age = ageClass(effectiveAssignedDate(it), it.resolvedDate);
       const dot = age ? `<span class="age-dot ${age}"></span>` : '';
       el.innerHTML = ''
         + dot
@@ -1716,7 +1726,9 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const statsBase = `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.`;
     const statsHidden = hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '';
     const avgHandle = averageHandleTime(resolvedOnly);
-    const acceptVals = normalized.map(it => daysBetween(it.createdDate, it.assignedDate)).filter(v => v != null && v >= 0);
+    const acceptVals = normalized
+      .map(it => daysBetween(it.createdDate, effectiveAssignedDate(it)))
+      .filter(v => v != null && v >= 0);
     const monthCounts = months.map(m => m.total);
     const avgPerMonth = monthCounts.length ? (monthCounts.reduce((a,b)=>a+b,0) / monthCounts.length) : null;
     const oldestActive = normalized.filter(x => !x.resolvedDate && x.createdDate)
