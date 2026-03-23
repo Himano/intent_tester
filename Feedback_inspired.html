@@ -1695,8 +1695,20 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const catRows = categoryView === 'detailed'
       ? DETAILED_CATEGORIES.map(name => toCategoryRow(name, catStats.get(name) || { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 }))
       : Array.from(catStats.entries()).map(([name, s]) => toCategoryRow(name, s)).sort((a,b)=> b.count - a.count);
+    const catRowsWithTotal = (categoryView !== 'detailed' && catRows.length)
+      ? (() => {
+          const total = { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 };
+          for (const s of catStats.values()){
+            total.count += s.count || 0;
+            total.aatSum += s.aatSum || 0; total.aatN += s.aatN || 0;
+            total.artSum += s.artSum || 0; total.artN += s.artN || 0;
+            total.ahtSum += s.ahtSum || 0; total.ahtN += s.ahtN || 0;
+          }
+          return [...catRows, toCategoryRow('Total', total)];
+        })()
+      : catRows;
     renderTable('tblCategory', ['Category','Count','Avr. accept time','Avr. resolution time','Avr. handling time'],
-      catRows.map(r => [r.name, r.count, fmtAvgDays(r.aat), fmtAvgDays(r.art), fmtAvgDays(r.aht)]));
+      catRowsWithTotal.map(r => [r.name, r.count, fmtAvgDays(r.aat), fmtAvgDays(r.art), fmtAvgDays(r.aht)]));
 
     renderHandleTrend(buildHandleTrend(normalized));
 
