@@ -915,7 +915,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
 </div>
 <div class="row">
 <div style="flex:1 1 340px">
-<label>Date range (Created)</label>
+<label>Date range (Resolved)</label>
 <div class="date-range" style="gap:6px">
 <input id="fromDate" type="date"/>
 <span style="align-self:center">-</span>
@@ -1190,11 +1190,29 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return ms / 86400000;
   }
 
+  function effectiveAssignedDate(item){
+    const assigned = item?.assignedDate || null;
+    const resolved = item?.resolvedDate || null;
+    if (assigned && resolved && resolved.getTime() < assigned.getTime()){
+      return resolved;
+    }
+    return assigned;
+  }
+
+  function calibratePowerBIDays(rawDays){
+    if (rawDays == null || Number.isNaN(rawDays)) return null;
+    if (rawDays < 0) return null;
+    if (rawDays === 0) return 1;
+    return rawDays + 0.1;
+  }
+
   function calcDurations(item){
-    const accept = daysBetween(item.createdDate, item.assignedDate);
-    const resolve = daysBetween(item.assignedDate, item.resolvedDate);
-    const handle = daysBetween(item.createdDate, item.resolvedDate);
-    return { accept, resolve, handle };
+    const effectiveAssigned = effectiveAssignedDate(item);
+    const accept = daysBetween(item.createdDate, effectiveAssigned);
+    const resolve = daysBetween(effectiveAssigned, item.resolvedDate);
+    const handleRaw = daysBetween(item.createdDate, item.resolvedDate);
+    const handle = calibratePowerBIDays(handleRaw);
+    return { accept, resolve, handle, handleRaw };
   }
 
   function fmtAvgDays(val){
@@ -1206,7 +1224,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     let sum = 0, n = 0;
     for (const it of items){
       const { handle } = calcDurations(it);
-      if (handle == null || handle < 0) continue;
+      if (handle == null) continue;
       sum += handle;
       n++;
     }
@@ -1244,7 +1262,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     }
     if (showOver5Only){
       out = out.filter(it => {
-        const days = daysBetween(it.assignedDate, it.resolvedDate);
+        const { handle: days } = calcDurations(it);
         return days != null && days > 5;
       });
     }
@@ -1257,9 +1275,9 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const countEl = root.querySelector('#entryCount');
     const counted = items.filter(it => {
       const { handle } = calcDurations(it);
-      return handle != null && handle >= 0;
+      return handle != null;
     }).length;
-    if (countEl) countEl.textContent = `${items.length} (${counted} counted)`;
+    if (countEl) countEl.textContent = `${items.length} total · ${counted} used for avg`;
     const ahtEl = root.querySelector('#entryAht');
     const avgHandle = averageHandleTime(items);
     if (ahtEl){
@@ -1270,14 +1288,16 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       const el = document.createElement('div');
       el.className = 'entry-card';
       const category = classifyCategory(it.area || it.title);
-      const age = ageClass(it.assignedDate, it.resolvedDate);
+      const age = ageClass(effectiveAssignedDate(it), it.resolvedDate);
       const dot = age ? `<span class="age-dot ${age}"></span>` : '';
       el.innerHTML = ''
         + dot
         + '<h4>' + escapeHtml(it.documentTitle || it.documentId || '—') + '</h4>'
         + '<div class="entry-meta">Title: <strong>' + escapeHtml(it.title || '—') + '</strong></div>'
         + '<div class="entry-meta">Category: <span class="badge">' + escapeHtml(category) + '</span></div>'
+        + '<div class="entry-meta">Created: <strong>' + fmtDate(it.createdDate) + '</strong></div>'
         + '<div class="entry-meta">Assigned: <strong>' + fmtDate(it.assignedDate) + '</strong> · Resolved: <strong>' + fmtDate(it.resolvedDate) + '</strong></div>'
+        + '<div class="entry-meta">Assigned to: <span class="badge">' + escapeHtml(it.assignedTo || '—') + '</span></div>'
         + '<div class="entry-meta">Resolved by: <span class="badge">' + escapeHtml(it.resolvedBy || '—') + '</span></div>'
         + '<div class="entry-meta">Issue</div>'
         + '<div class="desc">' + escapeHtml(it.description || '') + '</div>'
@@ -1442,6 +1462,18 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return `${y}-${m}`;
   }
 
+  function endOfDay(d){
+    if (!d) return null;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
+  }
+
+  function inRangeInclusive(d, fromD, toD){
+    if (!d) return false;
+    if (fromD && d < fromD) return false;
+    if (toD && d > endOfDay(toD)) return false;
+    return true;
+  }
+
   function update(){
     let raw = data.slice();
 
@@ -1449,47 +1481,37 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       raw = raw.filter(it => !isAutoRaw(it));
     }
 
-    // Filter by createdDate range (inclusive) if set
     const fromD = parseDateInput(fromDateInp?.value || '');
     const toD   = parseDateInput(toDateInp?.value   || '');
-    if (fromD || toD){
-      raw = raw.filter(it => {
-        const d = toDate(it.createdDate);
-        if (!d) return false;
-        if (fromD && d < fromD) return false;
-        if (toD   && d > toD)   return false;
-        return true;
-      });
-    }
 
-    const normalized = normalize(raw);
-    const sorted = sortData(normalized);
+    const normalizedAll = normalize(raw);
+    const resolvedOnly = normalizedAll.filter(it => !!it.resolvedDate && inRangeInclusive(it.resolvedDate, fromD, toD));
+    const activeCreatedInRange = normalizedAll.filter(it => !it.resolvedDate && !!it.createdDate && inRangeInclusive(it.createdDate, fromD, toD));
+
+    const sorted = sortData(resolvedOnly);
     render(sorted);
     updateResolvedByOptions(sorted);
     renderTopDocEntries(filterEntries(sorted));
 
-    const resolvedOnly = normalized.filter(x => !!x.resolvedDate);
     const byResolved = aggregateCounts(resolvedOnly, 'resolvedBy').slice(0, 20);
-    const byAssigned = aggregateCounts(normalized, 'assignedTo').slice(0, 20);
-    const docs = topDocs(normalized).slice(0, 15);
+    const byAssigned = aggregateCounts(resolvedOnly, 'assignedTo').slice(0, 20);
+    const docs = topDocs(resolvedOnly).slice(0, 15);
 
     renderTable('tblResolvedBy', ['Name','Resolved'], byResolved.map(r => [r.name, r.count]));
     renderTable('tblAssignedTo', ['Name','Assigned'], byAssigned.map(r => [r.name, r.count]));
-    renderTable('tblTopDocs', ['Articles with the most feedback','Total','Resolved'],
-      docs.map(d => [ (d.title || d.id || '—') + (d.id ? ` [${d.id}]` : ''), d.total, d.resolved ])
+    renderTable('tblTopDocs', ['Articles with the most feedback','Resolved'],
+      docs.map(d => [ (d.title || d.id || '—') + (d.id ? ` [${d.id}]` : ''), d.resolved ])
     );
 
-    // Category counts + durations (exclude negative days)
     const catStats = new Map();
     const classifyForCategoryTable = categoryView === 'detailed'
       ? classifyCategoryDetailed
       : classifyCategorySimple;
-    for (const it of normalized){
+    for (const it of resolvedOnly){
       const { accept, resolve, handle } = calcDurations(it);
       const hasAccept = accept != null && accept >= 0;
       const hasResolve = resolve != null && resolve >= 0;
-      const hasHandle = handle != null && handle >= 0;
-      // Kun rader med komplett, ikke-negativt data teller i alle kolonner
+      const hasHandle = handle != null;
       if (!(hasAccept && hasResolve && hasHandle)) continue;
 
       const cat = classifyForCategoryTable(it.area);
@@ -1513,48 +1535,34 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     renderTable('tblCategory', ['Category','Count','Avr. accept time','Avr. resolution time','Avr. handling time'],
       catRows.map(r => [r.name, r.count, fmtAvgDays(r.aat), fmtAvgDays(r.art), fmtAvgDays(r.aht)]));
 
-    // Feedbacks per month
-    const monthMap = new Map();
-    for (const it of normalized){
-      const k = monthKey(it.createdDate);
-      if (!k) continue;
-      monthMap.set(k, (monthMap.get(k)||0) + 1);
-    }
-    const months = [];
-    monthMap.forEach((count, month) => months.push({month, count}));
-    months.sort((a,b)=> a.month.localeCompare(b.month));
-    renderTable('tblMonths', ['Month','Count'], months.map(m => [m.month, m.count]));
-
-    // Per-category months (by createdDate)
-    const resMap = new Map(), salesMap = new Map(), unkMap = new Map();
-    for (const it of normalized){
-      const k = monthKey(it.createdDate);
+    const monthStats = new Map();
+    for (const it of resolvedOnly){
+      const k = monthKey(it.resolvedDate);
       if (!k) continue;
       const cat = classifyCategory(it.area);
-      if (cat === 'Resolution') resMap.set(k, (resMap.get(k)||0) + 1);
-      else if (cat === 'Sales') salesMap.set(k, (salesMap.get(k)||0) + 1);
-      else if (cat === 'Unknown') unkMap.set(k, (unkMap.get(k)||0) + 1);
+      const entry = monthStats.get(k) || { resolution:0, sales:0, unknown:0, total:0 };
+      if (cat === 'Resolution') entry.resolution++;
+      else if (cat === 'Sales') entry.sales++;
+      else entry.unknown++;
+      entry.total++;
+      monthStats.set(k, entry);
     }
-    const rowsFromMap = (map) => {
-      const arr = [];
-      map.forEach((count, month) => arr.push({month, count}));
-      arr.sort((a,b)=> a.month.localeCompare(b.month));
-      return arr.map(x => [x.month, x.count]);
-    };
-    renderTable('tblResPerMonth', ['Month','Resolution'], rowsFromMap(resMap));
-    renderTable('tblSalesPerMonth', ['Month','Sales'], rowsFromMap(salesMap));
-    renderTable('tblUnknownPerMonth', ['Month','Unknown'], rowsFromMap(unkMap));
+    const months = [];
+    monthStats.forEach((val, month) => months.push({ month, ...val }));
+    months.sort((a,b)=> a.month.localeCompare(b.month));
+    renderTable('tblMonths', ['Month','Resolution','Sales','Unknown','Total'], months.map(m => [m.month, m.resolution, m.sales, m.unknown, m.total]));
+    renderTable('tblResPerMonth', ['Month','Resolution'], months.map(m => [m.month, m.resolution]));
+    renderTable('tblSalesPerMonth', ['Month','Sales'], months.map(m => [m.month, m.sales]));
+    renderTable('tblUnknownPerMonth', ['Month','Unknown'], months.map(m => [m.month, m.unknown]));
 
-    const total = normalized.length;
-    const resolved = resolvedOnly.length;
-    const active = total - resolved;
+    const total = resolvedOnly.length;
     const hidden = data.length - raw.length;
-    const statsBase = `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.`;
+    const statsBase = `Resolved in selected range: ${total}. Active created in range: ${activeCreatedInRange.length}.`;
     const statsHidden = hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '';
-    stats.textContent = statsBase + statsHidden;          // full detalj i upload-panelet
-    if (statsTopEl) statsTopEl.textContent = statsBase;   // topp-linjen uten hidden-detalj
+    stats.textContent = statsBase + statsHidden;
+    if (statsTopEl) statsTopEl.textContent = statsBase;
     if (clearBtn){
-      clearBtn.style.display = total > 0 ? 'inline-block' : 'none';
+      clearBtn.style.display = (resolvedOnly.length || activeCreatedInRange.length) ? 'inline-block' : 'none';
     }
   }
 

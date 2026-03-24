@@ -973,7 +973,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     <div class="kpi-value" id="kpiOldestVal">—</div>
     <div class="kpi-sub" id="kpiOldestSub">—</div>
   </div>
-  <div class="hint kpi-note">Active feedbacks are not counted in the calculations.</div>
+  <div class="hint kpi-note">Resolved metrics use resolvedDate in the selected range and exclude auto-generated system feedback. Avg days use a light Power BI-style calibration because the JSON only contains dates, not timestamps.</div>
 </div>
 </div>
 <div class="grid-main">
@@ -994,7 +994,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   <div class="right-rail">
     <div class="card2" id="handleTrendPanel">
       <div class="row-between" style="margin-bottom:10px">
-        <label style="margin:0">Avg. handling time by month</label>
+        <label style="margin:0">Avg. handling time by resolved month</label>
       </div>
       <div class="row" style="margin-top:10px">
         <div style="flex:1 1 340px">
@@ -1023,7 +1023,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
         </div>
       </div>
       <details class="month-collapsible">
-        <summary>Feedbacks per Month</summary>
+        <summary>Resolved feedbacks per Month</summary>
         <div class="row">
           <div style="flex:1 1 340px">
             <label>Feedbacks per Month</label>
@@ -1277,12 +1277,25 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return assigned;
   }
 
+  function calibratePowerBIDays(rawDays){
+    if (rawDays == null || Number.isNaN(rawDays)) return null;
+    if (rawDays < 0) return null;
+
+    // JSON only contains dates, while Power BI appears to use richer action/event timing.
+    // To avoid systematically undercounting same-day resolutions, we apply a light calibration:
+    // - same-day resolved items count as 1 day
+    // - multi-day spans get a small +0.1 day offset
+    if (rawDays === 0) return 1;
+    return rawDays + 0.1;
+  }
+
   function calcDurations(item){
     const effectiveAssigned = effectiveAssignedDate(item);
     const accept = daysBetween(item.createdDate, effectiveAssigned);
     const resolve = daysBetween(effectiveAssigned, item.resolvedDate);
-    const handle = daysBetween(item.createdDate, item.resolvedDate);
-    return { accept, resolve, handle };
+    const handleRaw = daysBetween(item.createdDate, item.resolvedDate);
+    const handle = calibratePowerBIDays(handleRaw);
+    return { accept, resolve, handle, handleRaw };
   }
 
   function fmtAvgDays(val){
@@ -1300,7 +1313,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     let sum = 0, n = 0;
     for (const it of items){
       const { handle } = calcDurations(it);
-      if (handle == null || handle < 0) continue;
+      if (handle == null) continue;
       sum += handle;
       n++;
     }
@@ -1338,7 +1351,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     }
     if (showOver5Only){
       out = out.filter(it => {
-        const { resolve: days } = calcDurations(it);
+        const { handle: days } = calcDurations(it);
         return days != null && days > 5;
       });
     }
@@ -1356,9 +1369,9 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     const countEl = root.querySelector('#entryCount');
     const counted = items.filter(it => {
       const { handle } = calcDurations(it);
-      return handle != null && handle >= 0;
+      return handle != null;
     }).length;
-    if (countEl) countEl.textContent = `${items.length} (${counted} counted)`;
+    if (countEl) countEl.textContent = `${items.length} total · ${counted} used for avg`;
     const ahtEl = root.querySelector('#entryAht');
     const avgHandle = averageHandleTime(items);
     if (ahtEl){
@@ -1557,16 +1570,28 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     return `${y}-${m}`;
   }
 
+  function endOfDay(d){
+    if (!d) return null;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
+  }
+
+  function inRangeInclusive(d, fromD, toD){
+    if (!d) return false;
+    if (fromD && d < fromD) return false;
+    if (toD && d > endOfDay(toD)) return false;
+    return true;
+  }
+
   function buildHandleTrend(items){
     const map = new Map();
     const skillFilter = handleTrendSkillEl?.value || 'all';
     for (const it of items){
       if (skillFilter === 'resolution' && classifyCategorySimple(it.area) !== 'Resolution') continue;
       if (skillFilter === 'sales' && classifyCategorySimple(it.area) !== 'Sales') continue;
-      const k = monthKey(it.createdDate);
+      const k = monthKey(it.resolvedDate || it.createdDate);
       if (!k) continue;
       const { handle } = calcDurations(it);
-      if (handle == null || handle < 0) continue;
+      if (handle == null) continue;
       const entry = map.get(k) || { sum:0, n:0 };
       entry.sum += handle;
       entry.n++;
@@ -1623,33 +1648,35 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
   }
 
   function update(){
-    let raw = data.slice();
-
-    raw = raw.filter(it => !isAutoRaw(it));
-
-    // Filter by createdDate range (inclusive) if set
+    const base = data.slice().filter(it => !isAutoRaw(it));
     const fromD = parseDateInput(fromDateInp?.value || '');
     const toD   = parseDateInput(toDateInp?.value   || '');
-    if (fromD || toD){
-      raw = raw.filter(it => {
-        const d = toDate(it.createdDate);
-        if (!d) return false;
-        if (fromD && d < fromD) return false;
-        if (toD   && d > toD)   return false;
-        return true;
-      });
-    }
 
-    const normalized = normalize(raw);
-    const sorted = sortData(normalized);
-    render(sorted);
-    updateResolvedByOptions(sorted);
-    renderTopDocEntries(filterEntries(sorted));
+    const normalizedAll = normalize(base);
 
-    const resolvedOnly = normalized.filter(x => !!x.resolvedDate);
+    const completedInRange = normalizedAll.filter(it =>
+      !!it.resolvedDate && inRangeInclusive(it.resolvedDate, fromD, toD)
+    );
+
+    const createdInRange = normalizedAll.filter(it =>
+      !!it.createdDate && inRangeInclusive(it.createdDate, fromD, toD)
+    );
+
+    const openCreatedInRange = createdInRange.filter(it => !it.resolvedDate);
+    const openAll = normalizedAll.filter(it => !it.resolvedDate && it.createdDate);
+
+    const sortedCompleted = sortData(completedInRange);
+    const sortedOpen = [...openCreatedInRange].sort((a,b) => (a.createdDate?.getTime() || 0) - (b.createdDate?.getTime() || 0));
+    const listForCards = showActiveOnly ? sortedOpen : sortedCompleted;
+
+    render(showActiveOnly ? sortedOpen : sortedCompleted);
+    updateResolvedByOptions(sortedCompleted);
+    renderTopDocEntries(filterEntries(listForCards));
+
+    const resolvedOnly = completedInRange;
+    const docs = topDocs(resolvedOnly).slice(0, 15);
+
     const byResolved = aggregateCounts(resolvedOnly, 'resolvedBy');
-    const byAssigned = aggregateCounts(normalized, 'assignedTo');
-    const docs = topDocs(normalized).slice(0, 15);
 
     const ahtMap = new Map();
     const reassignedMap = new Map();
@@ -1658,9 +1685,8 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       const key = normalizeNameKey(rawName);
       const { handle } = calcDurations(it);
       if (handle == null) continue;
-      const safeHandle = handle < 0 ? 0 : handle;
       const entry = ahtMap.get(key) || { sum:0, n:0 };
-      entry.sum += safeHandle;
+      entry.sum += handle;
       entry.n++;
       ahtMap.set(key, entry);
       if (isReassignedResolvedItem(it)){
@@ -1682,21 +1708,21 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       });
       renderTable('tblLeaderboard', ['Name','Resolved','Reassigned','Avg. handling time'], rows);
     }
-    renderTable('tblTopDocs', ['Articles with the most feedback','Total','Resolved'],
-      docs.map(d => [ (d.title || d.id || '—') + (d.id ? ` [${d.id}]` : ''), d.total, d.resolved ])
+
+    renderTable('tblTopDocs', ['Articles with the most feedback','Resolved in range'],
+      docs.map(d => [ (d.title || d.id || '—') + (d.id ? ` [${d.id}]` : ''), d.resolved ])
     );
 
-    // Category counts + durations (exclude negative days)
     const catStats = new Map();
     const classifyForCategoryTable = categoryView === 'detailed'
       ? classifyCategoryDetailed
       : classifyCategorySimple;
-    for (const it of normalized){
+
+    for (const it of resolvedOnly){
       const { accept, resolve, handle } = calcDurations(it);
       const hasAccept = accept != null && accept >= 0;
       const hasResolve = resolve != null && resolve >= 0;
-      const hasHandle = handle != null && handle >= 0;
-      // Kun rader med komplett, ikke-negativt data teller i alle kolonner
+      const hasHandle = handle != null;
       if (!(hasAccept && hasResolve && hasHandle)) continue;
 
       const cat = classifyForCategoryTable(it.area);
@@ -1707,6 +1733,7 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       s.ahtSum += handle; s.ahtN++;
       catStats.set(cat, s);
     }
+
     const toCategoryRow = (name, s) => ({
       name,
       count: s.count,
@@ -1714,9 +1741,11 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
       art: s.artN ? s.artSum / s.artN : null,
       aht: s.ahtN ? s.ahtSum / s.ahtN : null
     });
+
     const catRows = categoryView === 'detailed'
       ? DETAILED_CATEGORIES.map(name => toCategoryRow(name, catStats.get(name) || { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 }))
       : Array.from(catStats.entries()).map(([name, s]) => toCategoryRow(name, s)).sort((a,b)=> b.count - a.count);
+
     const catRowsWithTotal = (categoryView !== 'detailed' && catRows.length)
       ? (() => {
           const total = { count:0, aatSum:0, aatN:0, artSum:0, artN:0, ahtSum:0, ahtN:0 };
@@ -1729,15 +1758,15 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
           return [...catRows, toCategoryRow('Total', total)];
         })()
       : catRows;
+
     renderTable('tblCategory', ['Category','Count','Avr. accept time','Avr. resolution time','Avr. handling time'],
       catRowsWithTotal.map(r => [r.name, r.count, fmtAvgDays(r.aat), fmtAvgDays(r.art), fmtAvgDays(r.aht)]));
 
-    renderHandleTrend(buildHandleTrend(normalized));
+    renderHandleTrend(buildHandleTrend(resolvedOnly));
 
-    // Feedbacks per month (Resolution / Sales / Unknown / Total)
     const monthStats = new Map();
-    for (const it of normalized){
-      const k = monthKey(it.createdDate);
+    for (const it of resolvedOnly){
+      const k = monthKey(it.resolvedDate);
       if (!k) continue;
       const cat = classifyCategory(it.area);
       const entry = monthStats.get(k) || { resolution:0, sales:0, unknown:0, total:0 };
@@ -1753,35 +1782,36 @@ label{display:block;font-size:12px;color:#334155;margin-bottom:2px;white-space:n
     renderTable('tblMonths', ['Month','Resolution','Sales','Unknown','Total'],
       months.map(m => [m.month, m.resolution, m.sales, m.unknown, m.total]));
 
-    const total = normalized.length;
-    const resolved = resolvedOnly.length;
-    const active = total - resolved;
-    const hidden = data.length - raw.length;
-    const statsBase = `Loaded ${total} feedbacks — ${resolved} resolved, ${active} active.`;
+    const total = resolvedOnly.length;
+    const activeInRange = openCreatedInRange.length;
+    const hidden = data.length - base.length;
+    const statsBase = `Resolved in selected range: ${total}. Active created in range: ${activeInRange}.`;
     const statsHidden = hidden > 0 ? ` (hidden ${hidden} auto-generated)` : '';
     const avgHandle = averageHandleTime(resolvedOnly);
-    const acceptVals = normalized
-      .map(it => daysBetween(it.createdDate, effectiveAssignedDate(it)))
-      .filter(v => v != null && v >= 0);
     const monthCounts = months.map(m => m.total);
     const avgPerMonth = monthCounts.length ? (monthCounts.reduce((a,b)=>a+b,0) / monthCounts.length) : null;
-    const oldestActive = normalized.filter(x => !x.resolvedDate && x.createdDate)
-      .sort((a,b)=> a.createdDate - b.createdDate)[0];
+    const oldestActive = openAll.sort((a,b)=> a.createdDate - b.createdDate)[0];
     const oldestDays = oldestActive ? daysBetween(oldestActive.createdDate, new Date()) : null;
+    const openAcceptVals = openAll
+      .map(it => daysBetween(it.createdDate, new Date()))
+      .filter(v => v != null && v >= 0);
+
+    stats.textContent = statsBase + statsHidden;
 
     if (kpiTotalVal) kpiTotalVal.textContent = total ? String(total) : '—';
-    if (kpiTotalSub) kpiTotalSub.textContent = total ? `${resolved} resolved (${active} active)` : 'No data';
+    if (kpiTotalSub) kpiTotalSub.textContent = total ? `${activeInRange} active created in range` : 'No data';
     if (kpiAhtVal) kpiAhtVal.textContent = avgHandle != null ? `${fmtAvgDays(avgHandle)}d` : '—';
-    if (kpiAhtSub) kpiAhtSub.textContent = avgHandle != null ? 'Completed cases' : '—';
+    if (kpiAhtSub) kpiAhtSub.textContent = avgHandle != null ? 'Resolved in selected range' : '—';
     if (kpiAvgMonthVal) kpiAvgMonthVal.textContent = avgPerMonth != null ? avgPerMonth.toFixed(1) : '—';
-    if (kpiAvgMonthSub) kpiAvgMonthSub.textContent = months.length ? `${months.length} months` : '—';
+    if (kpiAvgMonthSub) kpiAvgMonthSub.textContent = months.length ? `${months.length} resolved months` : '—';
     if (kpiOldestVal) kpiOldestVal.textContent = oldestDays != null ? `${oldestDays.toFixed(0)}d` : '—';
-    const avgAccept = average(acceptVals);
+    const avgOpenAge = average(openAcceptVals);
     if (kpiOldestSub) kpiOldestSub.textContent = oldestDays != null
-      ? `Since created (avg ${fmtAvgDays(avgAccept)}d)`
+      ? `All open items (avg ${fmtAvgDays(avgOpenAge)}d)`
       : '—';
+
     if (clearBtn){
-      clearBtn.style.display = total > 0 ? 'inline-block' : 'none';
+      clearBtn.style.display = (resolvedOnly.length || openAll.length) ? 'inline-block' : 'none';
     }
   }
 
