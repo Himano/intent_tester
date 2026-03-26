@@ -1,0 +1,1030 @@
+﻿<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Containment Inspector</title>
+  <script src="../xlsx.full.min.js"></script>
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --fg: #111111;
+      --accent: #ffda1a;
+      --accent-strong: #0058a3;
+      --accent-soft: #b9dcff;
+      --border: #000000;
+      --shadow: 4px 4px 0 #000000;
+      --radius: 10px;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-main);
+      font-size: 16px;
+      overflow: hidden;
+    }
+
+    .app {
+      height: 100vh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 24px;
+      background: var(--accent);
+      border-bottom: 3px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .logo-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 12px;
+      border: 3px solid var(--border);
+      background: #ffffff;
+      border-radius: var(--radius);
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .logo-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: var(--accent-strong);
+      border: 3px solid var(--border);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 15px;
+    }
+
+    .layout {
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 2fr 1.3fr;
+      gap: 20px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .file-card,
+    .chat-card,
+    .log-card {
+      background: #ffffff;
+      border: 3px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px 18px;
+    }
+
+    .chat-card,
+    .log-card {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .panel-left .chat-card,
+    .panel-right .log-card {
+      flex: 1;
+    }
+
+    h2,
+    h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    h3 {
+      font-size: 17px;
+    }
+
+    .helper-text {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 2px solid var(--border);
+      background: var(--accent-soft);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .file-input-label {
+      display: inline-block;
+      margin-top: 8px;
+      cursor: pointer;
+    }
+
+    .file-input-label input[type="file"] {
+      display: none;
+    }
+
+    .file-input-fake {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      border: 3px solid var(--border);
+      background: #ffffff;
+      box-shadow: var(--shadow);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .file-input-fake:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .file-status {
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .chat-window,
+    .logged-list {
+      border-radius: var(--radius);
+      border: 3px solid var(--border);
+      background: #fefefe;
+      padding: 10px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .chat-window {
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+    }
+
+    .logged-list {
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+      background: #fdfdfd;
+    }
+
+    .empty-state {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: #fafafa;
+      font-size: 14px;
+    }
+
+    .message-card {
+      border-radius: var(--radius);
+      border: 3px solid var(--border);
+      padding: 10px;
+      background: #ffffff;
+      box-shadow: 3px 3px 0 #000;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .message-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .meta-group {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .message-text {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    .message-intent-badge {
+      background: var(--accent-soft);
+    }
+
+    .message-id-badge {
+      background: #fff3b8;
+    }
+
+    .review-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .log-btn,
+    .btn-ghost,
+    .toggle-btn {
+      border-radius: 999px;
+      border: 2px solid var(--border);
+      background: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .log-btn {
+      padding: 4px 10px;
+      border-width: 3px;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .log-btn.primary {
+      background: var(--accent-strong);
+      color: #ffffff;
+    }
+
+    .btn-ghost {
+      padding: 4px 10px;
+      font-weight: 600;
+      background: transparent;
+    }
+
+    .btn-ghost:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .log-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .log-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .view-toggle {
+      display: inline-flex;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .toggle-btn {
+      padding: 4px 10px;
+      border: 0;
+      border-right: 2px solid var(--border);
+      background: #ffffff;
+    }
+
+    .toggle-btn:last-child {
+      border-right: 0;
+    }
+
+    .toggle-btn.active {
+      background: var(--accent-soft);
+    }
+
+    .log-view {
+      display: none;
+    }
+
+    .logged-list.log-view.active {
+      display: flex;
+    }
+
+    .logged-export.log-view.active {
+      display: block;
+    }
+
+    .logged-item {
+      border-radius: var(--radius);
+      border: 2px solid var(--border);
+      padding: 8px;
+      background: #ffffff;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .logged-item-main {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .logged-item-message {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.4;
+      white-space: pre-wrap;
+    }
+
+    .remove-logged-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 2px solid var(--border);
+      background: #ffffff;
+      color: #d11;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .logged-export {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      max-height: none;
+      border-radius: var(--radius);
+      border: 3px solid var(--border);
+      padding: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      background: #fffffe;
+      resize: none;
+      overflow-y: auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 960px) {
+      html,
+      body {
+        height: auto;
+        overflow: auto;
+      }
+
+      .app {
+        height: auto;
+        overflow: visible;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        overflow: visible;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="logo-block">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Containment Inspector</span>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel panel-left">
+        <div class="file-card">
+          <h2>1. Last opp datafil</h2>
+          <p class="helper-text">
+            Stotter Excel (<code>.xlsx</code>, <code>.xls</code>) og CSV med kolonnene
+            <code>Interaction_id</code>, <code>Intent</code>, <code>Message</code>
+            og gjerne en dato-kolonne.
+          </p>
+          <label class="file-input-label">
+            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+            <span class="file-input-fake">Velg fil</span>
+          </label>
+          <p id="fileStatus" class="file-status">Ingen fil lastet opp ennå.</p>
+        </div>
+
+        <div class="chat-card">
+          <h2>2. Gå gjennom problemstillinger</h2>
+          <p id="chatInfo" class="helper-text">
+            Last opp en fil. Du ser den andre meldingen i hver chat (typisk problemstillingen)
+            og kan markere hver som «Denne er grei» eller «Kunne vært contained».
+          </p>
+
+          <div id="chatWindow" class="chat-window">
+            <div class="empty-state">
+              <p>Ingen problemstillinger å vise ennå.</p>
+              <p class="helper-text">Last opp en fil for å starte.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel panel-right">
+        <div class="log-card">
+          <h2>3. Loggede meldinger</h2>
+          <p class="helper-text">
+            Klikk «Kunne vært contained» for å logge en chat. I liste-visning vises ID og tekst.
+            I tekst-visning vises kun tekst.
+          </p>
+
+          <div class="log-header-row">
+            <span id="loggedCountBadge" class="badge">0 logget</span>
+            <div class="log-controls">
+              <div class="view-toggle" role="group" aria-label="Velg visning">
+                <button id="listViewBtn" class="toggle-btn active" type="button">Liste</button>
+                <button id="textViewBtn" class="toggle-btn" type="button">Tekst</button>
+              </div>
+              <button id="copyLoggedBtn" class="btn-ghost" type="button" disabled>Kopier tekst</button>
+            </div>
+          </div>
+
+          <div id="loggedList" class="logged-list log-view active">
+            <div class="empty-state">
+              <p>Ingen meldinger logget ennå.</p>
+              <p class="helper-text">Bruk «Kunne vært contained» i venstre liste for å logge.</p>
+            </div>
+          </div>
+
+          <textarea
+            id="loggedExport"
+            class="logged-export log-view"
+            readonly
+            placeholder="Tekstvisning viser kun tekst, én per linje."
+          ></textarea>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    let reviewItems = [];
+    let loggedMessages = [];
+    let lastFileName = "";
+    let logViewMode = "list";
+
+    const STORAGE_KEY = "containmentInspectorState_v1";
+
+    const fileInput = document.getElementById("fileInput");
+    const fileStatus = document.getElementById("fileStatus");
+    const chatInfo = document.getElementById("chatInfo");
+    const chatWindow = document.getElementById("chatWindow");
+    const loggedListEl = document.getElementById("loggedList");
+    const loggedCountBadge = document.getElementById("loggedCountBadge");
+    const copyLoggedBtn = document.getElementById("copyLoggedBtn");
+    const loggedExport = document.getElementById("loggedExport");
+    const listViewBtn = document.getElementById("listViewBtn");
+    const textViewBtn = document.getElementById("textViewBtn");
+
+    function clearContainerWithEmptyState(container, message, helper) {
+      container.innerHTML = "";
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.innerHTML = helper
+        ? `<p>${message}</p><p class="helper-text">${helper}</p>`
+        : `<p>${message}</p>`;
+      container.appendChild(empty);
+    }
+
+    function compareInteractionId(a, b) {
+      const aNum = Number(a);
+      const bNum = Number(b);
+      if (Number.isFinite(aNum) && Number.isFinite(bNum)) {
+        return aNum - bNum;
+      }
+      return String(a).localeCompare(String(b), "no", { numeric: true, sensitivity: "base" });
+    }
+
+    function normalizeSortToken(value) {
+      if (value === null || value === undefined || value === "") {
+        return null;
+      }
+
+      if (typeof value === "number" && Number.isFinite(value)) {
+        return value;
+      }
+
+      const textValue = String(value).trim();
+      if (!textValue) {
+        return null;
+      }
+
+      const parsed = Number(textValue.replace(",", "."));
+      if (Number.isFinite(parsed)) {
+        return parsed;
+      }
+
+      return textValue;
+    }
+
+    function compareSortToken(a, b) {
+      if (a === null && b === null) return 0;
+      if (a === null) return 1;
+      if (b === null) return -1;
+
+      if (typeof a === "number" && typeof b === "number") {
+        return a - b;
+      }
+
+      return String(a).localeCompare(String(b), "no", { numeric: true, sensitivity: "base" });
+    }
+
+    function compareDateValue(a, b) {
+      if (!a && !b) return 0;
+      if (!a) return 1;
+      if (!b) return -1;
+
+      const aTime = Date.parse(a);
+      const bTime = Date.parse(b);
+
+      if (Number.isFinite(aTime) && Number.isFinite(bTime)) {
+        return aTime - bTime;
+      }
+
+      return String(a).localeCompare(String(b), "no", { numeric: true, sensitivity: "base" });
+    }
+
+    function updateInfoText() {
+      if (reviewItems.length === 0) {
+        chatInfo.textContent =
+          "Ingen problemstillinger igjen å vurdere. Enten er alt gjennomgått, eller det var ingen chatter med minst 3 meldinger.";
+      } else {
+        chatInfo.textContent =
+          `Det er ${reviewItems.length} problemstillinger igjen å vurdere (2. melding i hver chat med minst 3 meldinger).`;
+      }
+    }
+
+    function buildLoggedText() {
+      return loggedMessages.map((item) => item.message || "").join("\n");
+    }
+
+    function setLogViewMode(mode) {
+      logViewMode = mode === "text" ? "text" : "list";
+      const isListMode = logViewMode === "list";
+
+      loggedListEl.classList.toggle("active", isListMode);
+      loggedExport.classList.toggle("active", !isListMode);
+      listViewBtn.classList.toggle("active", isListMode);
+      textViewBtn.classList.toggle("active", !isListMode);
+
+      saveStateToStorage();
+    }
+
+    function renderReviewList() {
+      chatWindow.innerHTML = "";
+
+      if (reviewItems.length === 0) {
+        clearContainerWithEmptyState(chatWindow, "Ingen problemstillinger å vise.");
+        updateInfoText();
+        return;
+      }
+
+      reviewItems.forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "message-card";
+
+        const metaRow = document.createElement("div");
+        metaRow.className = "message-meta";
+
+        const leftMeta = document.createElement("div");
+        leftMeta.className = "meta-group";
+
+        const intentSpan = document.createElement("span");
+        intentSpan.className = "badge message-intent-badge";
+        intentSpan.textContent = item.intent || "(ingen intent)";
+
+        const idSpan = document.createElement("span");
+        idSpan.className = "badge message-id-badge";
+        idSpan.textContent = "ID " + item.interactionId;
+
+        leftMeta.appendChild(intentSpan);
+        leftMeta.appendChild(idSpan);
+
+        if (item.date) {
+          const dateSpan = document.createElement("span");
+          dateSpan.className = "badge";
+          dateSpan.textContent = item.date;
+          leftMeta.appendChild(dateSpan);
+        }
+
+        metaRow.appendChild(leftMeta);
+        card.appendChild(metaRow);
+
+        const textP = document.createElement("p");
+        textP.className = "message-text";
+        textP.textContent = item.message || "(tom melding)";
+        card.appendChild(textP);
+
+        const actions = document.createElement("div");
+        actions.className = "review-actions";
+
+        const okBtn = document.createElement("button");
+        okBtn.className = "log-btn";
+        okBtn.type = "button";
+        okBtn.textContent = "Denne er grei";
+
+        const containBtn = document.createElement("button");
+        containBtn.className = "log-btn primary";
+        containBtn.type = "button";
+        containBtn.textContent = "Kunne vært contained";
+
+        okBtn.addEventListener("click", () => {
+          reviewItems = reviewItems.filter((r) => r.internalId !== item.internalId);
+          renderReviewList();
+          saveStateToStorage();
+        });
+
+        containBtn.addEventListener("click", () => {
+          loggedMessages.push({
+            interactionId: item.interactionId,
+            intent: item.intent,
+            message: item.message,
+            date: item.date,
+          });
+          reviewItems = reviewItems.filter((r) => r.internalId !== item.internalId);
+          renderReviewList();
+          renderLoggedList();
+          saveStateToStorage();
+        });
+
+        actions.appendChild(okBtn);
+        actions.appendChild(containBtn);
+
+        card.appendChild(actions);
+        chatWindow.appendChild(card);
+      });
+
+      updateInfoText();
+    }
+
+    function renderLoggedList() {
+      loggedListEl.innerHTML = "";
+
+      const textContent = buildLoggedText();
+      loggedExport.value = textContent;
+      copyLoggedBtn.disabled = !textContent;
+
+      if (loggedMessages.length === 0) {
+        clearContainerWithEmptyState(
+          loggedListEl,
+          "Ingen meldinger logget ennå.",
+          "Bruk «Kunne vært contained» i venstre liste for å logge."
+        );
+        loggedCountBadge.textContent = "0 logget";
+        return;
+      }
+
+      loggedMessages.forEach((msg, index) => {
+        const item = document.createElement("div");
+        item.className = "logged-item";
+
+        const itemMain = document.createElement("div");
+        itemMain.className = "logged-item-main";
+
+        const idBadge = document.createElement("span");
+        idBadge.className = "badge message-id-badge";
+        idBadge.textContent = `ID ${msg.interactionId}`;
+
+        const message = document.createElement("p");
+        message.className = "logged-item-message";
+        message.textContent = msg.message || "(tom melding)";
+
+        itemMain.appendChild(idBadge);
+        itemMain.appendChild(message);
+
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "remove-logged-btn";
+        removeBtn.type = "button";
+        removeBtn.textContent = "x";
+        removeBtn.title = "Fjern denne fra loggen";
+
+        removeBtn.addEventListener("click", () => {
+          loggedMessages.splice(index, 1);
+          renderLoggedList();
+          saveStateToStorage();
+        });
+
+        item.appendChild(itemMain);
+        item.appendChild(removeBtn);
+        loggedListEl.appendChild(item);
+      });
+
+      loggedCountBadge.textContent = `${loggedMessages.length} logget`;
+    }
+
+    function saveStateToStorage() {
+      try {
+        const state = {
+          reviewItems,
+          loggedMessages,
+          lastFileName,
+          logViewMode,
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (error) {
+        console.warn("Kunne ikke lagre til localStorage:", error);
+      }
+    }
+
+    function loadStateFromStorage() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+
+        const state = JSON.parse(raw);
+        if (!state || !Array.isArray(state.reviewItems) || !Array.isArray(state.loggedMessages)) {
+          return false;
+        }
+
+        reviewItems = state.reviewItems;
+        loggedMessages = state.loggedMessages;
+        lastFileName = state.lastFileName || "";
+        logViewMode = state.logViewMode === "text" ? "text" : "list";
+
+        if (lastFileName) {
+          fileStatus.textContent =
+            `Gjenopprettet fra forrige sesjon: ${lastFileName} - ` +
+            `${reviewItems.length} problemstillinger i ko, ${loggedMessages.length} logget.`;
+        } else {
+          fileStatus.textContent =
+            `Gjenopprettet fra forrige sesjon - ` +
+            `${reviewItems.length} problemstillinger i ko, ${loggedMessages.length} logget.`;
+        }
+
+        renderReviewList();
+        renderLoggedList();
+        setLogViewMode(logViewMode);
+        return true;
+      } catch (error) {
+        console.warn("Kunne ikke lese fra localStorage:", error);
+        return false;
+      }
+    }
+
+    function buildConversationMap(rows) {
+      if (!rows || rows.length === 0) {
+        return [];
+      }
+
+      const sortedRows = [...rows].sort((a, b) => {
+        const idCompare = compareInteractionId(a.interactionId, b.interactionId);
+        if (idCompare !== 0) return idCompare;
+
+        const sortCompare = compareSortToken(a.sortToken, b.sortToken);
+        if (sortCompare !== 0) return sortCompare;
+
+        const dateCompare = compareDateValue(a.date, b.date);
+        if (dateCompare !== 0) return dateCompare;
+
+        return a.originalIndex - b.originalIndex;
+      });
+
+      let currentId = sortedRows[0].interactionId;
+      let currentMessages = [];
+      const grouped = [];
+
+      for (const row of sortedRows) {
+        if (row.interactionId === currentId) {
+          currentMessages.push(row);
+        } else {
+          grouped.push({ id: currentId, messages: currentMessages });
+          currentId = row.interactionId;
+          currentMessages = [row];
+        }
+      }
+
+      if (currentMessages.length > 0) {
+        grouped.push({ id: currentId, messages: currentMessages });
+      }
+
+      return grouped;
+    }
+
+    function normalizeRows(rows) {
+      return rows
+        .map((row, index) => {
+          const interactionId =
+            row["Interaction_id"] ??
+            row["interaction_id"] ??
+            row["Interaction ID"] ??
+            row["Interactionid"] ??
+            "";
+
+          const intent = row["Intent"] ?? row["intent"] ?? "";
+          const message = row["Message"] ?? row["message"] ?? "";
+
+          const dateValue =
+            row["Date"] ??
+            row["date"] ??
+            row["Dato"] ??
+            row["dato"] ??
+            row["Timestamp"] ??
+            row["timestamp"] ??
+            row["Created"] ??
+            row["created"] ??
+            "";
+
+          const sortRaw =
+            row["sort"] ??
+            row["Sort"] ??
+            row["Sequence"] ??
+            row["sequence"] ??
+            row["Message_number"] ??
+            row["message_number"] ??
+            row["Turn"] ??
+            row["turn"] ??
+            "";
+
+          return {
+            originalIndex: index,
+            interactionId: interactionId ? String(interactionId).trim() : "",
+            intent: intent ? String(intent).trim() : "",
+            message: message ? String(message).trim() : "",
+            date: dateValue ? String(dateValue).trim() : "",
+            sortToken: normalizeSortToken(sortRaw),
+          };
+        })
+        .filter((row) => row.interactionId);
+    }
+
+    function parseUploadedRows(rows, fileName) {
+      const normalizedRows = normalizeRows(rows);
+      if (normalizedRows.length === 0) {
+        throw new Error("Fant ingen rader med Interaction_id. Sjekk kolonnenavnene.");
+      }
+
+      const allConversations = buildConversationMap(normalizedRows);
+      const filteredConversations = allConversations.filter(
+        (conversation) => conversation.messages && conversation.messages.length >= 3
+      );
+
+      reviewItems = [];
+      loggedMessages = [];
+
+      filteredConversations.forEach((conversation) => {
+        const secondMessage = conversation.messages[conversation.messages.length - 2];
+        reviewItems.push({
+          internalId: `${conversation.id}::1`,
+          interactionId: conversation.id,
+          intent: secondMessage.intent,
+          message: secondMessage.message,
+          date: secondMessage.date,
+        });
+      });
+
+      const totalChats = filteredConversations.length;
+      const totalReview = reviewItems.length;
+
+      if (totalReview === 0) {
+        fileStatus.textContent =
+          `Lastet: ${fileName}, men fant ingen chatter med minst 3 meldinger som hadde en 2. melding å bruke.`;
+        clearContainerWithEmptyState(
+          chatWindow,
+          "Filen ble lest, men det var ingen relevante problemstillinger å vise."
+        );
+        renderLoggedList();
+        updateInfoText();
+        saveStateToStorage();
+        return;
+      }
+
+      fileStatus.textContent =
+        `Lastet: ${fileName} - ${totalChats} chatter med minst 3 meldinger, ` +
+        `${totalReview} problemstillinger (2. melding i hver chat).`;
+
+      renderReviewList();
+      renderLoggedList();
+      saveStateToStorage();
+    }
+
+    fileInput.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      fileStatus.textContent = `Laster: ${file.name} ...`;
+      lastFileName = file.name;
+
+      const reader = new FileReader();
+
+      reader.onload = (loadEvent) => {
+        try {
+          const data = loadEvent.target.result;
+          let rows = [];
+
+          if (file.name.toLowerCase().endsWith(".csv")) {
+            const workbook = XLSX.read(data, { type: "binary" });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+          } else {
+            const workbook = XLSX.read(data, { type: "array" });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+          }
+
+          if (!rows || rows.length === 0) {
+            throw new Error("Fant ingen rader i filen.");
+          }
+
+          parseUploadedRows(rows, file.name);
+        } catch (error) {
+          console.error(error);
+          fileStatus.textContent = "Feil ved lesing av fil: " + error.message;
+          reviewItems = [];
+          loggedMessages = [];
+          clearContainerWithEmptyState(chatWindow, "Kunne ikke lese filen. Sjekk at formatet stemmer.");
+          renderLoggedList();
+          updateInfoText();
+          saveStateToStorage();
+        }
+      };
+
+      if (file.name.toLowerCase().endsWith(".csv")) {
+        reader.readAsBinaryString(file);
+      } else {
+        reader.readAsArrayBuffer(file);
+      }
+    });
+
+    async function copyLoggedView() {
+      const text = buildLoggedText();
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        loggedExport.focus();
+        loggedExport.select();
+        document.execCommand("copy");
+      }
+    }
+
+    copyLoggedBtn.addEventListener("click", copyLoggedView);
+
+    listViewBtn.addEventListener("click", () => {
+      setLogViewMode("list");
+    });
+
+    textViewBtn.addEventListener("click", () => {
+      setLogViewMode("text");
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const restored = loadStateFromStorage();
+      if (!restored) {
+        clearContainerWithEmptyState(chatWindow, "Ingen problemstillinger å vise ennå.");
+        renderLoggedList();
+        updateInfoText();
+        setLogViewMode("list");
+      }
+    });
+  </script>
+</body>
+</html>

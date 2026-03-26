@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Review Tool – Neo Brutal</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- XLSX-bibliotek for å lese Excel-filer i nettleser -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="logo-block">
+        <span class="logo-dot"></span>
+        <span class="logo-text">Chat Containment Inspector</span>
+      </div>
+      <!-- Ingen "Neo-Brutal Lab" badge lenger -->
+    </header>
+
+    <main class="layout">
+      <!-- VENSTRE SIDE: fil + liste over problemstillinger -->
+      <section class="panel panel-left">
+        <div class="file-card">
+          <h2>1. Last opp datafil</h2>
+          <p class="helper-text">
+            Støtter Excel (<code>.xlsx</code>, <code>.xls</code>) og CSV med kolonnene
+            <code>Interaction_id</code>, <code>Intent</code>, <code>Message</code>
+            og gjerne en dato-kolonne (f.eks. <code>Date</code>, <code>Dato</code> eller lignende).
+          </p>
+          <label class="file-input-label">
+            <input type="file" id="fileInput" accept=".xlsx,.xls,.csv">
+            <span class="file-input-fake">Velg fil</span>
+          </label>
+          <p id="fileStatus" class="file-status">Ingen fil lastet opp ennå.</p>
+        </div>
+
+        <div class="chat-card">
+          <div class="chat-card-header">
+            <div>
+              <h2>2. Gå gjennom problemstillinger</h2>
+              <p id="chatInfo" class="helper-text">
+                Last opp en fil – under ser du den andre meldingen i hver chat
+                (typisk problemstillingen). Marker hver som «Denne er grei» eller
+                «Kunne vært contained».
+              </p>
+            </div>
+          </div>
+
+          <div id="chatWindow" class="chat-window">
+            <div class="empty-state">
+              <p>Ingen problemstillinger å vise ennå.</p>
+              <p class="helper-text">Last opp en fil for å starte.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HØYRE SIDE: loggede meldinger -->
+      <section class="panel panel-right">
+        <div class="log-card">
+          <h2>3. Loggede meldinger</h2>
+          <p class="helper-text">
+            Klikk <strong>«Kunne vært contained»</strong> på relevante problemstillinger.
+            De havner i listen under. Du kan fjerne enkeltmeldinger med den røde X-en.
+          </p>
+          <div class="log-header-row">
+            <span id="loggedCountBadge" class="badge">0 logget</span>
+            <button id="copyLoggedBtn" class="btn-ghost" disabled>Kopier som tekst</button>
+          </div>
+          <div id="loggedList" class="logged-list">
+            <div class="empty-state">
+              <p>Ingen meldinger logget ennå.</p>
+              <p class="helper-text">Bruk knappene «Kunne vært contained» for å logge.</p>
+            </div>
+          </div>
+          <textarea
+            id="loggedExport"
+            class="logged-export"
+            readonly
+            placeholder="Når du klikker 'Kopier som tekst' vises alle loggede tekster her – én per linje."
+          ></textarea>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
