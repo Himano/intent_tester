@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Containment Inspector</title>
+  <title>Agent_reqest inspector</title>
   <script src="xlsx.full.min.js"></script>
   <style>
     :root {
@@ -318,10 +318,6 @@
       font-size: 15px;
       line-height: 1.45;
       white-space: pre-wrap;
-    }
-
-    .message-intent-badge {
-      background: var(--accent-soft);
     }
 
     .message-id-badge {
@@ -813,15 +809,10 @@
         const leftMeta = document.createElement("div");
         leftMeta.className = "meta-group";
 
-        const intentSpan = document.createElement("span");
-        intentSpan.className = "badge message-intent-badge";
-        intentSpan.textContent = item.intent || "(ingen intent)";
-
         const idSpan = document.createElement("span");
         idSpan.className = "badge message-id-badge";
         idSpan.textContent = "ID " + item.interactionId;
 
-        leftMeta.appendChild(intentSpan);
         leftMeta.appendChild(idSpan);
 
         if (item.date) {
@@ -1114,9 +1105,7 @@
         return;
       }
 
-      fileStatus.textContent =
-        `Lastet: ${fileName} - ${totalChats} chatter med minst 3 meldinger, ` +
-        `${totalReview} problemstillinger (2. melding i hver chat).`;
+      fileStatus.textContent = `Lastet: ${fileName} - ${totalChats} chatter med minst 3 meldinger`;
 
       renderReviewList();
       renderLoggedList();
