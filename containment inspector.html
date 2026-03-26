@@ -48,6 +48,8 @@
     .app-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       padding: 16px 24px;
       background: var(--accent);
       border-bottom: 3px solid var(--border);
@@ -78,6 +80,40 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       font-size: 15px;
+    }
+
+    .header-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .header-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 5px 12px;
+      border: 3px solid var(--border);
+      border-radius: 999px;
+      box-shadow: var(--shadow-soft);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .home-btn {
+      background: var(--accent-strong);
+      color: #ffffff;
+    }
+
+    .clear-btn {
+      background: #ffffff;
+      color: #b20f0f;
     }
 
     .layout {
@@ -465,15 +501,19 @@
         grid-template-columns: 1fr;
         overflow: visible;
       }
+
+      .header-actions {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="app">
     <header class="app-header">
-      <div class="logo-block">
-        <span class="logo-dot"></span>
-        <span class="logo-text">Containment Inspector</span>
+      <a class="header-btn home-btn" href="index.html">Hjem</a>
+      <div class="header-actions">
+        <button id="clearToolBtn" class="header-btn clear-btn" type="button">Clear</button>
       </div>
     </header>
 
@@ -581,6 +621,7 @@
     const textViewBtn = document.getElementById("textViewBtn");
     const bulkExtractCount = document.getElementById("bulkExtractCount");
     const bulkExtractBtn = document.getElementById("bulkExtractBtn");
+    const clearToolBtn = document.getElementById("clearToolBtn");
 
     function clearContainerWithEmptyState(container, message, helper) {
       container.innerHTML = "";
@@ -730,6 +771,26 @@
 
       const amount = Math.min(requestedCount, reviewItems.length);
       moveItemsToLogged(amount);
+    }
+
+    function resetToolState() {
+      reviewItems = [];
+      loggedMessages = [];
+      lastFileName = "";
+      logViewMode = "list";
+      fileInput.value = "";
+      fileStatus.textContent = "Ingen fil lastet opp ennå.";
+      clearContainerWithEmptyState(chatWindow, "Ingen problemstillinger å vise ennå.");
+      renderLoggedList();
+      updateInfoText();
+      setLogViewMode("list");
+      syncBulkExtractControls();
+
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        console.warn("Kunne ikke tømme localStorage:", error);
+      }
     }
 
     function renderReviewList() {
@@ -1139,6 +1200,12 @@
       if (event.key === "Enter") {
         handleBulkExtract();
       }
+    });
+
+    clearToolBtn.addEventListener("click", () => {
+      const confirmed = window.confirm("Vil du nullstille verktøyet og slette lagret fremdrift?");
+      if (!confirmed) return;
+      resetToolState();
     });
 
     document.addEventListener("DOMContentLoaded", () => {
