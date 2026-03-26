@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Containment Inspector</title>
-  <script src="../xlsx.full.min.js"></script>
+  <script src="xlsx.full.min.js"></script>
   <style>
     :root {
       --bg: #f4f4f4;
@@ -14,6 +14,7 @@
       --accent-soft: #b9dcff;
       --border: #000000;
       --shadow: 4px 4px 0 #000000;
+      --shadow-soft: 3px 3px 0 #000000;
       --radius: 10px;
       --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
@@ -113,6 +114,40 @@
       flex-direction: column;
       gap: 12px;
       min-height: 0;
+    }
+
+    .chat-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .quick-extract-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-extract-input {
+      width: 70px;
+      height: 32px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: var(--shadow-soft);
+      background: #ffffff;
+    }
+
+    .bulk-extract-btn {
+      min-height: 32px;
+      margin: 0;
+      padding: 3px 10px;
+      border-width: 2px;
+      box-shadow: var(--shadow-soft);
     }
 
     .panel-left .chat-card,
@@ -298,6 +333,12 @@
       cursor: default;
     }
 
+    .bulk-extract-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+      box-shadow: none;
+    }
+
     .log-header-row {
       display: flex;
       justify-content: space-between;
@@ -453,7 +494,22 @@
         </div>
 
         <div class="chat-card">
-          <h2>2. Gå gjennom problemstillinger</h2>
+          <div class="chat-header-row">
+            <h2>2. Gå gjennom problemstillinger</h2>
+            <div class="quick-extract-controls">
+              <input
+                id="bulkExtractCount"
+                class="quick-extract-input"
+                type="number"
+                min="1"
+                step="1"
+                value="1"
+                aria-label="Antall som skal hentes ut"
+                title="Antall som skal hentes ut"
+              >
+              <button id="bulkExtractBtn" class="log-btn primary bulk-extract-btn" type="button">Hent ut</button>
+            </div>
+          </div>
           <p id="chatInfo" class="helper-text">
             Last opp en fil. Du ser den andre meldingen i hver chat (typisk problemstillingen)
             og kan markere hver som «Denne er grei» eller «Kunne vært contained».
@@ -523,6 +579,8 @@
     const loggedExport = document.getElementById("loggedExport");
     const listViewBtn = document.getElementById("listViewBtn");
     const textViewBtn = document.getElementById("textViewBtn");
+    const bulkExtractCount = document.getElementById("bulkExtractCount");
+    const bulkExtractBtn = document.getElementById("bulkExtractBtn");
 
     function clearContainerWithEmptyState(container, message, helper) {
       container.innerHTML = "";
@@ -618,12 +676,69 @@
       saveStateToStorage();
     }
 
+    function syncBulkExtractControls() {
+      const hasItems = reviewItems.length > 0;
+      bulkExtractBtn.disabled = !hasItems;
+      bulkExtractCount.disabled = !hasItems;
+
+      if (!hasItems) {
+        bulkExtractCount.value = "1";
+        bulkExtractCount.max = "1";
+        return;
+      }
+
+      bulkExtractCount.max = String(reviewItems.length);
+      const currentValue = Number.parseInt(bulkExtractCount.value, 10);
+
+      if (!Number.isFinite(currentValue) || currentValue < 1) {
+        bulkExtractCount.value = "1";
+      } else if (currentValue > reviewItems.length) {
+        bulkExtractCount.value = String(reviewItems.length);
+      }
+    }
+
+    function moveItemsToLogged(count) {
+      if (!Number.isFinite(count) || count < 1 || reviewItems.length === 0) {
+        return;
+      }
+
+      const itemsToMove = reviewItems.slice(0, count);
+
+      loggedMessages.push(
+        ...itemsToMove.map((item) => ({
+          interactionId: item.interactionId,
+          intent: item.intent,
+          message: item.message,
+          date: item.date,
+        }))
+      );
+
+      reviewItems = reviewItems.slice(itemsToMove.length);
+      renderReviewList();
+      renderLoggedList();
+      saveStateToStorage();
+    }
+
+    function handleBulkExtract() {
+      if (reviewItems.length === 0) return;
+
+      const requestedCount = Number.parseInt(bulkExtractCount.value, 10);
+      if (!Number.isFinite(requestedCount) || requestedCount < 1) {
+        bulkExtractCount.value = "1";
+        return;
+      }
+
+      const amount = Math.min(requestedCount, reviewItems.length);
+      moveItemsToLogged(amount);
+    }
+
     function renderReviewList() {
       chatWindow.innerHTML = "";
 
       if (reviewItems.length === 0) {
         clearContainerWithEmptyState(chatWindow, "Ingen problemstillinger å vise.");
         updateInfoText();
+        syncBulkExtractControls();
         return;
       }
 
@@ -703,6 +818,7 @@
       });
 
       updateInfoText();
+      syncBulkExtractControls();
     }
 
     function renderLoggedList() {
@@ -932,6 +1048,7 @@
         );
         renderLoggedList();
         updateInfoText();
+        syncBulkExtractControls();
         saveStateToStorage();
         return;
       }
@@ -982,6 +1099,7 @@
           clearContainerWithEmptyState(chatWindow, "Kunne ikke lese filen. Sjekk at formatet stemmer.");
           renderLoggedList();
           updateInfoText();
+          syncBulkExtractControls();
           saveStateToStorage();
         }
       };
@@ -1016,6 +1134,13 @@
       setLogViewMode("text");
     });
 
+    bulkExtractBtn.addEventListener("click", handleBulkExtract);
+    bulkExtractCount.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        handleBulkExtract();
+      }
+    });
+
     document.addEventListener("DOMContentLoaded", () => {
       const restored = loadStateFromStorage();
       if (!restored) {
@@ -1023,6 +1148,7 @@
         renderLoggedList();
         updateInfoText();
         setLogViewMode("list");
+        syncBulkExtractControls();
       }
     });
   </script>
