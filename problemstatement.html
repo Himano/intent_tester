@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Problem Statement Maker</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --panel: #ffffff;
+      --line: #d8dee7;
+      --muted: #64748b;
+      --text: #0f172a;
+      --blue-soft: #b7c4d1;
+      --blue-label: #aebdcb;
+      --accent: #2563eb;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f7f9fc 0%, #edf2f8 100%);
+      overflow: hidden;
+    }
+
+    .page {
+      width: 100%;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+    }
+
+    .preview-shell,
+    .form-card {
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .headerbar {
+      padding: 12px 20px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 10;
+    }
+
+    .headerbar h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .home-link span {
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    .home-link svg {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    .fav-menu {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .fav-menu a {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 14px;
+      color: var(--text);
+      background: #f4f6fa;
+      white-space: nowrap;
+    }
+
+    .fav-menu .empty {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      color: var(--text);
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(420px, 2fr);
+      gap: 18px;
+      align-items: stretch;
+      min-height: 0;
+      overflow: hidden;
+      padding: 18px 24px 24px;
+    }
+
+    .preview-column {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .preview-shell {
+      width: 100%;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .preview-frame {
+      width: 100%;
+      max-width: none;
+      height: 312.75px;
+      overflow: hidden;
+    }
+
+    #slidePreview {
+      width: 1280px;
+      height: 720px;
+      background: #f3f3f3;
+      position: relative;
+      overflow: hidden;
+      color: #000;
+      transform-origin: top left;
+    }
+
+    .preview-actions {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      justify-content: flex-start;
+    }
+
+    .slide-header {
+      height: 110px;
+      background: var(--blue-soft);
+      padding: 22px 24px 10px 24px;
+    }
+
+    .slide-title {
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 400;
+      margin: 0;
+      word-break: break-word;
+    }
+
+    .slide-main {
+      padding: 14px 12px 0 12px;
+      height: calc(100% - 110px);
+      display: grid;
+      grid-template-rows: 328px 1fr;
+      gap: 22px;
+    }
+
+    .top-section {
+      display: grid;
+      grid-template-columns: 34px 1fr 34px 290px;
+      gap: 12px;
+    }
+
+    .vertical-label {
+      background: var(--blue-label);
+      color: white;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .problem-box,
+    .team-box,
+    .impact-grid > div {
+      background: #f3f3f3;
+    }
+
+    .problem-box {
+      padding: 8px 12px;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+
+    .problem-box h3,
+    .team-box h3 {
+      margin: 0 0 2px;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .block-title {
+      font-weight: 700;
+      margin-top: 2px;
+      font-size: 12px;
+    }
+
+    .block-copy {
+      margin: 0 0 10px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .team-box {
+      padding: 8px 8px 8px 8px;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    .team-line {
+      margin-bottom: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .team-line strong {
+      font-size: 12px;
+    }
+
+    .impact-area {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .impact-right {
+      border-top: 1px dashed #6b7280;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      min-height: 0;
+    }
+
+    .impact-col {
+      padding: 10px 12px;
+      border-right: 1px dashed #6b7280;
+      min-height: 200px;
+      overflow: hidden;
+    }
+
+    .impact-col:last-child {
+      border-right: 0;
+    }
+
+    .impact-col h4 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .impact-col ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 12px;
+      line-height: 1.22;
+    }
+
+    .impact-col li {
+      margin-bottom: 10px;
+    }
+
+    .form-card {
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-rows: auto auto minmax(0, 1fr) auto minmax(0, .72fr) auto minmax(0, .9fr);
+      gap: 8px 12px;
+    }
+
+    .form-card > :nth-child(1) { grid-column: 1 / 2; grid-row: 1; align-self: center; }
+    .form-card > :nth-child(2) { grid-column: 2 / -1; grid-row: 1; }
+    .form-card > :nth-child(3) { grid-column: 1 / -1; grid-row: 2; }
+    .form-card > :nth-child(4) { grid-column: 1 / 3; grid-row: 3; }
+    .form-card > :nth-child(5) { grid-column: 3 / 5; grid-row: 3; }
+    .form-card > :nth-child(6) { grid-column: 5 / -1; grid-row: 3; }
+    .form-card > :nth-child(7) { grid-column: 1 / -1; grid-row: 4; }
+    .form-card > :nth-child(8) { grid-column: 1 / 3; grid-row: 5; }
+    .form-card > :nth-child(9) { grid-column: 3 / 5; grid-row: 5; }
+    .form-card > :nth-child(10) { grid-column: 5 / -1; grid-row: 5; }
+    .form-card > :nth-child(11) { grid-column: 1 / -1; grid-row: 6; }
+    .form-card > :nth-child(12) { grid-column: 1 / 3; grid-row: 7; }
+    .form-card > :nth-child(13) { grid-column: 3 / 5; grid-row: 7; }
+    .form-card > :nth-child(14) { grid-column: 5 / -1; grid-row: 7; }
+
+    .form-section {
+      min-height: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-grid-2,
+    .form-grid-3,
+    .team-grid {
+      min-height: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .form-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .form-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .team-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .team-grid .wide { grid-column: span 2; }
+
+    .group-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 0;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      padding: 10px 12px;
+      font: inherit;
+      color: var(--text);
+    }
+
+    textarea {
+      min-height: 68px;
+      flex: 1;
+      resize: none;
+    }
+
+    @media (max-width: 1300px) {
+      .workspace {
+        grid-template-columns: minmax(0, 3fr) minmax(400px, 2fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      html,
+      body {
+        height: auto;
+        overflow: auto;
+      }
+
+      .page {
+        min-height: 100vh;
+        height: auto;
+        overflow: visible;
+      }
+
+      .workspace {
+        grid-template-columns: 1fr;
+        overflow: visible;
+      }
+
+      .page { padding: 14px; }
+      .form-card {
+        height: auto;
+        overflow: visible;
+      }
+      .form-card,
+      .form-grid-2,
+      .form-grid-3,
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-card > * {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+      }
+      .team-grid .wide { grid-column: auto; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .preview-shell { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="headerbar">
+      <h2>
+        <a class="home-link" href="index.html" aria-label="Til hjem">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"/></svg>
+          <span>Problem Statement Maker</span>
+        </a>
+      </h2>
+      <div id="favMenu" class="fav-menu"></div>
+    </div>
+
+    <section class="workspace">
+      <section class="preview-column">
+      <div class="preview-shell">
+        <div class="preview-frame">
+          <div id="slidePreview">
+            <div class="slide-header">
+              <h2 class="slide-title" id="previewTitle">Problem Statement Title</h2>
+            </div>
+
+            <div class="slide-main">
+              <div class="top-section">
+                <div class="vertical-label">Problem statement</div>
+
+                <div class="problem-box">
+                  <div class="block-title">What is the problem?</div>
+                  <p class="block-copy" id="previewProblem"> </p>
+
+                  <div class="block-title">Why does it matter?</div>
+                  <p class="block-copy" id="previewWhy"> </p>
+
+                  <div class="block-title">How can we find the solution?</div>
+                  <p class="block-copy" id="previewSolution"> </p>
+                </div>
+
+                <div class="vertical-label">Team and timeline</div>
+
+                <div class="team-box">
+                  <div class="team-line"><strong>Sponsor:</strong> <span id="previewSponsor"></span></div>
+                  <div class="team-line"><strong>Project lead:</strong> <span id="previewLead"></span></div>
+                  <div class="team-line"><strong>Contributors:</strong>
+<span id="previewContributors"></span></div>
+                  <div class="team-line"><strong>Timeline:</strong> <span id="previewTimeline"></span></div>
+                  <div class="team-line"><strong>Jira link:</strong> <span id="previewJira"></span></div>
+                </div>
+              </div>
+
+              <div class="impact-area">
+                <div class="vertical-label">Impact</div>
+                <div class="impact-right">
+                  <div class="impact-col">
+                    <h4>Business</h4>
+                    <ul id="previewBusiness"></ul>
+                  </div>
+                  <div class="impact-col">
+                    <h4>Co-worker</h4>
+                    <ul id="previewCoworker"></ul>
+                  </div>
+                  <div class="impact-col">
+                    <h4>Customer</h4>
+                    <ul id="previewCustomer"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="actions preview-actions">
+          <button id="exampleBtn">Load example</button>
+          <button id="clearBtn">Clear fields</button>
+          <button id="pngBtn" class="primary">Export PNG</button>
+          <button id="pptBtn">Export PPTX</button>
+        </div>
+      </section>
+
+      <aside class="form-card">
+        <p class="group-title">Overskrift</p>
+        <div class="field">
+          <label for="title">Tittel</label>
+          <input id="title" type="text" />
+        </div>
+
+        <p class="group-title">Problem statement</p>
+        <div class="field">
+          <label for="problem">What is the problem?</label>
+          <textarea id="problem"></textarea>
+        </div>
+        <div class="field">
+          <label for="why">Why does it matter?</label>
+          <textarea id="why"></textarea>
+        </div>
+        <div class="field">
+          <label for="solution">How can we find the solution?</label>
+          <textarea id="solution"></textarea>
+        </div>
+
+        <p class="group-title">Team and timeline</p>
+        <div class="grid-2">
+          <div class="field">
+            <label for="sponsor">Sponsor</label>
+            <input id="sponsor" type="text" />
+          </div>
+          <div class="field">
+            <label for="lead">Project lead</label>
+            <input id="lead" type="text" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="contributors">Contributors</label>
+          <textarea id="contributors"></textarea>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="timeline">Timeline</label>
+            <input id="timeline" type="text" />
+          </div>
+          <div class="field">
+            <label for="jira">Jira link</label>
+            <input id="jira" type="text" />
+          </div>
+        </div>
+
+        <p class="group-title">Impact</p>
+        <div class="field">
+          <label for="business">Business</label>
+          <textarea id="business" placeholder="Én linje per punkt"></textarea>
+        </div>
+        <div class="field">
+          <label for="coworker">Co-worker</label>
+          <textarea id="coworker" placeholder="Én linje per punkt"></textarea>
+        </div>
+        <div class="field">
+          <label for="customer">Customer</label>
+          <textarea id="customer" placeholder="Én linje per punkt"></textarea>
+        </div>
+      </aside>
+    </section>
+  </div>
+
+  <script>
+    const fields = {
+      title: document.getElementById('title'),
+      problem: document.getElementById('problem'),
+      why: document.getElementById('why'),
+      solution: document.getElementById('solution'),
+      sponsor: document.getElementById('sponsor'),
+      lead: document.getElementById('lead'),
+      contributors: document.getElementById('contributors'),
+      timeline: document.getElementById('timeline'),
+      jira: document.getElementById('jira'),
+      business: document.getElementById('business'),
+      coworker: document.getElementById('coworker'),
+      customer: document.getElementById('customer')
+    };
+
+    const preview = {
+      title: document.getElementById('previewTitle'),
+      problem: document.getElementById('previewProblem'),
+      why: document.getElementById('previewWhy'),
+      solution: document.getElementById('previewSolution'),
+      sponsor: document.getElementById('previewSponsor'),
+      lead: document.getElementById('previewLead'),
+      contributors: document.getElementById('previewContributors'),
+      timeline: document.getElementById('previewTimeline'),
+      jira: document.getElementById('previewJira'),
+      business: document.getElementById('previewBusiness'),
+      coworker: document.getElementById('previewCoworker'),
+      customer: document.getElementById('previewCustomer')
+    };
+
+    const slidePreview = document.getElementById('slidePreview');
+    const previewFrame = document.querySelector('.preview-frame');
+    const LS_FAVS = 'tool_favorites.v1';
+
+    const exampleData = {
+      title: 'Speeding up GenAI rollout - helping more customers help themselves',
+      problem: "Our customers are reaching out to us about topics where Billie (our chatbot) doesn't give good enough answers yet.\nSome topics are already implemented and need some optimization, some are under development, and one haven't been started yet.\nIKEA Norway was the first non-English speaking country to launch GenAI in our chatbot - and we're proud of that! But as global releases new topics, we need to adopt them faster. Right now, we're not keeping up with the global rollout as quickly as we'd like, and some countries like Switzerland are adopting new topics faster than us. We want to regain our position as fast adopters so we can help even more customers 💛",
+      why: 'The gap in GenAI coverage could potentially lead to:\n• Lower containment rate.\n• A higher number of contacts that Billie could have solved (NVACS).\n• More handovers to co-workers, resulting more time and money spent.\n• More negative reviews from frustrated customers.',
+      solution: "To help even more customers help themselves and adopt new GenAI topics as global releases them, we need to ensure that the right specialists are involved at the right time, and that they receive dedicated time and support to contribute effectively. This requires that the specialists' team leaders are on board, are available to us when we need help, and fully understand how important this is for IKEA and our customers. This will enable effective collaboration to ensure rapid and accurate adaptation of global content, thereby accelerating the implementation of GenAI functionality.",
+      sponsor: 'Amalie Hansen',
+      lead: 'Jonas Berg and Sofia Nilsen',
+      contributors: 'Remote teamleders\nSales- og Resolution specialists',
+      timeline: 'FY26-27',
+      jira: '',
+      business: 'Increased containment rate for chatbot solution: Rapid adoption of new GenAI topics means more customers helped by the chatbot, leading to higher containment and more efficient resource use.\nDecreased negative reviews rate: Faster implementation reduces frustrated customers who can\'t find answers, leading to fewer negative reviews.\nReduced handover percentage to co-workers: Fewer handovers mean cost savings through more efficient use of co-worker time.',
+      coworker: 'More time for customers who really need our help: Self-service solutions reduce routine contacts, allowing co-workers to focus on complex, value-adding interactions.\nReduced repetitive work and improved job satisfaction: Co-workers focus on meaningful interactions rather than answering repetitive questions, leading to greater job satisfaction.',
+      customer: 'Ability to help themselves, whenever they want: Self-service options allow customers to find answers quickly and easily, improving their overall experience.\nLess frustration, faster answers: Efficient self-service positively impacts satisfaction as customers resolve issues independently.\nEasy and accessible: Reliable and effective service across all touchpoints leads to greater satisfaction.\nMore topics covered and better answers: Rapid adoption of global GenAI topics ensures access to up-to-date information and solutions.'
+    };
+
+    function setStatus(message) {
+      console.info(message);
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[char]));
+    }
+
+    function renderFavMenu() {
+      const favMenu = document.getElementById('favMenu');
+      if (!favMenu) return;
+
+      let favs = [];
+      try {
+        const raw = localStorage.getItem(LS_FAVS);
+        favs = raw ? JSON.parse(raw) : [];
+      } catch {
+        favs = [];
+      }
+
+      if (!Array.isArray(favs) || !favs.length) {
+        favMenu.innerHTML = '<span class="empty">No favorites</span>';
+        return;
+      }
+
+      favMenu.innerHTML = favs.slice(0, 5).map(fav => {
+        const title = fav.title || fav.href || 'Favorite';
+        return `<a href="${escapeHtml(fav.href || '#')}">${escapeHtml(title)}</a>`;
+      }).join('');
+    }
+
+    function resizePreview() {
+      if (!previewFrame) return;
+      const scale = Math.max(0.2, previewFrame.clientWidth / 1280);
+      slidePreview.style.transform = `scale(${scale})`;
+      previewFrame.style.height = `${720 * scale}px`;
+    }
+
+    function linesToList(text, target) {
+      target.innerHTML = '';
+      const lines = text.split('\n').map(line => line.trim()).filter(Boolean);
+      if (!lines.length) {
+        const li = document.createElement('li');
+        li.innerHTML = '&nbsp;';
+        target.appendChild(li);
+        return;
+      }
+      lines.forEach(line => {
+        const li = document.createElement('li');
+        li.textContent = line.replace(/^[\u2022*-]\s*/, '');
+        target.appendChild(li);
+      });
+    }
+
+    function syncPreview() {
+      preview.title.textContent = fields.title.value || 'Problem Statement Title';
+      preview.problem.textContent = fields.problem.value || ' ';
+      preview.why.textContent = fields.why.value || ' ';
+      preview.solution.textContent = fields.solution.value || ' ';
+      preview.sponsor.textContent = fields.sponsor.value || '';
+      preview.lead.textContent = fields.lead.value || '';
+      preview.contributors.textContent = fields.contributors.value || '';
+      preview.timeline.textContent = fields.timeline.value || '';
+      preview.jira.textContent = fields.jira.value || '';
+      linesToList(fields.business.value, preview.business);
+      linesToList(fields.coworker.value, preview.coworker);
+      linesToList(fields.customer.value, preview.customer);
+    }
+
+    function fillForm(data) {
+      Object.keys(fields).forEach(key => {
+        fields[key].value = data[key] || '';
+      });
+      syncPreview();
+    }
+
+    function clearForm() {
+      Object.values(fields).forEach(field => field.value = '');
+      syncPreview();
+    }
+
+    async function exportPng() {
+      setStatus('Lager PNG...');
+      const previousTransform = slidePreview.style.transform;
+      let canvas;
+      try {
+        slidePreview.style.transform = 'none';
+        canvas = await html2canvas(slidePreview, {
+          backgroundColor: '#f3f3f3',
+          scale: 2,
+          useCORS: true,
+          width: 1280,
+          height: 720
+        });
+      } finally {
+        slidePreview.style.transform = previousTransform;
+        resizePreview();
+      }
+      const link = document.createElement('a');
+      link.download = `${(fields.title.value || 'problem-statement').replace(/[^a-z0-9]+/gi, '-').toLowerCase()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      setStatus('PNG eksportert.');
+    }
+
+    function addTextBox(slide, text, x, y, w, h, opts = {}) {
+      slide.addText(text || '', {
+        x, y, w, h,
+        fontFace: 'Arial',
+        fontSize: opts.fontSize || 11,
+        color: opts.color || '000000',
+        bold: !!opts.bold,
+        margin: opts.margin ?? 0,
+        valign: opts.valign || 'top',
+        align: opts.align || 'left',
+        breakLine: false,
+        fit: 'shrink'
+      });
+    }
+
+    function listAsRuns(text) {
+      const lines = text.split('\n').map(line => line.trim()).filter(Boolean);
+      if (!lines.length) return [{ text: ' ' }];
+      const runs = [];
+      lines.forEach((line, idx) => {
+        runs.push({ text: `\u2022 ${line.replace(/^[\u2022*-]\s*/, '')}` });
+        if (idx < lines.length - 1) runs.push({ text: '\n' });
+      });
+      return runs;
+    }
+
+    async function exportPpt() {
+      setStatus('Lager PowerPoint...');
+      const pptx = new PptxGenJS();
+      pptx.layout = 'LAYOUT_WIDE';
+      pptx.author = 'ChatGPT';
+      pptx.subject = 'Problem Statement';
+      pptx.title = fields.title.value || 'Problem Statement';
+      pptx.company = 'Local Workspace';
+      pptx.lang = 'nb-NO';
+
+      const slide = pptx.addSlide();
+      slide.background = { color: 'F3F3F3' };
+
+      slide.addShape(pptx.ShapeType.rect, { x: 0, y: 0, w: 13.333, h: 1.53, line: { color: 'B7C4D1', transparency: 100 }, fill: { color: 'B7C4D1' } });
+      addTextBox(slide, fields.title.value || 'Problem Statement Title', 0.22, 0.28, 12.6, 0.8, { fontSize: 26 });
+
+      slide.addShape(pptx.ShapeType.rect, { x: 0.12, y: 1.74, w: 0.34, h: 4.1, line: { color: 'AEBDCB', transparency: 100 }, fill: { color: 'AEBDCB' } });
+      slide.addText('Problem statement', { x: 0.13, y: 2.38, w: 0.3, h: 2.8, fontFace: 'Arial', fontSize: 16, color: 'FFFFFF', rotate: 270, align: 'center', valign: 'mid', margin: 0 });
+
+      slide.addShape(pptx.ShapeType.rect, { x: 9.2, y: 1.74, w: 0.34, h: 4.1, line: { color: 'AEBDCB', transparency: 100 }, fill: { color: 'AEBDCB' } });
+      slide.addText('Team and timeline', { x: 9.21, y: 2.32, w: 0.3, h: 3.0, fontFace: 'Arial', fontSize: 16, color: 'FFFFFF', rotate: 270, align: 'center', valign: 'mid', margin: 0 });
+
+      addTextBox(slide, 'What is the problem?', 0.58, 1.82, 5.7, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.problem.value, 0.58, 2.05, 8.15, 0.95, { fontSize: 10.5 });
+
+      addTextBox(slide, 'Why does it matter?', 0.58, 3.02, 5.7, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.why.value, 0.58, 3.25, 8.15, 0.95, { fontSize: 10.5 });
+
+      addTextBox(slide, 'How can we find the solution?', 0.58, 4.21, 5.9, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.solution.value, 0.58, 4.44, 8.15, 1.04, { fontSize: 10.5 });
+
+      addTextBox(slide, 'Sponsor:', 9.75, 1.82, 1.2, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.sponsor.value, 10.62, 1.82, 2.35, 0.22, { fontSize: 10.5 });
+
+      addTextBox(slide, 'Project lead:', 9.75, 2.26, 1.4, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.lead.value, 10.88, 2.26, 2.1, 0.22, { fontSize: 10.5 });
+
+      addTextBox(slide, 'Contributors:', 9.75, 3.03, 1.3, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.contributors.value, 9.75, 3.26, 3.15, 0.62, { fontSize: 10.5 });
+
+      addTextBox(slide, 'Timeline:', 9.75, 4.2, 1.0, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.timeline.value, 10.58, 4.2, 2.2, 0.22, { fontSize: 10.5 });
+
+      addTextBox(slide, 'Jira link:', 9.75, 5.08, 1.0, 0.2, { fontSize: 11, bold: true });
+      addTextBox(slide, fields.jira.value, 10.5, 5.08, 2.3, 0.22, { fontSize: 10.5 });
+
+      slide.addText('Impact', { x: 0.13, y: 6.16, w: 0.3, h: 1.63, fontFace: 'Arial', fontSize: 16, color: 'FFFFFF', rotate: 270, align: 'center', valign: 'mid', margin: 0 });
+      slide.addShape(pptx.ShapeType.rect, { x: 0.12, y: 6.05, w: 0.34, h: 1.63, line: { color: 'AEBDCB', transparency: 100 }, fill: { color: 'AEBDCB' } });
+
+      slide.addText('Business', { x: 0.58, y: 5.82, w: 3.95, h: 0.26, fontFace: 'Arial', fontSize: 17, bold: true, align: 'center', margin: 0 });
+      slide.addText('Co-worker', { x: 4.53, y: 5.82, w: 4.26, h: 0.26, fontFace: 'Arial', fontSize: 17, bold: true, align: 'center', margin: 0 });
+      slide.addText('Customer', { x: 8.79, y: 5.82, w: 4.0, h: 0.26, fontFace: 'Arial', fontSize: 17, bold: true, align: 'center', margin: 0 });
+
+      slide.addShape(pptx.ShapeType.line, { x: 0.56, y: 5.7, w: 12.22, h: 0, line: { color: '777777', dash: 'dash', pt: 1 } });
+      slide.addShape(pptx.ShapeType.line, { x: 4.52, y: 5.72, w: 0, h: 2.18, line: { color: '777777', dash: 'dash', pt: 1 } });
+      slide.addShape(pptx.ShapeType.line, { x: 8.79, y: 5.72, w: 0, h: 2.18, line: { color: '777777', dash: 'dash', pt: 1 } });
+
+      slide.addText(listAsRuns(fields.business.value), { x: 0.58, y: 6.18, w: 3.72, h: 1.48, fontFace: 'Arial', fontSize: 10.5, breakLine: false, margin: 0.02, fit: 'shrink' });
+      slide.addText(listAsRuns(fields.coworker.value), { x: 4.64, y: 6.18, w: 3.95, h: 1.48, fontFace: 'Arial', fontSize: 10.5, breakLine: false, margin: 0.02, fit: 'shrink' });
+      slide.addText(listAsRuns(fields.customer.value), { x: 8.92, y: 6.18, w: 3.65, h: 1.48, fontFace: 'Arial', fontSize: 10.5, breakLine: false, margin: 0.02, fit: 'shrink' });
+
+      const filename = `${(fields.title.value || 'problem-statement').replace(/[^a-z0-9]+/gi, '-').toLowerCase()}.pptx`;
+      await pptx.writeFile({ fileName: filename });
+      setStatus('PPTX eksportert.');
+    }
+
+    Object.values(fields).forEach(field => field.addEventListener('input', syncPreview));
+
+    document.getElementById('exampleBtn').addEventListener('click', () => {
+      fillForm(exampleData);
+      setStatus('Eksempeldata lastet inn.');
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      clearForm();
+      setStatus('Feltene er tømt.');
+    });
+
+    document.getElementById('pngBtn').addEventListener('click', async () => {
+      try {
+        await exportPng();
+      } catch (error) {
+        console.error(error);
+        setStatus('Noe gikk galt under PNG-eksport.');
+      }
+    });
+
+    document.getElementById('pptBtn').addEventListener('click', async () => {
+      try {
+        await exportPpt();
+      } catch (error) {
+        console.error(error);
+        setStatus('Noe gikk galt under PPTX-eksport.');
+      }
+    });
+
+    if ('ResizeObserver' in window && previewFrame) {
+      new ResizeObserver(resizePreview).observe(previewFrame);
+    }
+    window.addEventListener('resize', resizePreview);
+
+    renderFavMenu();
+    resizePreview();
+
+    fillForm({
+      title: 'Problem Statement Title',
+      business: 'Målbare, knyttet opp mot businessplan'
+    });
+    setStatus('Klar.');
+  </script>
+</body>
+</html>
