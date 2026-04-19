@@ -136,6 +136,31 @@
       color: var(--muted);
       font-size: 0.92rem;
     }
+    .entry-details {
+      display: block;
+      min-width: 0;
+    }
+    .entry-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .entry-topline .rank {
+      margin-bottom: 0;
+    }
+    .score-badge {
+      flex: 0 0 auto;
+      border: 1px solid rgba(141,180,255,0.32);
+      background: rgba(141,180,255,0.12);
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      line-height: 1;
+      padding: 6px 8px;
+    }
     body.modal-open {
       overflow: hidden;
     }
@@ -370,11 +395,19 @@
       return Number.isInteger(rating) ? String(rating) : rating.toFixed(1);
     }
 
+    function inferRatingSet(item) {
+      if (item.ratingSet === true) return true;
+      if (item.ratingSet === false || !Object.prototype.hasOwnProperty.call(item, "rating")) return false;
+      const rating = Number(item.rating);
+      return Number.isFinite(rating) && clampRating(rating) !== 1;
+    }
+
     function normalizeItem(item) {
       return {
         title: item.title,
         src: item.src,
         rating: clampRating(Number(item.rating)),
+        ratingSet: inferRatingSet(item),
         note: typeof item.note === "string" ? item.note : ""
       };
     }
@@ -388,7 +421,7 @@
       const detailsByTitle = new Map(
         source
           .filter(item => item && typeof item.title === "string")
-          .map(item => [item.title, { rating: item.rating, note: item.note }])
+          .map(item => [item.title, { rating: item.rating, ratingSet: item.ratingSet, note: item.note }])
       );
 
       return defaultItems.map(defaultItem => {
@@ -439,8 +472,9 @@
       ratingValue.textContent = formatRating(ratingInput.value);
     }
 
-    function saveEntryDetails() {
+    function saveEntryDetails({ markRatingSet = false } = {}) {
       if (activeIndex === null || !items[activeIndex]) return;
+      if (markRatingSet) items[activeIndex].ratingSet = true;
       items[activeIndex].rating = clampRating(Number(ratingInput.value));
       items[activeIndex].note = noteInput.value;
       saveItems();
@@ -480,6 +514,7 @@
       items.forEach((item, index) => {
         const escapedTitle = escapeHtml(item.title);
         const escapedSrc = escapeHtml(item.src);
+        const scoreBadge = item.ratingSet ? `<span class="score-badge">${formatRating(item.rating)}/10</span>` : "";
         const row = document.createElement("div");
         row.className = "item";
         row.innerHTML = `
@@ -489,8 +524,11 @@
           </div>
           <button class="content entry-open" type="button" data-index="${index}" aria-label="Open ${escapedTitle}">
             <span class="thumb"><img src="${escapedSrc}" alt="${escapedTitle}" loading="eager" /></span>
-            <span>
-              <span class="rank">#${index + 1}</span>
+            <span class="entry-details">
+              <span class="entry-topline">
+                <span class="rank">#${index + 1}</span>
+                ${scoreBadge}
+              </span>
               <span class="title">${escapedTitle}</span>
               <span class="hint">${index === 0 ? "Foreløpig favoritt" : index === items.length - 1 ? "Sist på lista" : "Midt på lista"}</span>
             </span>
@@ -520,7 +558,7 @@
 
     ratingInput.addEventListener("input", () => {
       updateRatingValue();
-      saveEntryDetails();
+      saveEntryDetails({ markRatingSet: true });
     });
 
     noteInput.addEventListener("input", saveEntryDetails);
