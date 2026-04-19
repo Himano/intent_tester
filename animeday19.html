@@ -115,6 +115,9 @@
       font-weight: 700;
       margin-bottom: 8px;
     }
+    .title:last-child {
+      margin-bottom: 0;
+    }
     .thumb {
       display: block;
       width: 72px;
@@ -267,15 +270,17 @@
       font-size: 1.4rem;
       line-height: 1;
     }
-    .note-field {
+    .modal-field {
       display: grid;
       gap: 8px;
       color: var(--muted);
       font-weight: 700;
     }
-    .note-field textarea {
-      min-height: 130px;
-      resize: vertical;
+    .modal-field + .modal-field {
+      margin-top: 14px;
+    }
+    .modal-field input,
+    .modal-field textarea {
       width: 100%;
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -285,7 +290,12 @@
       line-height: 1.45;
       padding: 12px;
     }
-    .note-field textarea:focus,
+    .modal-field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+    .modal-field input:focus,
+    .modal-field textarea:focus,
     .close-btn:focus-visible,
     .done-btn:focus-visible {
       outline: 2px solid var(--accent);
@@ -358,7 +368,11 @@
         </div>
         <button class="close-btn" type="button" aria-label="Close modal" data-close-modal>&times;</button>
       </div>
-      <label class="note-field" for="noteInput">
+      <label class="modal-field" for="headlineInput">
+        Headline
+        <input id="headlineInput" type="text" maxlength="120" placeholder="Write one sentence" />
+      </label>
+      <label class="modal-field" for="noteInput">
         Note
         <textarea id="noteInput" placeholder="Write a note"></textarea>
       </label>
@@ -407,6 +421,7 @@
         src: item.src,
         rating: clampRating(Number(item.rating)),
         ratingSet: inferRatingSet(item),
+        headline: typeof item.headline === "string" ? item.headline : "",
         note: typeof item.note === "string" ? item.note : ""
       };
     }
@@ -420,7 +435,7 @@
       const detailsByTitle = new Map(
         source
           .filter(item => item && typeof item.title === "string")
-          .map(item => [item.title, { rating: item.rating, ratingSet: item.ratingSet, note: item.note }])
+          .map(item => [item.title, { rating: item.rating, ratingSet: item.ratingSet, headline: item.headline, note: item.note }])
       );
 
       return defaultItems.map(defaultItem => {
@@ -448,6 +463,7 @@
     const entryModal = document.getElementById("entryModal");
     const ratingInput = document.getElementById("ratingInput");
     const ratingValue = document.getElementById("ratingValue");
+    const headlineInput = document.getElementById("headlineInput");
     const noteInput = document.getElementById("noteInput");
     const modalImage = document.getElementById("modalImage");
     const modalRank = document.getElementById("modalRank");
@@ -475,6 +491,7 @@
       if (activeIndex === null || !items[activeIndex]) return;
       if (markRatingSet) items[activeIndex].ratingSet = true;
       items[activeIndex].rating = clampRating(Number(ratingInput.value));
+      items[activeIndex].headline = headlineInput.value.trim();
       items[activeIndex].note = noteInput.value;
       saveItems();
     }
@@ -484,6 +501,7 @@
       activeIndex = index;
       const item = items[index];
       ratingInput.value = formatRating(item.rating);
+      headlineInput.value = item.headline || "";
       noteInput.value = item.note || "";
       modalImage.src = item.src;
       modalImage.alt = item.title;
@@ -513,7 +531,9 @@
       items.forEach((item, index) => {
         const escapedTitle = escapeHtml(item.title);
         const escapedSrc = escapeHtml(item.src);
+        const escapedHeadline = escapeHtml(item.headline || "");
         const scoreBadge = item.ratingSet ? `<span class="score-badge">${formatRating(item.rating)}/10</span>` : "";
+        const headline = escapedHeadline ? `<span class="hint">${escapedHeadline}</span>` : "";
         const row = document.createElement("div");
         row.className = "item";
         row.innerHTML = `
@@ -529,7 +549,7 @@
                 ${scoreBadge}
               </span>
               <span class="title">${escapedTitle}</span>
-              <span class="hint">${index === 0 ? "Foreløpig favoritt" : index === items.length - 1 ? "Sist på lista" : "Midt på lista"}</span>
+              ${headline}
             </span>
           </button>
         `;
@@ -561,6 +581,11 @@
     });
 
     noteInput.addEventListener("input", saveEntryDetails);
+
+    headlineInput.addEventListener("input", () => {
+      saveEntryDetails();
+      render();
+    });
 
     entryModal.querySelectorAll("[data-close-modal]").forEach(element => {
       element.addEventListener("click", closeEntryModal);
